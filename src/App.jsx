@@ -1,8 +1,8 @@
-import Navbar from "./Components/Navbar/Navbar";
+import LandingPage from "./pages/LandingPage";
 function App() {
   return (
     <div>
-      <Navbar />
+      <LandingPage />
     </div>
   );
 }
