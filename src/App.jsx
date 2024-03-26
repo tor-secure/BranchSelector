@@ -1,10 +1,12 @@
-import Navbar from "./Components/Navbar/Navbar";
 
-import { QuestionSet } from "./Components/Tests/QuestionSet";
-import { TestArea } from "./Components/Tests/TestArea";
-
+import LandingPage from "./pages/LandingPage";
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <LandingPage />
+    </div>
+  );
+
 }
 
 export default App;
