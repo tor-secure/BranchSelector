@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import branchselector_logo from "../../assets/branchselector_logo.png";
 import "../../Components/Navbar/navbar.css";
+import { NavLink } from "react-router-dom";
 
 // Add this style to your css filesrc\assets\branchselector_logo.png
 
@@ -97,12 +98,12 @@ export default () => {
                 </a>
               </li>
               <li className="mt-8 lg:mt-0">
-                <a
-                  href="javascript:void(0)"
+                <NavLink
+                  to="/auth"
                   className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
                 >
                   Sign Up
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
