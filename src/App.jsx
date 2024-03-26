@@ -1,3 +1,4 @@
+
 import LandingPage from "./pages/LandingPage";
 function App() {
   return (
@@ -5,6 +6,7 @@ function App() {
       <LandingPage />
     </div>
   );
+
 }
 
 export default App;
