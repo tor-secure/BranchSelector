@@ -1,4 +1,6 @@
+
 import Authentication from "./pages/Authentication";
+
 import LandingPage from "./pages/LandingPage";
 function App() {
   return (
@@ -7,6 +9,7 @@ function App() {
       <Authentication />
     </div>
   );
+
 }
 
 export default App;
