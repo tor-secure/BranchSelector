@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { QuestionSet } from "./QuestionSet";
 import { SectionsArea } from "./SectionsArea";
+import { evaluteTest, getTestQuestions } from "../../services/testService";
 
 export const TestArea = () => {
   const heading = "Vark Test";
   const [result, setResult] = useState({});
-  const questionsPerPage = 3;
+  const questionsPerPage = 5;
   const [questionsRange, setQuestionsRange] = useState([0, questionsPerPage]);
-  const [isLastPage, setIsLastPage] = useState(false);
 
   const goToPrev = () => {
     if (questionsRange[0] >= questionsPerPage) {
@@ -15,7 +15,8 @@ export const TestArea = () => {
         questionsRange[0] - questionsPerPage,
         questionsRange[0],
       ]);
-      setIsLastPage(false);
+
+      window.scrollTo(0, 0);
     }
   };
 
@@ -30,17 +31,38 @@ export const TestArea = () => {
         questionsRange[0] + questionsPerPage,
         questionsData.length,
       ]);
-
-      setIsLastPage(true);
     }
+
+    window.scrollTo(0, 0);
   };
 
-  const hadleSubmit = () => {
-    console.log("Submitted");
+  const checkIfAllAnswered = () => {
+    const answeredAllQuestions = questionsData
+      .slice(questionsRange[0], questionsRange[1])
+      .every((questionData) => questionData.id in result);
+
+    console.log(answeredAllQuestions);
+    return answeredAllQuestions;
   };
+
+  const hadleSubmit = async () => {
+    console.log("Submitted");
+    console.log(await evaluteTest("brain", result));
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      //console.log(await getTestQuestions("brain"));
+      setQuestionsData(await getTestQuestions("brain"));
+    };
+
+    fetchData();
+
+    // Empty dependency array ensures this effect runs only once after the initial render
+  }, []);
 
   // var result = {}
-  const questionsData = [
+  const [questionsData, setQuestionsData] = useState([
     {
       id: "1",
       question: "How do you prefer to learn new concepts?1",
@@ -111,7 +133,7 @@ export const TestArea = () => {
         { VARO4: "By reading textbooks" },
       ],
     },
-  ];
+  ]);
 
   useEffect(() => {
     console.log(result);
@@ -158,7 +180,9 @@ export const TestArea = () => {
             ) : (
               <button
                 className="text-base font-semibold text-[#ffffff]  bg-[#2d6ddc] w-24 h-8 flex justify-center items-center mb-[2em] rounded-md"
-                onClick={() => goToNext()}
+                onClick={() => {
+                  checkIfAllAnswered() ? goToNext() : console.log();
+                }}
               >
                 Next
               </button>
