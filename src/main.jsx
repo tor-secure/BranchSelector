@@ -5,6 +5,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import Authentication from "./pages/Authentication.jsx";
+import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "auth",
     element: <Authentication />,
+  },
+  {
+    path: "result",
+    element: <ResultsPage />,
   },
   {
     path: "testPage",
