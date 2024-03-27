@@ -3,11 +3,13 @@ import ProfilePic from "../../assets/curiosity.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { homeicon } from "../../assets/Icons/home.svg";
 
-const SideDashBoard = () => {
+const SideDashBoard = (props) => {
   let userName = "James";
   let userMailId = "Jamesgmail.com";
   return (
-    <div className="flex flex-col pt-12 pb-20 items-center w-[20%]  fixed left-0 top-0 bottom-0 h-full justify-between ">
+    <div
+      className={`fixed z-20 bg-white flex flex-col pt-12 pb-20 items-center w-72  duration-300 left-0 top-0 bottom-0 h-screen justify-between ${props.className} `}
+    >
       <h2 className="text-3xl text-blue-700 font-semibold">BranchSelector</h2>
 
       <div className="flex flex-col items-center ">
