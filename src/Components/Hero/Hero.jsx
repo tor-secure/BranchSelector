@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
 
+import HeroNewAnim from "../../assets/animation/heroNew.json";
 export default () => {
   const [state, setState] = useState(false);
 
@@ -63,9 +65,9 @@ export default () => {
   */
 
   return (
-    <div className="relative">
+    <section className="relative">
       <div
-        className="absolute inset-0 blur-xl h-[580px]"
+        className="absolute inset-0 blur-xl h-[480px]"
         style={{
           background:
             "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
@@ -129,8 +131,8 @@ export default () => {
           </nav>
         </header> */}
       <section className="relative">
-        <div className="max-w-screen-xl mx-auto px-4 py-28 gap-12 text-gray-600 overflow-hidden md:px-8 md:flex">
-          <div className="flex-none space-y-5 max-w-xl">
+        <div className="max-w-screen-xl mx-auto px-4 py-6  md:py-16   gap-12 text-gray-600 overflow-hidden overflow-x-hidden md:px-8 md:flex">
+          <div className="flex-none  space-y-5 max-w-xl">
             {/* <a
                 href="javascript:void(0)"
                 className="inline-flex gap-x-6 items-center rounded-full p-1 pr-6 border text-sm font-medium duration-150 hover:bg-white"
@@ -154,12 +156,16 @@ export default () => {
                   </svg>
                 </p>
               </a> */}
-            <h1 className="text-4xl text-gray-800 font-extrabold sm:text-5xl">
-              Build your SaaS exactly how you want
+            <h1 className="text-4xl text-gray-800  font-extrabold sm:text-5xl">
+              Navigate Your Future with Confidence.
             </h1>
             <p>
-              Sed ut perspiciatis unde omnis iste natus voluptatem accusantium
-              doloremque laudantium, totam rem aperiam, eaque ipsa quae.
+              Welcome to Branch Selector, where your journey to discovering the
+              perfect course begins. Take our tailored tests designed to uncover
+              your interests, strengths, and passions. With personalized
+              recommendations, we'll guide you towards academic paths that align
+              with your goals and aspirations. Explore, learn, and embark on a
+              transformative educational experience. Your future starts here.
             </p>
             <div className="flex items-center gap-x-3 sm:text-sm">
               <a
@@ -180,35 +186,17 @@ export default () => {
                   />
                 </svg>
               </a>
-              {/* <a
-                  href="javascript:void(0)"
-                  className="flex items-center justify-center gap-x-1 py-2 px-4 text-gray-700 hover:text-gray-900 font-medium duration-150 md:inline-flex"
-                >
-                  Contact sales
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a> */}
             </div>
           </div>
-          <div className="flex-1 hidden md:block">
-            {/* Replace with your image */}
-            <img
-              src="https://raw.githubusercontent.com/sidiDev/remote-assets/c86a7ae02ac188442548f510b5393c04140515d7/undraw_progressive_app_m-9-ms_oftfv5.svg"
-              className="max-w-xl"
+          <div className="lg:flex-1 relative -top-16 hidden lg:block h-[20rem]">
+            <Lottie
+              animationData={HeroNewAnim}
+              loop={true}
+              className="h-[28rem]   object-contain"
             />
           </div>
         </div>
       </section>
-    </div>
+    </section>
   );
 };

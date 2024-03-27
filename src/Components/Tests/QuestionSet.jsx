@@ -6,15 +6,15 @@ export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
   //   console.log(qNo, questionsData);
 
   const handleOptionClick = (index, option) => {
-    console.log(questionsData.id, option);
+    console.log("Yooooooooooo", questionsData.id, option.id);
     const tempResult = { ...result }; // Create a copy of result to avoid mutating state directly
-    tempResult[questionsData.id] = Object.keys(option)[0];
+    tempResult[questionsData.id] = option.id;
     setResult(tempResult);
     setSelectedOptionIndex(index);
   };
 
   return (
-    <div className="w-[90%] h-[17em] my-[3em] ">
+    <div className="w-[90%]  my-[3em] ">
       <h2 className="text-2xl font-semibold">
         {qNo + "." + " " + questionsData.question}
       </h2>
@@ -24,12 +24,13 @@ export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
             key={index}
             onClick={() => handleOptionClick(index, option)}
             className={`hover:bg-[#e9e9e9] rounded-[7px] pl-3 indent-4 mt-6 h-10 text-[1.12em]  ${
-              selectedOptionIndex === index
+              questionsData.id in result &&
+              option.id == result[questionsData.id]
                 ? "bg-[#367AF3] text-[#FFFFFF] "
                 : "bg-[#ffffff]"
             } flex flex-row items-center`}
           >
-            {Object.values(option)}
+            {option.text}
           </li>
         ))}
       </ul>

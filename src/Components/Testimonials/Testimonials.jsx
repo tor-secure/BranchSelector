@@ -1,25 +1,28 @@
+import Om from "../../assets/om.png";
+import Manav from "../../assets/manav.png";
+import Bhavith from "../../assets/bhavith.png";
 export default () => {
   const testimonials = [
     {
-      avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-      name: "Martin escobar",
-      title: "Founder of meta",
+      avatar: Om,
+      name: "Om K Poojari",
+      title: "Reseacher Scientist",
       quote:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et est hendrerit, porta nunc vitae.",
+        "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
     {
-      avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-      name: "Simon andrew",
-      title: "Software engineer",
+      avatar: Manav,
+      name: "Manav Mak",
+      title: "Software Engineer",
       quote:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+        "Thanks to Branch Selector, I'm now pursuing a field I'm truly passionate about.",
     },
     {
-      avatar: "https://randomuser.me/api/portraits/men/86.jpg",
-      name: "Micheal worin",
-      title: "Product designer",
+      avatar: Bhavith,
+      name: "Bhavith B Shetty",
+      title: "UI/UX designer",
       quote:
-        "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.",
+        "Branch Selector provided invaluable clarity, leading me to my ideal course.",
     },
   ];
 
@@ -28,12 +31,11 @@ export default () => {
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="max-w-xl sm:text-center md:mx-auto">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-            Hear from our customers
+            Voices of Success: Student Testimonials
           </h3>
           <p className="mt-3 text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et est
-            hendrerit, porta nunc vitae, gravida justo. Nunc fermentum magna
-            lorem, euismod volutpat arcu volutpat et.
+            Discover how Branch Selector has transformed the academic journey
+            for students like you.
           </p>
         </div>
         <div className="mt-12">
