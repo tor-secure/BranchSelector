@@ -1,4 +1,4 @@
-import { browserLocalPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
+import { browserLocalPersistence, browserSessionPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
 import {
     app,
     GoogleAuthProvider,
@@ -57,7 +57,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 // Function to sign in with Google using Google OAuth provider
 const signInWithGoogle = async ({ rememberMe }) => {
     try {
-        const result = await signInWithPopup(auth, googleAuthProvider);
+        const result = await signInWithPopup(auth, googleAuthProvider).setPersistence(browserLocalPersistence);
         const user = result.user;
         const newUser = {
             authProvider: 'google',

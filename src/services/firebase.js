@@ -20,6 +20,7 @@ import {
   where,
   addDoc,
   doc,
+  setDoc
 } from "firebase/firestore";
 
 //firebase configuration for this project
@@ -64,4 +65,5 @@ export {
   where,
   addDoc,
   doc,
+  setDoc
 };
