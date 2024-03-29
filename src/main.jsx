@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Authentication from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
+import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "testPage",
     element: <TestArea />,
+  },
+    {
+    path: "services-test",
+    element: <ServicesTest />,
   },
 ]);
 
