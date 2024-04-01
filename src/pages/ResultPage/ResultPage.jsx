@@ -4,7 +4,8 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
-const ResultsPage = () => {
+const ResultsPage = ({ result }) => {
+  console.log(result);
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
 
   useEffect(() => {
