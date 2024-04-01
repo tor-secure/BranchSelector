@@ -10,6 +10,9 @@ import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
 import BookingPage from "./pages/BookingPage.jsx";
 
+import Book from "./pages/book.jsx";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,9 +38,13 @@ const router = createBrowserRouter([
     path: "testPage",
     element: <TestArea />,
   },
-    {
+  {
     path: "services-test",
     element: <ServicesTest />,
+  },
+  {
+    path: "book",
+    element: <Book />,
   },
 ]);
 
