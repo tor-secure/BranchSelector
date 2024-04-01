@@ -8,6 +8,7 @@ import Authentication from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
+import BookingPage from "./pages/BookingPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "auth",
     element: <Authentication />,
+  },
+  {
+    path: "booking",
+    element: <BookingPage />,
   },
   {
     path: "result",
