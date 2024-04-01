@@ -15,6 +15,7 @@ export default () => {
     { title: "Partners", path: "" },
     { title: "Ebook", path: "/book" },
     { title: "Blog", path: "" },
+    { title: "Appointment", path: "booking" },
   ];
 
   useEffect(() => {
@@ -38,13 +39,13 @@ export default () => {
     <nav ref={navRef} className="bg-white w-full top-0 z-20 ">
       <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex">
         <div className="flex items-center justify-between  lg:block">
-          <a href="javascript:void(0)">
+          <NavLink to="/">
             <img
               src={branchselector_logo}
               className=" md:w-20 w-16 "
               alt="branchselector logo"
             />
-          </a>
+          </NavLink>
           <div className="lg:hidden">
             <button
               className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"

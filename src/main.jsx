@@ -8,7 +8,10 @@ import {Authentication} from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
+import BookingPage from "./pages/BookingPage.jsx";
+
 import Book from "./pages/book.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "signup",
     element: <Authentication authType='signup'/>,
+  },
+  {
+    path: "booking",
+    element: <BookingPage />,
   },
   {
     path: "result",

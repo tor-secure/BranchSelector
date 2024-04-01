@@ -1,4 +1,3 @@
-
 import { Authentication  } from "./pages/Authentication";
 
 import LandingPage from "./pages/LandingPage";
