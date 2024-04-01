@@ -10,12 +10,12 @@ async function getD()
 
 
   const du = {
-    'EGGQ3': 3,
-    'EGGQ30': 5
+    'ENGQ1': 'ENGO2',
+    'ENGQ2': 'ENGO1'
    
   }
   //console.log(await generateCoupon(c.code,c["price-after-discount"],c["valid-from"],c["valid-till"],c.limit,3))
-  console.log(await evaluteTest('engineering',du))
+  console.log(await evaluteTest('english',du))
 
 }
 
@@ -40,9 +40,122 @@ export {ServicesTest}
 async function putDataToFireStore(){
   const db = getFirestore()
 
-  const testName = 'engineering';
+  const testName = 'english';
   const testCode = 'ENG' // Replace with your test name
-  const questionData = []
+  const questionData = [
+    {
+      "question": "What is the correct definition of the word \"ardent\"?",
+      "options": ["Angry", "Enthusiastic", "Lazy", "Sad"]
+    },
+    {
+      "question": "Which of the following sentences is grammatically correct?",
+      "options": ["Him and me went to the store.", "He and I went to the store.", "Me and he went to the store.", "Me and him went to the store."]
+    },
+    {
+      "question": "Choose the correct spelling:",
+      "options": ["Accommadate", "Accommodate", "Acommodate", "Acommodatte"]
+    },
+    {
+      "question": "What is the antonym of \"joyful\"?",
+      "options": ["Sad", "Angry", "Excited", "Happy"]
+    },
+    {
+      "question": "Identify the correct use of the apostrophe:",
+      "options": ["Its been a long day.", "It's been a long day.", "Its' been a long day.", "Its been a long day."]
+    },
+    {
+      "question": "Which sentence is in the passive voice?",
+      "options": ["She ate the cake quickly.", "The cake was eaten quickly by her.", "Quickly, the cake was eaten by her.", "The cake eaten quickly by her."]
+    },
+    {
+      "question": "What is the correct form of the verb in this sentence: \"She ___ to the party yesterday\"?",
+      "options": ["Goes", "Gone", "Went", "Go"]
+    },
+    {
+      "question": "Choose the correct word to complete the sentence: \"I ___ to the store yesterday.\"",
+      "options": ["Went", "Gone", "Go", "Goes"]
+    },
+    {
+      "question": "Which sentence is grammatically correct?",
+      "options": ["I have went to the store yesterday.", "I have gone to the store yesterday.", "I have go to the store yesterday.", "I have going to the store yesterday."]
+    },
+    {
+      "question": "What is the correct past tense of the verb \"sing\"?",
+      "options": ["Singed", "Sanged", "Sang", "Sung"]
+    },
+    {
+      "question": "What is the correct definition of the word \"benevolent\"?",
+      "options": ["Selfish", "Kind-hearted", "Cruel", "Dishonest"]
+    },
+    {
+      "question": "Choose the correct sentence:",
+      "options": ["The cat laid on the bed.", "The cat lain on the bed.", "The cat laid on the bed.", "The cat layed on the bed."]
+    },
+    {
+      "question": "Identify the correctly punctuated sentence:",
+      "options": ["I can't believe it's Monday already.", "I cant believe its Monday already.", "I can't believe its Monday already.", "I can't believe its monday already."]
+    },
+    {
+      "question": "Choose the correct homophone:",
+      "options": ["Their", "There", "They're", "Thier"]
+    },
+    {
+      "question": "What is the plural form of \"child\"?",
+      "options": ["Childs", "Childes", "Childrens", "Children"]
+    },
+    {
+      "question": "Identify the correct possessive form:",
+      "options": ["The dog's tail wagged happily.", "The dogs' tail wagged happily.", "The dogs tail wagged happily.", "The dog' tail wagged happily."]
+    },
+    {
+      "question": "Which sentence is grammatically correct?",
+      "options": ["He don't have any siblings.", "He doesn't have any siblings.", "He haven't any siblings.", "He isn't have any siblings."]
+    },
+    {
+      "question": "What is the correct comparative form of \"good\"?",
+      "options": ["Better", "Gooder", "Best", "More good"]
+    },
+    {
+      "question": "Choose the correct word to complete the sentence: \"The __ car in the lot was blue.\"",
+      "options": ["Most expensive", "Expensiver", "Most expensivest", "More expensive"]
+    },
+    {
+      "question": "What is the correct spelling?",
+      "options": ["Necessery", "Necesary", "Necessary", "Necessary"]
+    },
+    {
+      "question": "A way of doing something especially an ordered set of procedures or an orderly system",
+      "options": ["method", "process", "presentation", "agendas"]
+    },
+    {
+      "question": "The use of a bottle for the drinking of alcohol or the crown for the sovereign is the example of",
+      "options": ["metonymy", "antonym", "personification", "alliteration"]
+    },
+    {
+      "question": "To cancel (a law, agreement, etc.) formally or officially",
+      "options": ["object", "abjure", "terminate", "abrogate"]
+    },
+    {
+      "question": "The act of giving up something one has or would like to have",
+      "options": ["sacrilege", "Abnegation", "sacrifice", "acquiesce"]
+    },
+    {
+      "question": "Select the word that is opposite in meaning to the word Asset",
+      "options": ["credibility", "liability", "poverty", "prosperity"]
+    },
+    {
+      "question": "Select the word that is opposite in meaning to the word Smother",
+      "options": ["repress", "cheer", "nurture", "irritate"]
+    },
+    {
+      "question": "Select the word that is opposite in meaning to the word Reprimand",
+      "options": ["reward", "appreciate", "encourage", "praise"]
+    },
+    {
+      "question": "Select the word that is opposite in meaning to the word Tangible",
+      "options": ["gentle", "elusive", "refined", "palpabl"]
+    }
+  ]
   
   // Store questions and options
   const testQuestionsCollection = collection(db, 'test-content');
@@ -50,24 +163,36 @@ async function putDataToFireStore(){
   const contentCollection = collection(testQuestionsDocRef, 'questions');
   const answerKeyCollection = collection(testQuestionsDocRef, 'answer-key');
 
+  const answerKey =[
+    2, 2, 2, 1, 2, 2, 3, 1, 2, 3, 2, 1, 1, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 2, 2, 1, 3, 1, 2
+  ];
+
+  const answers ={}
 
   questionData.forEach((question, index) => {
 
- 
+
     const questionId = `${testCode}Q${index + 1}`;
     const questionDocRef = doc(contentCollection, questionId);
-    const answerKeyDocRef = doc(answerKeyCollection, questionId);
+    //const answerKeyDocRef = doc(answerKeyCollection, questionId);
 
-  
+    var answer ='ENGO' + (answerKey[index]).toString();
+    answers[questionId] = answer
+
     const weights = {};
     const options = {};
+    
     question.options.forEach((option, optionIndex) => {
-      options[`${testCode}O${optionIndex + 1}`] = option.text;
-      weights[`${testCode}O${optionIndex + 1}`] = option.score;
+      
+      options[`${testCode}O${optionIndex + 1}`] = option;
+     /* weights[`${testCode}O${optionIndex + 1}`] = option.score;*/
     });
   
 
-
+     
+    console.log(question)
+    console.log(answer)
+    console.log(options)
 
     setDoc(questionDocRef, { question: question.question, options })
       .then(() => {
@@ -77,16 +202,23 @@ async function putDataToFireStore(){
         console.error(`Error uploading question ${questionId}:`, error);
       });
 
-
+/*
       setDoc(answerKeyDocRef, weights)
         .then(() => {
           console.log(`Answer key for ${questionId} uploaded successfully`);
         })
         .catch((error) => {
           console.error(`Error uploading answer key for ${questionId}:`, error);
-        });
+        });*/
   });
-  
+    const answerKeyDocRef = doc(testQuestionsDocRef, 'answer-key', 'answers');
+    setDoc(answerKeyDocRef, answers)
+      .then(() => {
+        console.log(`Answer key uploaded successfully`);
+      })
+      .catch((error) => {
+        console.error(`Error uploading answer key for ${questionId}:`, error);
+      });
  
   }
 
@@ -143,291 +275,121 @@ async function putDataToFirestore_img() {
 
   const questionSet = [
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/1/F.png"
+      "question": "What is the correct definition of the word \"ardent\"?",
+      "options": ["Angry", "Enthusiastic", "Lazy", "Sad"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/2/F.png"
+      "question": "Which of the following sentences is grammatically correct?",
+      "options": ["Him and me went to the store.", "He and I went to the store.", "Me and he went to the store.", "Me and him went to the store."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/3/F.png"
+      "question": "Choose the correct spelling:",
+      "options": ["Accommadate", "Accommodate", "Acommodate", "Acommodatte"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/4/F.png"
+      "question": "What is the antonym of \"joyful\"?",
+      "options": ["Sad", "Angry", "Excited", "Happy"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/5/F.png"
+      "question": "Identify the correct use of the apostrophe:",
+      "options": ["Its been a long day.", "It's been a long day.", "Its' been a long day.", "Its been a long day."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/6/F.png"
+      "question": "Which sentence is in the passive voice?",
+      "options": ["She ate the cake quickly.", "The cake was eaten quickly by her.", "Quickly, the cake was eaten by her.", "The cake eaten quickly by her."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/7/F.png"
+      "question": "What is the correct form of the verb in this sentence: \"She ___ to the party yesterday\"?",
+      "options": ["Goes", "Gone", "Went", "Go"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/8/F.png"
+      "question": "Choose the correct word to complete the sentence: \"I ___ to the store yesterday.\"",
+      "options": ["Went", "Gone", "Go", "Goes"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/9/F.png"
+      "question": "Which sentence is grammatically correct?",
+      "options": ["I have went to the store yesterday.", "I have gone to the store yesterday.", "I have go to the store yesterday.", "I have going to the store yesterday."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/10/F.png"
+      "question": "What is the correct past tense of the verb \"sing\"?",
+      "options": ["Singed", "Sanged", "Sang", "Sung"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/11/F.png"
+      "question": "What is the correct definition of the word \"benevolent\"?",
+      "options": ["Selfish", "Kind-hearted", "Cruel", "Dishonest"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/12/F.png"
+      "question": "Choose the correct sentence:",
+      "options": ["The cat laid on the bed.", "The cat lain on the bed.", "The cat laid on the bed.", "The cat layed on the bed."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/13/F.png"
+      "question": "Identify the correctly punctuated sentence:",
+      "options": ["I can't believe it's Monday already.", "I cant believe its Monday already.", "I can't believe its Monday already.", "I can't believe its monday already."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/14/F.png"
+      "question": "Choose the correct homophone:",
+      "options": ["Their", "There", "They're", "Thier"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/15/F.png"
+      "question": "What is the plural form of \"child\"?",
+      "options": ["Childs", "Childes", "Childrens", "Children"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/16/F.png"
+      "question": "Identify the correct possessive form:",
+      "options": ["The dog's tail wagged happily.", "The dogs' tail wagged happily.", "The dogs tail wagged happily.", "The dog' tail wagged happily."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/17/F.png"
+      "question": "Which sentence is grammatically correct?",
+      "options": ["He don't have any siblings.", "He doesn't have any siblings.", "He haven't any siblings.", "He isn't have any siblings."]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/18/F.png"
+      "question": "What is the correct comparative form of \"good\"?",
+      "options": ["Better", "Gooder", "Best", "More good"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/19/F.png"
+      "question": "Choose the correct word to complete the sentence: \"The __ car in the lot was blue.\"",
+      "options": ["Most expensive", "Expensiver", "Most expensivest", "More expensive"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/20/F.png"
+      "question": "What is the correct spelling?",
+      "options": ["Necessery", "Necesary", "Necessary", "Necessary"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/21/F.png"
+      "question": "A way of doing something especially an ordered set of procedures or an orderly system",
+      "options": ["method", "process", "presentation", "agendas"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/22/F.png"
+      "question": "The use of a bottle for the drinking of alcohol or the crown for the sovereign is the example of",
+      "options": ["metonymy", "antonym", "personification", "alliteration"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/23/F.png"
+      "question": "To cancel (a law, agreement, etc.) formally or officially",
+      "options": ["object", "abjure", "terminate", "abrogate"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/24/F.png"
+      "question": "The act of giving up something one has or would like to have",
+      "options": ["sacrilege", "Abnegation", "sacrifice", "acquiesce"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/25/F.png"
+      "question": "Select the word that is opposite in meaning to the word Asset",
+      "options": ["credibility", "liability", "poverty", "prosperity"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/26/F.png"
+      "question": "Select the word that is opposite in meaning to the word Smother",
+      "options": ["repress", "cheer", "nurture", "irritate"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/27/F.png"
+      "question": "Select the word that is opposite in meaning to the word Reprimand",
+      "options": ["reward", "appreciate", "encourage", "praise"]
     },
     {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/28/F.png"
-    },
-    {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/29/F.png"
-    },
-    {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/30/F.png"
-    },
-    {
-      "question": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/question.png",
-      "A": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/A.png",
-      "B": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/B.png",
-      "C": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/C.png",
-      "D": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/D.png",
-      "E": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/E.png",
-      "F": "https://raw.githubusercontent.com/tor-secure/iq-test-images/main/31/F.png"
-    },
-
-    
+      "question": "Select the word that is opposite in meaning to the word Tangible",
+      "options": ["gentle", "elusive", "refined", "palpabl"]
+    }
   ]
 
   const answerKey =[
-    1, 5, 6, 6, 4, 5, 5, 3, 4, 4, 1, 1, 2, 3, 6, 2, 2, 3, 6, 6, 5, 6, 1, 6, 5,
-    6, 6, 1, 1, 3, 5
+    2, 2, 2, 1, 2, 2, 3, 1, 2, 3, 2, 1, 1, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 2, 2, 1, 3, 1, 2
   ];
 
   console.log(answerKey.length, questionSet.length)
