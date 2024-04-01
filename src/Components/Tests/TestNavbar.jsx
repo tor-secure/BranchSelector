@@ -106,7 +106,7 @@ export const TestNavbar = ({
     const finRes = await evaluteTest(testQueryName, result);
     console.log(finRes);
     navigate("/result", {
-      state: { result: finRes },
+      state: { result: finRes, testName: testQueryName },
     });
   };
 

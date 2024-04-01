@@ -3,9 +3,12 @@ import SideDashBoard from "../../Components/SideDashBoard/SideDashBoard";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { faL } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
 
-const ResultsPage = ({ result }) => {
-  console.log(result);
+const ResultsPage = () => {
+  const location = useLocation();
+  const { result, testName } = location.state || {};
+  console.log(result, testName);
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
 
   useEffect(() => {
