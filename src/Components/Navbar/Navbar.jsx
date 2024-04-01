@@ -13,7 +13,7 @@ export default () => {
   const navigation = [
     { title: "Tests", path: "" },
     { title: "Partners", path: "" },
-    { title: "Teams", path: "" },
+    { title: "Ebook", path: "/book" },
     { title: "Blog", path: "" },
   ];
 
