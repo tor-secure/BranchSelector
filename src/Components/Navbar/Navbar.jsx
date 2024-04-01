@@ -11,12 +11,10 @@ export default () => {
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: "Customers", path: "javascript:void(0)" },
-    { title: "Careers", path: "javascript:void(0)" },
-    { title: "Guides", path: "javascript:void(0)" },
-    { title: "Partners", path: "javascript:void(0)" },
-    { title: "Teams", path: "javascript:void(0)" },
-    { title: "Blog", path: "javascript:void(0)" },
+    { title: "Tests", path: "" },
+    { title: "Partners", path: "" },
+    { title: "Teams", path: "" },
+    { title: "Blog", path: "" },
   ];
 
   useEffect(() => {
@@ -38,13 +36,12 @@ export default () => {
 
   return (
     <nav ref={navRef} className="bg-white w-full top-0 z-20 ">
-      <div className="items-center px-4 max-w-screen-xl mx-auto md:px-8 lg:flex">
-        <div className="flex items-center justify-between py-3 lg:py-4 lg:block">
+      <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex">
+        <div className="flex items-center justify-between  lg:block">
           <a href="javascript:void(0)">
             <img
               src={branchselector_logo}
-              width={100}
-              height={50}
+              className=" md:w-20 w-16 "
               alt="branchselector logo"
             />
           </a>
@@ -92,14 +89,6 @@ export default () => {
         >
           <div>
             <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
-              <li className="mt-8 mb-8 lg:mt-0 lg:mb-0">
-                <a
-                  href="javascript:void(0)"
-                  className="text-gray-600 hover:text-indigo-600"
-                >
-                  Contact
-                </a>
-              </li>
               <li className="mt-4 lg:mt-0">
                 <a
                   href="javascript:void(0)"

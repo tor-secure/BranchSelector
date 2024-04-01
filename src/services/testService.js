@@ -1,84 +1,85 @@
-import engineeringLogo from "../../Assets/engineer.png";
-import brainLogo from "../../Assets/brain.png";
-import interestLogo from "../../Assets/interest.png";
-import IQLogo from "../../Assets/iq.png";
-import personalityLogo from "../../Assets/memory.png";
-import streamLogo from "../../Assets/classXI.png";
-import strengthLogo from "../../Assets/strength.png";
-import varkLogo from "../../Assets/vark.png";
 
-import defaultUserPic from "../../Assets/defaultUser.png";
 import { collection, doc, getDocs, getFirestore } from "./firebase";
 
-const testInformation = {
-  "Engineering Test": {
-    query_code:"engineering",
+const testMetaData = {
+  "engineering": {
+    queryCode: "engineering",
     name: "Engineering Test",
-    logo: engineeringLogo,
-    testPage: "/engineering/test",
-    resultPage: "/engineering/results",
+    displayType:"slider",
+    evaluationType: "weighted-aggregation"
+  },
+
+  "brain": {
+    queryCode: "brain",
+    name: "Brain Test",
+    displayType:"mcq",
+    evaluationType: "single-option"
+  },
+
+  "interest": {
+    queryCode: "interest",
+    name: "Interest Test",
+    displayType:"mcq",
+    evaluationType: "aggregation" 
+  },
+
+
+  "iq": {
+    queryCode: "iq",
+    name: "IQ Test",
+    displayType:"img-mcq",
+    evaluationType: "single-option"  
+  },
+
+
+  "personality": {
+    queryCode: "personality",
+    name: "Personality Test",
+    displayType:"mcq",
+    evaluationType: "aggregation"  
 
   },
-  "Brain Test": {
-    query_code:"brain",
-    name: "Brain Test",
-    logo: brainLogo,
-    testPage: "/brain/test",
-    resultPage: "/brain/results",
-  },
-  "Interest Test": {
-    query_code:"interest",
-    name: "Interest Test",
-    logo: interestLogo,
-    testPage: "/interest/test",
-    resultPage: "/interest/results",
-  },
-  "IQ Test": {
-    query_code:"iq",
-    name: "IQ Test",
-    logo: IQLogo,
-    testPage: "/iq/test",
-    resultPage: "/iq/results",
-  },
-  "Personality Test": {
-    query_code:"personality",
-    name: "Personality Test",
-    logo: personalityLogo,
-    testPage: "/personality/test",
-    resultPage: "/personality/results",
-  },
-  "Stream Test": {
-    query_code:"stream",
+
+  "stream": {
+    queryCode: "stream",
     name: "Stream Test",
-    logo: streamLogo,
-    testPage: "/classX/test",
-    resultPage: "/classX/results",
+    displayType:"mcq",
+    evaluationType: "aggregation"  
   },
-  "Strength Test": {
-    query_code:"strength",
+
+  "strength": {
+    queryCode: "strength",
     name: "Strength Test",
-    logo: strengthLogo,
-    testPage: "/strength/test",
-    resultPage: "/strength/results",
+    displayType:"mcq",
+    evaluationType: "aggregation"  
   },
-  "VARK Test": {
-    query_code:"vark",
+
+  "vark": {
+    queryCode: "vark",
     name: "VARK Test",
-    logo: varkLogo,
-    testPage: "/vark/test",
-    resultPage: "/vark/results",
+    displayType:"mcq",
+    evaluationType: "aggregation"  
   },
+
+  "english": {
+    queryCode: "english",
+    name: "English Test",
+    displayType:"mcq",
+    evaluationType: "single-option"  
+  },
+
+
+
 };
 
-
-const db = getFirestore()
+const db = getFirestore();
 
 const getTestLogo = (testName) => {
-  return testInformation[testName].logo;
+  return testMetaData[testName].logo;
 };
 
-const getTestInfo = (testName) => {
-  return testInformation[testName];
+const getTestMetaData = (testName) => {
+  return testMetaData[testName];
 };
 
 const getDefaultProfilePic = () => {
@@ -86,104 +87,127 @@ const getDefaultProfilePic = () => {
 };
 
 const getRemainingTests = (excludedTests) => {
-  const filteredTests = Object.keys(testInformation)
+  const filteredTests = Object.keys(testMetaData)
     .filter(
       (testKey) =>
         !excludedTests.some(
           (excludedTest) =>
             excludedTest["test-name"].toLowerCase() ===
-            testInformation[testKey].name.toLowerCase()
+            testMetaData[testKey].name.toLowerCase()
         )
     )
-    .map((testKey) => testInformation[testKey]);
+    .map((testKey) => testMetaData[testKey]);
 
   return filteredTests;
 };
 
 async function getTestQuestions(testName) {
   try {
-
-    const testQuestionsCollection = collection(db, 'test-content');
+    const testQuestionsCollection = collection(db, "test-content");
     const testQuestionsDocRef = doc(testQuestionsCollection, testName);
-    const contentCollection = collection(testQuestionsDocRef, 'questions');
+    const contentCollection = collection(testQuestionsDocRef, "questions");
 
     const querySnapshot = await getDocs(contentCollection);
     const questions = querySnapshot.docs.map((doc) => {
-      const data = doc.data();
+    const data = doc.data();
       return {
         id: doc.id,
         question: data.question,
-        options: Object.entries(data.options).map(([key, value]) => ({ id: key, text: value })),
+        options: Object.entries(data.options).map(([key, value]) => ({
+          id: key,
+          text: value,
+        })),
       };
     });
 
     return questions;
   } catch (error) {
-    console.error('Error retrieving questions:', error);
+    console.error("Error retrieving questions:", error);
     throw error;
   }
 }
 
 async function evaluteTest(testName, selectedOptions) {
+  const evaluationType = getTestMetaData(testName).evaluationType
   try {
-
-    const testQuestionsCollection = collection(db, 'test-content');
+    const testQuestionsCollection = collection(db, "test-content");
     const testQuestionsDocRef = doc(testQuestionsCollection, testName);
-    const answerKeyCollection = collection(testQuestionsDocRef, 'answer-key');
+    const answerKeyCollection = collection(testQuestionsDocRef, "answer-key");
 
     // Fetch the entire answer key
     const answerKeySnapshot = await getDocs(answerKeyCollection);
-  
-    const answerKey = {};
 
-    const results = {}
-
-    answerKeySnapshot.forEach((doc) => {
-      answerKey[doc.id] = doc.data();
-    });
-
-
-    
-
-    for (let [questionId,optionId] of Object.entries(selectedOptions)) {
-      const weights = answerKey[questionId];
-
-      if (weights) {
-        const optionWeight = weights[optionId];
-        if (optionWeight) {
-          Object.keys(optionWeight).forEach((weight)=>
-          {
-            if(results[weight])
-            results[weight] += optionWeight[weight]
-            
-            else
-            results[weight] = optionWeight[weight]
-
-
-          })
-
+    if(evaluationType == 'aggregation')
+    {
+      const answerKey = {};
+      const results = {};
+      answerKeySnapshot.forEach((doc) => {
+        answerKey[doc.id] = doc.data();
+      });
+      for (let [questionId, optionId] of Object.entries(selectedOptions)) {
+        const weights = answerKey[questionId];
+        if (weights) {
+          const optionWeight = weights[optionId];
+          if (optionWeight) {
+            Object.keys(optionWeight).forEach((weight) => {
+              if (results[weight]) results[weight] += optionWeight[weight];
+              else results[weight] = optionWeight[weight];
+            });
+          }
+        } else {
+          console.warn(`Answer key not found for question ${questionId}`);
         }
-      } else {
-        console.warn(`Answer key not found for question ${questionId}`);
       }
+      return results;
     }
 
-    return results;
+    else if(evaluationType == 'single-option')
+    {
+      let correctAnswers = 0
+      const answerKey = answerKeySnapshot.docs[0].data()
+      for (let [questionId, optionId] of Object.entries(selectedOptions)) {
+        if(optionId === answerKey[questionId]) correctAnswers += 1
+      }
+
+      return correctAnswers;
+    }
+
+    if(evaluationType == 'weighted-aggregation')
+    {
+      const answerKey = {};
+      const results = {};
+      answerKeySnapshot.forEach((doc) => {
+        answerKey[doc.id] = doc.data();
+      });
+      for (let [questionId, selectedWeight] of Object.entries(selectedOptions)) {
+        const weights = answerKey[questionId];
+        if (weights) {
+          const optionWeight = weights
+          if (optionWeight) {
+            Object.keys(optionWeight).forEach((weight) => {
+              if (results[weight]) results[weight] += selectedWeight*optionWeight[weight];
+              else results[weight] = selectedWeight*optionWeight[weight];
+            });
+          }
+        } else {
+          console.warn(`Answer key not found for question ${questionId}`);
+        }
+      }
+      return results;
+    }
+
+
   } catch (error) {
-    console.error('Error calculating total score:', error);
+    console.error("Error calculating total score:", error);
     throw error;
   }
 }
 
-
-
-export { 
-
-  getTestInfo,
+export {
+  getTestMetaData,
   getTestLogo,
   getRemainingTests,
   getDefaultProfilePic,
   getTestQuestions,
-  evaluteTest
-    
-  };
+  evaluteTest,
+};

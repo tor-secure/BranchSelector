@@ -7,11 +7,13 @@ import Features from "../Components/Features/Features";
 import Sponsors from "../Components/Sponsors/Sponsors";
 import CTA from "../Components/CTA/CTA";
 import Message from "../Components/Message/Message";
+import ContactUsFlag from "../Components/ContactUsFlag/ContactUsFlag";
 
 const LandingPage = () => {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navbar />
+      <ContactUsFlag />
       <Hero />
       <Sponsors />
       <Message />
@@ -19,7 +21,7 @@ const LandingPage = () => {
       <Testimonials />
       <CTA />
       <Footer />
-    </>
+    </div>
   );
 };
 
