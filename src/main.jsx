@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import Authentication from "./pages/Authentication.jsx";
+import {Authentication} from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
@@ -16,8 +16,12 @@ const router = createBrowserRouter([
     element: <LandingPage />,
   },
   {
-    path: "auth",
-    element: <Authentication />,
+    path: "login",
+    element: <Authentication authType='login'/>,
+  },
+  {
+    path: "signup",
+    element: <Authentication authType='signup'/>,
   },
   {
     path: "booking",
