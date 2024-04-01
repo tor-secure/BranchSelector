@@ -1,4 +1,4 @@
-import { auth } from "../../services/authService"
+import { auth, getCurrentUser } from "../../services/authService"
 import { collection, doc, getDocs, getFirestore, setDoc } from "../../services/firebase"
 import { evaluteTest, getTestQuestions } from "../../services/testService"
 
@@ -15,7 +15,7 @@ async function getD()
    
   }
   //console.log(await generateCoupon(c.code,c["price-after-discount"],c["valid-from"],c["valid-till"],c.limit,3))
-  console.log(await evaluteTest('english',du))
+  console.log(await getCurrentUser())
 
 }
 
