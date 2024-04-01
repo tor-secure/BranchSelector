@@ -6,16 +6,15 @@ export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
   //   console.log(qNo, questionsData);
 
   const handleOptionClick = (index, option) => {
-    console.log("Yooooooooooo", questionsData.id, option.id);
-    const tempResult = { ...result }; // Create a copy of result to avoid mutating state directly
+    const tempResult = { ...result };
     tempResult[questionsData.id] = option.id;
     setResult(tempResult);
     setSelectedOptionIndex(index);
   };
 
   return (
-    <div className="w-[90%]  my-[3em] ">
-      <h2 className="text-2xl font-semibold">
+    <div className="w-[90%]  my-[2.1em]">
+      <h2 className="text-[1.4em] font-normal">
         {qNo + "." + " " + questionsData.question}
       </h2>
       <ul className="list-disc list-inside">
@@ -23,11 +22,11 @@ export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
           <li
             key={index}
             onClick={() => handleOptionClick(index, option)}
-            className={`hover:bg-[#e9e9e9] rounded-[7px] pl-3 indent-4 mt-6 h-10 text-[1.12em]  ${
+            className={` rounded-[7px]   mt-6 min-h-10 text-[1.12em] text-start px-5 py-1  ${
               questionsData.id in result &&
               option.id == result[questionsData.id]
-                ? "bg-[#367AF3] text-[#FFFFFF] "
-                : "bg-[#ffffff]"
+                ? "bg-[#367AF3] text-[#FFFFFF] hover:bg-[#6393e6]"
+                : "bg-[#CBE1F6] hover:bg-[#e2eef9]"
             } flex flex-row items-center`}
           >
             {option.text}

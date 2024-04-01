@@ -4,14 +4,15 @@ import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import {Authentication} from "./pages/Authentication.jsx";
+import { Authentication } from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
+import { TestsList } from "./Components/TestsList.jsx";
+
 import BookingPage from "./pages/BookingPage.jsx";
 
 import Book from "./pages/book.jsx";
-
 
 const router = createBrowserRouter([
   {
@@ -20,11 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <Authentication authType='login'/>,
+    element: <Authentication authType="login" />,
   },
   {
     path: "signup",
-    element: <Authentication authType='signup'/>,
+    element: <Authentication authType="signup" />,
   },
   {
     path: "booking",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "services-test",
     element: <ServicesTest />,
+  },
+  {
+    path: "testList",
+    element: <TestsList />,
   },
   {
     path: "book",

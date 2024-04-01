@@ -1,75 +1,68 @@
-
 import { collection, doc, getDocs, getFirestore } from "./firebase";
 
 const testMetaData = {
-  "engineering": {
+  engineering: {
     queryCode: "engineering",
     name: "Engineering Test",
-    displayType:"slider",
-    evaluationType: "weighted-aggregation"
+    displayType: "slider",
+    evaluationType: "weighted-aggregation",
   },
 
-  "brain": {
+  brain: {
     queryCode: "brain",
     name: "Brain Test",
-    displayType:"mcq",
-    evaluationType: "single-option"
+    displayType: "mcq",
+    evaluationType: "single-option",
   },
 
-  "interest": {
+  interest: {
     queryCode: "interest",
     name: "Interest Test",
-    displayType:"mcq",
-    evaluationType: "aggregation" 
+    displayType: "mcq",
+    evaluationType: "aggregation",
   },
 
-
-  "iq": {
+  iq: {
     queryCode: "iq",
     name: "IQ Test",
-    displayType:"img-mcq",
-    evaluationType: "single-option"  
+    displayType: "img-mcq",
+    evaluationType: "single-option",
   },
 
-
-  "personality": {
+  personality: {
     queryCode: "personality",
     name: "Personality Test",
-    displayType:"mcq",
-    evaluationType: "aggregation"  
-
+    displayType: "mcq",
+    evaluationType: "aggregation",
   },
 
-  "stream": {
+  stream: {
     queryCode: "stream",
     name: "Stream Test",
-    displayType:"mcq",
-    evaluationType: "aggregation"  
+    displayType: "mcq",
+    evaluationType: "aggregation",
   },
 
-  "strength": {
+  strength: {
     queryCode: "strength",
     name: "Strength Test",
-    displayType:"mcq",
-    evaluationType: "aggregation"  
+    displayType: "mcq",
+    evaluationType: "aggregation",
   },
 
-  "vark": {
+  vark: {
     queryCode: "vark",
     name: "VARK Test",
-    displayType:"mcq",
-    evaluationType: "aggregation"  
+    displayType: "mcq",
+    evaluationType: "aggregation",
   },
 
-  "english": {
+  english: {
     queryCode: "english",
     name: "English Test",
-    displayType:"mcq",
-    evaluationType: "single-option"  
+    displayType: "mcq",
+    evaluationType: "single-option",
   },
-
-
-
 };
 
 const db = getFirestore();
@@ -109,7 +102,7 @@ async function getTestQuestions(testName) {
 
     const querySnapshot = await getDocs(contentCollection);
     const questions = querySnapshot.docs.map((doc) => {
-    const data = doc.data();
+      const data = doc.data();
       return {
         id: doc.id,
         question: data.question,
@@ -128,7 +121,7 @@ async function getTestQuestions(testName) {
 }
 
 async function evaluteTest(testName, selectedOptions) {
-  const evaluationType = getTestMetaData(testName).evaluationType
+  const evaluationType = getTestMetaData(testName).evaluationType;
   try {
     const testQuestionsCollection = collection(db, "test-content");
     const testQuestionsDocRef = doc(testQuestionsCollection, testName);
@@ -137,8 +130,7 @@ async function evaluteTest(testName, selectedOptions) {
     // Fetch the entire answer key
     const answerKeySnapshot = await getDocs(answerKeyCollection);
 
-    if(evaluationType == 'aggregation')
-    {
+    if (evaluationType == "aggregation") {
       const answerKey = {};
       const results = {};
       answerKeySnapshot.forEach((doc) => {
@@ -159,34 +151,33 @@ async function evaluteTest(testName, selectedOptions) {
         }
       }
       return results;
-    }
-
-    else if(evaluationType == 'single-option')
-    {
-      let correctAnswers = 0
-      const answerKey = answerKeySnapshot.docs[0].data()
+    } else if (evaluationType == "single-option") {
+      let correctAnswers = 0;
+      const answerKey = answerKeySnapshot.docs[0].data();
       for (let [questionId, optionId] of Object.entries(selectedOptions)) {
-        if(optionId === answerKey[questionId]) correctAnswers += 1
+        if (optionId === answerKey[questionId]) correctAnswers += 1;
       }
 
       return correctAnswers;
     }
 
-    if(evaluationType == 'weighted-aggregation')
-    {
+    if (evaluationType == "weighted-aggregation") {
       const answerKey = {};
       const results = {};
       answerKeySnapshot.forEach((doc) => {
         answerKey[doc.id] = doc.data();
       });
-      for (let [questionId, selectedWeight] of Object.entries(selectedOptions)) {
+      for (let [questionId, selectedWeight] of Object.entries(
+        selectedOptions
+      )) {
         const weights = answerKey[questionId];
         if (weights) {
-          const optionWeight = weights
+          const optionWeight = weights;
           if (optionWeight) {
             Object.keys(optionWeight).forEach((weight) => {
-              if (results[weight]) results[weight] += selectedWeight*optionWeight[weight];
-              else results[weight] = selectedWeight*optionWeight[weight];
+              if (results[weight])
+                results[weight] += selectedWeight * optionWeight[weight];
+              else results[weight] = selectedWeight * optionWeight[weight];
             });
           }
         } else {
@@ -195,8 +186,6 @@ async function evaluteTest(testName, selectedOptions) {
       }
       return results;
     }
-
-
   } catch (error) {
     console.error("Error calculating total score:", error);
     throw error;
@@ -204,6 +193,7 @@ async function evaluteTest(testName, selectedOptions) {
 }
 
 export {
+  testMetaData,
   getTestMetaData,
   getTestLogo,
   getRemainingTests,
