@@ -1,5 +1,4 @@
-
-import Authentication from "./pages/Authentication";
+import { Authentication  } from "./pages/Authentication";
 
 import LandingPage from "./pages/LandingPage";
 import ResultsPage from "./pages/ResultPage/ResultPage";
@@ -12,7 +11,6 @@ function App() {
   return (
     <div>
       <LandingPage />
-      <Authentication />
     </div>
   );
 
