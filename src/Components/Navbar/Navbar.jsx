@@ -35,7 +35,7 @@ export default () => {
   }, [state]);
 
   return (
-    <nav ref={navRef} className="bg-white w-full top-0 z-20 ">
+    <nav ref={navRef} className="bg-white w-full top-0 z-50 ">
       <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex">
         <div className="flex items-center justify-between  lg:block">
           <a href="javascript:void(0)">
@@ -100,7 +100,7 @@ export default () => {
               <li className="mt-8 lg:mt-0">
                 <NavLink
                   to="/auth"
-                  className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
+                  className="py-3 px-4 text-center text-white bg-primary hover:bg-[rgb(139,199,250)] rounded-md shadow block lg:inline"
                 >
                   Sign Up
                 </NavLink>
