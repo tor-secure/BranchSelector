@@ -73,7 +73,7 @@ function BookingPage() {
                   <input
                     type="text"
                     required
-                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-[#e8f0fe] shadow-sm rounded-lg"
+                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                   />
                 </div>
                 <div>
@@ -83,7 +83,7 @@ function BookingPage() {
                   <input
                     type="email"
                     required
-                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-[#e8f0fe] shadow-sm rounded-lg"
+                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                   />
                 </div>
                 <div>
@@ -93,7 +93,7 @@ function BookingPage() {
                   <input
                     type="text"
                     required
-                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-[#e8f0fe] shadow-sm rounded-lg"
+                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                   />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ function BookingPage() {
                   <input
                     type="datetime-local"
                     required
-                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-[#e8f0fe] shadow-sm rounded-lg"
+                    className="w-full mt-1 px-3 py-1.5 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                   />
                 </div>
                 {/* <div>
@@ -136,8 +136,8 @@ function BookingPage() {
                 </p>
               </form>
             </div>
-            <div className="md:hidden">
-              <p className="font-semibold text-sm">Councelling Partner</p>
+            <div className="md:hidden mt-5">
+              <p className="font-bold text-sm">Councelling Partner,</p>
               <div className="flex">
                 <img src={SurePass} alt="sure pass logo" className="w-40" />
                 <p className="w-48 text-[0.6rem] py-2">
