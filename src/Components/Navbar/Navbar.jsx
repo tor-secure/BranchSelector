@@ -13,7 +13,7 @@ export default () => {
   const navigation = [
     { title: "Tests", path: "" },
     { title: "Partners", path: "" },
-    { title: "Ebook", path: "/book" },
+    { title: "Ebook", path: "/ebook" },
     { title: "Blog", path: "" },
     { title: "Appointment", path: "booking" },
   ];
@@ -42,7 +42,7 @@ export default () => {
           <NavLink to="/">
             <img
               src={branchselector_logo}
-              className=" md:w-20 w-16 "
+              className=" md:w-16 w-16 "
               alt="branchselector logo"
             />
           </NavLink>

@@ -12,7 +12,7 @@ import { TestsList } from "./Components/TestsList.jsx";
 
 import BookingPage from "./pages/BookingPage.jsx";
 
-import Book from "./pages/book.jsx";
+import EBook from "./pages/Ebook.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
     element: <TestsList />,
   },
   {
-    path: "book",
-    element: <Book />,
+    path: "ebook",
+    element: <EBook />,
   },
 ]);
 
