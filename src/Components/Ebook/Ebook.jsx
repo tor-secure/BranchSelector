@@ -27,7 +27,7 @@ function Ebook() {
       bookName: "SurePass_Career",
       title: "Career Path Chart",
       description:
-        " your comprehensive guide to navigating career paths after Class 12 in Science, Commerce, and Arts",
+        " Your comprehensive guide to navigating career paths after Class 12 in Science, Commerce, and Arts",
       points: [
         "Exploring various career options available in Science, Commerce, and Arts after completing Class 12.",
         "Stressing the importance of choosing the right course to pave the way for a successful career journey.",
