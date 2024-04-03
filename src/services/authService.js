@@ -1,4 +1,4 @@
-import { browserLocalPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
+import { browserLocalPersistence, browserSessionPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
 import {
     app,
     GoogleAuthProvider,
@@ -29,7 +29,7 @@ const addAuthChangeListener = (onChange) => {
 
 
 // Function to register a new user with email and password
-const registerWithEmailAndPassword = async (name, email, password) => {
+const registerWithEmailAndPassword = async (name,phoneNumber, email, password) => {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password);
         const user = result.user;
@@ -39,16 +39,14 @@ const registerWithEmailAndPassword = async (name, email, password) => {
             email: user.email,
             metadata: user.metadata ? JSON.stringify(user.metadata) : "",
             displayName: name,
-            phoneNumber: user.phoneNumber ? user.phoneNumber : "",
+            phoneNumber: user.phoneNumber ? user.phoneNumber : phoneNumber,
             photoUrl: user.photoURL ? user.photoURL : "",
             accountType: 'free',
             testsTaken: 0
         };
         const usersCollection = collection(firestore, "users");
         await addDoc(usersCollection, newUser);
-        // Set authentication status in local storage
-        localStorage.setItem('isAuthenticated', 'true');
-        await syncUserData()
+
     } catch (error) {
         console.error(error);
     }
@@ -57,7 +55,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 // Function to sign in with Google using Google OAuth provider
 const signInWithGoogle = async ({ rememberMe }) => {
     try {
-        const result = await signInWithPopup(auth, googleAuthProvider);
+        const result = await signInWithPopup(auth, googleAuthProvider)
         const user = result.user;
         const newUser = {
             authProvider: 'google',
@@ -76,7 +74,7 @@ const signInWithGoogle = async ({ rememberMe }) => {
             await addDoc(usersCollection, newUser);
         }
         // Set authentication status in local storage
-        if (rememberMe) {
+        /*if (rememberMe) {
             console.log("Local persistence");
             localStorage.setItem('isAuthenticated', 'true');
             localStorage.setItem('currentUser', user.uid);
@@ -90,7 +88,7 @@ const signInWithGoogle = async ({ rememberMe }) => {
             localStorage.removeItem('isAuthenticated');
             localStorage.removeItem('currentUser');
         }
-        await syncUserData()
+        await syncUserData()*/
         return { success: true, user }; // Indicate successful login
     } catch (error) {
         console.error("Sign-in failed:", error);
@@ -101,7 +99,7 @@ const signInWithGoogle = async ({ rememberMe }) => {
 
 // Function to check if the user is signed in
 const isSignedIn = () => {
-    var isSignedInLocal = localStorage.getItem('isAuthenticated')  === 'true' ? true : false;
+    /*var isSignedInLocal = localStorage.getItem('isAuthenticated')  === 'true' ? true : false;
     if (isSignedInLocal) {
         return isSignedInLocal
     }
@@ -112,15 +110,20 @@ const isSignedIn = () => {
         return isSignedInSession 
     }
 
-    return false
+    return false*/
 }
 
 // Function to login with email and password
 const loginWithEmailAndPassword = async (email, password,{rememberMe}) => {
     try {
-        await signInWithEmailAndPassword(auth, email, password);
+        setPersistence(auth,rememberMe?browserLocalPersistence:browserSessionPersistence).then(
+            async ()=>{
+                await signInWithEmailAndPassword(auth, email, password)
+            }
+        )
+
         // Set authentication status in local storage
-        if(rememberMe)
+       /*if(rememberMe)
         {
 
         localStorage.setItem('isAuthenticated', 'true');
@@ -137,6 +140,7 @@ const loginWithEmailAndPassword = async (email, password,{rememberMe}) => {
         localStorage.removeItem('currentUser');
         }
         await syncUserData()
+        */
     } catch (error) {
         console.error(error);
         throw(error)
@@ -169,38 +173,26 @@ const SendPasswordResetEmail = async (email) => {
 // Function to logout the current user
 const logout = () => {
     // Remove authentication status from local storage
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('currentUser');
-    sessionStorage.removeItem('isAuthenticated');
-    sessionStorage.removeItem('currentUser');
+    // localStorage.removeItem('isAuthenticated');
+    // localStorage.removeItem('currentUser');
+    // sessionStorage.removeItem('isAuthenticated');
+    // sessionStorage.removeItem('currentUser');
     signOut(auth);
 };
 
 const getCurrentUser = () => {
-    var uidSession = sessionStorage.getItem('currentUser');
-    if (uidSession) {
-        return uidSession;
-    }
-
-    // Check if the user ID exists in local storage
-    var uidLocal = localStorage.getItem('currentUser');
-    if (uidLocal) {
-        return uidLocal;
-    }
-
-    // If the user ID is not found in either session storage or local storage, return null
-    return null;
+    return auth.currentUser
 }
 
 
 const syncUserData = async () => {
-    if(isSignedIn())
+    /*if(isSignedIn())
     {
     const usersCollection = collection(firestore, "users");
     const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", getCurrentUser() )));
     sessionStorage.setItem("userDetails",JSON.stringify(querySnapshot.docs[0].data()))
     }
-
+*/
 }
 
 export {

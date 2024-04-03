@@ -13,8 +13,9 @@ export default () => {
   const navigation = [
     { title: "Tests", path: "" },
     { title: "Partners", path: "" },
-    { title: "Teams", path: "" },
+    { title: "Ebook", path: "/book" },
     { title: "Blog", path: "" },
+    { title: "Appointment", path: "booking" },
   ];
 
   useEffect(() => {
@@ -38,13 +39,13 @@ export default () => {
     <nav ref={navRef} className="bg-white w-full top-0 z-50 ">
       <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex">
         <div className="flex items-center justify-between  lg:block">
-          <a href="javascript:void(0)">
+          <NavLink to="/">
             <img
               src={branchselector_logo}
               className=" md:w-20 w-16 "
               alt="branchselector logo"
             />
-          </a>
+          </NavLink>
           <div className="lg:hidden">
             <button
               className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
@@ -90,17 +91,18 @@ export default () => {
           <div>
             <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
               <li className="mt-4 lg:mt-0">
-                <a
-                  href="javascript:void(0)"
+
+                <NavLink
+                  to="/login"
                   className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
-                >
-                  Login
-                </a>
+                  Sign Up>
+                    Login
+                </NavLink>
               </li>
               <li className="mt-8 lg:mt-0">
                 <NavLink
-                  to="/auth"
-                  className="py-3 px-4 text-center text-white bg-primary hover:bg-[rgb(139,199,250)] rounded-md shadow block lg:inline"
+                  to="/signup"
+                  className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
                 >
                   Sign Up
                 </NavLink>
