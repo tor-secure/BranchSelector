@@ -6,11 +6,17 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import ProfilePic from "../../assets/profile.webp";
+import { getTestMetaData } from "../../services/testService";
+import { resultcontentdata } from "../../services/ResultContent";
 
 const ResultsPage = () => {
   const location = useLocation();
   const { result, testName } = location.state || {};
   console.log(result, testName);
+  const testmeta = getTestMetaData(testName);
+
+  console.log(testmeta.evaluationType);
+  console.log(result);
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
 
   useEffect(() => {
@@ -21,6 +27,7 @@ const ResultsPage = () => {
   }, []);
   let userName = "James";
   let userMailId = "Jamesgmail.com";
+
   return (
     <section
       className="bg-[#fffefe] "
@@ -42,17 +49,19 @@ const ResultsPage = () => {
         <div className="relative z-20  w-[100] lg:ml-72  py-12  lg:px-16 px-5 overflow-y-hidden border-t-4 ">
           <div>
             <h2 className=" text-3xl md:text-4xl pb-4 md:pb-7 font-semibold  ">
-              IQ Test Result
+              {testmeta.name} Result
             </h2>
             <div className="flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-5 ">
               <div className="bg-white shadow-xl shadow-[#dce7ff] sm:h-72 items-center xl:h-72 lg:w-8/12  rounded-[8px] sm:rounded-[15px] flex justify-center p-2 sm:p-5">
                 <Bar
                   data={{
-                    labels: ["A", "B", "C", "D"],
+                    // labels: ["A", "B", "C", "D"],
+                    labels: Object.keys(result),
                     datasets: [
                       {
-                        label: "Revenue",
-                        data: [100, 200, 300, 150],
+                        label: testmeta.name,
+                        // data: [100, 200, 300, 150],
+                        data: Object.values(result),
                         backgroundColor: "#2D6FEF",
                       },
                     ],
@@ -81,34 +90,22 @@ const ResultsPage = () => {
               </div>
             </div>
           </div>
+
           <div className="pt-12">
             <h2 className="text-3xl font-semibold pb-7">Insights</h2>
             <div className="bg-white shadow-xl  shadow-[#dce7ff] py-12 px-5 md:px-12 rounded-[15px] ">
               <h2 className="font-semibold text-2xl">What does this mean?</h2>
-              <div className="flex flex-col space-y-8 pt-8 md:px-5">
+              <div className="flex flex-col space-y-8 pt-10 md:px-5">
                 <p>
-                  <h2 className="pb-2 font-semibold text-[17px]">
-                    Openness to experience
-                  </h2>
-                  Individuals high in openness tend to be imaginative, creative,
-                  and curious about the world around them. Keywords: Creative,
-                  Imaginative, Curious, Unconventional, Open-minded
-                </p>
-                <p>
-                  <h2 className="pb-2 font-semibold text-[17px]">
-                    Openness to experience
-                  </h2>
-                  Individuals high in openness tend to be imaginative, creative,
-                  and curious about the world around them. Keywords: Creative,
-                  Imaginative, Curious, Unconventional, Open-minded
-                </p>
-                <p>
-                  <h2 className="pb-2 font-semibold text-[17px]">
-                    Openness to experience
-                  </h2>
-                  Individuals high in openness tend to be imaginative, creative,
-                  and curious about the world around them. Keywords: Creative,
-                  Imaginative, Curious, Unconventional, Open-minded
+                  {Object.keys(resultcontentdata[testName]).map((key) => (
+                    <p key={key} className="mb-8">
+                      <h2 className="pb-2 font-semibold text-[17px]">
+                        {key + ":"}
+                      </h2>
+
+                      {resultcontentdata[testName][key]}
+                    </p>
+                  ))}
                 </p>
               </div>
             </div>

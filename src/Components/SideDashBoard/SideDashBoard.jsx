@@ -3,11 +3,13 @@ import ProfilePic from "../../assets/curiosity.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Lottie from "lottie-react";
 import result from "../../assets/animation/result.json";
+import { Route, useNavigate } from "react-router-dom";
 // import { homeicon } from "../../assets/Icons/home.svg";
 
 const SideDashBoard = (props) => {
   let userName = props.userName;
   let userMailId = props.userMailId;
+  const navigate = useNavigate();
   ("Jamesgmail.com");
   return (
     // bg-gradient-to-r from-[#dde8f2] via-[#d2e2f2] to-[#CBE1F5]
@@ -31,7 +33,10 @@ const SideDashBoard = (props) => {
             <FontAwesomeIcon icon="fa-solid fa-chart-line" size="sm" />
             <h2>Dashboard</h2>
           </button>
-          <button className="flex items-baseline gap-2 hover:bg-primary rounded-md px-3 hover:text-white ">
+          <button
+            className="flex items-baseline gap-2 hover:bg-primary rounded-md px-3 hover:text-white "
+            onClick={() => navigate("/")}
+          >
             <FontAwesomeIcon icon="fa-solid fa-house " size="sm" />
             <h2>Home</h2>
           </button>
