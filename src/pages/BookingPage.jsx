@@ -48,7 +48,7 @@ function BookingPage() {
               />
               <div className="hidden md:block">
                 <p className="font-semibold text-sm">
-                  &nbsp;&nbsp;Councelling Partner,
+                  &nbsp;&nbsp;Counselling Partner,
                 </p>
                 <div className="flex">
                   <img src={SurePass} alt="sure pass logo" className="w-40" />
@@ -137,7 +137,7 @@ function BookingPage() {
               </form>
             </div>
             <div className="md:hidden mt-5">
-              <p className="font-bold text-sm">Councelling Partner,</p>
+              <p className="font-bold text-sm">Counselling Partner,</p>
               <div className="flex">
                 <img src={SurePass} alt="sure pass logo" className="w-40" />
                 <p className="w-48 text-[0.6rem] py-2">
