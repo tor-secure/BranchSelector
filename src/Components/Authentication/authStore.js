@@ -1,5 +1,5 @@
 // authStore.js
-import create from 'zustand';
+import {create} from 'zustand';
 import { auth } from '../../services/authService'; // Import your Firebase configuration
 
 const useAuthStore = create((set) => ({
