@@ -6,7 +6,7 @@ function BookingPage() {
   const onChange = () => {};
   return (
     <div className="h-[100vh] ">
-      <Navbar />
+      <Navbar/>
 
       <main className="py-0 bg-gray-50 ">
         <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
@@ -63,7 +63,7 @@ function BookingPage() {
             <div className="bg-white flex-1 sm:max-w-lg lg:max-w-md shadow-lg border rounded-md duration-300 hover:shadow-sm px-6 lg:pt-2">
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="space-y-3 py-6 "
+                className="space-y-3 py-6 md:py-2 "
               >
                 <p className="font-bold text-lg">Book Appointment</p>
                 <div>
