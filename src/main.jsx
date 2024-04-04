@@ -13,6 +13,7 @@ import { TestsList } from "./Components/TestsList.jsx";
 import BookingPage from "./pages/BookingPage.jsx";
 
 import EBook from "./pages/Ebook.jsx";
+import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "ebook",
     element: <EBook />,
+  },
+  {
+    path: "testInstruction",
+    element: <TestInstruction />,
   },
 ]);
 
