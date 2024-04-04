@@ -181,6 +181,7 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
+    console.log("from services",auth.currentUser)
     return auth.currentUser
 }
 
