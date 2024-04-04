@@ -14,11 +14,13 @@ import BookingPage from "./pages/BookingPage.jsx";
 
 import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
+import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: 
+      <LandingPage />
   },
   {
     path: "login",
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "testInstruction",
-    element: <TestInstruction />,
+    element: <TestInstruction />
   },
 ]);
 

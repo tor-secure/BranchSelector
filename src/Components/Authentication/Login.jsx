@@ -3,9 +3,15 @@ import { GoogleLogo } from "./GoogleLogo"
 import { loginWithEmailAndPassword, signInWithGoogle } from "../../services/authService"
 import {  useNavigate } from "react-router-dom"
 import branchselector_logo from '../../assets/branchselector_logo.png'
+import { useLocation } from "react-router-dom"
 
 const Login = () =>
 {
+    const location = useLocation();
+    const state = location.state || {};
+
+    const fromLocation = state.from;
+
     const navigate = useNavigate()
 
     const onSubmitHandler = async (e) =>
@@ -14,6 +20,8 @@ const Login = () =>
         const password = e.target.elements.password.value;
         const rememberMe = e.target.elements.rememberMe.checked;
         await loginWithEmailAndPassword(email, password, {rememberMe:rememberMe})
+        console.log(fromLocation.pathname)
+        navigate(fromLocation.pathname)
     }
 
     const onClickHandler = () =>
