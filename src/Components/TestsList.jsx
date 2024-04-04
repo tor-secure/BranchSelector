@@ -19,7 +19,7 @@ export const TestsList = () => {
           <li key={index} className="flex justify-center">
             <button
               onClick={() => {
-                navigate("/testPage", {
+                navigate("/testInstruction", {
                   state: { testMetaData: test },
                 });
               }}
