@@ -12,7 +12,7 @@ import { TestsList } from "./Components/TestsList.jsx";
 
 import BookingPage from "./pages/BookingPage.jsx";
 
-import Book from "./pages/book.jsx";
+import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 
 const router = createBrowserRouter([
