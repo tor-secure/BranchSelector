@@ -21,7 +21,6 @@ const router = createBrowserRouter([
     path: "/",
     element: 
       <LandingPage />
-
   },
   {
     path: "login",
@@ -57,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "testInstruction",
-    element: <TestInstruction />,
+    element: <TestInstruction />
   },
 ]);
 
