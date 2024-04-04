@@ -61,7 +61,7 @@ function Ebook() {
               <p className="mt-3 text-gray-600">
                 {item.description}
                 <ul className="mt-3">
-                  {item.points.map((point,index) => (
+                  {item.points.map((point, index) => (
                     <li key={index} className="mt-1 flex">
                       <span>&#10004;&nbsp;</span>
                       {point}

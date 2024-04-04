@@ -11,11 +11,11 @@ export default () => {
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: "Tests", path: "testList" },
+    { title: "Tests", path: "/testList" },
     { title: "Partners", path: "" },
     { title: "Ebook", path: "/ebook" },
     { title: "Blog", path: "" },
-    { title: "Appointment", path: "booking" },
+    { title: "Appointment", path: "/booking" },
   ];
 
   useEffect(() => {
@@ -36,15 +36,19 @@ export default () => {
   }, [state]);
 
   return (
-    <nav ref={navRef} className="bg-white w-full top-0 z-20 ">
-      <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex">
+    <nav ref={navRef} className="bg-green-300 w-full top-0 z-20 font-poppins ">
+      <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex ">
         <div className="flex items-center justify-between  lg:block">
-          <NavLink to="/">
+          <NavLink
+            to="/"
+            className="flex justify-center items-center text-xl font-medium  "
+          >
             <img
               src={branchselector_logo}
               className=" md:w-16 w-16 "
               alt="branchselector logo"
             />
+            <h2 className="hidden sm:block">BranchSelector</h2>
           </NavLink>
           <div className="lg:hidden">
             <button
@@ -115,7 +119,7 @@ export default () => {
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx} className="text-gray-600 hover:text-indigo-600">
-                    <a href={item.path}>{item.title}</a>
+                    <NavLink to={item.path}>{item.title}</NavLink>
                   </li>
                 );
               })}

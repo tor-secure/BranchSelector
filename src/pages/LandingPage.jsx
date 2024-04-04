@@ -8,20 +8,29 @@ import Sponsors from "../Components/Sponsors/Sponsors";
 import CTA from "../Components/CTA/CTA";
 import Message from "../Components/Message/Message";
 import ContactUsFlag from "../Components/ContactUsFlag/ContactUsFlag";
+import AuthenticatedNavBar from "../Components/Navbar/AuthenticatedNavBar";
+import NavTestingWork from "../Components/Navbar/NavTestingWork";
+import { getCurrentUser } from "../services/authService";
 
 const LandingPage = () => {
+  const isAuthenticated = getCurrentUser;
+
   return (
-    <div className="overflow-x-hidden">
-      <Navbar />
+    <main className="overflow-x-hidden">
+      {isAuthenticated === null ? <AuthenticatedNavBar /> : <Navbar />}
+
+      {/* <NavTestingWork /> */}
+
       <ContactUsFlag />
       <Hero />
+
       <Sponsors />
       <Message />
       <Features />
       <Testimonials />
       <CTA />
       <Footer />
-    </div>
+    </main>
   );
 };
 
