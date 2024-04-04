@@ -3,7 +3,7 @@ import { QuestionSet } from "./QuestionSet";
 import { SectionsArea } from "./SectionsArea";
 import { evaluteTest, getTestQuestions } from "../../services/testService";
 import { TestNavbar } from "./TestNavbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { QuestionSetScroll } from "./QuestionSetScroll";
 import { QuestionSetImgMcq } from "./QuestionSetImgMcq";
 import { faL } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,14 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 export const TestArea = () => {
   const location = useLocation();
   const { testMetaData } = location.state || {};
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (Object.keys(testMetaData).length === 0) {
+      navigate("/");
+    }
+  }, [navigate, testMetaData]);
+
   const heading = testMetaData.name;
   const [result, setResult] = useState({});
   // const questionsPerPage = 5;
@@ -131,7 +139,7 @@ export const TestArea = () => {
               heading={heading}
             />
           </div>
-          <div className="lg:ml-[25em] flex-grow  bg-white-500 flex flex-col items-center bg-[#ffffff] pt-10">
+          <div className="lg:ml-[25em] flex-grow  bg-white-500 flex flex-col items-center bg-[#ffffff] pt-10 mt-5">
             {renderQuestions()}
           </div>
         </div>
