@@ -8,11 +8,14 @@ import {Authentication} from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
+import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: 
+      <LandingPage />
+
   },
   {
     path: "login",

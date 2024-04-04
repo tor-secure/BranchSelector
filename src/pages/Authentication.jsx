@@ -1,13 +1,17 @@
 import { GoogleLogo } from "../Components/Authentication/GoogleLogo"
 import { Login } from "../Components/Authentication/Login"
 import { Signup } from "../Components/Authentication/Signup"
+import Navbar from "../Components/Navbar/Navbar"
 import { signInWithGoogle } from "../services/authService"
 
 const Authentication = ({authType}) => {
-    console.log(authType)
-    return (
-        <main className="w-full flex">
-            <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
+    
+const mainClasses = `w-full flex ${authType === 'login' ? 'flex-row-reverse' : ''}`;
+
+  return (
+    <>
+      <main className={mainClasses}>
+            <div className="relative flex-1 hidden  h-screen bg-gray-900  lg:flex">
                 <div
                     className="absolute inset-0 my-auto h-[500px]"
                     style={{
@@ -19,6 +23,7 @@ const Authentication = ({authType}) => {
             </div>
             {authType === 'login'?<Login/>:<Signup/>}
         </main>
+        </>
     )
 }
 

@@ -1,4 +1,4 @@
-import { auth, getCurrentUser } from "../../services/authService"
+import { auth, getCurrentUser, logout } from "../../services/authService"
 import { collection, doc, getDocs, getFirestore, setDoc } from "../../services/firebase"
 import { evaluteTest, getTestQuestions } from "../../services/testService"
 
@@ -27,6 +27,7 @@ const style = {
 return(
     <>
     <button onClick={async ()=>{await getD();}} style = {style}>sadasdfdsfsd</button>
+    <button onClick={async () => logout()} style = {style}>Logout</button>
     </>
 )
 
