@@ -164,7 +164,7 @@ export const TestInstruction = () => {
                   value="value1"
                   className="mx-1"
                 />
-                I have read the stuffs
+                I have read the disclaimer
               </p>
             </div>
           </div>
