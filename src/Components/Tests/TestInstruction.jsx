@@ -1,8 +1,10 @@
 import React from "react";
 import { TestNavbar } from "./TestNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
-import ExampleImg from "./../../assets/ExampleTestImg.png";
 import Navigation from "./../../assets/Navigation.png";
+import { TestInstructionSection } from "./TestInstructionSection";
+import { TestInstructionSectionMCQImg } from "./TestInstructionSectionMCQImg";
+import { TestInstructionSectionSlider } from "./TestInstructionSectionSlider";
 
 export const TestInstruction = () => {
   const navigate = useNavigate();
@@ -10,6 +12,27 @@ export const TestInstruction = () => {
   const { testMetaData } = location.state || {};
   console.log("ashshfahsfh", testMetaData);
   const heading = testMetaData.name;
+
+  const checkTest = (testType) => {
+    // Early return pattern - if the condition is met, the component renders early.
+    if (testType == "mcq") {
+      return (
+        <TestInstructionSection evaluationType={testMetaData.evaluationType} />
+      );
+    } else if (testType == "slider") {
+      return (
+        <TestInstructionSectionSlider
+          evaluationType={testMetaData.evaluationType}
+        />
+      );
+    } else if (testType == "img-mcq") {
+      return (
+        <TestInstructionSectionMCQImg
+          evaluationType={testMetaData.evaluationType}
+        />
+      );
+    }
+  };
 
   const setQuestionsRange = () => {};
   return (
@@ -26,8 +49,8 @@ export const TestInstruction = () => {
         isInstruction={true}
       />
 
-      <div className="mt-[10em]">
-        <div className="w-full h-[20em] flex">
+      <div className="mt-[8.3em]">
+        <div className="w-full h-[25em] flex">
           <div className="w-[50%] h-full">
             <h1 className="text-center font-bold text-xl">Disclaimer</h1>
             <div className="p-7 h-full">
@@ -171,34 +194,9 @@ export const TestInstruction = () => {
 
           <div className="h-full bg-[#DBDBDB] w-[2.5px]"></div>
 
-          <div className="w-[50%] p-3 flex justify-center">
-            <div>
-              <p>- This is a multiple choice quiz.</p>
-              <img
-                className="my-4 h-[12em]"
-                src={ExampleImg}
-                alt="loading"
-              ></img>
-              <p className="mb-4">
-                - Select the option which you feel is the most appropriate to
-                you.
-              </p>
-              <p className="font-bold mb-4">
-                - Remember, there are no correct answers.
-              </p>
-              <p className="mb-4">
-                - You can navigate the page using the navigator on top of the
-                page
-              </p>
-              <img
-                className="my-4 h-[2em]"
-                src={Navigation}
-                alt="loading"
-              ></img>
-            </div>
-          </div>
+          {checkTest(testMetaData.displayType)}
         </div>
-        <div className="w-full flex justify-center mt-36">
+        <div className="w-full flex justify-center mt-24">
           <button
             className=" bg-[#367AF3] text-white font-semibold w-28 h-10 rounded-md hover:bg-[#689af0]"
             onClick={() => {
