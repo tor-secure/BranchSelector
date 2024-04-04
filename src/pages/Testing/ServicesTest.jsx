@@ -16,6 +16,7 @@ async function getD()
   }
   //console.log(await generateCoupon(c.code,c["price-after-discount"],c["valid-from"],c["valid-till"],c.limit,3))
   console.log(await getCurrentUser())
+  
 
 }
 

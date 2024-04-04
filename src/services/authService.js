@@ -141,6 +141,7 @@ const loginWithEmailAndPassword = async (email, password,{rememberMe}) => {
         }
         await syncUserData()
         */
+        
     } catch (error) {
         console.error(error);
         throw(error)
