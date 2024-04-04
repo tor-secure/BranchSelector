@@ -81,9 +81,10 @@ const canTakeTest = async () => {
     return;
   }
   const doc = querySnapshot.docs[0];
-  let testsTaken = doc.data().testsTaken;
-  let accountType = doc.data().accountType;
-  if (accountType === "free" && testsTaken >= 3) {
+
+  let credits = doc.data().credits;
+
+  if (credits <= 0) {
     console.log("No more free tests");
     return false;
   } else {
