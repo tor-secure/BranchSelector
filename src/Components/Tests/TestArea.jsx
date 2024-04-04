@@ -6,6 +6,7 @@ import { TestNavbar } from "./TestNavbar";
 import { useLocation } from "react-router-dom";
 import { QuestionSetScroll } from "./QuestionSetScroll";
 import { QuestionSetImgMcq } from "./QuestionSetImgMcq";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 export const TestArea = () => {
   const location = useLocation();
@@ -92,6 +93,19 @@ export const TestArea = () => {
     }
   };
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ""; // Message shown in the dialog
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <div>
       {
@@ -104,6 +118,7 @@ export const TestArea = () => {
           questionsPerPage={questionsPerPage}
           noOfSections={Math.ceil(questionsData.length / questionsPerPage)}
           testQueryName={testMetaData.queryCode}
+          isInstruction={false}
         />
       }
       {/* <Navbar /> */}

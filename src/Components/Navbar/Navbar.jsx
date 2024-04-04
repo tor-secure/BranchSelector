@@ -11,7 +11,7 @@ export default () => {
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: "Tests", path: "" },
+    { title: "Tests", path: "testList" },
     { title: "Partners", path: "" },
     { title: "Ebook", path: "/book" },
     { title: "Blog", path: "" },
@@ -91,12 +91,13 @@ export default () => {
           <div>
             <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
               <li className="mt-4 lg:mt-0">
-
                 <NavLink
                   to="/login"
                   className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
-                  Sign Up>
-                    Login
+                  Sign
+                  Up
+                >
+                  Login
                 </NavLink>
               </li>
               <li className="mt-8 lg:mt-0">
