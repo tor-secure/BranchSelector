@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar/Navbar";
 import Graduation from "../assets/TestList/graduation.svg";
 import { MdEngineering } from "react-icons/md";
 import { PiBarbellFill } from "react-icons/pi";
@@ -81,49 +80,44 @@ export const TestsList = () => {
     },
   ];
 
-
-
   return (
-    <>
-      <Navbar />
-      <section className="mx-auto max-w-screen-xl ">
-        <div className="flex flex-col md:flex-row bg-blue-200 items-center justify-center md:gap-2 lg:gap-44">
-          <div className="items-center flex justify-center align-middle">
-            <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700">
-              Unlock Your Potential with our wide range of tests.
-            </p>
-          </div>
-
-          <img src={Graduation} alt="SVG image" className="h-52" />
+    <section className="mx-auto max-w-screen ">
+      <div className="flex flex-col md:flex-row bg-blue-200 items-center justify-center md:gap-2 lg:gap-44">
+        <div className="items-center flex justify-center align-middle">
+          <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700">
+            Unlock Your Potential with our wide range of tests.
+          </p>
         </div>
 
-        <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:mx-16">
-          {tests.map((test, index) => (
-            <div
-              key={index}
-              className=" max-w-80 md:max-w-60 mx-auto shadow-md border rounded-md duration-300 hover:shadow-sm py-4 mb-4"
-            >
-              <div className="flex flex-col items-center justify-center gap-4">
-                <h2 className="font-bold text-blue-600">{test.name}</h2>
-                {test.icon}
-                <p className="text-center text-xs font-medium text-gray-500 px-8">
-                  {test.discription}
-                </p>
-                <button
-                  onClick={() => {
-                    navigate("/testInstruction", {
-                      state: { testMetaData: test },
-                    });
-                  }}
-                  className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-10 rounded focus:outline-none focus:shadow-outline transform transition duration-150 ease-in-out"
-                >
-                  Take test
-                </button>
-              </div>
+        <img src={Graduation} alt="SVG image" className="h-52" />
+      </div>
+
+      <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:mx-16">
+        {tests.map((test, index) => (
+          <div
+            key={index}
+            className=" max-w-80 md:max-w-60 mx-auto shadow-md border rounded-md duration-300 hover:shadow-sm py-4 mb-4"
+          >
+            <div className="flex flex-col items-center justify-center gap-4">
+              <h2 className="font-bold text-blue-600">{test.name}</h2>
+              {test.icon}
+              <p className="text-center text-xs font-medium text-gray-500 px-8">
+                {test.discription}
+              </p>
+              <button
+                onClick={() => {
+                  navigate("/testInstruction", {
+                    state: { testMetaData: test },
+                  });
+                }}
+                className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-10 rounded focus:outline-none focus:shadow-outline transform transition duration-150 ease-in-out"
+              >
+                Take test
+              </button>
             </div>
-          ))}
-        </div>
-      </section>
-    </>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };

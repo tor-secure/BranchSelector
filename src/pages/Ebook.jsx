@@ -3,7 +3,6 @@ import Navbar from "../Components/Navbar/Navbar";
 function Ebook() {
   return (
     <>
-      <Navbar />
       <Book />
     </>
   );
