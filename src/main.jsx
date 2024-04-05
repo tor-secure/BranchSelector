@@ -15,13 +15,36 @@ import BookingPage from "./pages/BookingPage.jsx";
 import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
+import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: 
-      <LandingPage />
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <LandingPage />,
+      },
+      {
+        path: "booking",
+        element: <BookingPage />,
+      },
+      {
+        path: "testList",
+        element: <TestsList />,
+      },
+      {
+        path: "ebook",
+        element: <EBook />,
+      },
+      {
+        path: "contactus",
+        element: <ContactUs />,
+      },
+    ],
   },
+
   {
     path: "login",
     element: <Authentication authType="login" />,
@@ -30,10 +53,7 @@ const router = createBrowserRouter([
     path: "signup",
     element: <Authentication authType="signup" />,
   },
-  {
-    path: "booking",
-    element: <BookingPage />,
-  },
+
   {
     path: "result",
     element: <ResultsPage />,
@@ -46,17 +66,10 @@ const router = createBrowserRouter([
     path: "services-test",
     element: <ServicesTest />,
   },
-  {
-    path: "testList",
-    element: <TestsList />,
-  },
-  {
-    path: "ebook",
-    element: <EBook />,
-  },
+
   {
     path: "testInstruction",
-    element: <TestInstruction />
+    element: <TestInstruction />,
   },
 ]);
 

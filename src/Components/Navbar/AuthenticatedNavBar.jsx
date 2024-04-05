@@ -2,13 +2,16 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import branchselector_logo from "../../assets/branchselector_logo.png";
 import { NavLink, Link } from "react-router-dom";
+import { getCurrentUser } from "../../services/authService";
+
+const isLoggedIn = getCurrentUser();
 
 const ProfileDropDown = (props) => {
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
   const navigation = [
-    { title: "Dashboard", path: "ebook" },
+    { title: "Dashboard", path: "/ebook" },
     { title: "Log out", path: "javascript:void(0)" },
   ];
 
@@ -92,7 +95,7 @@ const AuthenticatedNavBar = () => {
   }, [state]);
 
   return (
-    <nav ref={navRef} className="bg-green-400 w-full top-0 z-20 font-poppins ">
+    <nav ref={navRef} className="bg-white w-full top-0 z-20 font-poppins ">
       <div className="flex items-center space-x-8 justify-between  px-4   max-w-screen-xl mx-auto md:px-8">
         <div className="flex  items-center justify-center ">
           <NavLink to="/" className="flex  items-center  text-xl font-medium  ">

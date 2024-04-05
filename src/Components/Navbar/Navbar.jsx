@@ -13,7 +13,7 @@ export default () => {
   const navigation = [
     { title: "Tests", path: "/testList" },
     { title: "Partners", path: "" },
-    { title: "Ebook", path: "/ebook" },
+    { title: "E-Book", path: "/ebook" },
     { title: "Blog", path: "" },
     { title: "Appointment", path: "/booking" },
   ];
@@ -36,7 +36,7 @@ export default () => {
   }, [state]);
 
   return (
-    <nav ref={navRef} className="bg-green-300 w-full top-0 z-20 font-poppins ">
+    <nav ref={navRef} className="bg-white w-full top-0 z-20 font-poppins ">
       <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex ">
         <div className="flex items-center justify-between  lg:block">
           <NavLink

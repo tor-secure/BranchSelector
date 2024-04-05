@@ -85,8 +85,7 @@ export const TestsList = () => {
 
   return (
     <>
-      <Navbar />
-      <section className="mx-auto max-w-screen-xl ">
+      <section className="mx-auto max-w-screen ">
         <div className="flex flex-col md:flex-row bg-blue-200 items-center justify-center md:gap-2 lg:gap-32 px-2">
           <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700">
             Unlock Your Potential with our wide range of tests.

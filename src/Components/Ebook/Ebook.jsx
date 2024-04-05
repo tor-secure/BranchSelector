@@ -51,7 +51,7 @@ function Ebook() {
               <img
                 src={item.img}
                 className="md:max-w-lg sm:rounded-lg w-2/3 shadow-xl"
-                alt=""
+                alt={item.title}
               />
             </div>
             <div className="max-w-xl px-6 space-y-3 mt-6 sm:px-4 md:mt-0 lg:max-w-2xl">

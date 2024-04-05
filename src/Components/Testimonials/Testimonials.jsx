@@ -6,13 +6,13 @@ export default () => {
     {
       avatar: Om,
       name: "Om K Poojari",
-      title: "Reseacher Scientist",
+      title: "Reseach Scientist",
       quote:
         "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
     {
       avatar: Manav,
-      name: "Manav Mak",
+      name: "Manav Makhasana",
       title: "Software Engineer",
       quote:
         "Thanks to Branch Selector, I'm now pursuing a field I'm truly passionate about.",

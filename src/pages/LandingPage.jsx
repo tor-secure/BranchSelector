@@ -13,24 +13,17 @@ import NavTestingWork from "../Components/Navbar/NavTestingWork";
 import { getCurrentUser } from "../services/authService";
 
 const LandingPage = () => {
-  const isAuthenticated = getCurrentUser;
-
+  console.log(getCurrentUser());
   return (
-    <main className="overflow-x-hidden">
-      {isAuthenticated === null ? <AuthenticatedNavBar /> : <Navbar />}
-
-      {/* <NavTestingWork /> */}
-
+    <>
       <ContactUsFlag />
       <Hero />
-
       <Sponsors />
       <Message />
       <Features />
       <Testimonials />
       <CTA />
-      <Footer />
-    </main>
+    </>
   );
 };
 
