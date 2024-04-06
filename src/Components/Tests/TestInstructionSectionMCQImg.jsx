@@ -3,7 +3,7 @@ import ExampleImgMCQ from "./../../assets/ExampleTestImgMCQ.png";
 
 export const TestInstructionSectionMCQImg = ({ evaluationType }) => {
   return (
-    <div className="w-[50%] p-3 flex justify-start ml-6">
+    <div className="p-3 flex justify-start ml-0 md:ml-6 w-full md:w-[50%]">
       <div>
         <p>- This is a multiple choice quiz.</p>
 
