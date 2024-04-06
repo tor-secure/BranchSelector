@@ -3,12 +3,14 @@ import Navigation from "./../../assets/Navigation.png";
 
 export const TestInstructionSectionSlider = ({ evaluationType }) => {
   return (
-    <div className="w-[50%] p-3 flex justify-start ml-6">
+    <div className=" p-3 flex justify-start ml:0 md:ml-6 w-full md:w-[50%]">
       <div>
-        <p>- Select the value which you feel is the most appropriate to you.</p>
+        <p className="w-[82%]">
+          - Select the value which you feel is the most appropriate to you.
+        </p>
 
         <img
-          className="w-full h-[6em] my-4"
+          className="h-[6em] my-4"
           src={ExampleImgSlider}
           alt="loading"
         ></img>
