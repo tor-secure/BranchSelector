@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import { getCurrentUser } from "./services/authService";
 import AuthenticatedNavBar from "./Components/Navbar/AuthenticatedNavBar";
+import { LoadingPage } from "./pages/LoadingPage";
 
 library.add(fas);
 
@@ -27,16 +28,18 @@ function App() {
         {isAuthenticated === null ? <Navbar /> : <AuthenticatedNavBar />}
       </header>
 
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<LoadingPage />}>
         <Outlet />
       </Suspense>
+      <LoadingPage />
+
       <Footer />
     </main>
   );
 }
 
-// function created for Suspense
-function Loading() {
-  return <h2>Loading...</h2>;
-}
+// function created for Suspense *changed to LoadingPage component
+// function Loading() {
+//   return <h2>Loading...</h2>;
+// }
 export default App;
