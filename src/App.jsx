@@ -31,7 +31,6 @@ function App() {
       <Suspense fallback={<LoadingPage />}>
         <Outlet />
       </Suspense>
-      <LoadingPage />
 
       <Footer />
     </main>

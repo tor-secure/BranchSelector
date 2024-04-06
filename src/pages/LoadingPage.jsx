@@ -12,7 +12,6 @@ const LoadingPage = () => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-
         animationData: loading,
       });
 
