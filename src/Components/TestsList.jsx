@@ -9,6 +9,7 @@ import { FaTheaterMasks } from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
 import { TbAbc } from "react-icons/tb";
 import { GiPaintBrush } from "react-icons/gi";
+import { testMetaData } from "../services/testService";
 import { data } from "autoprefixer";
 
 export const TestsList = () => {
@@ -107,7 +108,7 @@ export const TestsList = () => {
               <button
                 onClick={() => {
                   navigate("/testInstruction", {
-                    state: { testMetaData: test },
+                    state: { testMetaData: testMetaData[test.queryCode] },
                   });
                 }}
                 className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-10 rounded focus:outline-none focus:shadow-outline transform transition duration-150 ease-in-out"

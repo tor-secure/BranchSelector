@@ -3,11 +3,15 @@ import Navigation from "./../../assets/Navigation.png";
 
 export const TestInstructionSection = ({ evaluationType }) => {
   return (
-    <div className="w-[50%] p-3 flex justify-center">
+    <div className=" p-3 flex justify-center w-full md:w-[50%]">
       <div>
         <p>- This is a multiple choice quiz.</p>
 
-        <img className="my-4 h-[12em]" src={ExampleImg} alt="loading"></img>
+        <img
+          className="my-4 h-[6em] md:h-[12em]"
+          src={ExampleImg}
+          alt="loading"
+        ></img>
         <p className="mb-4">
           - Select the option which you feel is the most appropriate to you.
         </p>
