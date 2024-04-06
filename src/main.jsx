@@ -16,6 +16,7 @@ import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
 import ContactUs from "./Components/ContactUs/ContactUs.jsx";
+import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,33 +44,40 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
     ],
+    errorElement: <ErrorPage />,
   },
 
   {
     path: "login",
     element: <Authentication authType="login" />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "signup",
     element: <Authentication authType="signup" />,
+    errorElement: <ErrorPage />,
   },
 
   {
     path: "result",
     element: <ResultsPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "testPage",
     element: <TestArea />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "services-test",
     element: <ServicesTest />,
+    errorElement: <ErrorPage />,
   },
 
   {
     path: "testInstruction",
     element: <TestInstruction />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
