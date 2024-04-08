@@ -22,8 +22,7 @@ const Login = () => {
     await loginWithEmailAndPassword(email, password, {
       rememberMe: rememberMe,
     });
-    console.log(fromLocation.pathname);
-    navigate(fromLocation.pathname);
+    navigate(fromLocation?fromLocation.pathname:'/');
   };
 
   const onClickHandler = () => {
