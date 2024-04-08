@@ -9,7 +9,7 @@ import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
 import { TestsList } from "./Components/TestsList.jsx";
-
+import Blog from "./Components/Blog/Blog.jsx"
 import BookingPage from "./pages/BookingPage.jsx";
 
 import EBook from "./pages/Ebook.jsx";
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "testList",
         element: <TestsList />,
+      },
+      {
+        path:"blog",
+        element:<Blog />
       },
       {
         path: "ebook",

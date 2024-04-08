@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 // Add this style to your css filesrc\assets\branchselector_logo.png
 
-export default () => {
+const Navbar = () => {
   const [state, setState] = useState(false);
   const navRef = useRef();
 
@@ -14,7 +14,7 @@ export default () => {
     { title: "Tests", path: "/testList" },
     { title: "Partners", path: "" },
     { title: "E-Book", path: "/ebook" },
-    { title: "Blog", path: "" },
+    { title: "Blog", path: "/Blog" },
     { title: "Appointment", path: "/booking" },
   ];
 
@@ -130,3 +130,5 @@ export default () => {
     </nav>
   );
 };
+
+export default Navbar;
