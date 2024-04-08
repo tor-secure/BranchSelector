@@ -20,8 +20,8 @@ const Login = () =>
         const password = e.target.elements.password.value;
         const rememberMe = e.target.elements.rememberMe.checked;
         await loginWithEmailAndPassword(email, password, {rememberMe:rememberMe})
-        console.log(fromLocation.pathname)
-        navigate(fromLocation.pathname)
+        console.log(fromLocation?fromLocation.pathname:'root')
+        navigate(fromLocation?fromLocation.pathname:'/')
     }
 
     const onClickHandler = () =>
@@ -46,7 +46,10 @@ const Login = () =>
                     </div>
                     <div className="flex items-center justify-center">
                         <button className="flex items-center justify-center py-2.5 px-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
-                                onClick={signInWithGoogle}
+                               onClick={async ()=> {
+                                    await signInWithGoogle()
+                                    navigate('/')
+                                }}
                         >
                             
                             <GoogleLogo/>
