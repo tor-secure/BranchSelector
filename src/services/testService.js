@@ -12,7 +12,7 @@ const testMetaData = {
     queryCode: "brain",
     name: "Brain Test",
     displayType: "mcq",
-    evaluationType: "single-option",
+    evaluationType: "aggregation",
   },
 
   interest: {

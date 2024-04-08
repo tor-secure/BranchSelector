@@ -23,7 +23,7 @@ export const QuestionSetImgMcq = ({
   });
 
   return (
-    <div className="w-[90%] my-[2.1em]">
+    <div className="w-[90%] my-[2.1em] ">
       <div className="flex text-2xl">
         {qNo + "."}
         <h2 className="text-[1.4em] font-normal flex justify-center w-full">

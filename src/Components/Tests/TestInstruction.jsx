@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { TestNavbar } from "./TestNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
-import ExampleImg from "./../../assets/ExampleTestImg.png";
 import Navigation from "./../../assets/Navigation.png";
+import { TestInstructionSection } from "./TestInstructionSection";
+import { TestInstructionSectionMCQImg } from "./TestInstructionSectionMCQImg";
+import { TestInstructionSectionSlider } from "./TestInstructionSectionSlider";
 
 export const TestInstruction = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    console.log(event.target.checked);
+  };
   const navigate = useNavigate();
   const location = useLocation();
   const { testMetaData } = location.state || {};
   console.log("ashshfahsfh", testMetaData);
   const heading = testMetaData.name;
+
+  const checkTest = (testType) => {
+    // Early return pattern - if the condition is met, the component renders early.
+    if (testType == "mcq") {
+      return (
+        <TestInstructionSection evaluationType={testMetaData.evaluationType} />
+      );
+    } else if (testType == "slider") {
+      return (
+        <TestInstructionSectionSlider
+          evaluationType={testMetaData.evaluationType}
+        />
+      );
+    } else if (testType == "img-mcq") {
+      return (
+        <TestInstructionSectionMCQImg
+          evaluationType={testMetaData.evaluationType}
+        />
+      );
+    }
+  };
 
   const setQuestionsRange = () => {};
   return (
@@ -26,12 +55,12 @@ export const TestInstruction = () => {
         isInstruction={true}
       />
 
-      <div className="mt-[10em]">
-        <div className="w-full h-[20em] flex">
-          <div className="w-[50%] h-full">
+      <div className="mt-[8.3em] h-[62em] md:h-[30em]">
+        <div className="w-full h-[25em] md:flex">
+          <div className="w-full md:w-[50%] ">
             <h1 className="text-center font-bold text-xl">Disclaimer</h1>
-            <div className="p-7 h-full">
-              <ul className="overflow-y-scroll h-full">
+            <div className="p-7 ">
+              <ul className="overflow-y-scroll h-[20em]">
                 <li>
                   <strong>Purpose:</strong>
                   <ul>
@@ -156,60 +185,41 @@ export const TestInstruction = () => {
                 </li>
               </ul>
 
-              <p className="mt-5 text-center">
+              <p className="mt-5 text-center text-lg">
                 <input
                   type="checkbox"
                   id="checkbox1"
                   name="checkbox1"
                   value="value1"
-                  className="mx-1"
+                  className="mx-1 checkbox-large" // Add a custom class for styling
+                  onChange={handleCheckboxChange} // Attach onChange event handler
+                  checked={isChecked} // Controlled component: set the checked state
                 />
                 I have read the disclaimer
               </p>
             </div>
           </div>
 
-          <div className="h-full bg-[#DBDBDB] w-[2.5px]"></div>
+          <div className="h-full bg-[#DBDBDB] w-[2.5px] hidden md:block"></div>
 
-          <div className="w-[50%] p-3 flex justify-center">
-            <div>
-              <p>- This is a multiple choice quiz.</p>
-              <img
-                className="my-4 h-[12em]"
-                src={ExampleImg}
-                alt="loading"
-              ></img>
-              <p className="mb-4">
-                - Select the option which you feel is the most appropriate to
-                you.
-              </p>
-              <p className="font-bold mb-4">
-                - Remember, there are no correct answers.
-              </p>
-              <p className="mb-4">
-                - You can navigate the page using the navigator on top of the
-                page
-              </p>
-              <img
-                className="my-4 h-[2em]"
-                src={Navigation}
-                alt="loading"
-              ></img>
-            </div>
-          </div>
+          {checkTest(testMetaData.displayType)}
         </div>
-        <div className="w-full flex justify-center mt-36">
-          <button
-            className=" bg-[#367AF3] text-white font-semibold w-28 h-10 rounded-md hover:bg-[#689af0]"
-            onClick={() => {
+      </div>
+      <div className="w-full flex justify-center mb-4">
+        <button
+          className=" bg-[#367AF3] text-white font-semibold w-28 h-10 rounded-md hover:bg-[#689af0]"
+          onClick={() => {
+            if (isChecked) {
               navigate("/testPage", {
                 state: { testMetaData: testMetaData },
               });
-            }}
-          >
-            Begin Test
-          </button>
-        </div>
+            } else {
+              alert("Please confirm that you have read the disclaimer.");
+            }
+          }}
+        >
+          Begin Test
+        </button>
       </div>
     </div>
   );

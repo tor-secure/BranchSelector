@@ -15,48 +15,69 @@ import BookingPage from "./pages/BookingPage.jsx";
 import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
+import ContactUs from "./Components/ContactUs/ContactUs.jsx";
+import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: 
-      <LandingPage />
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <LandingPage />,
+      },
+      {
+        path: "booking",
+        element: <BookingPage />,
+      },
+      {
+        path: "testList",
+        element: <TestsList />,
+      },
+      {
+        path: "ebook",
+        element: <EBook />,
+      },
+      {
+        path: "contactus",
+        element: <ContactUs />,
+      },
+    ],
+    errorElement: <ErrorPage />,
   },
+
   {
     path: "login",
     element: <Authentication authType="login" />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "signup",
     element: <Authentication authType="signup" />,
+    errorElement: <ErrorPage />,
   },
-  {
-    path: "booking",
-    element: <BookingPage />,
-  },
+
   {
     path: "result",
     element: <ResultsPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "testPage",
     element: <TestArea />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "services-test",
     element: <ServicesTest />,
+    errorElement: <ErrorPage />,
   },
-  {
-    path: "testList",
-    element: <TestsList />,
-  },
-  {
-    path: "ebook",
-    element: <EBook />,
-  },
+
   {
     path: "testInstruction",
-    element: <TestInstruction />
+    element: <TestInstruction />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
