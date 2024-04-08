@@ -4,9 +4,8 @@ import branchselector_logo from "../../assets/branchselector_logo.png";
 import { NavLink, Link } from "react-router-dom";
 import { getCurrentUser } from "../../services/authService";
 
-const isLoggedIn = getCurrentUser();
-
 const ProfileDropDown = (props) => {
+
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
@@ -31,14 +30,14 @@ const ProfileDropDown = (props) => {
           onClick={() => setState(!state)}
         >
           <img
-            src="https://randomuser.me/api/portraits/men/46.jpg"
+            src={props.profile.photoURL.toString()}
             className="w-full h-full rounded-full"
             alt="user profile image"
           />
         </button>
         <div className="lg:hidden">
-          <span className="block">Micheal John</span>
-          <span className="block text-sm text-gray-500">john@gmail.com</span>
+          <span className="block">{props.profile.displayName.toString()}</span>
+          <span className="block text-sm text-gray-500">{props.profile.email.toString()}</span>
         </div>
       </div>
       <ul
@@ -60,7 +59,9 @@ const ProfileDropDown = (props) => {
     </div>
   );
 };
-const AuthenticatedNavBar = () => {
+
+
+const AuthenticatedNavBar = (props) => {
   const [menuState, setMenuState] = useState(false);
 
   // Replace javascript:void(0) path with your path
@@ -122,11 +123,11 @@ const AuthenticatedNavBar = () => {
               );
             })}
           </ul>
-          <ProfileDropDown class="mt-5 pt-5 border-t lg:hidden" />
+          <ProfileDropDown class="mt-5 pt-5 border-t lg:hidden" profile = {props.user}/>
         </div>
 
         <div className=" flex items-center  space-x-2 sm:space-x-6">
-          <ProfileDropDown class="hidden lg:block" />
+          <ProfileDropDown class="hidden lg:block"  profile = {props.user}/>
 
           <button
             className="outline-none p-2 text-gray-400 block lg:hidden"

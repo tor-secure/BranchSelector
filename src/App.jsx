@@ -27,7 +27,6 @@ function App() {
   useEffect(() => {
     const getAuthState = async () => {
       const temp = await getCurrentUser();
-      console.log(temp);
       setIsAuthenticated(temp);
     };
     getAuthState();
@@ -49,9 +48,9 @@ function App() {
         {isAuthenticated === null ? (
           <Navbar/>
         ) : isAuthenticated ? (
-          <AuthenticatedNavBar/>
+          <AuthenticatedNavBar user = {isAuthenticated}/>
         ) : (
-          <AuthenticatedNavBar/>
+          <Navbar/>
         )}
       </header>
       <Suspense fallback={<LoadingPage />}>
