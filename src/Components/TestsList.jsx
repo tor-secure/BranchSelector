@@ -82,15 +82,15 @@ export const TestsList = () => {
   ];
 
   return (
-    <section className=" mx-auto max-w-screen-xl ">
-      <div className="flex flex-col md:flex-row  bg-dimBlue items-center justify-center md:gap-2 lg:gap-44 ">
+    <section className="  mx-auto  max-w-screen-2xl ">
+      <div className="flex flex-col md:flex-row bg-dimBlue   items-center justify-center md:gap-2 lg:gap-44 ">
         <div className="items-center flex justify-center align-middle">
-          <h1 className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700">
+          <h1 className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700 ">
             Unlock Your Potential with our wide range of tests.
           </h1>
         </div>
 
-        <img src={Graduation} alt="Graduation" className="h-52" />
+        <img src={Graduation} alt="Graduation" className="h-32 xl:h-52" />
       </div>
 
       <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:mx-16  ">
