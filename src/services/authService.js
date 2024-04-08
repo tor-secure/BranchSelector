@@ -181,10 +181,12 @@ const logout = () => {
     signOut(auth);
 };
 
-const getCurrentUser = () => {
-    console.log("from services",auth.currentUser)
-    return auth.currentUser
+/*
+const getCurrentUser = async () => {
+    return await auth.currentUser
 }
+*/
+
 
 
 const syncUserData = async () => {
@@ -196,6 +198,17 @@ const syncUserData = async () => {
     }
 */
 }
+
+function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+     const unsubscribe = auth.onAuthStateChanged(user => {
+        unsubscribe();
+        resolve(user);
+     }, reject);
+  });
+}
+
+
 
 export {
     auth,
@@ -210,6 +223,8 @@ export {
     setPersistence,
     getCurrentUser,
     addAuthChangeListener,
-    syncUserData
+    syncUserData,
+
+
 };
 
