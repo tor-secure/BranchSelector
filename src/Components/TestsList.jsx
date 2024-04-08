@@ -82,21 +82,21 @@ export const TestsList = () => {
   ];
 
   return (
-    <section className="mx-auto max-w-screen ">
-      <div className="flex flex-col md:flex-row bg-blue-200 items-center justify-center md:gap-2 lg:gap-44">
+    <section className=" mx-auto max-w-screen-xl ">
+      <div className="flex flex-col md:flex-row  bg-dimBlue items-center justify-center md:gap-2 lg:gap-44 ">
         <div className="items-center flex justify-center align-middle">
-          <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700">
+          <h1 className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700">
             Unlock Your Potential with our wide range of tests.
-          </p>
+          </h1>
         </div>
 
-        <img src={Graduation} alt="SVG image" className="h-52" />
+        <img src={Graduation} alt="Graduation" className="h-52" />
       </div>
 
-      <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:mx-16">
-        {tests.map((test, index) => (
+      <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:mx-16  ">
+        {tests.map((test) => (
           <div
-            key={index}
+            key={test.queryCode}
             className=" max-w-80 md:max-w-60 mx-auto shadow-md border rounded-md duration-300 hover:shadow-sm py-4 mb-4"
           >
             <div className="flex flex-col items-center justify-center gap-4">
