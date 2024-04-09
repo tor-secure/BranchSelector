@@ -25,6 +25,11 @@ const Login = () => {
     navigate(fromLocation?fromLocation.pathname:'/');
   };
 
+  const onContinueWithGoogleHandler = async () =>{
+    await signInWithGoogle({rememberMe:false})
+    navigate(fromLocation?fromLocation.pathname:'/');
+  }
+
   const onClickHandler = () => {
     navigate("/signup");
   };
@@ -56,7 +61,7 @@ const Login = () => {
         <div className="flex items-center justify-center">
           <button
             className="flex items-center justify-center py-2.5 px-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
-            onClick={signInWithGoogle}
+            onClick={onContinueWithGoogleHandler}
           >
             <GoogleLogo />
             Continue with Google

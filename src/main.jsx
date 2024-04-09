@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "ebook",
-        element: <EBook />,
+        element:<EBook />,
       },
       {
         path: "contactus",

@@ -1,21 +1,37 @@
 // ProtectedRoute.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import useAuthStore from './authStore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getCurrentUser } from '../../services/authService';
 import { LoadingPage } from '../../pages/LoadingPage';
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, isLoading, initAuth } = useAuthStore();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
-    const unsubscribe = initAuth();
+    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
+      setIsAuthenticated(!!user);
+      setIsLoading(false);
+    });
+
     return unsubscribe;
-  }, [initAuth]);
+  }, []);
+
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const isAuth = await getCurrentUser();
+      setIsAuthenticated(isAuth);
+      setIsLoading(false);
+    };
+    checkAuth();
+  }, []);
 
   if (isLoading) {
     // Show a loading spinner or a placeholder while checking the authentication state
-    return <LoadingPage/>
+    return <LoadingPage />;
   }
 
   if (!isAuthenticated) {
