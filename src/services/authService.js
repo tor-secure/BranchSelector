@@ -114,39 +114,27 @@ const isSignedIn = () => {
 }
 
 // Function to login with email and password
-const loginWithEmailAndPassword = async (email, password,{rememberMe}) => {
-    try {
-        setPersistence(auth,rememberMe?browserLocalPersistence:browserSessionPersistence).then(
-            async ()=>{
-                await signInWithEmailAndPassword(auth, email, password)
-            }
-        )
+const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
+  try {
+    // Set the appropriate persistence based on the 'rememberMe' flag
+    await getAuth().setPersistence(
+      rememberMe ? browserLocalPersistence : browserSessionPersistence
+    );
 
-        // Set authentication status in local storage
-       /*if(rememberMe)
-        {
+    // Sign in with the email and password
+    const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
 
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('currentUser',auth.currentUser.uid);
-        sessionStorage.removeItem('isAuthenticated');
-        sessionStorage.removeItem('currentUser');
-        }
-        else
-        {
-    
-        sessionStorage.setItem('isAuthenticated','true');
-        sessionStorage.setItem('currentUser',auth.currentUser.uid);
-        localStorage.removeItem('isAuthenticated');
-        localStorage.removeItem('currentUser');
-        }
-        await syncUserData()
-        */
-        
-    } catch (error) {
-        console.error(error);
-        throw(error)
-    }
+    // Retrieve the current user
+    const currentUser = userCredential.user;
+
+    // Update the authentication state
+    return currentUser;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
+
 
 // Function to login with email link
 const loginWithEmailLink = async (email) => {
