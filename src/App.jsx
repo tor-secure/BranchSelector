@@ -11,18 +11,16 @@ import { getAuth } from "firebase/auth";
 
 library.add(fas);
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
     const unsubscribe = getAuth().onAuthStateChanged((user) => {
       setIsAuthenticated(!!user);
     });
 
     return unsubscribe;
   }, []);
-
 
   useEffect(() => {
     const getAuthState = async () => {
@@ -46,11 +44,11 @@ function App() {
     <main className="overflow-x-hidden">
       <header>
         {isAuthenticated === null ? (
-          <Navbar/>
+          <Navbar />
         ) : isAuthenticated ? (
-          <AuthenticatedNavBar user = {isAuthenticated}/>
+          <AuthenticatedNavBar user={isAuthenticated} />
         ) : (
-          <Navbar/>
+          <Navbar />
         )}
       </header>
       <Suspense fallback={<LoadingPage />}>

@@ -14,7 +14,7 @@ const Navbar = () => {
     { title: "Tests", path: "/testList" },
     { title: "Partners", path: "" },
     { title: "E-Book", path: "/ebook" },
-    { title: "Blog", path: "/Blog" },
+    { title: "Blog", path: "/blog" },
     { title: "Appointment", path: "/booking" },
   ];
 
