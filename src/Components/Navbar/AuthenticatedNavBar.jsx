@@ -5,7 +5,6 @@ import { NavLink, Link } from "react-router-dom";
 import { getCurrentUser } from "../../services/authService";
 
 const ProfileDropDown = (props) => {
-
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
@@ -37,11 +36,13 @@ const ProfileDropDown = (props) => {
         </button>
         <div className="lg:hidden">
           <span className="block">{props.profile.displayName.toString()}</span>
-          <span className="block text-sm text-gray-500">{props.profile.email.toString()}</span>
+          <span className="block text-sm text-gray-500">
+            {props.profile.email.toString()}
+          </span>
         </div>
       </div>
       <ul
-        className={`bg-white top-12 right-0 mt-5 space-y-5 lg:absolute lg:border lg:rounded-md lg:text-sm lg:w-52 lg:shadow-md lg:space-y-0 lg:mt-0 ${
+        className={`bg-white z-50 top-12 right-0 mt-5 space-y-5 lg:absolute lg:border lg:rounded-md lg:text-sm lg:w-52 lg:shadow-md lg:space-y-0 lg:mt-0 ${
           state ? "" : "lg:hidden"
         }`}
       >
@@ -60,7 +61,6 @@ const ProfileDropDown = (props) => {
   );
 };
 
-
 const AuthenticatedNavBar = (props) => {
   const [menuState, setMenuState] = useState(false);
 
@@ -74,7 +74,7 @@ const AuthenticatedNavBar = (props) => {
     { title: "Tests", path: "testList" },
     { title: "Partners", path: "" },
     { title: "Ebook", path: "/ebook" },
-    { title: "Blog", path: "" },
+    { title: "Blog", path: "/blog" },
     { title: "Appointment", path: "booking" },
   ];
 
@@ -123,11 +123,14 @@ const AuthenticatedNavBar = (props) => {
               );
             })}
           </ul>
-          <ProfileDropDown class="mt-5 pt-5 border-t lg:hidden" profile = {props.user}/>
+          <ProfileDropDown
+            class="mt-5 pt-5 border-t lg:hidden"
+            profile={props.user}
+          />
         </div>
 
         <div className=" flex items-center  space-x-2 sm:space-x-6">
-          <ProfileDropDown class="hidden lg:block"  profile = {props.user}/>
+          <ProfileDropDown class="hidden lg:block" profile={props.user} />
 
           <button
             className="outline-none p-2 text-gray-400 block lg:hidden"
