@@ -15,8 +15,9 @@ const ResultsPage = () => {
   console.log(result, testName);
   const testmeta = getTestMetaData(testName);
 
-  console.log(testmeta.evaluationType);
-  console.log(result);
+  // console.log(testmeta.evaluationType);
+  console.log(testName);
+
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
 
   useEffect(() => {
@@ -27,6 +28,22 @@ const ResultsPage = () => {
   }, []);
   let userName = "James";
   let userMailId = "Jamesgmail.com";
+
+  console.log(result);
+  const FirstLabel = Object.keys(result);
+  console.log(FirstLabel);
+
+  // const resultarray = Object.entries(result);
+
+  // const slicedEngineeringData = resultarray.slice(0, 15);
+
+  // const FirstLabel = slicedEngineeringData.map(([key]) => {
+  //   return key.replace("Engineering", "E");
+  // });
+
+  // const AdjustedLabel = FirstLabel.map((label) => label.split(" "));
+
+  // console.log(AdjustedLabel);
 
   return (
     <section
@@ -55,8 +72,9 @@ const ResultsPage = () => {
               <div className="bg-white shadow-xl shadow-[#dce7ff] sm:h-72 items-center xl:h-72 lg:w-8/12  rounded-[8px] sm:rounded-[15px] flex justify-center p-2 sm:p-5">
                 <Bar
                   data={{
-                    // labels: ["A", "B", "C", "D"],
-                    labels: Object.keys(result),
+                    labels: ["A", "B", "C", "D"],
+                    // labels: Object.keys(engineeringData),
+                    // labels: FirstLabel,
                     datasets: [
                       {
                         label: testmeta.name,
@@ -96,17 +114,17 @@ const ResultsPage = () => {
             <div className="bg-white shadow-xl  shadow-[#dce7ff] py-12 px-5 md:px-12 rounded-[15px] ">
               <h2 className="font-semibold text-2xl">What does this mean?</h2>
               <div className="flex flex-col space-y-8 pt-10 md:px-5">
-                <p>
+                <div>
                   {Object.keys(resultcontentdata[testName]).map((key) => (
-                    <p key={key} className="mb-8">
+                    <div key={key} className="mb-8">
                       <h2 className="pb-2 font-semibold text-[17px]">
                         {key + ":"}
                       </h2>
 
-                      {resultcontentdata[testName][key]}
-                    </p>
+                      <p> {resultcontentdata[testName][key]}</p>
+                    </div>
                   ))}
-                </p>
+                </div>
               </div>
             </div>
           </div>

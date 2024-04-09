@@ -65,7 +65,7 @@ const SideDashBoard = (props) => {
           loop={true}
           className="h-[10rem]   object-contain"
         /> */}
-        <button className="flex items-baseline gap-1 py-1 bg-red-500 hover:bg-red-600 rounded-md mt-5 px-3 text-white ">
+        <button className="flex items-baseline  gap-1 py-1 bg-red-500 hover:bg-red-600 rounded-md mt-5 px-3 text-white ">
           <FontAwesomeIcon icon="fa-solid fa-lock" size="sm" />
           <h2>Log Out</h2>
         </button>
