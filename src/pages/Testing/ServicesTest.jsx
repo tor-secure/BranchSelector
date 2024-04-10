@@ -7,6 +7,8 @@ import {
   setDoc,
 } from "../../services/firebase";
 import { evaluteTest, getTestQuestions } from "../../services/testService";
+import { getDoc } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 
 const ServicesTest = () => {
   async function getD() {
@@ -15,7 +17,7 @@ const ServicesTest = () => {
       ENGQ2: "ENGO1",
     };
     //console.log(await generateCoupon(c.code,c["price-after-discount"],c["valid-from"],c["valid-till"],c.limit,3))
-    console.log(await getCurrentUser());
+    console.log(await updateUsers());
   }
 
   const style = {
@@ -26,7 +28,7 @@ const ServicesTest = () => {
     <>
       <button
         onClick={async () => {
-          await getD();
+        //  await getD();
         }}
         style={style}
       >
@@ -40,6 +42,29 @@ const ServicesTest = () => {
 };
 
 export { ServicesTest };
+
+const updateUsers = async () => {
+  try {
+    const db = getFirestore()
+    const usersCollection = collection(db, 'users');
+    const usersSnapshot = await getDocs(usersCollection);
+
+    usersSnapshot.forEach(async (userDoc) => {
+      const userRef = doc(usersCollection, userDoc.id);
+      const userData = await getDoc(userRef);
+
+      const testsTaken = userData.data().testsTaken || 0;
+      const credit = 5 - testsTaken;
+      await updateDoc(userRef, { credit });
+    });
+
+    console.log('Users updated successfully.');
+  } catch (error) {
+    console.error('Error updating users:', error);
+    throw new Error('Error updating users.');
+  }
+};
+
 
 async function putDataToFireStore() {
   const db = getFirestore();

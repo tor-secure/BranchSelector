@@ -42,11 +42,12 @@ const registerWithEmailAndPassword = async (name,phoneNumber, email, password) =
             phoneNumber: user.phoneNumber ? user.phoneNumber : phoneNumber,
             photoUrl: user.photoURL ? user.photoURL : "",
             accountType: 'free',
-            testsTaken: 0
+            testsTaken: 0,
+            credit: 5
         };
         const usersCollection = collection(firestore, "users");
         await addDoc(usersCollection, newUser);
-
+        
     } catch (error) {
         console.error(error);
     }
@@ -66,7 +67,8 @@ const signInWithGoogle = async ({ rememberMe }) => {
             phoneNumber: user.phoneNumber,
             photoUrl: user.photoURL,
             accountType: 'free',
-            testsTaken: 0
+            testsTaken: 0,
+            credits: 5
         };
         const usersCollection = collection(firestore, "users");
         const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));

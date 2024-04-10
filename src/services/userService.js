@@ -56,9 +56,9 @@ const newTestTaken = async (testName, result) => {
       return;
     }
     const doc = querySnapshot.docs[0];
-    let testsTaken = doc.data().testsTaken;
-    testsTaken++;
-    await updateDoc(doc.ref, { testsTaken });
+    let credit = doc.data().credit;
+    credit++;
+    await updateDoc(doc.ref, { credit });
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
     console.log("Data written to Firestore successfully!");
@@ -82,7 +82,7 @@ const canTakeTest = async () => {
   }
   const doc = querySnapshot.docs[0];
 
-  let credits = doc.data().credits;
+  let credits = doc.data().credit;
 
   if (credits <= 0) {
     console.log("No more free tests");
