@@ -20,6 +20,8 @@ const Signup = () => {
     const phone = e.target.elements.phone.value;
 
     await registerWithEmailAndPassword(name, phone, email, password);
+
+    navigate('/login');
   };
 
   return (

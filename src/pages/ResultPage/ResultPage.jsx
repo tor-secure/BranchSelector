@@ -13,7 +13,7 @@ const ResultsPage = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenLarge = window.innerWidth > 768;
+      setScreenLarge(window.innerWidth > 768);
     };
     window.addEventListener("resize", handleResize);
   }, []);

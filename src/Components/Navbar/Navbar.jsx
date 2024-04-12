@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 // Add this style to your css filesrc\assets\branchselector_logo.png
 
-export default () => {
+const Navbar = () => {
   const [state, setState] = useState(false);
   const navRef = useRef();
 
@@ -14,7 +14,7 @@ export default () => {
     { title: "Tests", path: "/testList" },
     { title: "Partners", path: "" },
     { title: "E-Book", path: "/ebook" },
-    { title: "Blog", path: "" },
+    { title: "Blog", path: "/blog" },
     { title: "Appointment", path: "/booking" },
   ];
 
@@ -97,7 +97,7 @@ export default () => {
               <li className="mt-4 lg:mt-0">
                 <NavLink
                   to="/login"
-                  className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
+                  className="py-3 px-4 text-center border text-gray-600 hover:text-blue-600 rounded-md block lg:inline lg:border-0"
                   Sign
                   Up
                 >
@@ -107,7 +107,7 @@ export default () => {
               <li className="mt-8 lg:mt-0">
                 <NavLink
                   to="/signup"
-                  className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
+                  className="py-3 px-4 text-center text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow block lg:inline"
                 >
                   Sign Up
                 </NavLink>
@@ -130,3 +130,5 @@ export default () => {
     </nav>
   );
 };
+
+export default Navbar;

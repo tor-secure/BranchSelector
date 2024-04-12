@@ -7,12 +7,29 @@ import Footer from "./Components/Footer/Footer";
 import { getCurrentUser } from "./services/authService";
 import AuthenticatedNavBar from "./Components/Navbar/AuthenticatedNavBar";
 import { LoadingPage } from "./pages/LoadingPage";
+import { getAuth } from "firebase/auth";
 
 library.add(fas);
 
-//const isAuthenticated = getCurrentUser();
-
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = getAuth().onAuthStateChanged((user) => {
+      setIsAuthenticated(!!user);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const getAuthState = async () => {
+      const temp = await getCurrentUser();
+      setIsAuthenticated(temp);
+    };
+    getAuthState();
+  }, []);
+
   const { pathname } = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
@@ -37,16 +54,21 @@ function App() {
       behavior: "smooth",
     });
   }, [pathname]);
+
   return (
     <main className="overflow-x-hidden">
       <header>
-        {isAuthenticated === null ? <Navbar /> : <AuthenticatedNavBar />}
+        {isAuthenticated === null ? (
+          <Navbar />
+        ) : isAuthenticated ? (
+          <AuthenticatedNavBar user={isAuthenticated} />
+        ) : (
+          <Navbar />
+        )}
       </header>
-
       <Suspense fallback={<LoadingPage />}>
         <Outlet />
       </Suspense>
-
       <Footer />
     </main>
   );
