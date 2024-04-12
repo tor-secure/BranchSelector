@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TestNavbar } from "./TestNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navigation from "./../../assets/Navigation.png";
 import { TestInstructionSection } from "./TestInstructionSection";
 import { TestInstructionSectionMCQImg } from "./TestInstructionSectionMCQImg";
 import { TestInstructionSectionSlider } from "./TestInstructionSectionSlider";
+import { getCurrentUserInfo } from "../../services/userService";
+import { getCurrentUser } from "../../services/authService";
 
 export const TestInstruction = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -18,6 +20,19 @@ export const TestInstruction = () => {
   const { testMetaData } = location.state || {};
   console.log("ashshfahsfh", testMetaData);
   const heading = testMetaData.name;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userInfo = await getCurrentUser();
+        console.log("gg in instruction", userInfo);
+      } catch (error) {
+        console.error("An error occurred while fetching user info:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const checkTest = (testType) => {
     // Early return pattern - if the condition is met, the component renders early.

@@ -5,6 +5,7 @@ import { MdExitToApp } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { newTestTaken } from "../../services/userService";
 
 export const TestNavbar = ({
   heading,
@@ -106,6 +107,7 @@ export const TestNavbar = ({
     console.log("Submitted", result);
     const finRes = await evaluteTest(testQueryName, result);
     console.log(finRes);
+    await newTestTaken(testQueryName, result);
     navigate("/result", {
       state: { result: finRes, testName: testQueryName },
     });
