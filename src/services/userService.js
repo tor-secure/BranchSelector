@@ -98,7 +98,9 @@ const canTakeTest = async () => {
 // Retrieves the test history of the current user
 const getTestHistory = async () => {
   try {
-    const userId = getCurrentUser().uid;
+    const temp = await getCurrentUser();
+    //console.log("Userr", temp);
+    const userId = temp.uid;
     const usersCollection = await collection(firestore, "users");
     const querySnapshot = await getDocs(
       query(usersCollection, where("uid", "==", userId))
@@ -113,6 +115,7 @@ const getTestHistory = async () => {
     return testsSnapshot;
   } catch (error) {
     console.log("UserService: Something went wrong \n" + error);
+    return {};
   }
 };
 

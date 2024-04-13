@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   const { pathname } = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  //const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -9,6 +9,8 @@ import { getCurrentUserInfo } from "../../services/userService";
 import { getCurrentUser } from "../../services/authService";
 
 export const TestInstruction = () => {
+  const location = useLocation();
+  const { testMetaData } = location.state || {};
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (event) => {
@@ -16,8 +18,7 @@ export const TestInstruction = () => {
     console.log(event.target.checked);
   };
   const navigate = useNavigate();
-  const location = useLocation();
-  const { testMetaData } = location.state || {};
+
   console.log("ashshfahsfh", testMetaData);
   const heading = testMetaData.name;
 
