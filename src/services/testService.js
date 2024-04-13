@@ -1,4 +1,16 @@
 import { collection, doc, getDocs, getFirestore } from "./firebase";
+import React from "react";
+
+import Graduation from "../assets/TestList/graduation.svg";
+import { MdEngineering } from "react-icons/md";
+import { PiBarbellFill } from "react-icons/pi";
+import { RiLightbulbFlashFill } from "react-icons/ri";
+import { IoEar } from "react-icons/io5";
+import { BiSolidBrain } from "react-icons/bi";
+import { FaTheaterMasks } from "react-icons/fa";
+import { PiCertificateFill } from "react-icons/pi";
+import { TbAbc } from "react-icons/tb";
+import { GiPaintBrush } from "react-icons/gi";
 
 const testMetaData = {
   engineering: {
@@ -65,10 +77,82 @@ const testMetaData = {
   },
 };
 
-const db = getFirestore();
+const testLogoData = {
+  engineering: {
+    logo: (size) =>
+      React.createElement(MdEngineering, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
 
-const getTestLogo = (testName) => {
-  return testMetaData[testName].logo;
+  brain: {
+    logo: (size) =>
+      React.createElement(BiSolidBrain, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  interest: {
+    logo: (size) =>
+      React.createElement(GiPaintBrush, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  iq: {
+    logo: (size) =>
+      React.createElement(RiLightbulbFlashFill, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  personality: {
+    logo: (size) =>
+      React.createElement(FaTheaterMasks, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  stream: {
+    logo: (size) =>
+      React.createElement(PiCertificateFill, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  strength: {
+    logo: (size) =>
+      React.createElement(PiBarbellFill, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  vark: {
+    logo: (size) =>
+      React.createElement(PiBarbellFill, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  english: {
+    logo: (size) =>
+      React.createElement(TbAbc, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+};
+
+const getTestLogo = (testName, size) => {
+  return testLogoData[testName].logo(size);
 };
 
 const getTestMetaData = (testName) => {

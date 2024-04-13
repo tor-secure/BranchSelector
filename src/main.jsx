@@ -17,6 +17,7 @@ import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
 import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
+import { DashboardPage } from "./Components/Dashboard/DashboardPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "contactus",
         element: <ContactUs />,
+      },
+      {
+        path: "dashboard",
+        element: <DashboardPage />,
       },
     ],
     errorElement: <ErrorPage />,

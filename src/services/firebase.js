@@ -20,7 +20,10 @@ import {
   where,
   addDoc,
   doc,
-  setDoc
+  setDoc,
+  deleteDoc,
+  orderBy,
+  updateDoc,
 } from "firebase/firestore";
 
 //firebase configuration for this project
@@ -65,5 +68,8 @@ export {
   where,
   addDoc,
   doc,
-  setDoc
+  setDoc,
+  deleteDoc,
+  orderBy,
+  updateDoc,
 };

@@ -31,6 +31,21 @@ function App() {
   }, []);
 
   const { pathname } = useLocation();
+  //const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userInfo = await getCurrentUser();
+        setIsAuthenticated(userInfo);
+        console.log("gg in app", userInfo);
+      } catch (error) {
+        console.error("An error occurred while fetching user info:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({
