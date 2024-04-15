@@ -5,8 +5,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 function BookingPage() {
   const onChange = () => {};
   return (
-    <main className="py-0 bg-gray-50 ">
-      <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
+    <main className="py-0 bg-gray-50 min-h-[100vh] ">
+      <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:p-8">
         <div className="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none lg:mr-20">
           <div className="flex flex-col p-4 md:p-1">
             <div className="max-w-lg space-y-3">

@@ -1,56 +1,62 @@
-import { browserLocalPersistence, browserSessionPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
 import {
-    app,
-    GoogleAuthProvider,
-    getAuth,
-    signInWithPopup,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    sendPasswordResetEmail,
-    signOut,
-    signInWithEmailLink,
-    getFirestore,
-    query,
-    collection,
-    where,
-    addDoc,
-    getDocs
-} from './firebase.js';
+  browserLocalPersistence,
+  browserSessionPersistence,
+  onAuthStateChanged,
+  setPersistence,
+} from "firebase/auth";
+import {
+  app,
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  signInWithEmailLink,
+  getFirestore,
+  query,
+  collection,
+  where,
+  addDoc,
+  getDocs,
+} from "./firebase.js";
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const googleAuthProvider = new GoogleAuthProvider();
 
-
 const addAuthChangeListener = (onChange) => {
-    return onAuthStateChanged(auth, onChange);
+  return onAuthStateChanged(auth, onChange);
 };
 
-
-
 // Function to register a new user with email and password
-const registerWithEmailAndPassword = async (name,phoneNumber, email, password) => {
-    try {
-        const result = await createUserWithEmailAndPassword(auth, email, password);
-        const user = result.user;
-        const newUser = {
-            authProvider: 'local',
-            uid: user.uid,
-            email: user.email,
-            metadata: user.metadata ? JSON.stringify(user.metadata) : "",
-            displayName: name,
-            phoneNumber: user.phoneNumber ? user.phoneNumber : phoneNumber,
-            photoUrl: user.photoURL ? user.photoURL : "",
-            accountType: 'free',
-            testsTaken: 0,
-            credit: 5
-        };
-        const usersCollection = collection(firestore, "users");
-        await addDoc(usersCollection, newUser);
-        
-    } catch (error) {
-        console.error(error);
-    }
+const registerWithEmailAndPassword = async (
+  name,
+  phoneNumber,
+  email,
+  password
+) => {
+  try {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    const user = result.user;
+    const newUser = {
+      authProvider: "local",
+      uid: user.uid,
+      email: user.email,
+      metadata: user.metadata ? JSON.stringify(user.metadata) : "",
+      displayName: name,
+      phoneNumber: user.phoneNumber ? user.phoneNumber : phoneNumber,
+      photoUrl: user.photoURL ? user.photoURL : "",
+      accountType: "free",
+      testsTaken: 0,
+      credits: 5,
+    };
+    const usersCollection = collection(firestore, "users");
+    await addDoc(usersCollection, newUser);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Function to sign in with Google using Google OAuth provider
@@ -77,6 +83,31 @@ const signInWithGoogle = async ({ rememberMe }) => {
         }
         // Set authentication status in local storage
         /*if (rememberMe) {
+  try {
+    const result = await signInWithPopup(auth, googleAuthProvider);
+    const user = result.user;
+    const newUser = {
+      authProvider: "google",
+      uid: user.uid,
+      email: user.email,
+      metadata: JSON.stringify(user.metadata),
+      displayName: user.displayName,
+      phoneNumber: user.phoneNumber,
+      photoUrl: user.photoURL,
+      accountType: "free",
+      testsTaken: 0,
+      credits: 5,
+    };
+    const usersCollection = collection(firestore, "users");
+    const querySnapshot = await getDocs(
+      query(usersCollection, where("uid", "==", user.uid))
+    );
+    if (querySnapshot.empty) {
+      await addDoc(usersCollection, newUser);
+    }
+    // Set authentication status in local storage
+    /*if (rememberMe) {
+
             console.log("Local persistence");
             localStorage.setItem('isAuthenticated', 'true');
             localStorage.setItem('currentUser', user.uid);
@@ -91,17 +122,16 @@ const signInWithGoogle = async ({ rememberMe }) => {
             localStorage.removeItem('currentUser');
         }
         await syncUserData()*/
-        return { success: true, user }; // Indicate successful login
-    } catch (error) {
-        console.error("Sign-in failed:", error);
-        return { success: false, error }; // Indicate failed login with error details
-    }
+    return { success: true, user }; // Indicate successful login
+  } catch (error) {
+    console.error("Sign-in failed:", error);
+    return { success: false, error }; // Indicate failed login with error details
+  }
 };
-
 
 // Function to check if the user is signed in
 const isSignedIn = () => {
-    /*var isSignedInLocal = localStorage.getItem('isAuthenticated')  === 'true' ? true : false;
+  /*var isSignedInLocal = localStorage.getItem('isAuthenticated')  === 'true' ? true : false;
     if (isSignedInLocal) {
         return isSignedInLocal
     }
@@ -113,7 +143,7 @@ const isSignedIn = () => {
     }
 
     return false*/
-}
+};
 
 // Function to login with email and password
 const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
@@ -124,7 +154,11 @@ const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
     );
 
     // Sign in with the email and password
-    const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      getAuth(),
+      email,
+      password
+    );
 
     // Retrieve the current user
     const currentUser = userCredential.user;
@@ -137,38 +171,37 @@ const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
   }
 };
 
-
 // Function to login with email link
 const loginWithEmailLink = async (email) => {
-    try {
-        await signInWithEmailLink(auth, email);
-        // Set authentication status in local storage
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('currentUser',auth.currentUser.uid);
-        await syncUserData()
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    await signInWithEmailLink(auth, email);
+    // Set authentication status in local storage
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("currentUser", auth.currentUser.uid);
+    await syncUserData();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Function to send password reset email
 const SendPasswordResetEmail = async (email) => {
-    try {
-        await sendPasswordResetEmail(auth, email);
-        alert('Password reset email sent');
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset email sent");
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Function to logout the current user
 const logout = () => {
-    // Remove authentication status from local storage
-    // localStorage.removeItem('isAuthenticated');
-    // localStorage.removeItem('currentUser');
-    // sessionStorage.removeItem('isAuthenticated');
-    // sessionStorage.removeItem('currentUser');
-    signOut(auth);
+  // Remove authentication status from local storage
+  // localStorage.removeItem('isAuthenticated');
+  // localStorage.removeItem('currentUser');
+  // sessionStorage.removeItem('isAuthenticated');
+  // sessionStorage.removeItem('currentUser');
+  signOut(auth);
 };
 
 /*
@@ -177,44 +210,37 @@ const getCurrentUser = async () => {
 }
 */
 
-
-
 const syncUserData = async () => {
-    /*if(isSignedIn())
+  /*if(isSignedIn())
     {
     const usersCollection = collection(firestore, "users");
     const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", getCurrentUser() )));
     sessionStorage.setItem("userDetails",JSON.stringify(querySnapshot.docs[0].data()))
     }
 */
-}
+};
 
 function getCurrentUser() {
   return new Promise((resolve, reject) => {
-     const unsubscribe = auth.onAuthStateChanged(user => {
-        unsubscribe();
-        resolve(user);
-     }, reject);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
   });
 }
 
-
-
 export {
-    auth,
-    firestore,
-    registerWithEmailAndPassword,
-    signInWithGoogle,
-    loginWithEmailAndPassword,
-    loginWithEmailLink,
-    logout,
-    SendPasswordResetEmail,
-    isSignedIn,
-    setPersistence,
-    getCurrentUser,
-    addAuthChangeListener,
-    syncUserData,
-
-
+  auth,
+  firestore,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+  loginWithEmailAndPassword,
+  loginWithEmailLink,
+  logout,
+  SendPasswordResetEmail,
+  isSignedIn,
+  setPersistence,
+  getCurrentUser,
+  addAuthChangeListener,
+  syncUserData,
 };
-

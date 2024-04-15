@@ -8,11 +8,10 @@ const ProfileDropDown = (props) => {
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
-  console.log("auth creds",props)
+  console.log("auth creds", props);
 
-  
   const navigation = [
-    { title: "Dashboard", path: "/ebook" },
+    { title: "Dashboard", path: "/dashboard" },
     { title: "Log out", path: "/" },
   ];
 
@@ -32,13 +31,21 @@ const ProfileDropDown = (props) => {
           onClick={() => setState(!state)}
         >
           <img
-            src={props.profile.photoURL?props.profile.photoURL.toString():"https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"}
+            src={
+              props.profile.photoURL
+                ? props.profile.photoURL.toString()
+                : "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
+            }
             className="w-full h-full rounded-full"
             alt="user profile image"
           />
         </button>
         <div className="lg:hidden">
-          <span className="block">{props.profile.displayName?props.profile.displayName.toString():"User"}</span>
+          <span className="block">
+            {props.profile.displayName
+              ? props.profile.displayName.toString()
+              : "User"}
+          </span>
           <span className="block text-sm text-gray-500">
             {props.profile.email.toString()}
           </span>
@@ -50,7 +57,7 @@ const ProfileDropDown = (props) => {
         }`}
       >
         {navigation.map((item, idx) => (
-         <li key={idx}>
+          <li key={idx}>
             {item.title === "Log out" ? (
               <button
                 className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5 w-full text-left"
