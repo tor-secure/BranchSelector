@@ -151,6 +151,8 @@ const testLogoData = {
   },
 };
 
+const db = getFirestore();
+
 const getTestLogo = (testName, size) => {
   return testLogoData[testName].logo(size);
 };
