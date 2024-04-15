@@ -19,6 +19,9 @@ import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 import { DashboardPage } from "./Components/Dashboard/DashboardPage.jsx";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -92,6 +95,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <ToastContainer/>
     <RouterProvider router={router} />
   </React.StrictMode>
 );

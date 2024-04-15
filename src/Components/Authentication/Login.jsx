@@ -6,6 +6,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import branchselector_logo from "../../assets/branchselector_logo.png";
 import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const location = useLocation();
@@ -15,19 +17,61 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const onSubmitHandler = async (e) => {
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    const rememberMe = e.target.elements.rememberMe.checked;
-    await loginWithEmailAndPassword(email, password, {
-      rememberMe: rememberMe,
-    });
-    navigate(fromLocation?fromLocation.pathname:'/');
-  };
+    const toastOptions = {
+
+      position: "top-right",
+      closeOnClick:true,
+      delay:false
+
+    } 
+    
+
+
+const onSubmitHandler = async (e) => {
+  e.preventDefault(); // Prevent the default form submission
+
+  const email = e.target.elements.email.value;
+  const password = e.target.elements.password.value;
+  const rememberMe = e.target.elements.rememberMe.checked;
+
+  try {
+    const { status, message, currentUser } = await loginWithEmailAndPassword(
+      email,
+      password,
+      { rememberMe: rememberMe }
+    );
+
+    if (status === 'success') {
+      // Login successful, navigate to the desired location
+      toast.success("Logged in successfully")
+      navigate(fromLocation ? fromLocation.pathname : '/');
+    } else {
+      // Login failed, display the error message using a toast
+      toast.error(message);
+    }
+  } catch (error) {
+    // Handle any unexpected errors
+    console.error('An unexpected error occurred:', error);
+    toast.error('An unexpected error occurred. Please try again later.');
+  }
+};
 
   const onContinueWithGoogleHandler = async () =>{
-    await signInWithGoogle({rememberMe:false})
+    const authResult = await signInWithGoogle({rememberMe:false})
+    if(authResult.success)
+    {
+
+
+
+    toast.success("Logged in successfully!", toastOptions);
+
     navigate(fromLocation?fromLocation.pathname:'/');
+    }
+    else{
+      toast.error("Something went wrong! Try again!",toastOptions)
+    }
+
+
   }
 
   const onClickHandler = () => {
