@@ -9,6 +9,8 @@ import AuthenticatedNavBar from "./Components/Navbar/AuthenticatedNavBar";
 import { LoadingPage } from "./pages/LoadingPage";
 import { getAuth } from "firebase/auth";
 
+
+
 library.add(fas);
 
 function App() {
@@ -38,7 +40,6 @@ function App() {
       try {
         const userInfo = await getCurrentUser();
         setIsAuthenticated(userInfo);
-        console.log("gg in app", userInfo);
       } catch (error) {
         console.error("An error occurred while fetching user info:", error);
       }
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <main className="overflow-x-hidden">
+
       <header>
         {isAuthenticated === null ? (
           <Navbar />
@@ -69,6 +71,7 @@ function App() {
       <Suspense fallback={<LoadingPage />}>
         <Outlet />
       </Suspense>
+
       <Footer />
     </main>
   );

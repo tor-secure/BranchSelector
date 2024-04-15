@@ -73,10 +73,10 @@ const newTestTaken = async (testName, result) => {
 
 // Checks if the user is allowed to take a test based on their account type and the number of tests taken
 const canTakeTest = async () => {
-  const userId = getCurrentUser().uid;
+  const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
   const querySnapshot = await getDocs(
-    query(usersCollection, where("uid", "==", userId))
+    query(usersCollection, where("uid", "==", userId.uid))
   );
   if (querySnapshot.size != 1) {
     console.log("Invalid User");

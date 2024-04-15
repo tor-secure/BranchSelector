@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import branchselector_logo from "../../assets/branchselector_logo.png";
 import { NavLink, Link } from "react-router-dom";
 import { getCurrentUser, logout } from "../../services/authService";
+import { toast } from "react-toastify";
 
 const ProfileDropDown = (props) => {
   const [state, setState] = useState(false);
@@ -14,6 +15,11 @@ const ProfileDropDown = (props) => {
     { title: "Dashboard", path: "/dashboard" },
     { title: "Log out", path: "/" },
   ];
+
+  const logoutListener = () =>{
+    toast.success("Signed out suceessfully!")
+    logout()
+  }
 
   useEffect(() => {
     const handleDropDown = (e) => {
@@ -61,7 +67,7 @@ const ProfileDropDown = (props) => {
             {item.title === "Log out" ? (
               <button
                 className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5 w-full text-left"
-                onClick={logout}
+                onClick={logoutListener}
               >
                 {item.title}
               </button>
@@ -91,7 +97,6 @@ const AuthenticatedNavBar = (props) => {
   // Replace javascript:void(0) path with your path
   const navigation = [
     { title: "Tests", path: "testList" },
-    { title: "Partners", path: "" },
     { title: "Ebook", path: "/ebook" },
     { title: "Blog", path: "/blog" },
     { title: "Appointment", path: "booking" },
