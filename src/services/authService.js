@@ -61,6 +61,28 @@ const registerWithEmailAndPassword = async (
 
 // Function to sign in with Google using Google OAuth provider
 const signInWithGoogle = async ({ rememberMe }) => {
+    try {
+        const result = await signInWithPopup(auth, googleAuthProvider)
+        const user = result.user;
+        const newUser = {
+            authProvider: 'google',
+            uid: user.uid,
+            email: user.email,
+            metadata: JSON.stringify(user.metadata),
+            displayName: user.displayName,
+            phoneNumber: user.phoneNumber,
+            photoUrl: user.photoURL,
+            accountType: 'free',
+            testsTaken: 0,
+            credits: 5
+        };
+        const usersCollection = collection(firestore, "users");
+        const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));
+        if (querySnapshot.empty) {
+            await addDoc(usersCollection, newUser);
+        }
+        // Set authentication status in local storage
+        /*if (rememberMe) {
   try {
     const result = await signInWithPopup(auth, googleAuthProvider);
     const user = result.user;
@@ -85,6 +107,7 @@ const signInWithGoogle = async ({ rememberMe }) => {
     }
     // Set authentication status in local storage
     /*if (rememberMe) {
+
             console.log("Local persistence");
             localStorage.setItem('isAuthenticated', 'true');
             localStorage.setItem('currentUser', user.uid);
