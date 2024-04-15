@@ -5,17 +5,17 @@ import { NavLink } from "react-router-dom";
 
 // Add this style to your css filesrc\assets\branchselector_logo.png
 
-export default () => {
+const Navbar = () => {
   const [state, setState] = useState(false);
   const navRef = useRef();
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: "Tests", path: "" },
+    { title: "Tests", path: "/testList" },
     { title: "Partners", path: "" },
-    { title: "Ebook", path: "/book" },
-    { title: "Blog", path: "" },
-    { title: "Appointment", path: "booking" },
+    { title: "E-Book", path: "/ebook" },
+    { title: "Blog", path: "/blog" },
+    { title: "Appointment", path: "/booking" },
   ];
 
   useEffect(() => {
@@ -39,12 +39,16 @@ export default () => {
     <nav ref={navRef} className="bg-white w-full top-0 z-50 ">
       <div className="items-center px-4  max-w-screen-xl mx-auto md:px-8 lg:flex">
         <div className="flex items-center justify-between  lg:block">
-          <NavLink to="/">
+          <NavLink
+            to="/"
+            className="flex justify-center items-center text-xl font-medium  "
+          >
             <img
               src={branchselector_logo}
-              className=" md:w-20 w-16 "
+              className=" md:w-16 w-16 "
               alt="branchselector logo"
             />
+            <h2 className="hidden sm:block">BranchSelector</h2>
           </NavLink>
           <div className="lg:hidden">
             <button
@@ -91,18 +95,19 @@ export default () => {
           <div>
             <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
               <li className="mt-4 lg:mt-0">
-
                 <NavLink
                   to="/login"
-                  className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0"
-                  Sign Up>
-                    Login
+                  className="py-3 px-4 text-center border text-gray-600 hover:text-blue-600 rounded-md block lg:inline lg:border-0"
+                  Sign
+                  Up
+                >
+                  Login
                 </NavLink>
               </li>
               <li className="mt-8 lg:mt-0">
                 <NavLink
                   to="/signup"
-                  className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow block lg:inline"
+                  className="py-3 px-4 text-center text-white bg-blue-600 hover:bg-blue-700 rounded-md shadow block lg:inline"
                 >
                   Sign Up
                 </NavLink>
@@ -114,7 +119,7 @@ export default () => {
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx} className="text-gray-600 hover:text-indigo-600">
-                    <a href={item.path}>{item.title}</a>
+                    <NavLink to={item.path}>{item.title}</NavLink>
                   </li>
                 );
               })}
@@ -125,3 +130,5 @@ export default () => {
     </nav>
   );
 };
+
+export default Navbar;

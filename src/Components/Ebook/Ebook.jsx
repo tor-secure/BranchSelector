@@ -27,7 +27,7 @@ function Ebook() {
       bookName: "SurePass_Career",
       title: "Career Path Chart",
       description:
-        " your comprehensive guide to navigating career paths after Class 12 in Science, Commerce, and Arts",
+        " Your comprehensive guide to navigating career paths after Class 12 in Science, Commerce, and Arts",
       points: [
         "Exploring various career options available in Science, Commerce, and Arts after completing Class 12.",
         "Stressing the importance of choosing the right course to pave the way for a successful career journey.",
@@ -51,7 +51,7 @@ function Ebook() {
               <img
                 src={item.img}
                 className="md:max-w-lg sm:rounded-lg w-2/3 shadow-xl"
-                alt=""
+                alt={item.title}
               />
             </div>
             <div className="max-w-xl px-6 space-y-3 mt-6 sm:px-4 md:mt-0 lg:max-w-2xl">
@@ -61,7 +61,7 @@ function Ebook() {
               <p className="mt-3 text-gray-600">
                 {item.description}
                 <ul className="mt-3">
-                  {item.points.map((point,index) => (
+                  {item.points.map((point, index) => (
                     <li key={index} className="mt-1 flex">
                       <span>&#10004;&nbsp;</span>
                       {point}

@@ -17,12 +17,12 @@ export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
       <h2 className="text-[1.4em] font-normal">
         {qNo + "." + " " + questionsData.question}
       </h2>
-      <ul className="list-disc list-inside">
+      <ul className="list-disc list-inside md:ml-6">
         {questionsData.options.map((option, index) => (
           <li
             key={index}
             onClick={() => handleOptionClick(index, option)}
-            className={` rounded-[7px]   mt-6 min-h-10 text-[1.12em] text-start px-5 py-1  ${
+            className={` rounded-[7px] cursor-pointer  mt-6 min-h-10 text-[1.12em] text-start px-5 py-1  ${
               questionsData.id in result &&
               option.id == result[questionsData.id]
                 ? "bg-[#367AF3] text-[#FFFFFF] hover:bg-[#6393e6]"

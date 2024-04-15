@@ -8,13 +8,13 @@ import {
   query,
   app,
   where,
-  deleteDoc
+  deleteDoc,
+  updateDoc,
 } from "./firebase.js";
 
 const firestore = getFirestore(app);
 
 import { getCurrentUser, isSignedIn, syncUserData } from "./authService.js";
-
 
 // Retrieves all documents from a Firestore collection
 const getAllDocumentsFromCollection = async (collectionRef) => {
@@ -46,7 +46,9 @@ const newTestTaken = async (testName, result) => {
     if (!(await canTakeTest())) {
       return;
     }
-    const userId = getCurrentUser();
+    const userId = getCurrentUser().uid;
+    console.log("from new test", userId);
+
     const usersCollection = await collection(firestore, "users");
     const querySnapshot = await getDocs(
       query(usersCollection, where("uid", "==", userId))
@@ -71,7 +73,7 @@ const newTestTaken = async (testName, result) => {
 
 // Checks if the user is allowed to take a test based on their account type and the number of tests taken
 const canTakeTest = async () => {
-  const userId = getCurrentUser();
+  const userId = getCurrentUser().uid;
   const usersCollection = await collection(firestore, "users");
   const querySnapshot = await getDocs(
     query(usersCollection, where("uid", "==", userId))
@@ -81,9 +83,10 @@ const canTakeTest = async () => {
     return;
   }
   const doc = querySnapshot.docs[0];
-  let testsTaken = doc.data().testsTaken;
-  let accountType = doc.data().accountType;
-  if (accountType === "free" && testsTaken >= 3) {
+
+  let credits = doc.data().credits;
+
+  if (credits <= 0) {
     console.log("No more free tests");
     return false;
   } else {
@@ -95,7 +98,9 @@ const canTakeTest = async () => {
 // Retrieves the test history of the current user
 const getTestHistory = async () => {
   try {
-    const userId = getCurrentUser();
+    const temp = await getCurrentUser();
+    //console.log("Userr", temp);
+    const userId = temp.uid;
     const usersCollection = await collection(firestore, "users");
     const querySnapshot = await getDocs(
       query(usersCollection, where("uid", "==", userId))
@@ -110,6 +115,7 @@ const getTestHistory = async () => {
     return testsSnapshot;
   } catch (error) {
     console.log("UserService: Something went wrong \n" + error);
+    return {};
   }
 };
 
@@ -130,33 +136,29 @@ const validateCouponCode = async (couponCode) => {
   }
 
   const codeDoc = querySnapshot.docs[0];
-  const couponData = codeDoc.data()
+  const couponData = codeDoc.data();
   const startingDate = couponData["valid-from"].toDate();
   const endingDate = couponData["valid-till"].toDate();
   const priceAfterDiscount = couponData.priceAfterDiscount;
-  const limit = couponData.limit
-  const redeemed = couponData.redeemed
+  const limit = couponData.limit;
+  const redeemed = couponData.redeemed;
   const currentDate = new Date();
-  if (currentDate >= startingDate && currentDate <= endingDate ) {
-  console.log("Coupon code is valid.");
+  if (currentDate >= startingDate && currentDate <= endingDate) {
+    console.log("Coupon code is valid.");
 
-  if (redeemed >= limit)
-  {
-    console.log("Coupon limit reached")
-  }
+    if (redeemed >= limit) {
+      console.log("Coupon limit reached");
+    }
     return { newPrice: priceAfterDiscount };
-
   } else {
     console.log("Coupon code is expired.");
     return false;
   }
-  
 };
 
 // Updates the number of downloads for a specific asset
 const updateDownloads = async (assetDownloaded) => {
   try {
-
     const collectionRef = await collection(firestore, "books-downloads");
     const documentRef = await getDocs(collectionRef);
     const currentValue = documentRef.docs[0].data()[assetDownloaded] || 0;
