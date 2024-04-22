@@ -12,7 +12,10 @@ import { toast } from 'react-toastify';
 
 export const TestInstruction = () => {
   const location = useLocation();
-  const { testMetaData } = location.state || {};
+  const { testMetaData } = location.state ?? {};
+
+
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (event) => {
@@ -20,6 +23,15 @@ export const TestInstruction = () => {
     console.log(event.target.checked);
   };
   const navigate = useNavigate();
+  if (!testMetaData) {
+    console.log("IT EMPTY");
+    setTimeout(() => {
+      navigate("/testlist");
+    }, 10); 
+    /* IDK why but delay is required other wise it just loads a blank page. 
+       Probably has something to do with the Protected route stuff*/
+    return null;
+  }
 
   const heading = testMetaData.name;
 
@@ -27,7 +39,7 @@ export const TestInstruction = () => {
       const canTakeTestCheck = async () => {
 
         const result = await canTakeTest()
-                console.log("can take test",result)
+        console.log("can take test",result)
         if(!result)
         {
         toast.error("You cannot take anymore tests! Buy more credits!")

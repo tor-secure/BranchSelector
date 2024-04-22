@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <DashboardPage />,
+        element: <ProtectedRoute><DashboardPage /></ProtectedRoute>,
       },
     ],
     errorElement: <ErrorPage />,
@@ -72,12 +72,12 @@ const router = createBrowserRouter([
 
   {
     path: "result",
-    element: <ResultsPage />,
+    element: <ProtectedRoute><ResultsPage /></ProtectedRoute>,
     errorElement: <ErrorPage />,
   },
   {
     path: "testPage",
-    element: <TestArea />,
+    element: <ProtectedRoute><TestArea /></ProtectedRoute>,
     errorElement: <ErrorPage />,
   },
   {
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
 
   {
     path: "testInstruction",
-    element: <TestInstruction />,
+    element: <ProtectedRoute><TestInstruction /></ProtectedRoute>,
     errorElement: <ErrorPage />,
   },
 ]);

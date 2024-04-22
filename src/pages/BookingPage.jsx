@@ -2,8 +2,61 @@ import Navbar from "../Components/Navbar/Navbar";
 import SurePass from "../assets/SurePassLogo.jpeg";
 import Img from "../assets/bookAppointment.svg";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 function BookingPage() {
-  const onChange = () => {};
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    selectedDate: "",
+  });
+  const [captchaChecked, setCaptchaChecked] = useState(false);
+  const handleCaptchaChange = () => {
+    setCaptchaChecked(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+        if (!captchaChecked) {
+      // If ReCAPTCHA is not checked, prevent form submission
+      alert("Please complete the ReCAPTCHA verification.");
+      return;
+    }
+    try {
+      const response = await fetch("https://branchselctor--book-appointment.anish98821.workers.dev/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        // Handle successful submission
+        console.log("Form submitted successfully!");
+        toast.success("Your request has been recived. We will reach out to you shortly")
+        navigate('/')
+      } else {
+        // Handle error
+        console.error("Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Something went wrong. Try again later.")
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <main className="py-0 bg-gray-50 min-h-[100vh] ">
       <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:p-8">
@@ -58,10 +111,7 @@ function BookingPage() {
           </div>
 
           <div className="bg-white flex-1 sm:max-w-lg lg:max-w-md shadow-lg border rounded-md duration-300 hover:shadow-sm px-6 lg:pt-2">
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="space-y-3 py-6 md:py-2 "
-            >
+            <form onSubmit={handleSubmit} className="space-y-3 py-6 md:py-2 ">
               <p className="font-bold text-lg">Book Appointment</p>
               <div>
                 <label className="font-medium text-sm text-gray-500">
@@ -69,6 +119,9 @@ function BookingPage() {
                 </label>
                 <input
                   type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
                   required
                   className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                 />
@@ -79,6 +132,9 @@ function BookingPage() {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
                   className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                 />
@@ -88,7 +144,10 @@ function BookingPage() {
                   Phone Number
                 </label>
                 <input
-                  type="text"
+                  type="tel"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
                   required
                   className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                 />
@@ -99,33 +158,21 @@ function BookingPage() {
                 </label>
                 <input
                   type="datetime-local"
+                  name="selectedDate"
+                  value={formData.selectedDate}
+                  onChange={handleInputChange}
                   required
                   className="w-full mt-1 px-3 py-1.5 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                 />
               </div>
-              {/* <div>
-                  <p className="text-base font-semibold text-gray-500">
-                    Price{" "}
-                    <span className="text-sm font-normal text-gray-400">
-                      (To be paid after completion of the session)
-                    </span>
-                  </p>
-                  <p className="line-through text-sm text-gray-500">₹2000</p>
-                  <p className="text-blue-600 text-2xl font-bold">
-                    ₹1500{" "}
-                    <span className="text-sm text-gray-400 font-normal">
-                      /session
-                    </span>
-                  </p>
-                  <p className="mt-3 text-xs text-center">
-                    We will reach out to you to confirm the appointment date
-                  </p>
-                </div> */}
               <ReCAPTCHA
                 sitekey="6Le3tq0pAAAAAIVfl381LNT7XKGE3uWsjll_g2gY"
-                onChange={onChange}
+                onChange={handleCaptchaChange}
               />
-              <button className="w-full px-4 py-2  text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+              <button
+                type="submit"
+                className="w-full px-4 py-2  text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+              >
                 Book Appointment
               </button>
               <p className="mt-3 text-xs font-medium text-center">
