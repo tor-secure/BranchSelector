@@ -72,9 +72,9 @@ const ResultsPage = () => {
               <div className="bg-white shadow-xl shadow-[#dce7ff] sm:h-72 items-center xl:h-72 lg:w-8/12  rounded-[8px] sm:rounded-[15px] flex justify-center p-2 sm:p-5">
                 <Bar
                   data={{
-                    labels: ["A", "B", "C", "D"],
+                    // labels: ["A", "B", "C", "D"],
                     // labels: Object.keys(engineeringData),
-                    // labels: FirstLabel,
+                    labels: FirstLabel,
                     datasets: [
                       {
                         label: testmeta.name,
