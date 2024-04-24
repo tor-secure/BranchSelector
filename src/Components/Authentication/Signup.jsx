@@ -5,6 +5,8 @@ import {
 } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import branchselector_logo from "../../assets/branchselector_logo.png";
+import { toast } from "react-toastify";
+
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,16 +15,33 @@ const Signup = () => {
     navigate("/login");
   };
 
-  const onSubmitHandler = async (e) => {
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    const name = e.target.elements.name.value;
-    const phone = e.target.elements.phone.value;
+const onSubmitHandler = async (e) => {
+  e.preventDefault();
 
-    await registerWithEmailAndPassword(name, phone, email, password);
+  const email = e.target.elements.email.value;
+  const password = e.target.elements.password.value;
+  const name = e.target.elements.name.value;
+  const phone = e.target.elements.phone.value;
 
-    navigate('/login');
-  };
+  try {
+    const { status, message } = await registerWithEmailAndPassword(
+      name,
+      phone,
+      email,
+      password
+    );
+
+    if (status === 'success') {
+      toast.success(message);
+      navigate('/login');
+    } else {
+      toast.error(message);
+    }
+  } catch (error) {
+    console.error('An unexpected error occurred:', error);
+    toast.error('An unexpected error occurred. Please try again later.');
+  }
+};
 
   return (
     <div className="flex-1 flex items-center justify-center h-screen">
