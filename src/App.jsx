@@ -9,6 +9,8 @@ import AuthenticatedNavBar from "./Components/Navbar/AuthenticatedNavBar";
 import { LoadingPage } from "./pages/LoadingPage";
 import { getAuth } from "firebase/auth";
 
+
+
 library.add(fas);
 
 function App() {
@@ -31,6 +33,20 @@ function App() {
   }, []);
 
   const { pathname } = useLocation();
+  //const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userInfo = await getCurrentUser();
+        setIsAuthenticated(userInfo);
+      } catch (error) {
+        console.error("An error occurred while fetching user info:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({
@@ -42,6 +58,7 @@ function App() {
 
   return (
     <main className="overflow-x-hidden">
+
       <header>
         {isAuthenticated === null ? (
           <Navbar />
@@ -54,6 +71,7 @@ function App() {
       <Suspense fallback={<LoadingPage />}>
         <Outlet />
       </Suspense>
+
       <Footer />
     </main>
   );
