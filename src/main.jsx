@@ -9,7 +9,7 @@ import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
 import { TestsList } from "./Components/TestsList.jsx";
-import Blog from "./Components/Blog/Blog.jsx"
+import Blog from "./Components/Blog/Blog.jsx";
 import BookingPage from "./pages/BookingPage.jsx";
 
 import EBook from "./pages/Ebook.jsx";
@@ -17,6 +17,7 @@ import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
 import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
+import PrivacyPolicy from "./Components/PrivacyPolicy/PrivacyPolicy.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,16 +37,20 @@ const router = createBrowserRouter([
         element: <TestsList />,
       },
       {
-        path:"blog",
-        element:<Blog />
+        path: "blog",
+        element: <Blog />,
       },
       {
         path: "ebook",
-        element:<EBook />,
+        element: <EBook />,
       },
       {
         path: "contactus",
         element: <ContactUs />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
       },
     ],
     errorElement: <ErrorPage />,
