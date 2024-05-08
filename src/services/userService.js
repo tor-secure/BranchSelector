@@ -58,9 +58,9 @@ const newTestTaken = async (testName, result) => {
       return;
     }
     const doc = querySnapshot.docs[0];
-    let testsTaken = doc.data().testsTaken;
-    testsTaken++;
-    await updateDoc(doc.ref, { testsTaken });
+    let credit = doc.data().credit;
+    credit++;
+    await updateDoc(doc.ref, { credit });
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
     console.log("Data written to Firestore successfully!");
@@ -73,10 +73,10 @@ const newTestTaken = async (testName, result) => {
 
 // Checks if the user is allowed to take a test based on their account type and the number of tests taken
 const canTakeTest = async () => {
-  const userId = getCurrentUser().uid;
+  const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
   const querySnapshot = await getDocs(
-    query(usersCollection, where("uid", "==", userId))
+    query(usersCollection, where("uid", "==", userId.uid))
   );
   if (querySnapshot.size != 1) {
     console.log("Invalid User");
@@ -84,7 +84,7 @@ const canTakeTest = async () => {
   }
   const doc = querySnapshot.docs[0];
 
-  let credits = doc.data().credits;
+  let credits = doc.data().credit;
 
   if (credits <= 0) {
     console.log("No more free tests");
