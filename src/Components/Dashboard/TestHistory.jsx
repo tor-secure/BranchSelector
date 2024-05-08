@@ -6,10 +6,11 @@ import { CgAlignBottom } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
 export const TestHistory = ({ testHistory }) => {
+  console.log("testHistory", testHistory.length, testHistory);
   const navigate = useNavigate();
   return (
     <>
-      {testHistory && (
+      {testHistory.length > 0 ? (
         <div className="flex flex-col items-center mt-7 w-full">
           <div className="w-[80%]">
             <h2 className="text-2xl font-semibold">Test History</h2>
@@ -55,6 +56,20 @@ export const TestHistory = ({ testHistory }) => {
             ))}
           </div>
         </div>
+      ) : (
+        <>
+          <div className="flex flex-col items-center mt-7 w-full">
+            <div className="w-[80%]">
+              <h2 className="text-2xl font-semibold">Test History</h2>
+              <div className="bg-[#e4ecff] rounded-sm my-5 h-[12em] w-full flex flex-col justify-center items-center">
+                <h3 className="text-2xl font-semibold">No tests taken</h3>
+                <button className="mt-2 bg-primary text-white font-semibold p-1 px-5 rounded text-sm">
+                  Go to tests
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </>
   );
