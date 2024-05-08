@@ -8,9 +8,11 @@ import { FaUser } from "react-icons/fa";
 import { getCurrentUserInfo } from "../../services/userService";
 import { getCurrentUser } from "../../services/authService";
 
-export const LeftSection = () => {
+export const LeftSection = ({ scrolledPastSection, scrollGap }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
   const [userData, serUserData] = useState({});
+  const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
+
   useEffect(() => {
     async function fetchTestHistory() {
       const testUserData = await getCurrentUser();
@@ -21,19 +23,29 @@ export const LeftSection = () => {
     fetchTestHistory();
   }, []);
 
+  useEffect(() => {
+    console.log("scrollGap", parseInt(scrollGap));
+  }, [scrollGap, scrolledPastSection]);
+
   const handleClick = (pos) => {
     console.log("In");
     const temp = [...checkBottons];
-
     temp.fill(false);
-
     temp[pos] = true;
     setCheckBottons(temp);
   };
-
+  //mt-[${1000000}em]
   return (
-    <div className="hidden md:flex h-screen w-[18em] bg-white shadow-2xl p-10  flex-col items-center fixed">
-      <img src={userData.photoURL} className="rounded-full"></img>
+    <div
+      className={`hidden md:flex h-full w-[18em] bg-white shadow-2xl p-10 flex-col items-center fixed ${
+        scrolledPastSection ? `bottom-[${parseInt(scrollGap)}px]` : ``
+      }`}
+    >
+      <img
+        src={userData.photoURL}
+        className="rounded-full"
+        alt="User Profile"
+      ></img>
       <h3 className="font-bold text-xl">{userData.displayName}</h3>
       <p>{userData.email}</p>
 
@@ -79,3 +91,5 @@ export const LeftSection = () => {
     </div>
   );
 };
+
+export default LeftSection;
