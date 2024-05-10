@@ -5,7 +5,7 @@ import { MdExitToApp } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { getCurrentUser } from "../../services/authService";
 
-export const LeftSection = () => {
+export const LeftSection = ({ setSelectedPage }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
   const [userData, serUserData] = useState({});
   const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
@@ -20,8 +20,9 @@ export const LeftSection = () => {
     fetchTestHistory();
   }, []);
 
-  const handleClick = (pos) => {
+  const handleClick = (pos, selectedOpt) => {
     // console.log("In");
+    setSelectedPage(selectedOpt);
     const temp = [...checkBottons];
     temp.fill(false);
     temp[pos] = true;
@@ -40,7 +41,7 @@ export const LeftSection = () => {
 
       <ul className="font-bold text-base text-[#595959] mt-12 w-full">
         <li
-          onClick={() => handleClick(0)}
+          onClick={() => handleClick(0, "Your Data")}
           className={
             checkBottons[0]
               ? "flex my-7 text-start text-white bg-primary p-3 rounded-md mx-[-18px] shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
@@ -51,7 +52,7 @@ export const LeftSection = () => {
           <p className="ml-2">Your Data</p>
         </li>
         <li
-          onClick={() => handleClick(1)}
+          onClick={() => handleClick(1, "Buy Credits")}
           className={
             checkBottons[1]
               ? "flex my-7 text-start text-white bg-primary p-3 rounded-md mx-[-18px] shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
@@ -62,7 +63,7 @@ export const LeftSection = () => {
           <p className="ml-2">Buy Credits</p>
         </li>
         <li
-          onClick={() => handleClick(2)}
+          onClick={() => handleClick(2, "Settings")}
           className={
             checkBottons[2]
               ? "flex my-7 text-start text-white bg-primary p-3 rounded-md mx-[-18px] shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"

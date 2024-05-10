@@ -37,7 +37,7 @@ export const RightSection = () => {
             </div>
             <img
               src={DashboardBackground}
-              className="hidden lg:block md:h-[20em] animate-breathing mt-5"
+              className="hidden lg:block md:h-[20em] animate-breathing mt-5 -ml-16"
               alt="Dashboard Background"
             />
             <div className="hidden  sm:flex items-end flex-col py-5 ">

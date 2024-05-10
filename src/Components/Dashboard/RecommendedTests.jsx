@@ -34,7 +34,7 @@ export const RecommendedTests = ({ recommendedTests }) => {
         <div className="flex items-center justify-between mt-3">
           <div>
             <RiArrowLeftSLine
-              className="text-[#707070] ml-0 lg:ml-8 z-10 text-3xl sm:text-5xl"
+              className="text-[#707070] ml-0 lg:ml-4 z-10 text-3xl sm:text-5xl"
               onClick={scrollLeft}
             />
           </div>
@@ -79,7 +79,7 @@ export const RecommendedTests = ({ recommendedTests }) => {
           </div>
           <div>
             <RiArrowRightSLine
-              className="text-[#707070] mr-0 lg:mr-8  text-3xl sm:text-5xl"
+              className="text-[#707070] mr-0 lg:mr-4  text-3xl sm:text-5xl"
               onClick={scrollRight}
             />
           </div>
