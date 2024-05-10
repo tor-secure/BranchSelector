@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RiCoinsFill } from "react-icons/ri";
-import { MdOutlineSettings } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { MdExitToApp } from "react-icons/md";
-import { FaFile } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { getCurrentUserInfo } from "../../services/userService";
 import { getCurrentUser } from "../../services/authService";
 
-export const LeftSection = ({ scrolledPastSection, scrollGap }) => {
+export const LeftSection = () => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
   const [userData, serUserData] = useState({});
   const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
@@ -23,12 +20,8 @@ export const LeftSection = ({ scrolledPastSection, scrollGap }) => {
     fetchTestHistory();
   }, []);
 
-  useEffect(() => {
-    console.log("scrollGap", parseInt(scrollGap));
-  }, [scrollGap, scrolledPastSection]);
-
   const handleClick = (pos) => {
-    console.log("In");
+    // console.log("In");
     const temp = [...checkBottons];
     temp.fill(false);
     temp[pos] = true;
@@ -36,11 +29,7 @@ export const LeftSection = ({ scrolledPastSection, scrollGap }) => {
   };
   //mt-[${1000000}em]
   return (
-    <div
-      className={`hidden md:flex h-full w-[18em] bg-white shadow-2xl p-10 flex-col items-center fixed ${
-        scrolledPastSection ? `bottom-[${parseInt(scrollGap)}px]` : ``
-      }`}
-    >
+    <div className="hidden lg:flex h-[100dvh] w-[18em] bg-white shadow-2xl p-10 flex-col items-center sticky top-10">
       <img
         src={userData.photoURL}
         className="rounded-full"
