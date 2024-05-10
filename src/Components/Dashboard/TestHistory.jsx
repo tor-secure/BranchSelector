@@ -20,7 +20,7 @@ export const TestHistory = ({ testHistory }) => {
                 className="flex justify-between items-center bg-[#f8f9fb] shadow-blue-200 p-1 shadow-lg w-full h-24 sm:h-44  my-4 rounded-lg"
               >
                 <div className="w-[16em]">
-                  <div className="hidden sm:flex">
+                  <div className="hidden sm:flex ml-3">
                     {getTestLogo(test["test-name"], 100)}
                   </div>
                   <div className="flex sm:hidden">
@@ -43,14 +43,14 @@ export const TestHistory = ({ testHistory }) => {
                         },
                       });
                     }}
-                    className="flex flex-col justify-center items-center h-16 sm:h-full w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 sm:mt-0"
+                    className="flex flex-col justify-center items-center h-16 sm:h-32 w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 "
                   >
                     <BsArrowClockwise className="text-2xl sm:text-5xl" />
                     <p className="text-center text-primary font-bold mt-1 text-xs sm:text-base">
                       Retest
                     </p>
                   </button>
-                  <button className="flex flex-col justify-center items-center h-16 sm:h-full w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 sm:mt-0">
+                  <button className="flex flex-col justify-center items-center h-16 sm:h-32 w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 ">
                     <CgAlignBottom className="text-2xl sm:text-5xl" />
                     <p className="text-center text-primary font-bold mt-1 text-xs sm:text-base">
                       Results
