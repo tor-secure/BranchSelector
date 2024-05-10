@@ -8,46 +8,9 @@ import { getRemainingTests, getTestLogo } from "../../services/testService";
 import { getTestHistory } from "../../services/userService";
 import { TestHistory } from "./TestHistory";
 
-export const RightSection = ({
-  setScrolledPastSection,
-  setScrollGap,
-  scrolledPastSection,
-}) => {
+export const RightSection = () => {
   const [testHistory, setTestHistory] = useState([]);
   const [recommendedTests, setRecommendedTests] = useState([]);
-
-  useEffect(() => {
-    const sectionTemp = document.getElementById("sectionToCheck"); // Get the section element
-    const scrollGap1 = sectionTemp.offsetHeight - 250;
-
-    const handleScroll = () => {
-      const section = document.getElementById("sectionToCheck"); // Get the section element
-      const sectionTop = section.offsetHeight - 400; // Get the top position of the section
-
-      //console.log(sectionTop, window.scrollY);
-      const scrollPosition = window.scrollY;
-
-      // console.log(
-      //   400 + scrollPosition - section.offsetHeight,
-      //   section.offsetHeight,
-      //   "sectionTemp.offsetTop"
-      // );
-      setScrollGap(400 + scrollPosition - section.offsetHeight);
-
-      // Update scrolledPastSection state based on scroll position
-      if (scrollPosition > sectionTop) {
-        setScrolledPastSection(true);
-      } else {
-        setScrolledPastSection(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []); // Empty dependency array ensures the effect runs only once on mount
 
   useEffect(() => {
     async function fetchTestHistory() {
@@ -64,36 +27,39 @@ export const RightSection = ({
   }, []);
 
   return (
-    <div className={`ml-0 md:ml-[18em] ${scrolledPastSection ? "" : ``}`}>
-      <div
-        className="bg-gradient-to-b from-[#CBE1F6] to-white z-0 "
-        id="sectionToCheck"
-      >
-        <div className="flex justify-between">
-          <div className="hidden w-[20%] sm:flex items-center flex-col justify-center">
-            <h1 className=" text-6xl font-extralight ml-[-30px]">Hello</h1>
-            <h1 className="text-6xl font-semibold">There!</h1>
+    <div>
+      <div className="w-[100vw] lg:w-[calc(100vw-18em)] flex flex-col">
+        <div className="bg-gradient-to-b from-[#CBE1F6] to-white z-0 ">
+          <div className="flex justify-between">
+            <div className=" w-[20%] sm:flex text-xl sm:text-6xl items-center flex-row sm:flex-col justify-center mt-5 sm:mt-0">
+              <h1 className="  font-extralight ml-0 md:ml-[-30px] ">Hello</h1>
+              <h1 className=" font-semibold">There!</h1>
+            </div>
+            <img
+              src={DashboardBackground}
+              className="hidden lg:block md:h-[20em] animate-breathing mt-5"
+              alt="Dashboard Background"
+            />
+            <div className="hidden  sm:flex items-end flex-col py-5 ">
+              <CreditsRemainingCard />
+              <TestsTakenCard />
+            </div>
           </div>
-          <img
-            src={DashboardBackground}
-            className="h-[20em] animate-breathing mt-5"
-          ></img>
-          <div className="hidden w-[20%] sm:flex items-end flex-col py-5 ">
+          <div className="flex justify-between">
+            <hr className="border border-[#c2d6fd] my-4 w-44"></hr>
+            <hr className="border border-[#c2d6fd] my-4 w-44"></hr>
+          </div>
+
+          <div className="  sm:hidden  flex py-5 ml-8">
             <CreditsRemainingCard />
             <TestsTakenCard />
           </div>
+
+          <RecommendedTests recommendedTests={recommendedTests} />
+          {/* <TestHistory testHistory={testHistory} /> */}
         </div>
-        <div className="flex justify-between">
-          <hr className="border border-[#c2d6fd] my-4 w-44"></hr>
-          <hr className="border border-[#c2d6fd] my-4 w-44"></hr>
-        </div>
-        <div className="w-full sm:hidden items-end flex py-5 ">
-          <CreditsRemainingCard />
-          <TestsTakenCard />
-        </div>
-        <RecommendedTests recommendedTests={recommendedTests} />
+        <TestHistory testHistory={testHistory} />
       </div>
-      <TestHistory testHistory={testHistory} />
     </div>
   );
 };

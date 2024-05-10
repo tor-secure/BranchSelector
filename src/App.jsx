@@ -9,8 +9,6 @@ import AuthenticatedNavBar from "./Components/Navbar/AuthenticatedNavBar";
 import { LoadingPage } from "./pages/LoadingPage";
 import { getAuth } from "firebase/auth";
 
-
-
 library.add(fas);
 
 function App() {
@@ -57,8 +55,7 @@ function App() {
   }, [pathname]);
 
   return (
-    <main className="overflow-x-hidden">
-
+    <main>
       <header>
         {isAuthenticated === null ? (
           <Navbar />
