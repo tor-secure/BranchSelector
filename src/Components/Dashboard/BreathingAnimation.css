@@ -25,3 +25,9 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
+
+@media (min-width: 470px) and (max-width: 600px) {
+  .setAlignment {
+    margin-left: 38%;
+  }
+}
