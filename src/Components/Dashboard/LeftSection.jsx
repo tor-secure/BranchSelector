@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { RiCoinsFill } from "react-icons/ri";
-import { MdOutlineSettings } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { MdExitToApp } from "react-icons/md";
-import { FaFile } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { getCurrentUserInfo } from "../../services/userService";
 import { getCurrentUser } from "../../services/authService";
+import "./BreathingAnimation.css";
 
-export const LeftSection = () => {
+export const LeftSection = ({ setSelectedPage }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
   const [userData, serUserData] = useState({});
+  const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
+
   useEffect(() => {
     async function fetchTestHistory() {
       const testUserData = await getCurrentUser();
@@ -21,61 +21,68 @@ export const LeftSection = () => {
     fetchTestHistory();
   }, []);
 
-  const handleClick = (pos) => {
-    console.log("In");
+  const handleClick = (pos, selectedOpt) => {
+    // console.log("In");
+    setSelectedPage(selectedOpt);
     const temp = [...checkBottons];
-
     temp.fill(false);
-
     temp[pos] = true;
     setCheckBottons(temp);
   };
-
+  //mt-[${1000000}em]
   return (
-    <div className="hidden md:flex h-screen w-[18em] bg-white shadow-2xl p-10  flex-col items-center fixed">
-      <img src={userData.photoURL} className="rounded-full"></img>
-      <h3 className="font-bold text-xl">{userData.displayName}</h3>
-      <p>{userData.email}</p>
-
-      <ul className="font-bold text-base text-[#595959] mt-12 w-full">
+    <div className="w-full lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff]">
+      <div className="w-full flex flex-col justify-center items-center mt-10 lg:mt-0">
+        <img
+          src={userData.photoURL}
+          className="rounded-full size-40 lg:size-28"
+          alt="User Profile"
+        ></img>
+        <h3 className="font-bold text-xl">{userData.displayName}</h3>
+        <p>{userData.email}</p>
+      </div>
+      <ul className="font-bold text-sm lg:text-base text-[#595959] mt-12 w-full flex lg:block justify-between flex-wrap">
         <li
-          onClick={() => handleClick(0)}
-          className={
+          onClick={() => handleClick(0, "Your Data")}
+          className={`p-3 rounded-md mx-1 w-32 lg:w-48 ${
             checkBottons[0]
-              ? "flex my-7 text-start text-white bg-primary p-3 rounded-md mx-[-18px] shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
-              : "flex my-7 text-start cursor-pointer hover:text-[#808080]"
-          }
+              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
+              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
+          }`}
         >
           <FaUser size={18} className="mt-1" />
           <p className="ml-2">Your Data</p>
         </li>
         <li
-          onClick={() => handleClick(1)}
-          className={
+          onClick={() => handleClick(1, "Buy Credits")}
+          className={`p-3 rounded-md mx-1  lg:w-48 ${
             checkBottons[1]
-              ? "flex my-7 text-start text-white bg-primary p-3 rounded-md mx-[-18px] shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
-              : "flex my-7 text-start cursor-pointer hover:text-[#808080]"
-          }
+              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
+              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
+          }`}
         >
           <RiCoinsFill size={25} />
           <p className="ml-2">Buy Credits</p>
         </li>
         <li
-          onClick={() => handleClick(2)}
-          className={
+          onClick={() => handleClick(2, "Settings")}
+          className={`p-3 rounded-md mx-1 w-32 lg:w-48 ${
             checkBottons[2]
-              ? "flex my-7 text-start text-white bg-primary p-3 rounded-md mx-[-18px] shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
-              : "flex my-7 text-start cursor-pointer hover:text-[#808080]"
-          }
+              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
+              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
+          }`}
         >
           <IoIosSettings size={25} />
           <p className="ml-2">Settings</p>
         </li>
-        <li className="flex my-7 text-start text-red-600 cursor-pointer hover:text-red-400">
+        <li className="setAlignment p-3 flex my-7 mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md">
           <MdExitToApp size={25} />
           <p className="ml-2">Log Out</p>
+          {/* setAlignment defined in BreathingAnimation.css*/}
         </li>
       </ul>
     </div>
   );
 };
+
+export default LeftSection;
