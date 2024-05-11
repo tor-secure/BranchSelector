@@ -1,7 +1,5 @@
 import { collection, doc, getDocs, getFirestore } from "./firebase";
 import React from "react";
-
-import Graduation from "../assets/TestList/graduation.svg";
 import { MdEngineering } from "react-icons/md";
 import { PiBarbellFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
@@ -172,7 +170,7 @@ const getRemainingTests = (excludedTests) => {
         !excludedTests.some(
           (excludedTest) =>
             excludedTest["test-name"].toLowerCase() ===
-            testMetaData[testKey].name.toLowerCase()
+            testMetaData[testKey].queryCode.toLowerCase()
         )
     )
     .map((testKey) => testMetaData[testKey]);

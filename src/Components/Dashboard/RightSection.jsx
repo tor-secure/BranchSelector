@@ -18,6 +18,7 @@ export const RightSection = () => {
       console.log("Fetched test history:", testHistoryTemp);
       //console.log("0", testHistoryTemp[0]["test-name"]);
       const remainigTemp = getRemainingTests(testHistoryTemp);
+      console.log("Fetched remaining tests:", remainigTemp);
       setRecommendedTests(remainigTemp);
       console.log("Remaining test", remainigTemp);
       setTestHistory(testHistoryTemp);
@@ -37,7 +38,7 @@ export const RightSection = () => {
             </div>
             <img
               src={DashboardBackground}
-              className="hidden lg:block md:h-[20em] animate-breathing mt-5 -ml-16"
+              className="hidden lg:block md:h-[20em] animate-breathing mt-5 -ml-28"
               alt="Dashboard Background"
             />
             <div className="hidden  lg:flex items-end flex-col py-5 ">

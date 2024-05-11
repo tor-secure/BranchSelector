@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { QuestionSetScroll } from "./QuestionSetScroll";
 import { QuestionSetImgMcq } from "./QuestionSetImgMcq";
 import { faL } from "@fortawesome/free-solid-svg-icons";
+import { NextPrevSec } from "./NextPrevSec";
 
 export const TestArea = () => {
   const location = useLocation();
@@ -59,6 +60,13 @@ export const TestArea = () => {
     }
     if (testMetaData.displayType === "img-mcq") setQuestionsPerPage(1);
   }, [testMetaData.displayType, questionsData]);
+
+  const range1 = Array.from({
+    length: Math.ceil(questionsData.length / questionsPerPage),
+  }).fill(false);
+  range1[0] = true;
+
+  const [secData, setSecData] = useState(range1);
 
   const renderQuestions = () => {
     // Slice the questions data based on the provided range
@@ -127,6 +135,9 @@ export const TestArea = () => {
           noOfSections={Math.ceil(questionsData.length / questionsPerPage)}
           testQueryName={testMetaData.queryCode}
           isInstruction={false}
+          secData={secData}
+          setSecData={setSecData}
+          range1={range1}
         />
       }
       {/* <Navbar /> */}
@@ -137,10 +148,25 @@ export const TestArea = () => {
             <SectionsArea
               noOfSections={Math.ceil(questionsData.length / questionsPerPage)}
               heading={heading}
+              testCode={testMetaData.queryCode}
             />
           </div>
           <div className="lg:ml-[25em] flex-grow  bg-white-500 flex flex-col items-center bg-[#ffffff] pt-10 mt-5">
             {renderQuestions()}
+            <NextPrevSec
+              heading={heading}
+              questionsRange={questionsRange}
+              setQuestionsRange={setQuestionsRange}
+              questionsData={questionsData}
+              result={result}
+              questionsPerPage={questionsPerPage}
+              noOfSections={Math.ceil(questionsData.length / questionsPerPage)}
+              testQueryName={testMetaData.queryCode}
+              isInstruction={false}
+              secData={secData}
+              setSecData={setSecData}
+              range1={range1}
+            />
           </div>
         </div>
       </div>
