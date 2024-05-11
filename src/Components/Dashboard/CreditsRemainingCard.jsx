@@ -2,7 +2,7 @@ import CreditsRemainingIcon from "./../../assets/CreditsRemainingIcon.svg";
 
 export const CreditsRemainingCard = () => {
   return (
-    <div className="bg-white rounded-xl sm:rounded-r-none w-28 h-28 sm:w-36 sm:h-32 my-5 py-1 shadow-[#9cbcf8] shadow-md">
+    <div className="bg-white rounded-xl lg:rounded-r-none w-28 h-28 sm:w-36 sm:h-32 my-5 py-1 shadow-[#9cbcf8] shadow-md">
       <div className="ml-3 text-xs font-bold">
         <p>Credits</p>
         <p>Remaining</p>
