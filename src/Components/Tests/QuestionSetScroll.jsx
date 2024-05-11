@@ -14,8 +14,12 @@ export const QuestionSetScroll = ({
   // }, [result]);
 
   const [sliderValue, setSliderValue] = useState(3);
+
   const handleSliderChange = (event) => {
-    setSliderValue(event.target.value);
+    const tempResult = {...result}
+    tempResult[questionsData.id] = event.target.value
+    setSliderValue(tempResult);
+    setResult(tempResult)
   };
 
   return (
@@ -29,7 +33,7 @@ export const QuestionSetScroll = ({
           <input
             id="labels-range-input"
             type="range"
-            value={sliderValue}
+            value={sliderValue[questionsData.id]}
             min="1"
             max="5"
             onChange={handleSliderChange}
