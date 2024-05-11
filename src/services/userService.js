@@ -46,7 +46,8 @@ const newTestTaken = async (testName, result) => {
     if (!(await canTakeTest())) {
       return;
     }
-    const userId = getCurrentUser().uid;
+    let userId = await getCurrentUser();
+    userId = userId.uid
     console.log("from new test", userId);
 
     const usersCollection = await collection(firestore, "users");
@@ -59,7 +60,7 @@ const newTestTaken = async (testName, result) => {
     }
     const doc = querySnapshot.docs[0];
     let credit = doc.data().credit;
-    credit++;
+    credit--;
     await updateDoc(doc.ref, { credit });
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
@@ -68,7 +69,6 @@ const newTestTaken = async (testName, result) => {
     console.error("Error writing document: ", error);
   }
 
-  await syncUserData();
 };
 
 // Checks if the user is allowed to take a test based on their account type and the number of tests taken
