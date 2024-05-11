@@ -22,14 +22,15 @@ export const TestInstruction = () => {
     setIsChecked(event.target.checked);
     console.log(event.target.checked);
   };
+
   const navigate = useNavigate();
+
   if (!testMetaData) {
-    console.log("IT EMPTY");
     setTimeout(() => {
       navigate("/testlist");
     }, 10); 
     /* IDK why but delay is required other wise it just loads a blank page. 
-       Probably has something to do with the Protected route stuff*/
+       Probably has something to do with the Protected route stuff */
     return null;
   }
 
@@ -107,13 +108,13 @@ export const TestInstruction = () => {
             <h1 className="text-center font-bold text-xl">Disclaimer</h1>
             <div className="p-7 ">
               <Disclaimer />
-              <p className="mt-5 text-center text-lg">
+              <p className="mt-10 text-center text-lg font-semibold">
                 <input
                   type="checkbox"
                   id="checkbox1"
                   name="checkbox1"
                   value="value1"
-                  className="mx-1 checkbox-large" // Add a custom class for styling
+                  className="mx-1 checkbox-large scale-[2] mr-3" // Add a custom class for styling
                   onChange={handleCheckboxChange} // Attach onChange event handler
                   checked={isChecked} // Controlled component: set the checked state
                 />
