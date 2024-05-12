@@ -1,4 +1,4 @@
-import { Disclaimer } from './Disclaimer';
+import { Disclaimer } from "./Disclaimer";
 import React, { useEffect, useState } from "react";
 import { TestNavbar } from "./TestNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,13 +8,11 @@ import { TestInstructionSectionMCQImg } from "./TestInstructionSectionMCQImg";
 import { TestInstructionSectionSlider } from "./TestInstructionSectionSlider";
 import { canTakeTest, getCurrentUserInfo } from "../../services/userService";
 import { getCurrentUser } from "../../services/authService";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export const TestInstruction = () => {
   const location = useLocation();
   const { testMetaData } = location.state ?? {};
-
-
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -22,33 +20,31 @@ export const TestInstruction = () => {
     setIsChecked(event.target.checked);
     console.log(event.target.checked);
   };
+
   const navigate = useNavigate();
+
   if (!testMetaData) {
-    console.log("IT EMPTY");
     setTimeout(() => {
       navigate("/testlist");
-    }, 10); 
+    }, 10);
     /* IDK why but delay is required other wise it just loads a blank page. 
-       Probably has something to do with the Protected route stuff*/
+       Probably has something to do with the Protected route stuff */
     return null;
   }
 
   const heading = testMetaData.name;
 
   useEffect(() => {
-      const canTakeTestCheck = async () => {
-
-        const result = await canTakeTest()
-        console.log("can take test",result)
-        if(!result)
-        {
-        toast.error("You cannot take anymore tests! Buy more credits!")
-        navigate('/')
-        }
-    }
-    canTakeTestCheck()
+    const canTakeTestCheck = async () => {
+      const result = await canTakeTest();
+      console.log("can take test", result);
+      if (!result) {
+        toast.error("You cannot take anymore tests! Buy more credits!");
+        navigate("/");
+      }
+    };
+    canTakeTestCheck();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,9 +57,6 @@ export const TestInstruction = () => {
 
     fetchData();
   }, []);
-
-
-
 
   const checkTest = (testType) => {
     // Early return pattern - if the condition is met, the component renders early.
@@ -99,6 +92,9 @@ export const TestInstruction = () => {
         noOfSections={0}
         testQueryName={""}
         isInstruction={true}
+        secData={[]}
+        setSecData={() => {}}
+        range1={[]}
       />
 
       <div className="mt-[8.3em] h-[62em] md:h-[30em]">
@@ -107,13 +103,13 @@ export const TestInstruction = () => {
             <h1 className="text-center font-bold text-xl">Disclaimer</h1>
             <div className="p-7 ">
               <Disclaimer />
-              <p className="mt-5 text-center text-lg">
+              <p className="mt-10 text-center text-lg font-semibold">
                 <input
                   type="checkbox"
                   id="checkbox1"
                   name="checkbox1"
                   value="value1"
-                  className="mx-1 checkbox-large" // Add a custom class for styling
+                  className="mx-1 checkbox-large scale-[2] mr-3" // Add a custom class for styling
                   onChange={handleCheckboxChange} // Attach onChange event handler
                   checked={isChecked} // Controlled component: set the checked state
                 />

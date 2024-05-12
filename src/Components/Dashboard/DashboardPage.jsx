@@ -7,7 +7,7 @@ import { BuyCredits } from "./BuyCredits";
 export const DashboardPage = () => {
   const [selectedPage, setSelectedPage] = useState("Your Data");
   return (
-    <div class="bg-white flex items-start w-full">
+    <div class="bg-white block lg:flex items-start w-full">
       <LeftSection setSelectedPage={setSelectedPage} />
       {selectedPage == "Your Data" && <RightSection />}
       {selectedPage == "Buy Credits" && <BuyCredits />}
