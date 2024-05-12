@@ -8,6 +8,8 @@ import branchselector_logo from "../../assets/branchselector_logo.png";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { IoClose } from "react-icons/io5";
+
 
 const Login = () => {
   const location = useLocation();
@@ -25,7 +27,9 @@ const Login = () => {
 
     } 
     
-
+const handleGoBack = () => {
+        navigate('/');
+}
 
 const onSubmitHandler = async (e) => {
   e.preventDefault(); // Prevent the default form submission
@@ -83,11 +87,19 @@ const onSubmitHandler = async (e) => {
   };
 
   return (
+    
     <div className="flex-1 flex items-center justify-center h-screen">
+
+ 
       <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
+
+        <div className="mt-5 space-y-2">
+        <div class="absolute top-0 right-0 items-center justify-center w-16 h-16 bg-gray-300 rounded-full mr-5 mt-5 lg:flex hidden" onClick={handleGoBack}>
+        <IoClose class="text-black text-2xl" />
+        </div>
         <div className="">
           <img src={branchselector_logo} width={75} className="lg:hidden" />
-          <div className="mt-5 space-y-2">
+
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
               Login
             </h3>
