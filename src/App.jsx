@@ -7,16 +7,19 @@ import Footer from "./Components/Footer/Footer";
 import { getCurrentUser } from "./services/authService";
 import AuthenticatedNavBar from "./Components/Navbar/AuthenticatedNavBar";
 import { LoadingPage } from "./pages/LoadingPage";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 library.add(fas);
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const unsubscribe = getAuth().onAuthStateChanged((user) => {
-      setIsAuthenticated(!!user);
+    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
+      setIsAuthenticated(user);
+      setIsLoading(false);
     });
 
     return unsubscribe;
@@ -30,35 +33,15 @@ function App() {
     getAuthState();
   }, []);
 
-  const { pathname } = useLocation();
-  //const [isAuthenticated, setIsAuthenticated] = useState(null);
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userInfo = await getCurrentUser();
-        setIsAuthenticated(userInfo);
-      } catch (error) {
-        console.error("An error occurred while fetching user info:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [pathname]);
 
   return (
     <main>
       <header>
-        {isAuthenticated === null || isAuthenticated === true ? (
-          <Navbar />
+        {isLoading ? (
+          <LoadingPage />
         ) : isAuthenticated ? (
           <AuthenticatedNavBar user={isAuthenticated} />
         ) : (
@@ -68,14 +51,9 @@ function App() {
       <Suspense fallback={<LoadingPage />}>
         <Outlet />
       </Suspense>
-
       <Footer />
     </main>
   );
 }
 
-// function created for Suspense *changed to LoadingPage component
-// function Loading() {
-//   return <h2>Loading...</h2>;
-// }
 export default App;
