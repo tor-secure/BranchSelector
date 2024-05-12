@@ -57,7 +57,7 @@ function App() {
   return (
     <main>
       <header>
-        {isAuthenticated === null ? (
+        {isAuthenticated === null || isAuthenticated === true ? (
           <Navbar />
         ) : isAuthenticated ? (
           <AuthenticatedNavBar user={isAuthenticated} />
