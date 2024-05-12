@@ -177,10 +177,18 @@ const syncUserData = async () => {
 
 function getCurrentUser() {
   return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      unsubscribe();
-      resolve(user);
-    }, reject);
+    const unsubscribe = auth.onAuthStateChanged(
+      (user) => {
+        unsubscribe();
+        resolve(user);
+      },
+      reject,
+      // This line is added to handle the case where there is no change in the authentication state
+      () => {
+        unsubscribe();
+        resolve(null); // Resolve with null to indicate no user is signed in
+      }
+    );
   });
 }
 
