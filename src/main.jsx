@@ -59,6 +59,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+        {
+    path: "result",
+    element: (
+      <ProtectedRoute>
+        <ResultsPage />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
     ],
     errorElement: <ErrorPage />,
   },
@@ -74,15 +83,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 
-  {
-    path: "result",
-    element: (
-      <ProtectedRoute>
-        <ResultsPage />
-      </ProtectedRoute>
-    ),
-    errorElement: <ErrorPage />,
-  },
+
   {
     path: "testPage",
     element: (

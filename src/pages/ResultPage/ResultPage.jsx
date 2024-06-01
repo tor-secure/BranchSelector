@@ -8,6 +8,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import ProfilePic from "../../assets/profile.webp";
 import { getTestMetaData } from "../../services/testService";
 import { resultcontentdata } from "../../services/ResultContent";
+import LeftSection from "../../Components/Dashboard/LeftSection";
 
 const ResultsPage = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const ResultsPage = () => {
   // console.log(AdjustedLabel);
 
   return (
+    <>
     <section
       className="bg-[#fffefe] "
       style={{
@@ -53,17 +55,12 @@ const ResultsPage = () => {
           "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
       }}
     >
-      <Navbar />
+      
       {/* <div className="bg-[#c2c2c2] h-4 "></div> */}
       <div className="flex font-poppins  relative ">
-        <SideDashBoard
-          className={`${!isScreenLarge && "hidden"}`}
-          ProfilePic={ProfilePic}
-          userName={userName}
-          userMailId={userMailId}
-        />
+        <LeftSection/>
         {/* bg-[#CBE1F6] */}
-        <div className="relative z-20  w-[100] lg:ml-72  py-12  lg:px-16 px-5 overflow-y-hidden border-t-4 ">
+        <div className="relative z-2  w-[100]  py-12  lg:px-16 px-5 overflow-y-hidden border-t-4 ">
           <div>
             <h2 className=" text-3xl md:text-4xl pb-4 md:pb-7 font-semibold  ">
               {testmeta.name} Result
@@ -141,6 +138,7 @@ const ResultsPage = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
