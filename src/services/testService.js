@@ -216,7 +216,7 @@ async function evaluteTest(testName, selectedOptions) {
 
     if (evaluationType == "aggregation") {
       const answerKey = {};
-      const results = {};
+      var results = {};
       answerKeySnapshot.forEach((doc) => {
         answerKey[doc.id] = doc.data();
       });
@@ -234,7 +234,12 @@ async function evaluteTest(testName, selectedOptions) {
           console.warn(`Answer key not found for question ${questionId}`);
         }
       }
+      var resultsArray = Object.entries(results);
+      resultsArray.sort((a, b) => b[1] - a[1]);
+      console.log(resultsArray)
+      results = Object.fromEntries(resultsArray);
       return results;
+
     } else if (evaluationType == "single-option") {
       let correctAnswers = 0;
       const answerKey = answerKeySnapshot.docs[0].data();
@@ -247,7 +252,7 @@ async function evaluteTest(testName, selectedOptions) {
 
     if (evaluationType == "weighted-aggregation") {
       const answerKey = {};
-      const results = {};
+      var results = {};
       answerKeySnapshot.forEach((doc) => {
         answerKey[doc.id] = doc.data();
       });
@@ -268,6 +273,13 @@ async function evaluteTest(testName, selectedOptions) {
           console.warn(`Answer key not found for question ${questionId}`);
         }
       }
+      var resultsArray = Object.entries(results);
+      resultsArray.sort((a, b) => b[1] - a[1]);
+
+      if (testName === 'engineering') {
+         resultsArray = resultsArray.slice(0, 5);
+      }
+      results = Object.fromEntries(resultsArray);
       return results;
     }
   } catch (error) {

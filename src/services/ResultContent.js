@@ -106,4 +106,39 @@ const resultcontentdata = {
       "Individuals with a strong kinesthetic learning preference tend to learn best through hands-on experience, physical movement, and tactile engagement. They often thrive in environments that allow them to actively manipulate or interact with the learning material, and may enjoy activities that involve hands-on demonstrations or experiential learning.",
   },
 };
-export { resultcontentdata };
+
+
+const resultTextData = {
+  engineering:{
+    text:"Based on your answers, here are the top 5 engineering streams that will best suit your interest. "
+  },
+  iq:{
+    text:"Based on the questions you answered, your IQ score is "
+  },
+  vark:{
+    text:"Based on questions you answered, your preferred learning method is "
+  },
+  brain:{
+    text:"Based on the questions you answered, your dominant brain hemisphere is calculated to be "
+  },
+  stream:{
+    text:"Based on the questions you answered, the best stream for you will be "
+  },
+  strength:{
+    text:"Based on your answers, your most dominant strength is "
+  },
+  interest:{
+    text:"Based on your answers, your interes lies in "
+  },
+  personality:{
+    text:"Based on your answers, your most dominant personality trait is "
+  },
+  english:{
+    text:"Based on the questions you answered, your english score is"
+  }
+
+}
+export { 
+  resultcontentdata,
+  resultTextData  
+};
