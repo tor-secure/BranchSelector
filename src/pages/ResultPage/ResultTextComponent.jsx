@@ -12,7 +12,7 @@ Object.keys(result).map((index,value)=>{
 const ResultTextComponent = ({testName, result}) => {
     return (
         
-  <div className="rounded-lg bg-white shadow-md w-[40%] p-5 flex flex-col h-auto">
+  <div className="rounded-lg bg-white shadow-md lg:w-[40%] p-5 flex flex-col h-auto">
       <div className="text-[18px]">
         {resultTextData[testName].text}
       </div>

@@ -4,7 +4,7 @@ import { Bar } from "react-chartjs-2";
 const ResultGraphComponent = ({ testname, result }) => {
   return (
     <div
-      className="bg-white shadow-xl shadow-md h-[70vh] w-[60%] rounded-[8px] sm:rounded-[15px] flex items-center justify-center p-2 sm:p-5"
+      className="bg-white shadow-xl shadow-md h-[70vh] lg:w-[60%]  rounded-[8px] sm:rounded-[15px] flex items-center justify-center p-2 sm:p-5"
     >
       <div className="w-full h-full">
         <Bar

@@ -59,8 +59,9 @@ const newTestTaken = async (testName, result) => {
       return;
     }
     const doc = querySnapshot.docs[0];
-    let credit = doc.data().credit;
-    credit--;
+    var credit = doc.data().credit;
+    credit -= 1;
+    console.log("credit updated to ",credit)
     await updateDoc(doc.ref, { credit });
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
