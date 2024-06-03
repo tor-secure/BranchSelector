@@ -102,7 +102,7 @@ const getTestHistory = async () => {
     const temp = await getCurrentUser();
     //console.log("Userr", temp);
     const userId = temp.uid;
-    const usersCollection = await collection(firestore, "users");
+    const usersCollection = collection(firestore, "users");
     const querySnapshot = await getDocs(
       query(usersCollection, where("uid", "==", userId))
     );
@@ -112,13 +112,16 @@ const getTestHistory = async () => {
     }
     const doc = querySnapshot.docs[0];
     const testsCollectionRef = collection(doc.ref, "tests-taken");
-    const testsSnapshot = getAllDocumentsFromCollection(testsCollectionRef);
-    return testsSnapshot;
+    const testsSnapshot = await getDocs(
+      query(testsCollectionRef, orderBy("time", "desc"))
+    );
+    return testsSnapshot.docs.map(doc => doc.data());
   } catch (error) {
     console.log("UserService: Something went wrong \n" + error);
     return {};
   }
 };
+
 
 // Upgrades the user's account
 const upgradeAccount = async () => {
@@ -175,13 +178,24 @@ const updateDownloads = async (assetDownloaded) => {
 
 // Retrieves the current user's information
 const getCurrentUserInfo = async () => {
-  if (isSignedIn()) {
-    if (!sessionStorage.getItem("userDetails")) {
-      await syncUserData();
-    }
-    return JSON.parse(sessionStorage.getItem("userDetails"));
-  }
+  const uid = getCurrentUser().uid
+/*DEPRECEATED*/
+
 };
+
+const getRemainingCredits = async () =>{
+  const userId = await getCurrentUser()
+  const usersCollection = await collection(firestore, "users");
+  const querySnapshot = await getDocs(
+    query(usersCollection, where("uid", "==", userId.uid))
+  );
+  if (querySnapshot.size != 1) {
+    console.log("Invalid User");
+    return;
+  }
+  const doc = querySnapshot.docs[0];
+  return doc.data().credit;
+}
 
 export {
   canTakeTest,
@@ -189,5 +203,6 @@ export {
   getTestHistory,
   validateCouponCode,
   updateDownloads,
-  getCurrentUserInfo,
+  getRemainingCredits,
+  getCurrentUserInfo
 };

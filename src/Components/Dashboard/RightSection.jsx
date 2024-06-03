@@ -5,22 +5,26 @@ import "./BreathingAnimation.css";
 import { RecommendedTests } from "./RecommendedTests";
 import { useEffect, useState } from "react";
 import { getRemainingTests, getTestLogo } from "../../services/testService";
-import { getTestHistory } from "../../services/userService";
+import { getRemainingCredits, getTestHistory } from "../../services/userService";
 import { TestHistory } from "./TestHistory";
+import { getCurrentUser } from "../../services/authService";
 
 export const RightSection = () => {
   const [testHistory, setTestHistory] = useState([]);
   const [recommendedTests, setRecommendedTests] = useState([]);
-
+  const [remainingCredits, setRemainingCredits] = useState(0)
+ 
   useEffect(() => {
     async function fetchTestHistory() {
       const testHistoryTemp = await getTestHistory();
-      console.log("Fetched test history:", testHistoryTemp);
-      //console.log("0", testHistoryTemp[0]["test-name"]);
+      const userDataTemp = await getRemainingCredits()
+
+      console.log("from credit card ", userDataTemp)
       const remainigTemp = getRemainingTests(testHistoryTemp);
-      console.log("Fetched remaining tests:", remainigTemp);
+
+      setRemainingCredits(userDataTemp);
       setRecommendedTests(remainigTemp);
-      console.log("Remaining test", remainigTemp);
+
       setTestHistory(testHistoryTemp);
     }
 
@@ -42,8 +46,8 @@ export const RightSection = () => {
               alt="Dashboard Background"
             />
             <div className="hidden  lg:flex items-end flex-col py-5 ">
-              <CreditsRemainingCard />
-              <TestsTakenCard />
+              <CreditsRemainingCard remainingCredits={remainingCredits}/>
+              <TestsTakenCard testsTaken={8-recommendedTests.length}/>
             </div>
           </div>
           <div className="hidden lg:flex justify-between">
@@ -52,8 +56,8 @@ export const RightSection = () => {
           </div>
 
           <div className="  lg:hidden  flex py-5 justify-center">
-            <CreditsRemainingCard />
-            <TestsTakenCard />
+            <CreditsRemainingCard remainingCredits={remainingCredits} />
+            <TestsTakenCard testsTaken={8-recommendedTests.length}/>
           </div>
 
           <RecommendedTests recommendedTests={recommendedTests} />
