@@ -238,6 +238,12 @@ async function evaluteTest(testName, selectedOptions) {
       resultsArray.sort((a, b) => b[1] - a[1]);
       console.log(resultsArray)
       results = Object.fromEntries(resultsArray);
+
+      if(testName === "brain"){
+        console.log("Brain Test taken")
+        results = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
+      }
+
       return results;
 
     } else if (evaluationType == "single-option") {
@@ -247,7 +253,7 @@ async function evaluteTest(testName, selectedOptions) {
         if (optionId === answerKey[questionId]) correctAnswers += 1;
       }
 
-      return correctAnswers;
+      return {'Correct Answers':correctAnswers,'Wrong Answers':Object.values(selectedOptions).length - correctAnswers};
     }
 
     if (evaluationType == "weighted-aggregation") {

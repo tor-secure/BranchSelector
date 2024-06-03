@@ -1,4 +1,5 @@
 import { resultTextData } from "../../services/ResultContent";
+import { getTestMetaData } from "../../services/testService";
 
 const EngineeringResultListComponent = ({result}) =>{
 Object.keys(result).map((index,value)=>{
@@ -10,6 +11,9 @@ Object.keys(result).map((index,value)=>{
 
 
 const ResultTextComponent = ({testName, result}) => {
+
+  const testMetadata = getTestMetaData(testName);
+
     return (
         
   <div className="rounded-lg bg-white shadow-md lg:w-[40%] p-5 flex flex-col h-auto">
@@ -26,7 +30,17 @@ const ResultTextComponent = ({testName, result}) => {
             ))}
           </div>
         ) : (
-          Object.keys(result)[0]
+          testMetadata['evaluationType'] == 'single-option'?
+          (
+          <div className="text-[40px]">
+          {Object.values(result)[0]}
+          </div>
+          ):
+          (
+          <div className="text-[30px]">
+          {Object.keys(result)[0]}
+          </div>
+          )
         )}
       </div>
     </div>
