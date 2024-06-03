@@ -1,20 +1,42 @@
 const resultcontentdata = {
   engineering: {
-    "Acoustic Engineering":
-      "Focuses on the design, development, and analysis of systems that produce, transmit, or control sound. This includes areas like audio equipment, noise control, and architectural acoustics.",
-  },
+  "Civil Engineering": "Focuses on the design, construction, and maintenance of infrastructure projects such as roads, bridges, dams, and buildings. Civil engineers ensure these structures are safe, sustainable, and efficient.",
+  "Mechanical Engineering": "Involves the design, analysis, and manufacturing of mechanical systems. This includes engines, machines, and tools, with applications in industries like automotive, aerospace, and energy.",
+  "Electrical Engineering": "Centers on the study and application of electricity, electronics, and electromagnetism. Electrical engineers work on projects involving power generation, communication systems, and electronic devices.",
+  "Aerospace Engineering": "Focuses on the development of aircraft and spacecraft. This includes the design, testing, and production of systems and vehicles for aviation and space exploration.",
+  "Chemical Engineering": "Combines principles of chemistry, biology, and physics to develop processes for manufacturing chemicals, pharmaceuticals, and other products. This field also addresses issues like energy production and environmental protection.",
+  "Computer Engineering": "Involves the design and development of computer systems and components. This includes hardware, software, and networks, with applications in areas such as robotics, artificial intelligence, and data processing.",
+  "Biomedical Engineering": "Applies engineering principles to the medical field. This includes developing medical devices, imaging equipment, and biocompatible materials to improve healthcare outcomes.",
+  "Environmental Engineering": "Focuses on solving environmental problems through engineering. This includes water and air pollution control, waste management, and sustainable design to protect and improve the natural environment.",
+  "Industrial Engineering": "Optimizes complex processes and systems to improve efficiency, productivity, and quality. Industrial engineers work in manufacturing, logistics, healthcare, and other industries to streamline operations.",
+  "Nuclear Engineering": "Involves the application of nuclear processes and principles. This includes the development of nuclear reactors, radiation safety, and the use of radioactive materials in medical and industrial applications.",
+  "Materials Engineering": "Studies the properties, performance, and applications of materials. Materials engineers develop new materials and improve existing ones for use in a variety of products and technologies.",
+  "Petroleum Engineering": "Focuses on the extraction and production of oil and gas. Petroleum engineers design and implement methods for efficient and safe resource recovery, including drilling and reservoir management.",
+  "Structural Engineering": "A branch of civil engineering that deals with the design and analysis of structures that support or resist loads. Structural engineers ensure that buildings, bridges, and other structures are safe and stable.",
+  "Geotechnical Engineering": "Involves the study of soil and rock behavior for use in construction. Geotechnical engineers analyze ground conditions and design foundations, retaining structures, and other earthworks.",
+  "Robotics Engineering": "Combines mechanical, electrical, and computer engineering to design and develop robots. This includes autonomous systems, industrial robots, and robotic devices for various applications.",
+  "Software Engineering": "Focuses on the design, development, and maintenance of software systems. Software engineers create applications, systems software, and manage software development processes.",
+  "Automotive Engineering": "Involves the design, development, and production of vehicles. Automotive engineers work on improving vehicle performance, safety, and efficiency, as well as developing new technologies.",
+  "Agricultural Engineering": "Applies engineering principles to agriculture. This includes designing machinery, improving farming practices, and developing technologies for food production and resource management.",
+  "Marine Engineering": "Focuses on the design, construction, and maintenance of ships and offshore structures. Marine engineers work on propulsion systems, navigation, and safety systems for marine vessels.",
+  "Biotechnology Engineering": "Combines biology and engineering to develop products and technologies. Biotechnology engineers work on genetic engineering, biofuels, pharmaceuticals, and other applications.",
+  "Mechatronics Engineering": "Integrates mechanical, electrical, and computer engineering to create smart systems and products. Mechatronics engineers develop automation systems, robotics, and advanced manufacturing technologies.",
+  "Systems Engineering": "Focuses on the design and management of complex systems. Systems engineers ensure that different components of a system work together efficiently and effectively.",
+  "Architectural Engineering": "Combines engineering and architecture principles to design and construct buildings. Architectural engineers focus on the structural, mechanical, and electrical systems within buildings.",
+  "Mining Engineering": "Involves the extraction of minerals from the earth. Mining engineers design and implement safe and efficient methods for mining operations and resource management.",
+  "Acoustic Engineering": "Focuses on the design, development, and analysis of systems that produce, transmit, or control sound. This includes areas like audio equipment, noise control, and architectural acoustics.",
+  "Water Resources Engineering": "Deals with the management and distribution of water. Water resources engineers design systems for water supply, irrigation, flood control, and wastewater treatment.",
+  "Transportation Engineering": "Focuses on the design, construction, and maintenance of transportation systems. This includes roads, railways, airports, and public transit systems to ensure efficient and safe movement of people and goods.",
+  "Optical Engineering": "Involves the design and application of optical systems. Optical engineers work on lenses, lasers, fiber optics, and imaging systems for use in various technologies.",
+  "Telecommunication Engineering": "Centers on the transmission of information across channels such as cables, satellites, and wireless systems. Telecommunication engineers design and manage communication networks and devices.",
+  "Renewable Energy Engineering": "Focuses on the development and implementation of sustainable energy sources. Renewable energy engineers work on solar, wind, hydro, and other renewable technologies to reduce dependence on fossil fuels."
+}
+,
   brain: {
-    "Openness to experience":
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-    Hello:
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-
-    Openness:
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-
-    Experience:
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-  },
+  "Left Brain": "Individuals who favor left-brain thinking are often analytical, logical, and detail-oriented. They excel in tasks that require reasoning, organization, and systematic problem-solving. These individuals tend to be good with numbers, language, and facts, preferring structured environments where they can apply their methodical approach.",
+  "Right Brain": "Individuals who favor right-brain thinking are often creative, intuitive, and holistic in their approach. They excel in tasks that involve imagination, pattern recognition, and spatial awareness. These individuals are typically good at art, music, and understanding emotions, thriving in environments that allow for flexibility and innovative thinking."
+}
+,
   interest: {
     Artistic:
       "Individuals with a strong artistic personality tend to be creative, imaginative, and expressive. They often enjoy working in fields like art, design, music, or writing, where they can use their talents to bring their ideas to life. Artistic personalities may be drawn to roles that allow them to be innovative and visually or aesthetically oriented.",
@@ -30,16 +52,11 @@ const resultcontentdata = {
       " People with a social personality type are generally empathetic, collaborative, and enjoy working with others. They often excel at roles that involve helping, teaching, or interacting with people. Social personalities may be drawn to careers in healthcare, education, counseling, or human resources, where they can utilize their strong interpersonal and communication skills.",
   },
   iq: {
-    "Openness to experience":
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-    Hello:
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-
-    Openness:
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
-
-    Experience:
-      " Individuals high in openness tend to be imaginative, creative,and curious about the world around them. Keywords: Creative,Imaginative, Curious, Unconventional, Open-minded",
+    "History": "The concept of intelligence quotient (IQ) was developed in the early 20th century by psychologists like Alfred Binet and Lewis Terman. Initially used to identify children needing educational assistance, IQ testing has evolved to assess various cognitive abilities and is widely used in both educational and professional settings.",
+    "Importance": "IQ tests are used to measure a person's cognitive abilities relative to others. High IQ scores are often associated with academic and professional success, though they do not capture all aspects of intelligence, such as emotional and social intelligence. They can help identify strengths and weaknesses in cognitive functioning.",
+    "Applications": "IQ tests are used in various fields, including education, psychology, and human resources. They help in identifying gifted individuals, diagnosing learning disabilities, and informing decisions in hiring and career development.",
+    "Types of IQ Tests": "There are various types of IQ tests, such as the Stanford-Binet, Wechsler Adult Intelligence Scale (WAIS), and Raven's Progressive Matrices. Each test has different formats and focuses on measuring different cognitive abilities.",
+    "Limitations": "While IQ tests provide valuable insights into certain cognitive abilities, they do not measure creativity, emotional intelligence, practical skills, or other important aspects of human intelligence. They should be used as one of multiple tools in assessing cognitive abilities."
   },
   personality: {
     Agreeableness:
@@ -60,27 +77,19 @@ const resultcontentdata = {
     Science:
       "This score indicates a high level of interest and ability in the scientific realm, encompassing fields such as mathematics, engineering, technology, and research. Individuals with this profile are likely to be curious, analytical, and driven to explore and understand the natural and physical world through systematic investigation and experimentation.",
   },
-  strength: {
-    Achiever:
-      "This score of 16 indicates a strong drive to accomplish goals, be productive, and deliver results. Individuals with high achiever tendencies are often self-motivated, ambitious, and take pride in their accomplishments.",
-    Adaptability:
-      "This score of 28 suggests a high level of flexibility, openness to change, and the ability to adjust to new situations. Individuals with strong adaptability are often comfortable with uncertainty, able to pivot quickly, and thrive in dynamic environments.",
-    Communication:
-      "The score of 20 for communication reflects a well-developed ability to express ideas, share information, and connect with others effectively. Individuals with this profile are likely to be articulate, persuasive, and adept at fostering understanding.",
-    Developer:
-      "This score of 18 indicates a tendency to focus on nurturing and supporting the growth and development of others. Individuals with a strong developer orientation are often mentors, coaches, or collaborators who take satisfaction in helping people reach their full potential.",
-    Empathy:
-      "The score of 11 for empathy suggests a moderate level of emotional intelligence and the ability to understand and share the feelings of others. Individuals with this profile may be able to empathize with others, but may not always prioritize emotional considerations in their decision-making.",
-    Ideation:
-      "This score of 16 reflects a propensity for generating innovative ideas, exploring unconventional solutions, and engaging in creative problem-solving. Individuals with high ideation tendencies are often imaginative, curious, and comfortable with ambiguity.",
-    Maximizer:
-      "The score of 9 for maximizer indicates a lower preference for striving for perfection, optimizing outcomes, and seeking the best possible solution. Individuals with this profile may be more inclined to focus on satisficing rather than maximizing.",
-    Positivity:
-      "This score of 14 suggests a moderately positive outlook, optimism, and the ability to uplift and motivate others. Individuals with this profile may not always be the most enthusiastic or cheerful, but they can still bring a sense of optimism and encouragement to their interactions.",
-    Strategic:
-      "The score of 11 for strategic thinking reflects a moderate inclination towards anticipating future challenges, identifying opportunities, and formulating comprehensive plans. Individuals with this profile may be able to think strategically, but may not always prioritize long-term planning over more immediate concerns.",
-    Woo: "This score of 18 indicates a strong tendency towards warmth, charm, and the ability to win others over. Individuals with high woo tendencies are often skilled at networking, building relationships, and persuading others through their interpersonal skills.",
-  },
+  strength: 
+  {
+  "Achiever": "Individuals with a strong drive to accomplish goals are often self-motivated, ambitious, and take pride in their accomplishments. They excel in being productive and delivering results.",
+  "Adaptability": "Those with a high level of flexibility and openness to change are adept at adjusting to new situations. They thrive in dynamic environments and are comfortable with uncertainty, able to pivot quickly when needed.",
+  "Communication": "People with a well-developed ability to express ideas and share information effectively are articulate, persuasive, and skilled at fostering understanding. They connect with others easily and communicate clearly.",
+  "Developer": "Individuals who focus on nurturing and supporting the growth of others often take on roles as mentors, coaches, or collaborators. They find satisfaction in helping people reach their full potential.",
+  "Empathy": "People with a moderate level of emotional intelligence can understand and share the feelings of others. While they can empathize, they may not always prioritize emotional considerations in their decision-making.",
+  "Ideation": "Those who generate innovative ideas and explore unconventional solutions are imaginative and curious. They engage in creative problem-solving and are comfortable with ambiguity.",
+  "Maximizer": "Individuals who prefer satisficing over maximizing are less inclined to strive for perfection. They focus on achieving satisfactory outcomes rather than optimizing every detail.",
+  "Positivity": "People with a moderately positive outlook bring a sense of optimism and encouragement to their interactions. They uplift and motivate others, even if they are not the most enthusiastic or cheerful.",
+  "Strategic": "Those with a moderate inclination towards strategic thinking can anticipate future challenges and identify opportunities. They are capable of formulating comprehensive plans but may sometimes prioritize immediate concerns over long-term planning.",
+  "Woo": "Individuals who are skilled at networking and building relationships use their warmth and charm to win others over. They are persuasive and excel in interpersonal interactions."
+},
   vark: {
     Visual:
       "Individuals with a strong visual learning preference tend to learn best through the use of images, diagrams, charts, and other visual aids. They often excel at processing information presented in a visual format, and may benefit from learning materials that incorporate visual elements, such as PowerPoint presentations, infographics, or video demonstrations.",
@@ -93,17 +102,13 @@ const resultcontentdata = {
     Kinesthetic:
       "Individuals with a strong kinesthetic learning preference tend to learn best through hands-on experience, physical movement, and tactile engagement. They often thrive in environments that allow them to actively manipulate or interact with the learning material, and may enjoy activities that involve hands-on demonstrations or experiential learning.",
   },
-  english: {
-    Visual:
-      "Individuals with a strong visual learning preference tend to learn best through the use of images, diagrams, charts, and other visual aids. They often excel at processing information presented in a visual format, and may benefit from learning materials that incorporate visual elements, such as PowerPoint presentations, infographics, or video demonstrations.",
-
-    Auditory:
-      "Individuals with a strong auditory learning preference tend to learn best through listening and processing information through sound. They often excel at remembering verbal instructions, enjoy participating in discussions, and may benefit from audio recordings or lectures.",
-    "Read/Write":
-      "Individuals with a strong read/write learning preference tend to learn best through reading and writing. They often excel at processing information presented in textual formats, such as books, articles, or written instructions, and may benefit from opportunities to take notes, create summaries, or engage in written exercises.",
-
-    Kinesthetic:
-      "Individuals with a strong kinesthetic learning preference tend to learn best through hands-on experience, physical movement, and tactile engagement. They often thrive in environments that allow them to actively manipulate or interact with the learning material, and may enjoy activities that involve hands-on demonstrations or experiential learning.",
+english: {
+    "Reading Comprehension": "Assesses the ability to understand, interpret, and analyze written texts. This includes identifying main ideas, details, and inferences within various types of passages.",
+    "Writing": "Evaluates the ability to compose clear, coherent, and well-structured written responses. This includes grammar, punctuation, style, and organization in essays or short answers.",
+    "Listening Comprehension": "Measures the ability to understand and process spoken English. This includes identifying main ideas, specific details, and the overall gist of conversations, lectures, and other audio materials.",
+    "Speaking": "Tests the ability to speak English fluently and accurately. This includes pronunciation, vocabulary usage, grammatical correctness, and the ability to express ideas coherently in various contexts.",
+    "Grammar and Vocabulary": "Assesses knowledge of English grammar rules and vocabulary. This includes identifying correct grammatical structures, appropriate word usage, and understanding nuances in meaning.",
+    "Literary Analysis": "Evaluates the ability to analyze and interpret literary texts. This includes understanding themes, characters, plot development, and literary devices used in poetry, prose, and drama."
   },
 };
 

@@ -11,6 +11,7 @@ import { resultcontentdata } from "../../services/ResultContent";
 import LeftSection from "../../Components/Dashboard/LeftSection";
 import ResultGraphComponent from "./ResultGraphComponent";
 import ResultTextComponent from "./ResultTextComponent";
+import ResultSidebar from "./ResultSidebar";
 
 const ResultsPage = () => {
   const location = useLocation();
@@ -59,8 +60,8 @@ const ResultsPage = () => {
     >
       
       {/* <div className="bg-[#c2c2c2] h-4 "></div> */}
-      <div className="flex font-poppins  relative ">
-        <LeftSection/>
+      <div className="lg:flex font-poppins   relative ">
+        <ResultSidebar/>
         {/* bg-[#CBE1F6] */}
         <div className="relative z-2  w-[100]  py-12  lg:px-16 px-5 overflow-y-hidden border-t-2 ">
           <div>
@@ -94,15 +95,7 @@ const ResultsPage = () => {
             </div>
           </div>
 
-          <div className="mt-12">
-            <h2 className="font-semibold text-2xl mb-5 ">What next?</h2>
-            <div className="bg-white shadow-xl  shadow-[#dce7ff] py-5 px-5 space-y-8 md:space-y-0 md:px-12 rounded-[10px] flex flex-col  md:flex-row  items-center md:justify-between md:items-baseline">
-              <p>To talk to Dr.Ananth Prabhu, book an appointment now</p>
-              <button className="bg-primary text-white text-sm p-2 rounded-[5px]">
-                book an appointment
-              </button>
-            </div>
-          </div>
+                    
         </div>
       </div>
     </section>
