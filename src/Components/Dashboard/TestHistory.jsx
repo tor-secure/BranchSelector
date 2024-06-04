@@ -43,14 +43,14 @@ export const TestHistory = ({ testHistory }) => {
                         },
                       });
                     }}
-                    className="flex flex-col justify-center items-center h-16 sm:h-32 w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 "
+                    className="flex rounded-md flex-col justify-center items-center h-16 sm:h-32 w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 "
                   >
                     <BsArrowClockwise className="text-2xl sm:text-5xl" />
                     <p className="text-center text-primary font-bold mt-1 text-xs sm:text-base">
                       Retest
                     </p>
                   </button>
-                  <button className="flex flex-col justify-center items-center h-16 sm:h-32 w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 "
+                  <button className="flex rounded-md flex-col justify-center items-center h-16 sm:h-32 w-16 sm:w-[10em] shadow-blue-200 p-6 shadow-lg mx-1 sm:mx-3 bg-white py-3 mt-2 "
                   onClick={()=>{
 
                     navigate('/result',{
