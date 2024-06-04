@@ -50,11 +50,12 @@ const onSubmitHandler = async (e) => {
 };
 
   return (
-    <div className="flex-1 flex items-center justify-center h-screen">
+    <div className="flex-1 flex lg:items-center justify-center h-screen">
       <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-                <div class="absolute top-0 left-0 items-center justify-center w-16 h-16 bg-gray-300 rounded-full ml-5 mt-5 lg:flex hidden" onClick={handleGoBack}>
+        <div class="absolute top-0 left-0 items-center justify-center w-16 h-16 bg-gray-300 rounded-full ml-5 mt-5 lg:flex hidden" onClick={handleGoBack}>
         <IoClose class="text-black text-2xl" />
         </div>
+
         <div className="">
           <img src={branchselector_logo} width={75} className="lg:hidden" />
           <div className="mt-5 space-y-2">
