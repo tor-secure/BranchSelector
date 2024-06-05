@@ -13,7 +13,6 @@ import NavTestingWork from "../Components/Navbar/NavTestingWork";
 import { getCurrentUser } from "../services/authService";
 
 const LandingPage = () => {
-  console.log(getCurrentUser());
   return (
     <>
       <ContactUsFlag />
