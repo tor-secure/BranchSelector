@@ -9,7 +9,6 @@ const ProfileDropDown = (props) => {
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
-  console.log("auth creds", props);
 
   const navigation = [
     { title: "Dashboard", path: "/dashboard" },
@@ -63,7 +62,7 @@ const ProfileDropDown = (props) => {
         }`}
       >
         {navigation.map((item, idx) => (
-          <li key={idx}>
+          <li key={idx} onClick={()=>setState(false)}>
             {item.title === "Log out" ? (
               <button
                 className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5 w-full text-left"
@@ -75,6 +74,7 @@ const ProfileDropDown = (props) => {
               <Link
                 className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5"
                 to={item.path}
+                
               >
                 {item.title}
               </Link>
@@ -141,7 +141,7 @@ const AuthenticatedNavBar = (props) => {
           <ul className="justify-center relative lg:right-12    items-start space-y-8 lg:flex lg:space-x-6 lg:space-y-0">
             {navigation.map((item, idx) => {
               return (
-                <li key={idx} className="text-gray-600 hover:text-indigo-600">
+                <li key={idx} className="text-gray-600 hover:text-indigo-600" onClick={() => setMenuState(!menuState)}>
                   <NavLink to={item.path}>{item.title}</NavLink>
                 </li>
               );
