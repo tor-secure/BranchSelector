@@ -68,7 +68,7 @@ const Blog = () => {
       <div className="text-center border border-blue-500 bg-blue-600 rounded-2xl p-20">
         <h1 className="text-3xl text-gray-100 font-semibold">Blog</h1>
         <p className="mt-3 text-white">
-          Blogs that are loved by the community. Updated every hour.
+          Blogs that are loved by the community.
         </p>
       </div>
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

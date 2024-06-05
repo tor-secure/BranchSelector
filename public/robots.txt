@@ -1,2 +1,5 @@
-user-agent: *
-disallow: /downloads/
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+
+Sitemap:https://www.branchselector.com/sitemap.xml
