@@ -63,7 +63,7 @@ export const RedeemCoupon = () => {
                 type="submit"
                 className="w-full px-4 py-2 mt-[10%]  text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
               >
-                Pay Now
+                Redeem Coupon
               </button>
             </form>
           </div>
