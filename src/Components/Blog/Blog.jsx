@@ -23,7 +23,7 @@ const Blog = () => {
     try {
       let q = query(
         collection(firestoredb, "blog-posts"),
-        orderBy("date"),
+        orderBy("date","desc"),
         limit(10)
       );
 
