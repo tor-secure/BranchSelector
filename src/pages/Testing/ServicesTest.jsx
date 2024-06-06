@@ -5,10 +5,13 @@ import {
   getDocs,
   getFirestore,
   setDoc,
+  deleteDoc
 } from "../../services/firebase";
 import { evaluteTest, getTestQuestions } from "../../services/testService";
 import { getDoc } from "firebase/firestore";
 import { updateDoc } from "firebase/firestore";
+
+import {redeemCoupon, validateCouponCode} from "../../services/userService"
 
 const ServicesTest = () => {
   async function getD() {
@@ -28,7 +31,7 @@ const ServicesTest = () => {
     <>
       <button
         onClick={async () => {
-        //  await getD();
+          console.log(redeemCoupon("Free5"))
         }}
         style={style}
       >
@@ -42,6 +45,8 @@ const ServicesTest = () => {
 };
 
 export { ServicesTest };
+
+
 
 const updateUsers = async () => {
   try {
@@ -65,6 +70,36 @@ const updateUsers = async () => {
   }
 };
 
+const migrateUsers = async () => {
+  try {
+    console.log("starting migration...")
+    const db = getFirestore();
+    const usersCollection = collection(db, 'users');
+    const usersSnapshot = await getDocs(usersCollection);
+
+    for (const userDoc of usersSnapshot.docs) {
+      const userRef = doc(usersCollection, userDoc.id);
+
+      // Set user credits back to 5
+      await updateDoc(userRef, { credit: 5 });
+
+      // Reference to the 'tests-taken' subcollection
+      const testsTakenCollection = collection(userRef, 'tests-taken');
+      const testsTakenSnapshot = await getDocs(testsTakenCollection);
+
+      // Delete each document in the 'tests-taken' subcollection
+      for (const testDoc of testsTakenSnapshot.docs) {
+        const testDocRef = doc(testsTakenCollection, testDoc.id);
+        await deleteDoc(testDocRef);
+      }
+    }
+
+    console.log('Users migrated successfully.');
+  } catch (error) {
+    console.error('Error migrating users:', error);
+    throw new Error('Error migrating users.');
+  }
+};
 
 async function putDataToFireStore() {
   const db = getFirestore();

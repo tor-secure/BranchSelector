@@ -5,6 +5,7 @@ import { MdExitToApp } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { getCurrentUser } from "../../services/authService";
 import "./BreathingAnimation.css";
+import { BiSolidCoupon } from "react-icons/bi";
 
 export const LeftSection = ({ setSelectedPage }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
@@ -64,6 +65,18 @@ export const LeftSection = ({ setSelectedPage }) => {
           <RiCoinsFill size={25} />
           <p className="ml-2">Buy Credits</p>
         </li>
+          <li
+          onClick={() => handleClick(2, "Redeem Coupon")}
+          className={`p-3 rounded-md mx-1  lg:w-48 ${
+            checkBottons[2]
+              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
+              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
+          }`}
+        >
+          <BiSolidCoupon size={25} />
+          <p className="ml-2">Redeem Coupon</p>
+        </li>
+        {/*
         <li
           onClick={() => handleClick(2, "Settings")}
           className={`p-3 rounded-md mx-1 w-32 lg:w-48 ${
@@ -74,7 +87,7 @@ export const LeftSection = ({ setSelectedPage }) => {
         >
           <IoIosSettings size={25} />
           <p className="ml-2">Settings</p>
-        </li>
+        </li>*/}
         <li className="setAlignment p-3 flex my-7 mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md">
           <MdExitToApp size={25} />
           <p className="ml-2">Log Out</p>
