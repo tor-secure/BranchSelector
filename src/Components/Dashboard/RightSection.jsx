@@ -47,7 +47,7 @@ export const RightSection = () => {
             />
             <div className="hidden  lg:flex items-end flex-col py-5 ">
               <CreditsRemainingCard remainingCredits={remainingCredits}/>
-              <TestsTakenCard testsTaken={8-recommendedTests.length}/>
+              <TestsTakenCard testsTaken={9-recommendedTests.length}/>
             </div>
           </div>
           <div className="hidden lg:flex justify-between">

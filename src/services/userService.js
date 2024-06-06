@@ -15,6 +15,7 @@ import {
 const firestore = getFirestore(app);
 
 import { getCurrentUser, isSignedIn, syncUserData } from "./authService.js";
+import { toast } from "react-toastify";
 
 // Retrieves all documents from a Firestore collection
 const getAllDocumentsFromCollection = async (collectionRef) => {
@@ -128,22 +129,22 @@ const upgradeAccount = async () => {
   // Implementation goes here
 };
 
-// Validates a coupon code and returns the new price if valid
+// Validates a coupon code and returns the credits to be added
 const validateCouponCode = async (couponCode) => {
-  const usersCollection = await collection(firestore, "coupons");
+  const usersCollection = await collection(firestore, "coupon");
   const querySnapshot = await getDocs(
     query(usersCollection, where("code", "==", couponCode))
   );
   if (querySnapshot.size != 1) {
     console.log("Code Does not exist");
-    return false;
+    return {status:"fail",message:"Coupon does not exist"};
   }
 
   const codeDoc = querySnapshot.docs[0];
   const couponData = codeDoc.data();
-  const startingDate = couponData["valid-from"].toDate();
-  const endingDate = couponData["valid-till"].toDate();
-  const priceAfterDiscount = couponData.priceAfterDiscount;
+  const startingDate = new Date(couponData["validFrom"]);
+  const endingDate = new Date(couponData["validTill"]);
+  const creditsToBeAdded = couponData.credit;
   const limit = couponData.limit;
   const redeemed = couponData.redeemed;
   const currentDate = new Date();
@@ -151,15 +152,76 @@ const validateCouponCode = async (couponCode) => {
     console.log("Coupon code is valid.");
 
     if (redeemed >= limit) {
-      console.log("Coupon limit reached");
+      return {status:"fail",message:"Coupon Code has reached its limit!"}
     }
-    return { newPrice: priceAfterDiscount };
+    return {status:"success", creditsToBeAdded: creditsToBeAdded };
   } else {
     console.log("Coupon code is expired.");
-    return false;
+    return {status:"fail",message:"Coupon Code has expired"}
   }
 };
 
+const redeemCoupon = async (couponCode) => {
+  try {
+    // Validate the coupon
+    const validationResult = await validateCouponCode(couponCode);
+    
+    if (validationResult.status==="fail") {
+      console.log("Invalid coupon code. No credits added.");
+      toast.error(validationResult.message)
+      return;
+    }
+
+    const { status,creditsToBeAdded } = validationResult;
+
+    // Get the current user
+    const currentUser = await getCurrentUser();
+    const userUid = currentUser.uid;
+
+    // Reference to the users collection
+    const usersCollection = collection(firestore, 'users');
+    const couponCollection = collection(firestore, 'coupon')
+    const userQuery = query(usersCollection, where('uid', '==', userUid));
+    const userSnapshot = await getDocs(userQuery);
+
+    if (userSnapshot.empty) {
+      console.log("User does not exist.");
+      return;
+    }
+
+    // Assuming uid is unique and there is only one document in the snapshot
+    const userDoc = userSnapshot.docs[0];
+    const userRef = userDoc.ref;
+    const userData = userDoc.data();
+    const currentCredits = userData.credit || 0;
+    const newCredits = currentCredits + creditsToBeAdded;
+
+    // Update the user's credits
+    await updateDoc(userRef, { credit: newCredits });
+
+    console.log(`Credits updated successfully. New credits: ${newCredits}`);
+
+    // Update the redeemed count for the coupon
+    const couponQuery = query(couponCollection, where('code', '==', couponCode));
+    const couponSnapshot = await getDocs(couponQuery);
+
+    if (!couponSnapshot.empty) {
+      const couponDoc = couponSnapshot.docs[0];
+      const couponRef = couponDoc.ref;
+      const couponData = couponDoc.data();
+      const newRedeemedCount = (couponData.redeemed || 0) + 1;
+      await updateDoc(couponRef, { redeemed: newRedeemedCount });
+      console.log(`Coupon redeemed count updated to: ${newRedeemedCount}`);
+      toast.success("Coupon redeemed sucessfully!")
+    } else {
+      console.log("Coupon document does not exist for updating redeemed count.");
+    }
+
+  } catch (error) {
+    console.error("Error adding credits:", error);
+    throw new Error("Error adding credits.");
+  }
+};
 // Updates the number of downloads for a specific asset
 const updateDownloads = async (assetDownloaded) => {
   try {
@@ -204,5 +266,6 @@ export {
   validateCouponCode,
   updateDownloads,
   getRemainingCredits,
-  getCurrentUserInfo
+  getCurrentUserInfo,
+  redeemCoupon
 };
