@@ -3,14 +3,18 @@ import { RiCoinsFill } from "react-icons/ri";
 import { IoIosSettings } from "react-icons/io";
 import { MdExitToApp } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import { getCurrentUser } from "../../services/authService";
+import { getCurrentUser, logout } from "../../services/authService";
 import "./BreathingAnimation.css";
 import { BiSolidCoupon } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const LeftSection = ({ setSelectedPage }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
   const [userData, serUserData] = useState({});
   const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchTestHistory() {
@@ -88,7 +92,14 @@ export const LeftSection = ({ setSelectedPage }) => {
           <IoIosSettings size={25} />
           <p className="ml-2">Settings</p>
         </li>*/}
-        <li className="setAlignment p-3 flex my-7 mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md">
+        <li className="setAlignment p-3 flex my-7 mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md"
+        onClick={()=>{
+          navigate('/')
+          toast.success("Logged out sucessfully!")
+          logout();
+        }
+        }
+        >
           <MdExitToApp size={25} />
           <p className="ml-2">Log Out</p>
           {/* setAlignment defined in BreathingAnimation.css*/}

@@ -4,15 +4,16 @@ import { TestsTakenCard } from "./TestsTakenCard";
 import "./BreathingAnimation.css";
 import { RecommendedTests } from "./RecommendedTests";
 import { useEffect, useState } from "react";
-import { getRemainingTests, getTestLogo } from "../../services/testService";
+import { getRemainingTests, getTestLogo, testMetaData } from "../../services/testService";
 import { getRemainingCredits, getTestHistory } from "../../services/userService";
 import { TestHistory } from "./TestHistory";
+import { LoadingPage } from "../../pages/LoadingPage"
 import { getCurrentUser } from "../../services/authService";
 
 export const RightSection = () => {
-  const [testHistory, setTestHistory] = useState([]);
-  const [recommendedTests, setRecommendedTests] = useState([]);
-  const [remainingCredits, setRemainingCredits] = useState(0)
+  const [testHistory, setTestHistory] = useState(null);
+  const [recommendedTests, setRecommendedTests] = useState(null);
+  const [remainingCredits, setRemainingCredits] = useState(null)
  
   useEffect(() => {
     async function fetchTestHistory() {
@@ -32,6 +33,7 @@ export const RightSection = () => {
   }, []);
 
   return (
+    (testHistory !== null && recommendedTests !== null && remainingCredits !== null)?
     <div>
       <div className="w-[100vw] lg:w-[calc(100vw-18em)] flex flex-col">
         <div className="bg-gradient-to-b from-[#e9f3fc] to-white  lg:bg-gradient-to-b lg:from-[#CBE1F6] lg:to-white z-0 ">
@@ -47,7 +49,7 @@ export const RightSection = () => {
             />
             <div className="hidden  lg:flex items-end flex-col py-5 ">
               <CreditsRemainingCard remainingCredits={remainingCredits}/>
-              <TestsTakenCard testsTaken={9-recommendedTests.length}/>
+              <TestsTakenCard testsTaken={Object.keys(testMetaData).length-recommendedTests.length}/>
             </div>
           </div>
           <div className="hidden lg:flex justify-between">
@@ -57,7 +59,7 @@ export const RightSection = () => {
 
           <div className="  lg:hidden  flex py-5 justify-center">
             <CreditsRemainingCard remainingCredits={remainingCredits} />
-            <TestsTakenCard testsTaken={8-recommendedTests.length}/>
+            <TestsTakenCard testsTaken={Object.keys(testMetaData).length-recommendedTests.length}/>
           </div>
 
           <RecommendedTests recommendedTests={recommendedTests} />
@@ -65,6 +67,8 @@ export const RightSection = () => {
         </div>
         <TestHistory testHistory={testHistory} />
       </div>
-    </div>
+    </div>:(
+      <div className="flex items-center justify-center ml-[5%] mt[5%] pb-[10%] pt-[10%] text-[18px] lg:ml-[35%] lg:mt-[10%] lg:text-[32px]">Loading...</div>
+    )
   );
 };
