@@ -161,18 +161,28 @@ const validateCouponCode = async (couponCode) => {
   }
 };
 
+
 const redeemCoupon = async (couponCode) => {
+  const toastId = toast.loading("Validating coupon....", { autoClose: false, draggable: true });
   try {
     // Validate the coupon
     const validationResult = await validateCouponCode(couponCode);
     
-    if (validationResult.status==="fail") {
+    if (validationResult.status === "fail") {
       console.log("Invalid coupon code. No credits added.");
-      toast.error(validationResult.message)
+      toast.update(toastId, {
+        render: validationResult.message,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
       return;
     }
 
-    const { status,creditsToBeAdded } = validationResult;
+    const { status, creditsToBeAdded } = validationResult;
+
+
 
     // Get the current user
     const currentUser = await getCurrentUser();
@@ -180,12 +190,19 @@ const redeemCoupon = async (couponCode) => {
 
     // Reference to the users collection
     const usersCollection = collection(firestore, 'users');
-    const couponCollection = collection(firestore, 'coupon')
+    const couponCollection = collection(firestore, 'coupon');
     const userQuery = query(usersCollection, where('uid', '==', userUid));
     const userSnapshot = await getDocs(userQuery);
 
     if (userSnapshot.empty) {
       console.log("User does not exist.");
+      toast.update(toastId, {
+        render: "User does not exist.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
       return;
     }
 
@@ -196,10 +213,29 @@ const redeemCoupon = async (couponCode) => {
     const currentCredits = userData.credit || 0;
     const newCredits = currentCredits + creditsToBeAdded;
 
+    // Check if the coupon has already been redeemed
+    const redeemedCoupons = userData.redeemedCoupons || [];
+    if (redeemedCoupons.includes(couponCode)) {
+      console.log("You have already redeemed the coupon.");
+      toast.update(toastId, {
+        render: "You have already redeemed the coupon.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
+      return;
+    }
+
+
     // Update the user's credits
-    await updateDoc(userRef, { credit: newCredits });
+    await updateDoc(userRef, {
+      credit: newCredits,
+      redeemedCoupons: [...redeemedCoupons, couponCode]
+    });
 
     console.log(`Credits updated successfully. New credits: ${newCredits}`);
+
 
     // Update the redeemed count for the coupon
     const couponQuery = query(couponCollection, where('code', '==', couponCode));
@@ -212,16 +248,38 @@ const redeemCoupon = async (couponCode) => {
       const newRedeemedCount = (couponData.redeemed || 0) + 1;
       await updateDoc(couponRef, { redeemed: newRedeemedCount });
       console.log(`Coupon redeemed count updated to: ${newRedeemedCount}`);
-      toast.success("Coupon redeemed sucessfully!")
+      toast.update(toastId, {
+        render: "Coupon redeemed successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
     } else {
       console.log("Coupon document does not exist for updating redeemed count.");
+      toast.update(toastId, {
+        render: "Coupon document does not exist for updating redeemed count.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
     }
 
   } catch (error) {
     console.error("Error adding credits:", error);
+    toast.update(toastId, {
+      render: "Error adding credits.",
+      type: "error",
+      isLoading: false,
+      autoClose: 3000,
+      draggable: true
+    });
     throw new Error("Error adding credits.");
   }
 };
+
+
 // Updates the number of downloads for a specific asset
 const updateDownloads = async (assetDownloaded) => {
   try {
