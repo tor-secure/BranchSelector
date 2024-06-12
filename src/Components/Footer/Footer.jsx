@@ -4,44 +4,23 @@ import branchselector_logo from "../../assets/branchselector_logo.png";
 export default () => {
   const footerNavs = [
     {
-      label: "Company",
-      items: [
-        {
-          href: "javascript:void()",
-          name: "Partners",
-        },
-        {
-          href: "javascript:void()",
-          name: "Blog",
-        },
-        {
-          href: "javascript:void()",
-          name: "Team",
-        },
-        {
-          href: "javascript:void()",
-          name: "Careers",
-        },
-      ],
-    },
-    {
       label: "Resources",
       items: [
         {
-          href: "javascript:void()",
-          name: "Contact",
+          href: "contactus",
+          name: "Contact Us",
         },
         {
-          href: "javascript:void()",
-          name: "Support",
+          href: "booking",
+          name: "Book Appointment",
         },
         {
-          href: "javascript:void()",
-          name: "Docs",
+          href: "ebook",
+          name: "Ebooks",
         },
         {
-          href: "javascript:void()",
-          name: "Pricing",
+          href: "blog",
+          name: "Blogs",
         },
       ],
     },
@@ -49,21 +28,14 @@ export default () => {
       label: "About",
       items: [
         {
-          href: "javascript:void()",
-          name: "Terms",
+          href: "terms",
+          name: "Terms of Service",
         },
         {
-          href: "javascript:void()",
-          name: "License",
+          href: "privacy",
+          name: "Privacy Policy",
         },
-        {
-          href: "javascript:void()",
-          name: "Privacy",
-        },
-        {
-          href: "javascript:void()",
-          name: "About US",
-        },
+
       ],
     },
   ];
@@ -85,9 +57,9 @@ export default () => {
             </div>
             
           </div>
-          <div className="flex-1 mt-10 space-y-6 items-center justify-between sm:flex md:space-y-0 md:mt-0">
+          <div className="flex-1 mt-10 space-y-6 justify-end  sm:flex md:space-y-0 md:mt-0">
             {footerNavs.map((item, idx) => (
-              <ul className="space-y-4" key={idx}>
+              <ul className="space-y-4 mr-20" key={idx}>
                 <h4 className="text-primary font-medium">{item.label}</h4>
                 {item.items.map((el, idx) => (
                   <li key={idx}>
@@ -105,7 +77,7 @@ export default () => {
         </div>
         <div className="mt-8 py-6 border-t items-center justify-between sm:flex">
           <div className="mt-4 sm:mt-0">
-            &copy; 2024 BranchSelector All rights reserved.
+            &copy; 2012 - 2024 BranchSelector. All rights reserved.
           </div>
           <div className="mt-6 sm:mt-0">
             <ul className="flex items-center space-x-4">

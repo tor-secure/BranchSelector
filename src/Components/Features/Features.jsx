@@ -30,7 +30,7 @@ export default () => {
     },
     {
       icon: (<IoPeopleOutline size={25}/> ),
-      title: "Personal Conselling",
+      title: "Personal Counselling",
       desc: "Get personalized one-on-one in person counselling from our expert counselling partners at SurePass.",
     },
     

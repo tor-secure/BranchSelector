@@ -15,6 +15,7 @@ const Navbar = () => {
     { title: "E-Book", path: "/ebook" },
     { title: "Blog", path: "/blog" },
     { title: "Appointment", path: "/booking" },
+    { title: "Contact Us", path:"contactus"}
   ];
 
   useEffect(() => {

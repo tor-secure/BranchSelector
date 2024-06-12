@@ -6,7 +6,7 @@ const CTA = () => {
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:text-center md:px-8">
         <div className="max-w-xl md:mx-auto">
           <p className="text-white text-3xl font-semibold sm:text-4xl">
-            Build your future with us
+            Know yourself in depth!
           </p>
           <p className="text-blue-100 my-3">
             Sign up now to unlock 3 tests for free!

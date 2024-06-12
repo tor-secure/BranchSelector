@@ -9,21 +9,25 @@ const SponsorsLogo = [
     id: 1,
     logo: TorsecureLogo,
     logoAlt: "TorSecure Logo",
+    url: "https://www.torsecure.com/"
   },
   {
     id: 2,
     logo: PanamaLogo,
     logoAlt: "Panama Logo",
+    url: "https://panamacorporationltd.com/"
   },
   {
     id: 3,
     logo: SurePassLogo,
     logoAlt: "SurePass Logo",
+    url: "https://www.thesurepass.com"
   },
   {
     id: 4,
     logo: SahyadriLogo,
     logoAlt: "Sahyadri Logo",
+    url:"https://www.sahyadri.edu.in"
   },
 ];
 const Sponsors = () => {
@@ -37,7 +41,13 @@ const Sponsors = () => {
           <ul className="flex gap-y-6 flex-wrap items-center justify-center gap-x-16   ">
             {SponsorsLogo.map((item) => (
               <li className="flex-none mx-4" key={item.id}>
-                <img src={item.logo} alt={item.logoAlt} className="w-48" />
+                <img 
+                  src={item.logo} 
+                  alt={item.logoAlt} 
+                  className="w-48" 
+                  onClick={() => window.open(item.url, '_blank')}
+                  style={{ cursor: 'pointer' }} 
+                />
               </li>
             ))}
           </ul>
