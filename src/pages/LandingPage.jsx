@@ -15,7 +15,6 @@ import { getCurrentUser } from "../services/authService";
 const LandingPage = () => {
   return (
     <>
-      <ContactUsFlag />
       <Hero />
       <Sponsors />
       <Message />
