@@ -9,6 +9,7 @@ import { FaTheaterMasks } from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
 import { TbAbc } from "react-icons/tb";
 import { GiPaintBrush } from "react-icons/gi";
+import { getCurrentUserInfo } from "./userService";
 
 const testMetaData = {
   engineering: {
@@ -240,8 +241,8 @@ async function evaluteTest(testName, selectedOptions) {
       results = Object.fromEntries(resultsArray);
 
       if(testName === "brain"){
-        console.log("Brain Test taken")
-        results = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
+        const tempRes = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
+        return tempRes
       }
 
       return results;
@@ -294,6 +295,40 @@ async function evaluteTest(testName, selectedOptions) {
   }
 }
 
+const sendTestResultsMail = async (testName,result) => {
+  const testData = await getTestMetaData(testName);
+  const userData = await getCurrentUserInfo();
+
+  const requestBody = {
+    name: userData.displayName,
+    email: userData.email,
+    "results":result,
+    "testName":testData.name,
+    "testType":testData.evaluationType == 'single-option'?'single-option':"aggregation"
+  }
+
+  console.log("Mail server update body", JSON.stringify(requestBody))
+
+  try {
+      const response = await fetch("https://result-mail-sender.branchselector.workers.dev/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestBody),
+         mode: 'no-cors'
+      });
+      if (response.ok) {
+        console.log("Mail server contacted succefuly");
+      } else {
+        console.error("Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
+}
+
 export {
   testMetaData,
   getTestMetaData,
@@ -302,4 +337,5 @@ export {
   getDefaultProfilePic,
   getTestQuestions,
   evaluteTest,
+  sendTestResultsMail
 };
