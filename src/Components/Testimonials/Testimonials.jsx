@@ -6,7 +6,7 @@ export default () => {
     {
       avatar: Om,
       name: "Om K Poojari",
-      title: "Reseach Scientist",
+      title: "Trainee Software Engineer",
       quote:
         "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
@@ -40,8 +40,11 @@ export default () => {
         </div>
         <div className="mt-12">
           <ul className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((item, idx) => (
-              <li key={idx} className="bg-white rounded-xl border shadow-md">
+            {testimonials.map((item) => (
+              <li
+                key={item.name}
+                className="bg-white rounded-xl border shadow-md"
+              >
                 <div className="p-4">
                   <svg
                     className="w-9 h-9 text-gray-300"

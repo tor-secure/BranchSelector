@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-
+import { Link } from "react-router-dom";
 import HeroNewAnim from "../../assets/animation/heroNew.json";
 export default () => {
   const [state, setState] = useState(false);
@@ -73,7 +73,6 @@ export default () => {
             "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
         }}
       ></div>
-
       <section className="relative">
         <div className="max-w-screen-xl mx-auto px-4 py-6  md:py-16   gap-12 text-gray-600 overflow-hidden overflow-x-hidden md:px-8 md:flex">
           <div className="flex-none  space-y-5 max-w-xl">
@@ -104,13 +103,14 @@ export default () => {
               Navigate Your Future with Confidence.
             </h1>
             <p className="">
-              Your journey to discovering the
-              perfect course and career begins here.<br/> Take our tailored tests designed to uncover
-              your interests, strengths, and passions. 
+              Your journey to discovering the perfect course and career begins
+              here.
+              <br /> Take our tailored tests designed to uncover your interests,
+              strengths, and passions.
             </p>
             <div className="flex items-center gap-x-3 sm:text-sm">
-              <a
-                href="javascript:void(0)"
+              <Link
+                to="/testList"
                 className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 duration-150 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex"
               >
                 Get started
@@ -126,7 +126,7 @@ export default () => {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="lg:flex-1 mt-10 lg:mt-0 relative -top-16 lg:block h-[20rem]">
