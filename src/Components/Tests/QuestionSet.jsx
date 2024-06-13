@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
+  
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
 
   //   console.log(qNo, questionsData);

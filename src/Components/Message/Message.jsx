@@ -16,12 +16,10 @@ const Message = () => {
               Crafting Futures: Your Path Starts Here
             </h3>
             <p className="mt-3 text-gray-600 md:text-lg text-ellipsis">
-              At Branch Selector, we're passionate about guiding you toward your
-              dream career. Our personalized tests help you explore your
-              interests and discover your strengths, providing tailored
-              recommendations to shape your academic journey. Join us as we
-              embark on this journey of self-discovery, together creating a
-              future filled with purpose and passion
+              With personalized
+              recommendations, we'll guide you towards academic paths that align
+              with your goals and aspirations. Explore, learn, and embark on a
+              transformative educational experience. Your future starts here.
             </p>
           </div>
         </div>

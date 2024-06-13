@@ -1,7 +1,5 @@
 import { collection, doc, getDocs, getFirestore } from "./firebase";
 import React from "react";
-
-import Graduation from "../assets/TestList/graduation.svg";
 import { MdEngineering } from "react-icons/md";
 import { PiBarbellFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
@@ -172,7 +170,7 @@ const getRemainingTests = (excludedTests) => {
         !excludedTests.some(
           (excludedTest) =>
             excludedTest["test-name"].toLowerCase() ===
-            testMetaData[testKey].name.toLowerCase()
+            testMetaData[testKey].queryCode.toLowerCase()
         )
     )
     .map((testKey) => testMetaData[testKey]);
@@ -218,7 +216,7 @@ async function evaluteTest(testName, selectedOptions) {
 
     if (evaluationType == "aggregation") {
       const answerKey = {};
-      const results = {};
+      var results = {};
       answerKeySnapshot.forEach((doc) => {
         answerKey[doc.id] = doc.data();
       });
@@ -236,7 +234,18 @@ async function evaluteTest(testName, selectedOptions) {
           console.warn(`Answer key not found for question ${questionId}`);
         }
       }
+      var resultsArray = Object.entries(results);
+      resultsArray.sort((a, b) => b[1] - a[1]);
+      console.log(resultsArray)
+      results = Object.fromEntries(resultsArray);
+
+      if(testName === "brain"){
+        console.log("Brain Test taken")
+        results = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
+      }
+
       return results;
+
     } else if (evaluationType == "single-option") {
       let correctAnswers = 0;
       const answerKey = answerKeySnapshot.docs[0].data();
@@ -244,12 +253,12 @@ async function evaluteTest(testName, selectedOptions) {
         if (optionId === answerKey[questionId]) correctAnswers += 1;
       }
 
-      return correctAnswers;
+      return {'Correct Answers':correctAnswers,'Wrong Answers':Object.values(selectedOptions).length - correctAnswers};
     }
 
     if (evaluationType == "weighted-aggregation") {
       const answerKey = {};
-      const results = {};
+      var results = {};
       answerKeySnapshot.forEach((doc) => {
         answerKey[doc.id] = doc.data();
       });
@@ -270,6 +279,13 @@ async function evaluteTest(testName, selectedOptions) {
           console.warn(`Answer key not found for question ${questionId}`);
         }
       }
+      var resultsArray = Object.entries(results);
+      resultsArray.sort((a, b) => b[1] - a[1]);
+
+      if (testName === 'engineering') {
+         resultsArray = resultsArray.slice(0, 5);
+      }
+      results = Object.fromEntries(resultsArray);
       return results;
     }
   } catch (error) {

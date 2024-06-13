@@ -23,7 +23,9 @@ import {
   setDoc,
   deleteDoc,
   orderBy,
+  limit,
   updateDoc,
+  startAfter
 } from "firebase/firestore";
 
 //firebase configuration for this project
@@ -72,4 +74,6 @@ export {
   deleteDoc,
   orderBy,
   updateDoc,
+  limit,
+  startAfter
 };

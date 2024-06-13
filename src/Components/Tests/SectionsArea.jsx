@@ -4,8 +4,9 @@ import Lottie from "lottie-react";
 import Blob from "../../assets/animation/Blob.json";
 import BoyStudyLotte from "../../assets/animation/BoyStudyingLotte.json";
 import BoyStudy from "../../assets/BoyStudy.png";
+import testContent from "../../Constants/TestPageConstVals";
 
-export const SectionsArea = ({ noOfSections, heading }) => {
+export const SectionsArea = ({ noOfSections, heading, testCode }) => {
   return (
     <div className="flex flex-col  items-center h-full justify-between bg-white">
       <div className="h-full mt-[7em]">
@@ -18,9 +19,7 @@ export const SectionsArea = ({ noOfSections, heading }) => {
           <div className="absolute top-[12em] left-0 flex flex-col items-center justify-center w-[50%] ml-[9em] text-white">
             <h3 className="text-3xl font-bold">Did you know?</h3>
             <p className="text-center mt-3 font-thin text-base">
-              The VARK model was developed by Neil Fleming in 1987 and stands
-              for Visual, Aural/Auditory, Read/Write, and Kinesthetic learning
-              styles.
+              {testContent[testCode]}
             </p>
           </div>
         </div>

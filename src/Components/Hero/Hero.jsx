@@ -103,13 +103,10 @@ export default () => {
             <h1 className="text-4xl text-gray-800  font-extrabold sm:text-5xl">
               Navigate Your Future with Confidence.
             </h1>
-            <p>
-              Welcome to Branch Selector, where your journey to discovering the
-              perfect course begins. Take our tailored tests designed to uncover
-              your interests, strengths, and passions. With personalized
-              recommendations, we'll guide you towards academic paths that align
-              with your goals and aspirations. Explore, learn, and embark on a
-              transformative educational experience. Your future starts here.
+            <p className="">
+              Your journey to discovering the
+              perfect course and career begins here.<br/> Take our tailored tests designed to uncover
+              your interests, strengths, and passions. 
             </p>
             <div className="flex items-center gap-x-3 sm:text-sm">
               <a
@@ -132,7 +129,7 @@ export default () => {
               </a>
             </div>
           </div>
-          <div className="lg:flex-1 relative -top-16 hidden lg:block h-[20rem]">
+          <div className="lg:flex-1 mt-10 lg:mt-0 relative -top-16 lg:block h-[20rem]">
             <Lottie
               animationData={HeroNewAnim}
               loop={true}

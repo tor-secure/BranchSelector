@@ -15,6 +15,7 @@ const Navbar = () => {
     { title: "E-Book", path: "/ebook" },
     { title: "Blog", path: "/blog" },
     { title: "Appointment", path: "/booking" },
+    { title: "Contact Us", path:"contactus"}
   ];
 
   useEffect(() => {
@@ -93,7 +94,7 @@ const Navbar = () => {
         >
           <div>
             <ul className="flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row">
-              <li className="mt-4 lg:mt-0">
+              <li className="mt-4 lg:mt-0" >
                 <NavLink
                   to="/login"
                   className="py-3 px-4 text-center border text-gray-600 hover:text-blue-600 rounded-md block lg:inline lg:border-0"
@@ -118,7 +119,7 @@ const Navbar = () => {
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx} className="text-gray-600 hover:text-indigo-600">
-                    <NavLink to={item.path}>{item.title}</NavLink>
+                    <NavLink to={item.path} onClick={()=>setState(!state)}>{item.title}</NavLink>
                   </li>
                 );
               })}

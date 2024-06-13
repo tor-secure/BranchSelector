@@ -8,6 +8,10 @@ import Navbar from "../../Components/Navbar/Navbar";
 import ProfilePic from "../../assets/profile.webp";
 import { getTestMetaData } from "../../services/testService";
 import { resultcontentdata } from "../../services/ResultContent";
+import LeftSection from "../../Components/Dashboard/LeftSection";
+import ResultGraphComponent from "./ResultGraphComponent";
+import ResultTextComponent from "./ResultTextComponent";
+import ResultSidebar from "./ResultSidebar";
 
 const ResultsPage = () => {
   const location = useLocation();
@@ -46,6 +50,7 @@ const ResultsPage = () => {
   // console.log(AdjustedLabel);
 
   return (
+    <>
     <section
       className="bg-[#fffefe] "
       style={{
@@ -53,59 +58,20 @@ const ResultsPage = () => {
           "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
       }}
     >
-      <Navbar />
+      
       {/* <div className="bg-[#c2c2c2] h-4 "></div> */}
-      <div className="flex font-poppins  relative ">
-        <SideDashBoard
-          className={`${!isScreenLarge && "hidden"}`}
-          ProfilePic={ProfilePic}
-          userName={userName}
-          userMailId={userMailId}
-        />
+      <div className="lg:flex font-poppins   relative ">
+        <ResultSidebar/>
         {/* bg-[#CBE1F6] */}
-        <div className="relative z-20  w-[100] lg:ml-72  py-12  lg:px-16 px-5 overflow-y-hidden border-t-4 ">
+        <div className="relative z-2  w-[100]  py-12  lg:px-16 px-5 overflow-y-hidden border-t-2 ">
           <div>
-            <h2 className=" text-3xl md:text-4xl pb-4 md:pb-7 font-semibold  ">
+            <h2 className=" text-3xl md:text-3xl pb-4 md:pb-7 font-semibold  ">
               {testmeta.name} Result
             </h2>
-            <div className="flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-5 ">
-              <div className="bg-white shadow-xl shadow-[#dce7ff] sm:h-72 items-center xl:h-72 lg:w-8/12  rounded-[8px] sm:rounded-[15px] flex justify-center p-2 sm:p-5">
-                <Bar
-                  data={{
-                    // labels: ["A", "B", "C", "D"],
-                    // labels: Object.keys(engineeringData),
-                    labels: FirstLabel,
-                    datasets: [
-                      {
-                        label: testmeta.name,
-                        // data: [100, 200, 300, 150],
-                        data: Object.values(result),
-                        backgroundColor: "#2D6FEF",
-                      },
-                    ],
-                  }}
-                ></Bar>
-              </div>
-              <div className="bg-white shadow-xl  shadow-[#dce7ff] h-60 w-full  sm:w-60 lg:h-72 lg:w-72 rounded-[8px] sm:rounded-[15px] flex justify-center p-5">
-                <Doughnut
-                  data={{
-                    labels: ["A", "B", "C", "D"],
-                    datasets: [
-                      { label: "Revenue", data: [100, 200, 300, 150] },
-                    ],
-                  }}
-                  options={{
-                    plugins: {
-                      legend: {
-                        display: true,
-                        labels: {
-                          boxWidth: 20,
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>
+           <div className="flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-5">
+
+              <ResultTextComponent testName = {testName} result={result}/>
+              <ResultGraphComponent testname={testmeta.name}  result={result}/>
             </div>
           </div>
 
@@ -129,18 +95,11 @@ const ResultsPage = () => {
             </div>
           </div>
 
-          <div className="mt-12">
-            <h2 className="font-semibold text-2xl mb-5 ">What next?</h2>
-            <div className="bg-white shadow-xl  shadow-[#dce7ff] py-5 px-5 space-y-8 md:space-y-0 md:px-12 rounded-[10px] flex flex-col  md:flex-row  items-center md:justify-between md:items-baseline">
-              <p>To talk to Dr.Ananth Prabhu, book an appointment now</p>
-              <button className="bg-primary text-white text-sm p-2 rounded-[5px]">
-                book an appointment
-              </button>
-            </div>
-          </div>
+                    
         </div>
       </div>
     </section>
+    </>
   );
 };
 

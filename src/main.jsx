@@ -19,8 +19,10 @@ import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 import { DashboardPage } from "./Components/Dashboard/DashboardPage.jsx";
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PrivacyPage from "./pages/PrivacyPage.jsx";
+import TermsPage from "./pages/TermsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <LandingPage />,
+      },
+      {
+        path: "privacy",
+        element: <PrivacyPage />,
+      },
+      {
+        path: "terms",
+        element: <TermsPage />,
       },
       {
         path: "booking",
@@ -53,8 +63,21 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <ProtectedRoute><DashboardPage /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        ),
       },
+        {
+    path: "result",
+    element: (
+      <ProtectedRoute>
+        <ResultsPage />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
     ],
     errorElement: <ErrorPage />,
   },
@@ -70,14 +93,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 
-  {
-    path: "result",
-    element: <ProtectedRoute><ResultsPage /></ProtectedRoute>,
-    errorElement: <ErrorPage />,
-  },
+
   {
     path: "testPage",
-    element: <ProtectedRoute><TestArea /></ProtectedRoute>,
+    element: (
+      <ProtectedRoute>
+        <TestArea />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -88,14 +111,18 @@ const router = createBrowserRouter([
 
   {
     path: "testInstruction",
-    element: <ProtectedRoute><TestInstruction /></ProtectedRoute>,
+    element: (
+      <ProtectedRoute>
+        <TestInstruction />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ToastContainer/>
+    <ToastContainer />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
