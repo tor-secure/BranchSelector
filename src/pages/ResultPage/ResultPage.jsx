@@ -19,8 +19,6 @@ const ResultsPage = () => {
   console.log(result, testName);
   const testmeta = getTestMetaData(testName);
 
-  // console.log(testmeta.evaluationType);
-  console.log(testName);
 
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
 
@@ -30,12 +28,6 @@ const ResultsPage = () => {
     };
     window.addEventListener("resize", handleResize);
   }, []);
-  let userName = "James";
-  let userMailId = "Jamesgmail.com";
-
-  console.log(result);
-  const FirstLabel = Object.keys(result);
-  console.log(FirstLabel);
 
   // const resultarray = Object.entries(result);
 

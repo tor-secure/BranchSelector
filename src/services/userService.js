@@ -16,6 +16,7 @@ const firestore = getFirestore(app);
 
 import { getCurrentUser, isSignedIn, syncUserData } from "./authService.js";
 import { toast } from "react-toastify";
+import { sendTestResultsMail } from "./testService.js";
 
 // Retrieves all documents from a Firestore collection
 const getAllDocumentsFromCollection = async (collectionRef) => {
@@ -70,6 +71,8 @@ const newTestTaken = async (testName, result) => {
   } catch (error) {
     console.error("Error writing document: ", error);
   }
+
+  await sendTestResultsMail(testName,result)
 
 };
 
@@ -298,8 +301,18 @@ const updateDownloads = async (assetDownloaded) => {
 
 // Retrieves the current user's information
 const getCurrentUserInfo = async () => {
-  const uid = getCurrentUser().uid
-/*DEPRECEATED*/
+  
+  const userId = await getCurrentUser()
+  const usersCollection = await collection(firestore, "users");
+  const querySnapshot = await getDocs(
+    query(usersCollection, where("uid", "==", userId.uid))
+  );
+  if (querySnapshot.size != 1) {
+    console.log("Invalid User");
+    return;
+  }
+  const doc = querySnapshot.docs[0];
+  return doc.data()
 
 };
 

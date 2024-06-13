@@ -89,7 +89,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://branch-selector--contact.anish98821.workers.dev/", {
+      const response = await fetch("https://contact-us.branchselector.workers.dev/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
