@@ -27,16 +27,15 @@ function BookingPage() {
       return;
     }
     try {
-      const response = await fetch(
-        "https://branchselctor--book-appointment.anish98821.workers.dev/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+
+      const response = await fetch("https://book-appointment.branchselector.workers.dev/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
       if (response.ok) {
         // Handle successful submission
         console.log("Form submitted successfully!");
