@@ -1,24 +1,24 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const CTA = () => {
   return (
-    <section className="py-28 relative bg-black">
+    <section className="py-28 relative bg-black  ">
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:text-center md:px-8">
         <div className="max-w-xl md:mx-auto">
-          <p className="text-white text-3xl font-semibold sm:text-4xl">
+          <h2 className="text-white text-3xl font-semibold sm:text-4xl">
             Know yourself in depth!
-          </p>
+          </h2>
           <p className="text-blue-100 my-3">
             Sign up now to unlock 3 tests for free!
           </p>
         </div>
         <div className="mt-4">
-          <a
-            href="javascript:void(0)"
+          <Link
+            to="/testList"
             className="inline-block py-2 px-4 text-gray-800 font-medium bg-white duration-150 hover:bg-gray-100 active:bg-gray-200 rounded-full"
           >
             Get started
-          </a>
+          </Link>
         </div>
       </div>
       {/* <div

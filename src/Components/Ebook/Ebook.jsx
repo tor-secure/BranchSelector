@@ -38,7 +38,7 @@ function Ebook() {
 
   return (
     <section
-      className="py-14 min-h-[100vh]"
+      className="py-14"
       style={{
         background:
           "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
