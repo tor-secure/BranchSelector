@@ -10,6 +10,8 @@ import {
   startAfter,
 } from "../../services/firebase";
 
+import blogIcon from '../../assets/Icons/BlogIcon.svg'
+
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -64,13 +66,18 @@ const Blog = () => {
   };
 
   return (
-    <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8 mb-5">
-      <div className="text-center border border-blue-500 bg-blue-600 rounded-2xl p-20">
-        <h1 className="text-3xl text-gray-100 font-semibold">Blog</h1>
-        <p className="mt-3 text-white">
-          Blogs that are loved by the community.
-        </p>
+    <>
+          <div className="flex flex-col md:flex-row bg-dimBlue   items-center justify-center md:gap-2 lg:gap-44 p-20 ">
+                  <img src = {blogIcon}/>
+        <div className="items-center flex justify-center align-middle">
+          <h1 className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700 ">
+            Stay informed with the latest education tips and trends.
+          </h1>
+        </div>
+
       </div>
+    <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8 mb-5">
+
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {posts
   .filter((item, index, self) => self.findIndex((t) => t.id === item.id) === index) // Remove duplicates
@@ -105,6 +112,7 @@ const Blog = () => {
         </div>
       </a>
     </article>
+
   ))}
 
       </div>
@@ -118,6 +126,7 @@ const Blog = () => {
         </button>
       </div>
     </section>
+        </>
   );
 };
 
