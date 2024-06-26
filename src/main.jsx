@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -9,20 +9,30 @@ import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
 import { TestsList } from "./Components/TestsList.jsx";
-import Blog from "./Components/Blog/Blog.jsx";
-import BookingPage from "./pages/BookingPage.jsx";
 
-import EBook from "./pages/Ebook.jsx";
+//import BookingPage from "./pages/BookingPage.jsx";
+
+//import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
-import ContactUs from "./Components/ContactUs/ContactUs.jsx";
+//import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 import { DashboardPage } from "./Components/Dashboard/DashboardPage.jsx";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PrivacyPage from "./pages/PrivacyPage.jsx";
-import TermsPage from "./pages/TermsPage.jsx";
+//import TermsPage from "./pages/TermsPage.jsx";
+import { LoadingPage } from "./pages/LoadingPage.jsx";
+
+const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
+const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
+const LazyBlogPage = React.lazy(() => import("./Components/Blog/Blog.jsx"));
+const LazyEbook = React.lazy(() => import("./pages/Ebook.jsx"));
+const LazyBookingPage = React.lazy(() => import("./pages/BookingPage.jsx"));
+const LazyContactUs = React.lazy(() =>
+  import("./Components/ContactUs/ContactUs.jsx")
+);
+//const LazyTestListPage = React.lazy(() => import("./Components/TestsList.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -35,31 +45,61 @@ const router = createBrowserRouter([
       },
       {
         path: "privacy",
-        element: <PrivacyPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <LazyPrivacyPage />
+          </Suspense>
+        ),
       },
       {
         path: "terms",
-        element: <TermsPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <LazyTermsPage />
+          </Suspense>
+        ),
       },
       {
         path: "booking",
-        element: <BookingPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <LazyBookingPage />
+          </Suspense>
+        ),
       },
       {
         path: "testList",
-        element: <TestsList />,
+        element: (
+          //<Suspense fallback={<LoadingPage />}>
+          //<LazyTestListPage />
+          //</Suspense>
+          <TestsList />
+        ),
       },
       {
         path: "blog",
-        element: <Blog />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <LazyBlogPage />
+          </Suspense>
+        ),
       },
       {
         path: "ebook",
-        element: <EBook />,
+        //<EBook />
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <LazyEbook />
+          </Suspense>
+        ),
       },
       {
         path: "contactus",
-        element: <ContactUs />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <LazyContactUs />
+          </Suspense>
+        ), //<ContactUs />,
       },
       {
         path: "dashboard",
