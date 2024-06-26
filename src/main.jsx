@@ -69,15 +69,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-        {
-    path: "result",
-    element: (
-      <ProtectedRoute>
-        <ResultsPage />
-      </ProtectedRoute>
-    ),
-    errorElement: <ErrorPage />,
-  },
+      {
+        path: "result",
+        element: (
+          <ProtectedRoute>
+            <ResultsPage />
+          </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+      },
     ],
     errorElement: <ErrorPage />,
   },
@@ -92,7 +92,6 @@ const router = createBrowserRouter([
     element: <Authentication authType="signup" />,
     errorElement: <ErrorPage />,
   },
-
 
   {
     path: "testPage",
