@@ -85,10 +85,8 @@ const testsExtraData = [
 ];
 
 const TestsList = () => {
-
   const navigate = useNavigate();
-    setTimeout(() => {
-    }, 100); 
+  setTimeout(() => {}, 100);
 
   return (
     <section className="  mx-auto  max-w-screen-2xl ">

@@ -59,10 +59,7 @@ export const LeftSection = ({ setSelectedPage }) => {
           <p className="ml-2">Your Data</p>
         </li>
 
-
-
-
-          <li
+        <li
           onClick={() => handleClick(2, "Redeem Coupon")}
           className={`p-3 rounded-md mx-1  lg:w-48 ${
             checkBottons[2]
@@ -73,8 +70,6 @@ export const LeftSection = ({ setSelectedPage }) => {
           <BiSolidCoupon size={25} />
           <p className="ml-2">Redeem Coupon</p>
         </li>
-
-
 
         {/*<li
           onClick={() => handleClick(1, "Buy Credits")}
@@ -100,13 +95,13 @@ export const LeftSection = ({ setSelectedPage }) => {
           <IoIosSettings size={25} />
           <p className="ml-2">Settings</p>
         </li>*/}
-        <li className="setAlignment p-3 flex my-7 mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md"
-        onClick={()=>{
-          navigate('/')
-          toast.success("Logged out sucessfully!")
-          logout();
-        }
-        }
+        <li
+          className="setAlignment p-3 flex my-7 mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md"
+          onClick={() => {
+            navigate("/");
+            toast.success("Logged out sucessfully!");
+            logout();
+          }}
         >
           <MdExitToApp size={25} />
           <p className="ml-2">Log Out</p>

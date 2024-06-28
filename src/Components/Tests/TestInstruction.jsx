@@ -100,7 +100,7 @@ export const TestInstruction = () => {
       <div className="mt-[8.3em] h-[62em] md:h-[30em]">
         <div className="w-full h-[25em] md:flex">
           <div className="w-full md:w-[50%] ">
-            <h1 className="text-center font-bold text-xl">Disclaimer</h1>
+            <h3 className="text-center font-bold text-xl">Disclaimer</h3>
             <div className="p-7 ">
               <Disclaimer />
               <p className="mt-10 text-center text-lg font-semibold">

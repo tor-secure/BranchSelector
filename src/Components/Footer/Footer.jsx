@@ -1,5 +1,6 @@
 import { BsGlobe2 } from "react-icons/bs";
 import branchselector_logo from "../../assets/branchselector_logo.png";
+import { Link } from "react-router-dom";
 
 export default () => {
   const footerNavs = [
@@ -35,7 +36,6 @@ export default () => {
           href: "privacy",
           name: "Privacy Policy",
         },
-
       ],
     },
   ];
@@ -55,7 +55,6 @@ export default () => {
                 Join BranchSelector to take your future in your hands!
               </p>
             </div>
-            
           </div>
           <div className="flex-1 mt-10 space-y-6 justify-end  sm:flex md:space-y-0 md:mt-0">
             {footerNavs.map((item, idx) => (
@@ -63,12 +62,12 @@ export default () => {
                 <h4 className="text-primary font-medium">{item.label}</h4>
                 {item.items.map((el, idx) => (
                   <li key={idx}>
-                    <a
-                      href={el.href}
+                    <Link
+                      to={el.href}
                       className="hover:underline hover:text-indigo-600"
                     >
                       {el.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -123,7 +122,7 @@ export default () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                <BsGlobe2/>
+                  <BsGlobe2 />
                 </a>
               </li>
 

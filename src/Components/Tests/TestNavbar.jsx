@@ -123,8 +123,8 @@ export const TestNavbar = ({
   return (
     <>
       {secData && (
-        <div className="h-[7em] fixed top-0 z-20 w-full">
-          <div className="h-[50%] bg-white flex justify-between items-center mx-8">
+        <header className="h-[7em]  fixed top-0 z-20 w-screen ">
+          <nav className="h-[50%] bg-white flex justify-between items-center mx-2 sm:mx-8">
             <div className="h-full flex items-center ml-1 w-[12em]">
               <img
                 src={Logo_Temp}
@@ -135,7 +135,7 @@ export const TestNavbar = ({
                 BranchSelector
               </p>
             </div>
-            <h1 className="font-bold text-xl flex justify-center items-center h-full w-full md:text-3xl">
+            <h1 className="font-bold text-lg flex justify-center items-center h-full w-full text-center md:text-2xl lg:text-3xl">
               {heading}
             </h1>
             <div className="h-full flex items-center justify-end w-[12em]">
@@ -146,7 +146,7 @@ export const TestNavbar = ({
                 <MdExitToApp /> <p className="hidden md:block">Exit</p>
               </button>
             </div>
-          </div>
+          </nav>
 
           <div className="h-[50%] bg-[#F3F3F3] border-y border-y-[#D6D6D6] border-y-solid flex items-center justify-center">
             {/* <h3 className="font-semibold cursor-pointer hover:text-[#686868]">
@@ -222,12 +222,12 @@ export const TestNavbar = ({
             )}
 
             {isInstruction && (
-              <h1 className="font-bold text-xl flex justify-center items-center h-full w-full md:text-2xl">
+              <h2 className="font-bold text-xl flex justify-center items-center h-full w-full md:text-2xl">
                 Instructions
-              </h1>
+              </h2>
             )}
           </div>
-        </div>
+        </header>
       )}
     </>
   );

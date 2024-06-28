@@ -129,7 +129,7 @@ export default () => {
               </Link>
             </div>
           </div>
-          <div className="lg:flex-1 mt-10 lg:mt-0 relative -top-16 lg:block h-[20rem]">
+          <div className="lg:flex-1 mt-10 lg:mt-0 relative -top-16 lg:block h-[20rem] md:hidden block ">
             <Lottie
               animationData={HeroNewAnim}
               loop={true}
