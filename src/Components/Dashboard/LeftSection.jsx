@@ -71,7 +71,8 @@ export const LeftSection = ({ setSelectedPage }) => {
           <p className="ml-2">Redeem Coupon</p>
         </li>
 
-        {/*<li
+        {<li
+
           onClick={() => handleClick(1, "Buy Credits")}
           className={`p-3 rounded-md mx-1  lg:w-48 ${
             checkBottons[1]
@@ -81,7 +82,7 @@ export const LeftSection = ({ setSelectedPage }) => {
         >
           <RiCoinsFill size={25} />
           <p className="ml-2">Buy Credits</p>
-        </li>*/}
+        </li>}
 
         {/*
         <li

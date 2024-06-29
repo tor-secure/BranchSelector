@@ -6,6 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { newTestTaken } from "../../services/userService";
+import { toast } from "react-toastify";
 
 export const TestNavbar = ({
   heading,
@@ -104,8 +105,16 @@ export const TestNavbar = ({
   };
 
   const hadleSubmit = async () => {
+    const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     const finRes = await evaluteTest(testQueryName, result);
     await newTestTaken(testQueryName, finRes);
+    toast.update(toastId, {
+        render: "Test evaluation complete!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
     navigate("/result", {
       state: { result: finRes, testName: testQueryName },
     });
