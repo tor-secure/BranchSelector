@@ -132,6 +132,85 @@ const upgradeAccount = async () => {
   // Implementation goes here
 };
 
+const validateDiscountVoucher = async (voucherCode) => {
+  const toastId = toast.loading("Validating voucher...", { autoClose: false, draggable: true });
+  
+  try {
+    // Reference to the vouchers collection
+    const vouchersCollection = collection(firestore, 'vouchers');
+    const voucherQuery = query(vouchersCollection, where('code', '==', voucherCode));
+    const voucherSnapshot = await getDocs(voucherQuery);
+
+    if (voucherSnapshot.size !== 1) {
+      console.log("Voucher code does not exist.");
+      toast.update(toastId, {
+        render: "Voucher code does not exist.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
+      return null;
+    }
+
+    const voucherDoc = voucherSnapshot.docs[0];
+    const voucherData = voucherDoc.data();
+    const startingDate = new Date(voucherData["validFrom"]);
+    const endingDate = new Date(voucherData["validTill"]);
+    const discountPercentage = voucherData.discountPercentage;
+    const limit = voucherData.limit;
+    const redeemed = voucherData.redeemed || 0;
+    const currentDate = new Date();
+
+    if (currentDate >= startingDate && currentDate <= endingDate) {
+      if (redeemed >= limit) {
+        console.log("Voucher code has reached its limit.");
+        toast.update(toastId, {
+          render: "Voucher code has reached its limit.",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          draggable: true
+        });
+        return null;
+      }
+
+      console.log(`Voucher validated. Discount: ${discountPercentage}%`);
+      toast.update(toastId, {
+        render: `Voucher validated!`,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
+
+      return discountPercentage;
+    } else {
+      console.log("Voucher code is expired.");
+      toast.update(toastId, {
+        render: "Voucher code is expired.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
+      return null;
+    }
+  } catch (error) {
+    console.error("Error validating voucher:", error);
+    toast.update(toastId, {
+      render: "Error validating voucher.",
+      type: "error",
+      isLoading: false,
+      autoClose: 3000,
+      draggable: true
+    });
+    throw new Error("Error validating voucher.");
+  }
+};
+
+
+
 // Validates a coupon code and returns the credits to be added
 const validateCouponCode = async (couponCode) => {
   const usersCollection = await collection(firestore, "coupon");
@@ -338,5 +417,6 @@ export {
   updateDownloads,
   getRemainingCredits,
   getCurrentUserInfo,
-  redeemCoupon
+  redeemCoupon,
+  validateDiscountVoucher
 };

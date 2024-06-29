@@ -15,6 +15,28 @@ const Signup = () => {
     navigate("/login");
   };
 
+const onContinueWithGoogleHandler = async () =>{
+      const toastOptions = {
+
+      position: "top-right",
+      closeOnClick:true,
+      delay:false
+
+    } 
+    const authResult = await signInWithGoogle({rememberMe:false})
+    if(authResult.success)
+    {
+
+    toast.success("Logged in successfully!", toastOptions);
+
+    navigate('/');
+    }
+    else{
+      toast.error("Something went wrong! Try again!",toastOptions)
+    }
+
+
+  }
 
 const handleGoBack = () => {
         navigate('/');
@@ -76,7 +98,7 @@ const onSubmitHandler = async (e) => {
         <div className="flex items-center justify-center">
           <button
             className="flex items-center justify-center py-2.5 px-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
-            onClick={signInWithGoogle}
+            onClick={onContinueWithGoogleHandler}
           >
             <GoogleLogo />
             Continue with Google
