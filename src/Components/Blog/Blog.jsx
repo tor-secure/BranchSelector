@@ -10,7 +10,7 @@ import {
   startAfter,
 } from "../../services/firebase";
 
-import blogIcon from '../../assets/Icons/BlogIcon.svg'
+import blogIcon from "../../assets/Icons/BlogIcon.svg";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -25,7 +25,7 @@ const Blog = () => {
     try {
       let q = query(
         collection(firestoredb, "blog-posts"),
-        orderBy("date","desc"),
+        orderBy("date", "desc"),
         limit(10)
       );
 
@@ -67,66 +67,69 @@ const Blog = () => {
 
   return (
     <>
-          <div className="flex flex-col md:flex-row bg-dimBlue   items-center justify-center md:gap-10 lg:gap-44 p-20 ">
-                  <img src = {blogIcon}/>
+      <div className="flex flex-col md:flex-row bg-dimBlue   items-center justify-center md:gap-2 lg:gap-44 p-20 ">
+        <img src={blogIcon} alt="blog icon" />
         <div className="items-center flex justify-center align-middle">
           <h1 className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700 ">
             Stay informed with the latest education tips and trends.
           </h1>
         </div>
-
       </div>
-    <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8 mb-5">
-
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {posts
-  .filter((item, index, self) => self.findIndex((t) => t.id === item.id) === index) // Remove duplicates
-  .map((item) => (
-    <article
-      key={`${item.id}`}
-      className="max-w-md mx-auto mt-4 shadow-sm border rounded-md duration-300 hover:shadow-lg hover:scale-105"
-    >
-      <a href={item.href}>
-        <img
-          src={item.img}
-          loading="lazy"
-          alt={item.title}
-          className="w-full h-48 rounded-t-md"
-        />
-        <div className="flex items-center mt-2 pt-3 ml-4 mr-2">
-          <div className="flex-none w-10 h-10 rounded-full">
-            <img
-              src={item.authorLogo}
-              className="w-full h-full rounded-full"
-              alt={item.authorName}
-            />
-          </div>
-          <div className="ml-3">
-            <span className="block text-gray-900">{item.authorName}</span>
-            <span className="block text-gray-400 text-sm">{item.date}</span>
-          </div>
+      <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8 mb-5 ">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
+          {posts
+            .filter(
+              (item, index, self) =>
+                self.findIndex((t) => t.id === item.id) === index
+            ) // Remove duplicates
+            .map((item) => (
+              <article
+                key={`${item.id}`}
+                className="max-w-md mx-auto mt-4 shadow-sm border rounded-md duration-300 hover:shadow-lg hover:scale-105 "
+              >
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={item.img}
+                    loading="lazy"
+                    alt={item.title}
+                    className="w-full h-48 rounded-t-md object-contain"
+                  />
+                  <div className="flex items-center mt-2 pt-3 ml-4 mr-2">
+                    <div className="flex-none w-10 h-10 rounded-full">
+                      <img
+                        src={item.authorLogo}
+                        className="w-full h-full rounded-full"
+                        alt={item.authorName}
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <span className="block text-gray-900">
+                        {item.authorName}
+                      </span>
+                      <span className="block text-gray-400 text-sm">
+                        {item.date}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="pt-3 ml-4 mr-2 mb-3">
+                    <h3 className="text-xl text-gray-900">{item.title}</h3>
+                    <p className="text-gray-400 text-sm mt-1">{item.desc}</p>
+                  </div>
+                </a>
+              </article>
+            ))}
         </div>
-        <div className="pt-3 ml-4 mr-2 mb-3">
-          <h3 className="text-xl text-gray-900">{item.title}</h3>
-          <p className="text-gray-400 text-sm mt-1">{item.desc}</p>
+        <div className="flex justify-center">
+          <button
+            onClick={handleLoadMore}
+            className="border border-gray-300 rounded px-4 py-2 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors mt-10"
+            disabled={!hasMore || loading} // Disable button when there are no more posts or while loading
+          >
+            {loading ? "Loading..." : hasMore ? "Load More" : "No More Posts"}
+          </button>
         </div>
-      </a>
-    </article>
-
-  ))}
-
-      </div>
-      <div className="flex justify-center">
-        <button
-          onClick={handleLoadMore}
-          className="border border-gray-300 rounded px-4 py-2 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors mt-10"
-          disabled={!hasMore || loading} // Disable button when there are no more posts or while loading
-        >
-          {loading ? "Loading..." : hasMore ? "Load More" : "No More Posts"}
-        </button>
-      </div>
-    </section>
-        </>
+      </section>
+    </>
   );
 };
 
