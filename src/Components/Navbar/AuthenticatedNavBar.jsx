@@ -5,13 +5,14 @@ import { NavLink, Link } from "react-router-dom";
 import { getCurrentUser, logout } from "../../services/authService";
 import { toast } from "react-toastify";
 
-const ProfileDropDown = (props) => {
+const ProfileDropDown = ({ profile, className, setMenuState }) => {
   const [state, setState] = useState(false);
+  //const [menuState, setMenuState] = useState(false);
   const profileRef = useRef();
 
   const navigation = [
-    { title: "Dashboard", path: "/dashboard" },
-    { title: "Log out", path: "/" },
+    { id: 1, title: "Dashboard", path: "/dashboard" },
+    { id: 2, title: "Log out", path: "/" },
   ];
 
   const logoutListener = () => {
@@ -27,7 +28,7 @@ const ProfileDropDown = (props) => {
   }, []);
 
   return (
-    <div className={`relative left-0 ${props.class}`}>
+    <div className={`relative left-0 ${className}`}>
       <div className="flex items-center space-x-4">
         <button
           ref={profileRef}
@@ -36,8 +37,8 @@ const ProfileDropDown = (props) => {
         >
           <img
             src={
-              props.profile.photoURL
-                ? props.profile.photoURL.toString()
+              profile.photoURL
+                ? profile.photoURL.toString()
                 : "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
             }
             className="w-full h-full rounded-full"
@@ -46,12 +47,10 @@ const ProfileDropDown = (props) => {
         </button>
         <div className="lg:hidden">
           <span className="block">
-            {props.profile.displayName
-              ? props.profile.displayName.toString()
-              : "User"}
+            {profile.displayName ? profile.displayName.toString() : "User"}
           </span>
           <span className="block text-sm text-gray-500">
-            {props.profile.email.toString()}
+            {profile.email.toString()}
           </span>
         </div>
       </div>
@@ -60,8 +59,14 @@ const ProfileDropDown = (props) => {
           state ? "" : "lg:hidden"
         }`}
       >
-        {navigation.map((item, idx) => (
-          <li key={idx} onClick={() => setState(false)}>
+        {navigation.map((item) => (
+          <li
+            key={item.id}
+            onClick={() => {
+              setState(false);
+              setMenuState(false);
+            }}
+          >
             {item.title === "Log out" ? (
               <button
                 className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5 w-full text-left"
@@ -73,6 +78,10 @@ const ProfileDropDown = (props) => {
               <Link
                 className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5"
                 to={item.path}
+                onClick={() => {
+                  //setMenuState(!menuState);
+                  setState(false);
+                }}
               >
                 {item.title}
               </Link>
@@ -151,13 +160,20 @@ const AuthenticatedNavBar = (props) => {
             })}
           </ul>
           <ProfileDropDown
-            class="mt-5 pt-5 border-t lg:hidden"
+            className="mt-5 pt-5 border-t lg:hidden "
             profile={props.user}
+            setMenuState={setMenuState}
+            //menuState={menuState}
           />
         </div>
 
         <div className=" flex items-center  space-x-2 sm:space-x-6">
-          <ProfileDropDown class="hidden lg:block" profile={props.user} />
+          <ProfileDropDown
+            className="hidden lg:block "
+            profile={props.user}
+            setMenuState={setMenuState}
+            //menuState={menuState}
+          />
 
           <button
             className="outline-none p-2 text-gray-400 block lg:hidden"

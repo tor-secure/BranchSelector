@@ -13,7 +13,7 @@ export const DashboardPage = () => {
       {selectedPage == "Your Data" && <RightSection />}
       {selectedPage == "Buy Credits" && <BuyCredits />}
       {selectedPage == "Settings" && <Settings />}
-      {selectedPage == "Redeem Coupon" && <RedeemCoupon/>}
+      {selectedPage == "Redeem Coupon" && <RedeemCoupon />}
     </div>
   );
 };
