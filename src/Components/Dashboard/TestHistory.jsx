@@ -72,9 +72,9 @@ export const TestHistory = ({ testHistory }) => {
         <>
           <div className="flex flex-col items-center mt-7 w-full">
             <div className="w-[80%]">
-              <h2 className="text-2xl font-semibold">Test History</h2>
+              <h2 className="text-lg lg:text-2xl font-semibold">Test History</h2>
               <div className="bg-[#e4ecff] rounded-sm my-5 h-[12em] w-full flex flex-col justify-center items-center">
-                <h3 className="text-2xl font-semibold">No tests taken</h3>
+                <h3 className="text-lg  lg:text-2xl font-semibold">No tests taken</h3>
                 <button className="mt-2 bg-primary text-white font-semibold p-1 px-5 rounded text-sm">
                   Go to tests
                 </button>
