@@ -1,153 +1,182 @@
 import { useState } from "react";
 import img from "../../assets/buycreditillustration.svg";
 import creditImg from "../../assets/CreditsRemainingIcon.svg";
-import { getCurrentUserInfo, validateDiscountVoucher } from "../../services/userService";
-import { toast } from 'react-toastify';
+import {
+  getCurrentUserInfo,
+  validateDiscountVoucher,
+} from "../../services/userService";
+import { toast } from "react-toastify";
 import SliderTabs from "./AddCredits";
 
 export const BuyCredits = () => {
   const [totalAmountToPay, setTotalAmountToPay] = useState(200);
   const [discountApplied, setDiscountApplied] = useState(0);
-  const [voucherCode, setVoucherCode] = useState('');
+  const [voucherCode, setVoucherCode] = useState("");
   const [credit, setCredits] = useState(1);
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
 
-const handleVoucherCodeChange = (event) => {
+  const handleVoucherCodeChange = (event) => {
     setVoucherCode(event.target.value);
   };
 
-const tempPayHandle = (event)=>{
-  event.preventDefault()
-  toast.error("Payment option is not yet active!")
-}
+  const tempPayHandle = (event) => {
+    event.preventDefault();
+    toast.error("Payment option is not yet active!");
+  };
 
-const verifyPayment = async (userId, userName, userEmail, creditsPurchased, transactionId, couponUsed) => {
-  const toastId = toast.loading("Verifying payment...", { autoClose: false, draggable: true });
-
-  try {
-    const response = await fetch('https://verify-credit-purchase.branchselector.workers.dev/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId,
-        userName,
-        creditsPurchased,
-        transactionId,
-        couponUsed,
-        userEmail
-      })
+  const verifyPayment = async (
+    userId,
+    userName,
+    userEmail,
+    creditsPurchased,
+    transactionId,
+    couponUsed
+  ) => {
+    const toastId = toast.loading("Verifying payment...", {
+      autoClose: false,
+      draggable: true,
     });
 
-    const data = await response.json();
-
-    if (data.status === 'success') {
-      toast.update(toastId, {
-        render: `Payment verified successfully! ${creditsPurchased} credits have been added to your account!`,
-        type: "success",
-        isLoading: false,
-        autoClose: 3000,
-        draggable: true
-      });
-    } else {
-      toast.update(toastId, {
-        render: data.message,
-        type: "error",
-        isLoading: false,
-        autoClose: 3000,
-        draggable: true
-      });
-    }
-  } catch (error) {
-    console.error("Error verifying payment:", error);
-    toast.update(toastId, {
-      render: "Error verifying payment.",
-      type: "error",
-      isLoading: false,
-      autoClose: 3000,
-      draggable: true
-    });
-  }
-};
-
-
-const handlePayment = async (event) => {
-  event.preventDefault();
-
-  const toastId = toast.loading("Contacting Payment Gateway...", { autoClose: false, draggable: true });
-
-  try {
-    const userDetails = await getCurrentUserInfo();
-
-    const response = await fetch('https://payment-gateway.branchselector.workers.dev/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        couponCode: voucherCode,
-        creditsOrdered: credit
-      })
-    });
-
-    const data = await response.json();
-
-    if (data.status === 'success') {
-      toast.update(toastId, {
-        render: "Redirected to payment gateway successfully!",
-        type: "success",
-        isLoading: false,
-        autoClose: 3000,
-        draggable: true
-      });
-
-      const options = {
-        key_id: 'rzp_test_yAtiwPxT3TKKr2', // Enter the Key ID generated from the Dashboard
-        amount: data.orderAmount * 100, // Amount in paise
-        currency: 'INR',
-        name: 'SurePass',
-        description: 'Buy Credits',
-        order_id: data.razorpayOrder.id, // Razorpay Order ID
-        handler: function (response) {
-          verifyPayment(userDetails.uid,userDetails.displayName,userDetails.email,credit,response.razorpay_payment_id,voucherCode)
-        },
-        prefill: {
-          name: userDetails.displayName,
-          email: userDetails.email,
-        },
-        notes: {
-          address: '9, II, Manasa Tower, PVS Junction, Kodailbail, Mangaluru, Karnataka 575003'
-        },
-        theme: {
-          color: '#F37254'
+    try {
+      const response = await fetch(
+        "https://verify-credit-purchase.branchselector.workers.dev/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId,
+            userName,
+            creditsPurchased,
+            transactionId,
+            couponUsed,
+            userEmail,
+          }),
         }
-      };
+      );
 
-      const rzp1 = new Razorpay(options);
-      rzp1.on('payment.failed', function (response) {
-        toast.error(`Payment Failed: ${response.error.description}`, {
+      const data = await response.json();
+
+      if (data.status === "success") {
+        toast.update(toastId, {
+          render: `Payment verified successfully! ${creditsPurchased} credits have been added to your account!`,
+          type: "success",
+          isLoading: false,
           autoClose: 3000,
-          draggable: true
+          draggable: true,
         });
-      });
-      rzp1.open();
-    } else {
+      } else {
+        toast.update(toastId, {
+          render: data.message,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          draggable: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error verifying payment:", error);
       toast.update(toastId, {
-        render: data.message,
+        render: "Error verifying payment.",
         type: "error",
         isLoading: false,
         autoClose: 3000,
-        draggable: true
+        draggable: true,
       });
     }
-  } catch (error) {
-    toast.update(toastId, {
-      render: "Error processing payment.",
-      type: "error",
-      isLoading: false,
-      autoClose: 3000,
-      draggable: true
+  };
+
+  const handlePayment = async (event) => {
+    event.preventDefault();
+
+    const toastId = toast.loading("Contacting Payment Gateway...", {
+      autoClose: false,
+      draggable: true,
     });
-    console.error("Error processing payment:", error);
-  }
-};
+
+    try {
+      const userDetails = await getCurrentUserInfo();
+
+      const response = await fetch(
+        "https://payment-gateway.branchselector.workers.dev/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            couponCode: voucherCode,
+            creditsOrdered: credit,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        toast.update(toastId, {
+          render: "Redirected to payment gateway successfully!",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          draggable: true,
+        });
+
+        const options = {
+          key_id: "rzp_test_yAtiwPxT3TKKr2", // Enter the Key ID generated from the Dashboard
+          amount: data.orderAmount * 100, // Amount in paise
+          currency: "INR",
+          name: "SurePass",
+          description: "Buy Credits",
+          order_id: data.razorpayOrder.id, // Razorpay Order ID
+          handler: function (response) {
+            verifyPayment(
+              userDetails.uid,
+              userDetails.displayName,
+              userDetails.email,
+              credit,
+              response.razorpay_payment_id,
+              voucherCode
+            );
+          },
+          prefill: {
+            name: userDetails.displayName,
+            email: userDetails.email,
+          },
+          notes: {
+            address:
+              "9, II, Manasa Tower, PVS Junction, Kodailbail, Mangaluru, Karnataka 575003",
+          },
+          theme: {
+            color: "#F37254",
+          },
+        };
+
+        const rzp1 = new Razorpay(options);
+        rzp1.on("payment.failed", function (response) {
+          toast.error(`Payment Failed: ${response.error.description}`, {
+            autoClose: 3000,
+            draggable: true,
+          });
+        });
+        rzp1.open();
+      } else {
+        toast.update(toastId, {
+          render: data.message,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+          draggable: true,
+        });
+      }
+    } catch (error) {
+      toast.update(toastId, {
+        render: "Error processing payment.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true,
+      });
+      console.error("Error processing payment:", error);
+    }
+  };
 
   const handleCreditsChange = (newCredits) => {
     setCredits(newCredits);
@@ -163,7 +192,7 @@ const handlePayment = async (event) => {
     event.preventDefault();
     if (isVoucherApplied) {
       setDiscountApplied(0);
-      setVoucherCode('');
+      setVoucherCode("");
       setIsVoucherApplied(false);
       calculateAmountToPay(credit, 0);
     } else {
@@ -264,15 +293,23 @@ const handlePayment = async (event) => {
                     className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
                   />
                   <button
-                    className={`px-2 text-white font-medium ${isVoucherApplied ? 'bg-red-500 hover:bg-red-400' : 'bg-indigo-500 hover:bg-indigo-400'} active:${isVoucherApplied ? 'bg-red-500' : 'bg-indigo-500'} rounded-lg duration-150`}
+                    className={`px-2 text-white font-medium ${
+                      isVoucherApplied
+                        ? "bg-red-500 hover:bg-red-400"
+                        : "bg-indigo-500 hover:bg-indigo-400"
+                    } active:${
+                      isVoucherApplied ? "bg-red-500" : "bg-indigo-500"
+                    } rounded-lg duration-150`}
                     onClick={handleApplyVoucher}
                   >
-                    {isVoucherApplied ? 'Remove' : 'Apply'}
+                    {isVoucherApplied ? "Remove" : "Apply"}
                   </button>
                 </div>
                 {discountApplied > 0 && (
                   <p className="text-green-600 text-sm mt-2 font-bold">
-                   Code "{voucherCode}"  applied for {discountApplied}% discount. <br/>You save ₹{(credit * 200 * discountApplied) / 100}.
+                    Code "{voucherCode}" applied for {discountApplied}%
+                    discount. <br />
+                    You save ₹{(credit * 200 * discountApplied) / 100}.
                   </p>
                 )}
               </div>
@@ -290,9 +327,8 @@ const handlePayment = async (event) => {
               </div>
 
               <button
-
-                type='submit'
-                onClick = {tempPayHandle}
+                type="submit"
+                onClick={tempPayHandle}
                 className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
               >
                 Pay Now

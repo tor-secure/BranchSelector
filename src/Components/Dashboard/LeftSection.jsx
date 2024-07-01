@@ -36,7 +36,7 @@ export const LeftSection = ({ setSelectedPage }) => {
   };
   //mt-[${1000000}em]
   return (
-    <div className="w-full lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff]">
+    <aside className="w-full lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff]">
       <div className="w-full flex flex-col justify-center items-center mt-10 lg:mt-0">
         <img
           src={userData.photoURL}
@@ -84,18 +84,19 @@ export const LeftSection = ({ setSelectedPage }) => {
           <p className="ml-2">Buy Credits</p>
         </li>*/}
 
-        {<li
-
-          onClick={() => handleClick(1, "Add Credits")}
-          className={`p-3 rounded-md mx-1  lg:w-48 ${
-            checkBottons[1]
-              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
-              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
-          }`}
-        >
-          <RiCoinsFill size={25} />
-          <p className="ml-2">Add Credits</p>
-        </li>}
+        {
+          <li
+            onClick={() => handleClick(1, "Add Credits")}
+            className={`p-3 rounded-md mx-1  lg:w-48 ${
+              checkBottons[1]
+                ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
+                : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
+            }`}
+          >
+            <RiCoinsFill size={25} />
+            <p className="ml-2">Add Credits</p>
+          </li>
+        }
 
         {/*
         <li
@@ -122,7 +123,7 @@ export const LeftSection = ({ setSelectedPage }) => {
           {/* setAlignment defined in BreathingAnimation.css*/}
         </li>
       </ul>
-    </div>
+    </aside>
   );
 };
 
