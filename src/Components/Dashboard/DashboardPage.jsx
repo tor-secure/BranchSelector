@@ -4,6 +4,8 @@ import { RightSection } from "./RightSection";
 import { Settings } from "./Settings";
 import { BuyCredits } from "./BuyCredits";
 import { RedeemCoupon } from "./RedeemCoupon";
+import AddCredits from "./AddCredits";
+
 
 export const DashboardPage = () => {
   const [selectedPage, setSelectedPage] = useState("Your Data");
@@ -14,6 +16,7 @@ export const DashboardPage = () => {
       {selectedPage == "Buy Credits" && <BuyCredits />}
       {selectedPage == "Settings" && <Settings />}
       {selectedPage == "Redeem Coupon" && <RedeemCoupon />}
+      {selectedPage === "Add Credits" && <AddCredits/> }
     </div>
   );
 };
