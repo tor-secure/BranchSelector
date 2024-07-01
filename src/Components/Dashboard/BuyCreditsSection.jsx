@@ -3,9 +3,10 @@ import img from "../../assets/buycreditillustration.svg";
 import creditImg from "../../assets/CreditsRemainingIcon.svg";
 import { getCurrentUserInfo, validateDiscountVoucher } from "../../services/userService";
 import { toast } from 'react-toastify';
-import SliderTabs from "./AddCredits";
+import CreditsRemainingIcon from "./../../assets/CreditsRemainingIcon.svg";
 
-export const BuyCredits = () => {
+
+export const BuyCreditsSection = () => {
   const [totalAmountToPay, setTotalAmountToPay] = useState(200);
   const [discountApplied, setDiscountApplied] = useState(0);
   const [voucherCode, setVoucherCode] = useState('');
@@ -188,119 +189,84 @@ const handlePayment = async (event) => {
     }
   };
 
-  return (
-    <main className="py-0 bg-white min-h-[100vh]">
-      <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:p-8">
-        <div className="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none lg:mr-20">
-          <div className="flex flex-col p-4 md:p-1">
-            <div className="max-w-lg space-y-3">
-              <p className="text-gray-800 text-2xl font-bold sm:text-3xl">
-                Get credits and start exploring today!
-              </p>
-              <p className="text-blue-600 text-2xl font-bold">
-                ₹200{" "}
-                <span className="text-sm text-gray-400 font-normal">
-                  /credit
-                </span>
-              </p>
-              <p>Each credit unlocks one test</p>
-              <p>Got a code? Apply it at checkout for a discount!</p>
-            </div>
-
-            <img
-              src={img}
-              alt="illustration img"
-              className="hidden md:flex size-60 mt-10"
-            />
+ return (
+  <div className="bg-white p-5 w-full max-w-md mx-auto">
+    <form>
+      <div className="mb-4">
+        <label className="font-bold text-sm text-gray-700">
+          Credits
+        </label>
+        <div className="flex items-center gap-2 mt-1">
+          <button
+            type="button"
+            onClick={handleDecreaseCredits}
+            className="px-3 py-1 bg-white rounded-full font-bold border"
+          >
+            -
+          </button>
+          <div className="flex items-center font-bold px-3 py-3 text-black border bg-white shadow-sm rounded-md min-w-[20%]">
+            <img src={CreditsRemainingIcon} className="h-5 mr-3" alt="Credits" />
+            {credit}
           </div>
-
-          <div className="bg-white flex-1 sm:max-w-lg lg:max-w-md shadow-lg border rounded-md duration-300 hover:shadow-sm px-6 lg:pt-2">
-            <form className="space-y-3 py-6 md:py-2">
-              <p className="font-bold text-xl text-center">Buy Credits</p>
-              <div className="flex justify-center items-center">
-                <img src={creditImg} alt="credit icon" className="size-24" />
-              </div>
-
-              <div>
-                <label className="font-medium text-sm text-gray-500">
-                  Enter Number of Credits:
-                </label>
-                <div className="flex items-center gap-2 mt-1">
-                  <button
-                    type="button"
-                    onClick={handleDecreaseCredits}
-                    className="px-3 py-1 bg-gray-300 rounded-lg"
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    name="credit"
-                    value={credit}
-                    readOnly
-                    className="w-16 text-center px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleIncreaseCredits}
-                    className="px-3 py-1 bg-gray-300 rounded-lg"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="font-medium text-sm text-gray-500">
-                  Discount Code :
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    name="code"
-                    value={voucherCode}
-                    onChange={handleVoucherCodeChange}
-                    disabled={isVoucherApplied}
-                    className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
-                  />
-                  <button
-                    className={`px-2 text-white font-medium ${isVoucherApplied ? 'bg-red-500 hover:bg-red-400' : 'bg-indigo-500 hover:bg-indigo-400'} active:${isVoucherApplied ? 'bg-red-500' : 'bg-indigo-500'} rounded-lg duration-150`}
-                    onClick={handleApplyVoucher}
-                  >
-                    {isVoucherApplied ? 'Remove' : 'Apply'}
-                  </button>
-                </div>
-                {discountApplied > 0 && (
-                  <p className="text-green-600 text-sm mt-2 font-bold">
-                   Code "{voucherCode}"  applied for {discountApplied}% discount. <br/>You save ₹{(credit * 200 * discountApplied) / 100}.
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="font-medium text-sm text-gray-500">
-                  Amount to pay :
-                </label>
-                <p
-                  id="output"
-                  className="w-full mb-4 h-8 mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
-                >
-                  ₹{totalAmountToPay}
-                </p>
-              </div>
-
-              <button
-
-                type='submit'
-                onClick = {tempPayHandle}
-                className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
-              >
-                Pay Now
-              </button>
-            </form>
-          </div>
+          <button
+            type="button"
+            onClick={handleIncreaseCredits}
+            className="px-3 py-1 bg-white rounded-full font-bold border"
+          >
+            +
+          </button>
+          <span className="font-bold text-sm">1 credit unlocks 1 test</span>
         </div>
       </div>
-    </main>
-  );
+
+      <div className="mb-4">
+        <label className="font-bold text-sm text-gray-700">
+          Discount Code
+        </label>
+        <div className="flex gap-2 mt-1">
+          <input
+            type="text"
+            name="code"
+            placeholder="Enter Discount code"
+            value={voucherCode}
+            onChange={handleVoucherCodeChange}
+            disabled={isVoucherApplied}
+            className="flex-1 px-3 py-1 text-gray-500 bg-white outline-none border shadow-sm rounded-md"
+          />
+          <button
+            className={`lg:px-5 px-3  text-white text-sm rounded-md duration-150 ${
+              isVoucherApplied ? 'bg-red-500 hover:bg-red-400' : 'bg-[#367AF3] hover:bg-blue-400'
+            }`}
+            onClick={handleApplyVoucher}
+          >
+            {isVoucherApplied ? 'Remove' : 'Apply'}
+          </button>
+        </div>
+        {discountApplied > 0 && (
+          <p className="text-green-600 text-sm mt-2 font-bold">
+            Code "{voucherCode}" applied for {discountApplied}% discount. <br />You save ₹{(credit * 200 * discountApplied) / 100}.
+          </p>
+        )}
+      </div>
+
+      <div className="mb-4">
+        <label className="font-bold text-sm text-gray-700">
+          Amount to pay
+        </label>
+        <p className="text-black shadow-sm border p-4 rounded-md text-2xl font-bold">
+          ₹{totalAmountToPay}
+        </p>
+      </div>
+
+      <button
+        type="submit"
+        onClick={tempPayHandle}
+        className="w-full px-4 py-2 text-white bg-[#367AF3] hover:bg-blue-400 active:bg-[#367AF3] rounded-md duration-150"
+      >
+        Pay Now
+      </button>
+    </form>
+  </div>
+);
+
 };

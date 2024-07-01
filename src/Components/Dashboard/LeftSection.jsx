@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const LeftSection = ({ setSelectedPage }) => {
-  const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
+  const [checkBottons, setCheckBottons] = useState([true, false, false]);
   const [userData, serUserData] = useState({});
   const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
 
@@ -59,7 +59,7 @@ export const LeftSection = ({ setSelectedPage }) => {
           <p className="ml-2">Your Data</p>
         </li>
 
-        <li
+        {/*<li
           onClick={() => handleClick(2, "Redeem Coupon")}
           className={`p-3 rounded-md mx-1  lg:w-48 ${
             checkBottons[2]
@@ -69,9 +69,9 @@ export const LeftSection = ({ setSelectedPage }) => {
         >
           <BiSolidCoupon size={25} />
           <p className="ml-2">Redeem Coupon</p>
-        </li>
+        </li>*/}
 
-        {<li
+        {/*<li
 
           onClick={() => handleClick(1, "Buy Credits")}
           className={`p-3 rounded-md mx-1  lg:w-48 ${
@@ -82,6 +82,19 @@ export const LeftSection = ({ setSelectedPage }) => {
         >
           <RiCoinsFill size={25} />
           <p className="ml-2">Buy Credits</p>
+        </li>*/}
+
+        {<li
+
+          onClick={() => handleClick(1, "Add Credits")}
+          className={`p-3 rounded-md mx-1  lg:w-48 ${
+            checkBottons[1]
+              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
+              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
+          }`}
+        >
+          <RiCoinsFill size={25} />
+          <p className="ml-2">Add Credits</p>
         </li>}
 
         {/*
