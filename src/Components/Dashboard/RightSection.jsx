@@ -69,7 +69,7 @@ export const RightSection = () => {
             <hr className="border border-[#c2d6fd] my-4 w-44"></hr>
           </div>
 
-          <div className="  lg:hidden  flex py-5 justify-center">
+          <div className="  lg:hidden  flex py-5 pt-0 justify-center">
             <CreditsRemainingCard remainingCredits={remainingCredits} />
             <TestsTakenCard
               testsTaken={
