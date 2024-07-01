@@ -218,7 +218,7 @@ export const BuyCreditsSection = () => {
   };
 
   return (
-    <div className="bg-white p-5 my-8 md:w-max max-w-md mx-auto">
+    <div className="bg-white p-5 my-8 mt-0 md:w-max max-w-md mx-auto">
       <form>
         <div className="mb-4">
           <label className="font-bold text-sm text-gray-700">Credits</label>

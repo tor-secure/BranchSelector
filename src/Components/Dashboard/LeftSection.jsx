@@ -53,7 +53,7 @@ export const LeftSection = ({ setSelectedPage }) => {
         <p className="text-gray-600 text-sm overflow-clip max-w-56">{userData.email}</p>
         </div>
       </div>
-      <div className="flex flex-col justify-items-center items-center ">
+      <div className="flex flex-col justify-items-center items-center pb-10 lg:pb-0 ">
       <ul className="font-bold text-sm lg:text-base text-[#595959] mt-0 lg:mt-12 w-full flex lg:block justify-center">
         <li
           onClick={() => handleClick(0, "Your Data")}
