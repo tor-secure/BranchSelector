@@ -44,7 +44,7 @@ export const RecommendedTests = ({ recommendedTests }) => {
                 <h3 className="text-lg sm:text-2xl font-semibold -ml-10 sm:ml-0">
                   Recommended Tests
                 </h3>
-                <h3 className="text-sm font-bold text-primary -mr-8 mt-1 sm:mr-0 sm:mt-0">
+                <h3 className="text-sm font-bold text-primary mr-1 lg:-mr-8 mt-1 sm:mr-0 sm:mt-0">
                   View all
                 </h3>
               </div>
