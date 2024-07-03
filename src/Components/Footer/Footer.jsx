@@ -36,6 +36,10 @@ export default () => {
           href: "privacy",
           name: "Privacy Policy",
         },
+        {
+          href: "refund",
+          name: "Refund Policy"
+        },
       ],
     },
   ];
