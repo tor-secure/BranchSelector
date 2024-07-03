@@ -23,6 +23,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //import TermsPage from "./pages/TermsPage.jsx";
 import { LoadingPage } from "./pages/LoadingPage.jsx";
+import RefundPolicyPage from "./pages/RefundPage.jsx";
+import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
@@ -102,6 +104,14 @@ const router = createBrowserRouter([
         ), //<ContactUs />,
       },
       {
+        path: "refund",
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <RefundPolicyPage />
+          </Suspense>
+        ), //<ContactUs />,
+      },
+      {
         path: "dashboard",
         element: (
           <ProtectedRoute>
@@ -114,6 +124,15 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ResultsPage />
+          </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "about",
+        element: (
+          <ProtectedRoute>
+            <AboutUs />
           </ProtectedRoute>
         ),
         errorElement: <ErrorPage />,
