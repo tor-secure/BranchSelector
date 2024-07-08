@@ -97,8 +97,7 @@ export const NextPrevSec = ({
   const hadleSubmit = async () => {
     console.log("Submitted", result);
     const finRes = await evaluteTest(testQueryName, result);
-    console.log(finRes);
-    await newTestTaken(testQueryName, result);
+    await newTestTaken(testQueryName, finRes);
     navigate("/result", {
       state: { result: finRes, testName: testQueryName },
     });

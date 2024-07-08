@@ -15,12 +15,10 @@ import {redeemCoupon, validateCouponCode} from "../../services/userService"
 
 const ServicesTest = () => {
   async function getD() {
-    const du = {
-      ENGQ1: "ENGO2",
-      ENGQ2: "ENGO1",
-    };
+    const du = {"VARQ1":"VARO2","VARQ10":"VARO2","VARQ11":"VARO3","VARQ12":"VARO2","VARQ13":"VARO2","VARQ14":"VARO1","VARQ15":"VARO4","VARQ16":"VARO4","VARQ17":"VARO1","VARQ18":"VARO2","VARQ19":"VARO2","VARQ2":"VARO3","VARQ20":"VARO3","VARQ21":"VARO1","VARQ22":"VARO1","VARQ23":"VARO4","VARQ24":"VARO3","VARQ25":"VARO2","VARQ3":"VARO3","VARQ4":"VARO2","VARQ5":"VARO1","VARQ6":"VARO4","VARQ7":"VARO2","VARQ8":"VARO3","VARQ9":"VARO2"}
+    ;
     //console.log(await generateCoupon(c.code,c["price-after-discount"],c["valid-from"],c["valid-till"],c.limit,3))
-    console.log(await updateUsers());
+    console.log(await evaluteTest("vark",du));
   }
 
   const style = {
@@ -31,7 +29,7 @@ const ServicesTest = () => {
     <>
       <button
         onClick={async () => {
-          console.log(redeemCoupon("Free5"))
+          console.log(getD())
         }}
         style={style}
       >
