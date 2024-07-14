@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 const contactMethods = [
   {
@@ -71,6 +73,10 @@ const contactMethods = [
 ];
 
 const ContactUs = () => {
+  const [captchaChecked, setCaptchaChecked] = useState(false);
+  const handleCaptchaChange = () => {
+    setCaptchaChecked(true);
+  };
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -88,6 +94,11 @@ const ContactUs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!captchaChecked) {
+      // If ReCAPTCHA is not checked, prevent form submission
+      alert("Please complete the ReCAPTCHA verification.");
+      return;
+    }
     try {
       const response = await fetch("https://contact-us.branchselector.workers.dev/", {
         method: "POST",
@@ -112,10 +123,10 @@ const ContactUs = () => {
   };
 
   return (
-    <section className="py-14">
-      <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
+    <section className="pb-10">
+      <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8 ">
         <div className="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none">
-          <div className="max-w-lg space-y-3">
+          <div className="max-w-lg space-y-3 py-10">
             <h3 className="text-indigo-600 font-semibold">Contact</h3>
             <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Let us know how we can help
@@ -180,6 +191,7 @@ const ContactUs = () => {
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   required
+                  pattern="[1-9]{1}[0-9]{9}"
                   className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 />
               </div>
@@ -193,10 +205,18 @@ const ContactUs = () => {
                   className="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 ></textarea>
               </div>
+                          <div className="flex items-start justify-center sm:justify-start mx-4 md:mx-0">
+                <ReCAPTCHA
+                  sitekey="6Le3tq0pAAAAAIVfl381LNT7XKGE3uWsjll_g2gY"
+                  onChange={handleCaptchaChange}
+                  className="scale-75 fel  md:scale-110  lg:scale-90 "
+                />
+            </div>
               <button type="submit" className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
                 Submit
               </button>
             </form>
+
           </div>
         </div>
       </div>

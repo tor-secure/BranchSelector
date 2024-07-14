@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Graduation from "../assets/TestList/graduation.svg";
-import { MdEngineering } from "react-icons/md";
+import { MdEngineering, MdOutlineEmojiEmotions } from "react-icons/md";
 import { PiBarbellFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
 import { IoEar } from "react-icons/io5";
@@ -8,7 +8,7 @@ import { BiSolidBrain } from "react-icons/bi";
 import { FaTheaterMasks } from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
 import { TbAbc } from "react-icons/tb";
-import { GiPaintBrush } from "react-icons/gi";
+import { GiBookmarklet, GiPaintBrush } from "react-icons/gi";
 import { testMetaData } from "../services/testService";
 import { data } from "autoprefixer";
 
@@ -24,56 +24,56 @@ const testsExtraData = [
     name: "Engineering Test",
     icon: <MdEngineering className="size-10 text-gray-700" />,
     discription:
-      "Discover which branch of engineering aligns with your interests and strengths.",
+      "Discover which branch of engineering aligns with your interests and strengths",
   },
   {
     queryCode: "brain",
     name: "Brain Test",
     icon: <BiSolidBrain className="size-10 text-gray-700" />,
     discription:
-      "Explore your cognitive strengths and discover your dominant brain hemisphere.",
+      "Explore your cognitive strengths and discover your dominant brain hemisphere",
   },
   {
     queryCode: "interest",
     name: "Interest Test",
     icon: <GiPaintBrush className="size-10 text-gray-700" />,
     discription:
-      "Uncover your passions and interests to guide your career and personal pursuits.",
+      "Uncover your passions and interests to guide your career and personal pursuits",
   },
   {
     queryCode: "iq",
     name: "IQ Test",
     icon: <RiLightbulbFlashFill className="size-10 text-gray-700" />,
     discription:
-      "Measure your cognitive abilities and explore your intellectual potential.",
+      "Measure your cognitive abilities and explore your intellectual potential",
   },
   {
     queryCode: "personality",
     name: "Personality Test",
     icon: <FaTheaterMasks className="size-10 text-gray-700" />,
     discription:
-      "Gain insights into your personality traits and behaviors to better understand yourself.",
+      "Gain insights into your personality traits and behaviors to better understand yourself",
   },
   {
     queryCode: "stream",
     name: "Stream Test",
     icon: <PiCertificateFill className="size-10 text-gray-700" />,
     discription:
-      "Determine the ideal academic stream science, arts,or commerce for your future path.",
+      "Determine the ideal academic stream science, arts,or commerce for your future path",
   },
   {
     queryCode: "strength",
     name: "Strength Test",
     icon: <PiBarbellFill className="size-10 text-gray-700" />,
     discription:
-      "Identify your unique strengths and talents to maximize your potential.",
+      "Identify your unique strengths and talents to maximize your potential",
   },
   {
     queryCode: "vark",
     name: "VARK Test",
     icon: <IoEar className="size-10 text-gray-700" />,
     discription:
-      "Discover your preferred learning style to enhance your study strategies.",
+      "Discover your preferred learning style to enhance your study strategies",
   },
   {
     queryCode: "english",
@@ -82,6 +82,20 @@ const testsExtraData = [
     discription:
       "Test your English proficiency to enhance your language skills and communication abilities",
   },
+  {
+    queryCode: "eq",
+    name: "EQ Test",
+    icon: <MdOutlineEmojiEmotions className="size-10 text-gray-700" />,
+    discription:
+      "Evaluate your emotional intelligence to understand and manage your emotions effectively",
+  },
+    {
+    queryCode: "study",
+    name: "Study Habits Test",
+    icon: <GiBookmarklet className="size-10 text-gray-700" />,
+    discription:
+      "Analyze your study habits to identify strengths and areas for improvement",
+  }
 ];
 
 const TestsList = () => {

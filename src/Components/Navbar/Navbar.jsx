@@ -48,7 +48,7 @@ const Navbar = () => {
               className=" md:w-16 w-16 "
               alt="branchselector logo"
             />
-            <h2 className="hidden sm:block">BranchSelector</h2>
+            <h2 className="">BranchSelector</h2>
           </NavLink>
           <div className="lg:hidden">
             <button
