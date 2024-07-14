@@ -110,6 +110,35 @@ english: {
     "Grammar and Vocabulary": "Assesses knowledge of English grammar rules and vocabulary. This includes identifying correct grammatical structures, appropriate word usage, and understanding nuances in meaning.",
     "Literary Analysis": "Evaluates the ability to analyze and interpret literary texts. This includes understanding themes, characters, plot development, and literary devices used in poetry, prose, and drama."
   },
+
+  eq: {
+  "Self Awareness": 
+    "The ability to recognize and understand your own emotions, strengths, weaknesses, and drives. This includes being aware of the impact of your emotions on your thoughts and behaviors. Self-awareness helps in making better decisions and managing emotions in different situations. It involves self-reflection and the ability to assess oneself objectively.",
+  "Self Regulation": 
+    "The ability to control or redirect disruptive emotions and impulses, and adapt to changing circumstances. This includes managing stress, maintaining self-discipline, and staying calm under pressure. Self-regulation allows individuals to think before acting and express emotions appropriately. It involves self-control, trustworthiness, and conscientiousness.",
+  "Motivation": 
+    "The drive to achieve goals for personal satisfaction rather than external rewards. This includes setting high standards for yourself and striving to meet them. Motivated individuals are passionate about their work, resilient in the face of setbacks, and persistent in achieving their objectives. They often exhibit a strong desire for personal growth and accomplishment.",
+  "Empathy": 
+    "The ability to understand and share the feelings of others. This helps in building strong relationships and responding appropriately to social situations. Empathy involves recognizing emotional cues, listening actively, and showing compassion. It enables individuals to connect with others on an emotional level, fostering trust and collaboration.",
+  "Relationship Management": 
+    "The ability to develop and maintain good relationships, communicate clearly, inspire and influence others, work well in a team, and manage conflict. This includes effective communication, conflict resolution, and the ability to influence and inspire others. Strong relationship management skills help in building and maintaining healthy, productive, and rewarding relationships in both personal and professional settings."
+  },
+  study:{
+  "Learning Environment": 
+    "The quality and organization of your study space and comfort level. A well-organized, comfortable, and distraction-free environment can enhance your focus and efficiency during study sessions, while a cluttered or uncomfortable space can hinder your ability to concentrate and retain information.",
+  "Motivation": 
+    "Your intrinsic and extrinsic motivators and how they drive your study habits. Understanding what drives you to study—whether it's personal satisfaction, curiosity, achieving long-term goals, or external rewards—can help you stay committed and improve your academic performance.",
+  "Stress Management": 
+    "How well you manage stress, maintain well-being, and balance academic demands. Effective stress management involves strategies to cope with academic pressure, maintain a healthy lifestyle, and find a balance between studies and personal life, ensuring that stress does not negatively impact your academic success and overall well-being.",
+  "Resilience": 
+    "Your ability to handle setbacks, adapt to changes, persist in your studies, and seek feedback constructively. Being resilient means you can bounce back from challenges, stay motivated despite difficulties, and continuously improve by learning from feedback and adapting your study strategies as needed.",
+  "Self Improvement": 
+    "Your commitment to reflecting on and improving your study habits, trying new methods, seeking resources, and self-assessing your progress. Regularly evaluating and refining your study techniques, being open to new approaches, and actively seeking resources to aid your learning can lead to continuous academic growth and success.",
+  "Learning Tools": 
+    "How effectively you utilize technology, online resources, digital tools, and educational apps/software to aid your studies. Leveraging modern learning tools can enhance your study efficiency, provide access to a wealth of information, and offer innovative ways to understand and retain knowledge.",
+  "Support Seeking": 
+    "How often you seek academic support from study groups, teachers, mentors, family, friends, tutoring services, or academic support centers. Actively seeking help and collaborating with others can provide different perspectives, clarify doubts, and offer emotional and academic support, contributing to a more effective and enjoyable learning experience."
+},
 };
 
 
@@ -133,13 +162,21 @@ const resultTextData = {
     text:"Based on your answers, your most dominant strength is "
   },
   interest:{
-    text:"Based on your answers, your interes lies in "
+    text:"Based on your answers, your interest lies in "
   },
   personality:{
     text:"Based on your answers, your most dominant personality trait is "
   },
   english:{
     text:"Based on the questions you answered, your english score is"
+  },
+
+  eq:{
+    text: "Based on the questions you answered, your most dominant EQ trait is"
+  },
+
+  study:{
+    text:"Based on the questions you answered, the best trait about your study habits is"
   }
 
 }

@@ -161,11 +161,11 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
   },
-  /*{
+  {
     path: "services-test",
     element: <ServicesTest />,
     errorElement: <ErrorPage />,
-  },*/
+  },
 
   {
     path: "testInstruction",
