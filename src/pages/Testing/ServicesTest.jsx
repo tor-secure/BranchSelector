@@ -102,277 +102,523 @@ const migrateUsers = async () => {
 async function putDataToFireStoreRegular() {
   const db = getFirestore();
 
-  const testName = "study";
-  const testCode = "STU"; // Replace with your test name
-  const questionData = [
+  const testName = "career";
+  const testCode = "CAR"; // Replace with your test name
+ const questionData = [
   {
-    question: "How often do you create a study schedule?",
-    options: ["Always", "Often", "Sometimes", "Never"]
+    question: "When faced with a problem, I prefer to:",
+    options: [
+      "Analyze it thoroughly",
+      "Seek advice from others",
+      "Take quick action",
+      "Collaborate with a team",
+      "Look for creative solutions"
+    ]
   },
   {
-    question: "When do you usually start preparing for exams?",
-    options: ["Several weeks in advance", "One week in advance", "A few days before", "The night before"]
+    question: "In a team project, I am most likely to:",
+    options: [
+      "Organize tasks and set deadlines",
+      "Listen to others' ideas and build consensus",
+      "Take the lead and make decisions",
+      "Communicate effectively with team members",
+      "Innovate and suggest new approaches"
+    ]
   },
   {
-    question: "How do you handle distractions while studying?",
-    options: ["I eliminate all distractions", "I minimize distractions", "I struggle but manage", "I often get distracted"]
+    question: "When learning a new skill, I prefer:",
+    options: [
+      "Reading and researching",
+      "Learning from hands-on experience",
+      "Watching tutorials or demonstrations",
+      "Working with others",
+      "Experimenting and trying things out"
+    ]
   },
   {
-    question: "How often do you review your notes?",
-    options: ["Daily", "Weekly", "Before exams", "Rarely"]
+    question: "My favorite subjects in school were:",
+    options: [
+      "Math and Science",
+      "Languages and Literature",
+      "Art and Music",
+      "Physical Education and Sports",
+      "History and Social Sciences"
+    ]
   },
   {
-    question: "How do you organize your study materials?",
-    options: ["Everything is neatly organized", "Mostly organized", "Somewhat organized", "Not organized"]
+    question: "I am motivated by:",
+    options: [
+      "Achieving tangible results",
+      "Helping others succeed",
+      "Expressing creativity",
+      "Collaborating with a team",
+      "Solving complex problems"
+    ]
   },
   {
-    question: "Do you have a designated study space?",
-    options: ["Yes, always", "Most of the time", "Occasionally", "No, I study anywhere"]
+    question: "When faced with a challenge at work, I am likely to:",
+    options: [
+      "Develop a detailed plan of action",
+      "Collaborate with colleagues for solutions",
+      "Innovate and try new approaches",
+      "Communicate effectively with stakeholders",
+      "Analyze data and trends"
+    ]
   },
   {
-    question: "How often do you take breaks during study sessions?",
-    options: ["Regularly", "Sometimes", "Rarely", "Never"]
+    question: "My ideal work environment is:",
+    options: [
+      "Structured and organized",
+      "Collaborative and team-oriented",
+      "Dynamic and fast-paced",
+      "Creative and innovative",
+      "Clear goals and direction"
+    ]
   },
   {
-    question: "How do you set your study goals?",
-    options: ["Specific and realistic", "Somewhat specific", "Vague goals", "I don't set goals"]
+    question: "In my free time, I enjoy:",
+    options: [
+      "Solving puzzles or brain teasers",
+      "Volunteering or helping others",
+      "Creating art, music, or writing",
+      "Playing team sports or engaging in physical activities",
+      "Learning new skills or exploring new interests"
+    ]
   },
   {
-    question: "What do you do when you don't understand something?",
-    options: ["Seek help immediately", "Try to figure it out first", "Leave it and move on", "Ignore it"]
+    question: "When making important decisions, I rely on:",
+    options: [
+      "Logical reasoning and analysis",
+      "Intuition and gut feelings",
+      "Advice from trusted individuals",
+      "Considering ethical implications",
+      "Balancing risks and rewards"
+    ]
   },
   {
-    question: "How often do you participate in study groups?",
-    options: ["Frequently", "Occasionally", "Rarely", "Never"]
+    question: "I excel in:",
+    options: [
+      "Planning and organizing events or activities",
+      "Negotiating and mediating conflicts",
+      "Developing creative solutions to problems",
+      "Adapting to changing situations",
+      "Analyzing complex data"
+    ]
   },
   {
-    question: "How well do you manage your time between school and other activities?",
-    options: ["Very well", "Well", "Fairly well", "Poorly"]
+    question: "When communicating with others, I am best at:",
+    options: [
+      "Presenting complex information clearly",
+      "Listening actively and empathetically",
+      "Persuading and influencing opinions",
+      "Resolving conflicts and finding common ground",
+      "Avoiding confrontations or difficult conversations"
+    ]
   },
   {
-    question: "How often do you rewrite or summarize your notes?",
-    options: ["Always", "Often", "Sometimes", "Never"]
+    question: "My career goals include:",
+    options: [
+      "Advancing to a leadership position",
+      "Making a positive impact on society",
+      "Expressing my creativity and innovation",
+      "Achieving work-life balance and personal fulfillment",
+      "Specializing in a specific field or industry"
+    ]
   },
   {
-    question: "Do you use a variety of study methods (e.g., flashcards, summarizing, teaching)?",
-    options: ["Yes, frequently", "Yes, sometimes", "Rarely", "Never"]
+    question: "When faced with a setback, I:",
+    options: [
+      "Analyze the situation and learn from it",
+      "Seek support from friends or mentors",
+      "Explore new opportunities or directions",
+      "Take time to reflect and reassess goals",
+      "Feel defeated and give up"
+    ]
   },
   {
-    question: "How do you handle difficult or boring subjects?",
-    options: ["I break them into smaller tasks", "I try to make them interesting", "I force myself through them", "I avoid them"]
+    question: "I prefer a job that offers:",
+    options: [
+      "Clear career progression and development",
+      "Opportunities to work with diverse groups of people",
+      "Freedom to innovate and explore new ideas",
+      "Flexibility in work hours and location",
+      "Stability and predictability"
+    ]
   },
   {
-    question: "How often do you set specific times for study sessions?",
-    options: ["Always", "Often", "Sometimes", "Never"]
+    question: "In my previous work experiences, I have been praised for:",
+    options: [
+      "Efficiency and productivity",
+      "Collaboration and teamwork",
+      "Creativity and innovative thinking",
+      "Adaptability and flexibility",
+      "Analytical thinking and problem-solving"
+    ]
   },
   {
-    question: "How well do you prioritize your tasks?",
-    options: ["Very well", "Well", "Fairly well", "Poorly"]
+    question: "When planning a project, I focus most on:",
+    options: [
+      "Setting clear goals and milestones",
+      "Building strong relationships with team members",
+      "Generating new ideas and approaches",
+      "Avoiding mistakes and risks",
+      "Analyzing potential outcomes and scenarios"
+    ]
   },
   {
-    question: "How often do you study in a quiet environment?",
-    options: ["Always", "Often", "Sometimes", "Rarely"]
+    question: "My strongest skills are in:",
+    options: [
+      "Analyzing data and trends",
+      "Communicating effectively with others",
+      "Creating or designing visual content",
+      "Managing time and priorities",
+      "Working collaboratively with diverse teams"
+    ]
   },
   {
-    question: "How do you approach large assignments?",
-    options: ["Break them into smaller tasks", "Plan and start early", "Work on them last minute", "Procrastinate"]
+    question: "When learning new software or technology, I:",
+    options: [
+      "Prefer to read manuals and follow instructions",
+      "Learn best through hands-on experimentation",
+      "Watch tutorials or online videos",
+      "Prefer to learn from others who are already proficient",
+      "Like to explore and discover features on my own"
+    ]
   },
   {
-    question: "How often do you review past papers or practice tests?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
+    question: "My preferred method of receiving feedback is:",
+    options: [
+      "Detailed analysis and constructive criticism",
+      "Positive reinforcement and encouragement",
+      "Practical advice for improvement",
+      "Avoiding feedback altogether",
+      "Collaboration and discussion for mutual understanding"
+    ]
   },
   {
-    question: "Do you set rewards for achieving study goals?",
-    options: ["Always", "Often", "Sometimes", "Never"]
+    question: "When evaluating a job offer, I prioritize:",
+    options: [
+      "Opportunities for career advancement",
+      "Company culture and values alignment",
+      "Compensation and benefits package",
+      "Work-life balance and flexibility",
+      "Job stability and security"
+    ]
   },
   {
-    question: "How often do you feel overwhelmed by your studies?",
-    options: ["Rarely", "Occasionally", "Often", "Always"]
+    question: "I am most interested in careers that involve:",
+    options: [
+      "Analyzing data to make informed decisions",
+      "Helping and serving others in need",
+      "Creating or designing new products or solutions",
+      "Working outdoors or with physical tasks",
+      "Leading teams and achieving strategic goals"
+    ]
   },
   {
-    question: "How do you handle setbacks in your studies?",
-    options: ["Learn from them and move on", "Try to understand and fix them", "Get discouraged but continue", "Give up"]
+    question: "My approach to networking is:",
+    options: [
+      "Strategic and focused on professional goals",
+      "Genuine and building personal connections",
+      "Attending events and meeting new people",
+      "Avoiding networking events altogether",
+      "Using networking to explore new opportunities"
+    ]
   },
   {
-    question: "How often do you engage in physical activity to manage stress?",
-    options: ["Regularly", "Sometimes", "Rarely", "Never"]
+    question: "My ideal career path involves:",
+    options: [
+      "Specializing in a specific field or industry",
+      "Developing skills across various domains",
+      "Creating my own business or startup",
+      "Having a stable job with consistent routines",
+      "Advancing to leadership roles"
+    ]
   },
   {
-    question: "How often do you seek feedback on your work?",
-    options: ["Always", "Often", "Sometimes", "Never"]
+    question: "When facing a difficult ethical dilemma at work, I:",
+    options: [
+      "Analyze the situation from different perspectives",
+      "Seek advice from colleagues or mentors",
+      "Act based on personal values and principles",
+      "Avoid making decisions in such situations",
+      "Innovate and find alternative solutions"
+    ]
   },
   {
-    question: "How do you handle multiple assignments with the same deadline?",
-    options: ["Plan and prioritize", "Work on them simultaneously", "Focus on one, then the next", "Last-minute rush"]
+    question: "My preferred method of professional development is:",
+    options: [
+      "Pursuing advanced degrees or certifications",
+      "Attending workshops, seminars, or conferences",
+      "Engaging in self-directed learning and projects",
+      "Not actively seeking professional development",
+      "Learning through hands-on experience and practice"
+    ]
   },
   {
-    question: "How often do you reflect on your study habits and adjust them?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
+    question: "When assigned a new project, I am most concerned about:",
+    options: [
+      "Meeting deadlines and quality standards",
+      "Ensuring effective communication within the team",
+      "Innovating and finding new solutions",
+      "Avoiding mistakes and setbacks",
+      "Adapting to unexpected changes and challenges"
+    ]
   },
   {
-    question: "How often do you use technology to aid your studies?",
-    options: ["Regularly", "Sometimes", "Rarely", "Never"]
+    question: "I am most energized when:",
+    options: [
+      "Solving complex problems or challenges",
+      "Collaborating with others on a meaningful project",
+      "Creating something new or innovative",
+      "Maintaining a steady routine and predictable tasks",
+      "Leading a team towards a common goal"
+    ]
   },
   {
-    question: "How often do you compare your study habits with peers to find new methods?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
+    question: "My long-term career aspirations include:",
+    options: [
+      "Achieving leadership roles in my field",
+      "Making significant contributions to society",
+      "Advancing my skills and knowledge continuously",
+      "Achieving work-life balance and personal fulfillment",
+      "Specializing in a specific area of expertise"
+    ]
   },
   {
-    question: "How confident are you in your study abilities?",
-    options: ["Very confident", "Confident", "Somewhat confident", "Not confident"]
+    question: "My ideal work-life balance involves:",
+    options: [
+      "Clearly defined work hours and boundaries",
+      "Integrating work with personal interests",
+      "Pursuing personal growth and development outside of work",
+      "Prioritizing personal life over professional ambitions",
+      "Balancing professional challenges with personal well-being"
+    ]
   },
   {
-    question: "How often do you seek help from teachers or tutors when needed?",
-    options: ["Always", "Often", "Sometimes", "Never"]
-  },
-  {
-    question: "How often do you ensure your study space is free from distractions (e.g., noise, clutter)?",
-    options: ["Always", "Often", "Sometimes", "Never"]
-  },
-  {
-    question: "How comfortable is your study environment (e.g., seating, lighting)?",
-    options: ["Very comfortable", "Comfortable", "Somewhat comfortable", "Not comfortable"]
-  },
-  {
-    question: "How often do you visualize your academic and career goals to stay motivated?",
-    options: ["Always", "Often", "Sometimes", "Never"]
-  },
-  {
-    question: "How often do you track your progress toward your study goals?",
-    options: ["Always", "Often", "Sometimes", "Never"]
-  },
-  {
-    question: "How often do you practice relaxation techniques (e.g., deep breathing, meditation) to manage stress?",
-    options: ["Regularly", "Sometimes", "Rarely", "Never"]
-  },
-  {
-    question: "How well do you balance academic work with leisure activities to prevent burnout?",
-    options: ["Very well", "Well", "Fairly well", "Poorly"]
-  },
-  {
-    question: "How often do you get enough sleep to stay focused and productive?",
-    options: ["Always", "Often", "Sometimes", "Rarely"]
-  },
-  {
-    question: "How do you react to receiving a poor grade?",
-    options: ["Analyze what went wrong and improve", "Feel bad but try harder next time", "Feel discouraged", "Lose motivation"]
-  },
-  {
-    question: "How do you handle unexpected changes to your study schedule or plans?",
-    options: ["Adapt and stay on track", "Adjust with some difficulty", "Struggle but manage", "Get overwhelmed"]
-  },
-  {
-    question: "How do you cope with academic challenges and difficulties?",
-    options: ["Look for solutions and persist", "Try to manage with help", "Feel stressed but keep going", "Avoid or give up"]
-  },
-   {
-    question: "How often do you seek feedback and use it constructively?",
-    options: ["Always", "Often", "Sometimes", "Never"]
-  },
-  {
-    question: "How often do you reflect on your academic performance and set new goals?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How open are you to trying new study methods and techniques?",
-    options: ["Very open", "Open", "Somewhat open", "Not open"]
-  },
-  {
-    question: "How often do you seek out resources (books, videos, workshops) to improve your study skills?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you self-assess your progress in achieving your study goals?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you use educational apps or software to aid your studies?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you use online resources (e.g., tutorials, forums) to supplement your learning?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you use digital tools (e.g., calendars, to-do lists) to organize your study schedule?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How comfortable are you with using technology for your studies?",
-    options: ["Very comfortable", "Comfortable", "Somewhat comfortable", "Not comfortable"]
-  },
-  {
-    question: "How often do you attend study groups or peer study sessions?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you discuss academic challenges with teachers or mentors?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you seek academic support from family or friends?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
-  },
-  {
-    question: "How often do you use tutoring services or academic support centers?",
-    options: ["Regularly", "Occasionally", "Rarely", "Never"]
+    question: "When faced with a tight deadline, I:",
+    options: [
+      "Focus intensively and work efficiently",
+      "Collaborate closely with others to meet the deadline",
+      "Find creative solutions to finish on time",
+      "Feel stressed and struggle to meet expectations",
+      "Plan and prioritize tasks to meet the deadline"
+    ]
   }
 ];
 
-  const answerKey = [
- [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Learning Environment": 3}, {"Learning Environment": 2}, {"Learning Environment": 1}, {"Learning Environment": 0}],
-  [{"Learning Environment": 3}, {"Learning Environment": 2}, {"Learning Environment": 1}, {"Learning Environment": 0}],
-  [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Motivation": 3}, {"Motivation": 2}, {"Motivation": 1}, {"Motivation": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Learning Environment": 3}, {"Learning Environment": 2}, {"Learning Environment": 1}, {"Learning Environment": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Motivation": 3}, {"Motivation": 2}, {"Motivation": 1}, {"Motivation": 0}],
-   [{"Stress Management": 3}, {"Stress Management": 2}, {"Stress Management": 1}, {"Stress Management": 0}],
-  [{"Resilience": 3}, {"Resilience": 2}, {"Resilience": 1}, {"Resilience": 0}],
-  [{"Stress Management": 3}, {"Stress Management": 2}, {"Stress Management": 1}, {"Stress Management": 0}],
-  [{"Study Techniques": 3}, {"Study Techniques": 2}, {"Study Techniques": 1}, {"Study Techniques": 0}],
-  [{"Time Management": 3}, {"Time Management": 2}, {"Time Management": 1}, {"Time Management": 0}],
-  [{"Self-Improvement": 3}, {"Self-Improvement": 2}, {"Self-Improvement": 1}, {"Self-Improvement": 0}],
-  [{"Learning Tools": 3}, {"Learning Tools": 2}, {"Learning Tools": 1}, {"Learning Tools": 0}],
-  [{"Learning Techniques": 3}, {"Learning Techniques": 2}, {"Learning Techniques": 1}, {"Learning Techniques": 0}],
-  [{"Self-Efficacy": 3}, {"Self-Efficacy": 2}, {"Self-Efficacy": 1}, {"Self-Efficacy": 0}],
-  [{"Support Seeking": 3}, {"Support Seeking": 2}, {"Support Seeking": 1}, {"Support Seeking": 0}],
-  [{"Learning Environment": 3}, {"Learning Environment": 2}, {"Learning Environment": 1}, {"Learning Environment": 0}],
-  [{"Learning Environment": 3}, {"Learning Environment": 2}, {"Learning Environment": 1}, {"Learning Environment": 0}],
-  [{"Motivation": 3}, {"Motivation": 2}, {"Motivation": 1}, {"Motivation": 0}],
-  [{"Motivation": 3}, {"Motivation": 2}, {"Motivation": 1}, {"Motivation": 0}],
-  [{"Stress Management": 3}, {"Stress Management": 2}, {"Stress Management": 1}, {"Stress Management": 0}],
-  [{"Stress Management": 3}, {"Stress Management": 2}, {"Stress Management": 1}, {"Stress Management": 0}],
-  [{"Stress Management": 3}, {"Stress Management": 2}, {"Stress Management": 1}, {"Stress Management": 0}],
-  [{"Resilience": 3}, {"Resilience": 2}, {"Resilience": 1}, {"Resilience": 0}],
-  [{"Resilience": 3}, {"Resilience": 2}, {"Resilience": 1}, {"Resilience": 0}],
-  [{"Resilience": 3}, {"Resilience": 2}, {"Resilience": 1}, {"Resilience": 0}],
-  [{"Resilience": 3}, {"Resilience": 2}, {"Resilience": 1}, {"Resilience": 0}],
-  [{"Self-Improvement": 3}, {"Self-Improvement": 2}, {"Self-Improvement": 1}, {"Self-Improvement": 0}],
-  [{"Self-Improvement": 3}, {"Self-Improvement": 2}, {"Self-Improvement": 1}, {"Self-Improvement": 0}],
-  [{"Self-Improvement": 3}, {"Self-Improvement": 2}, {"Self-Improvement": 1}, {"Self-Improvement": 0}],
-  [{"Self-Improvement": 3}, {"Self-Improvement": 2}, {"Self-Improvement": 1}, {"Self-Improvement": 0}],
-  [{"Learning Tools": 3}, {"Learning Tools": 2}, {"Learning Tools": 1}, {"Learning Tools": 0}],
-  [{"Learning Tools": 3}, {"Learning Tools": 2}, {"Learning Tools": 1}, {"Learning Tools": 0}],
-  [{"Learning Tools": 3}, {"Learning Tools": 2}, {"Learning Tools": 1}, {"Learning Tools": 0}],
-  [{"Learning Tools": 3}, {"Learning Tools": 2}, {"Learning Tools": 1}, {"Learning Tools": 0}],
-  [{"Support Seeking": 3}, {"Support Seeking": 2}, {"Support Seeking": 1}, {"Support Seeking": 0}],
-  [{"Support Seeking": 3}, {"Support Seeking": 2}, {"Support Seeking": 1}, {"Support Seeking": 0}],
-  [{"Support Seeking": 3}, {"Support Seeking": 2}, {"Support Seeking": 1}, {"Support Seeking": 0}],
-  [{"Support Seeking": 3}, {"Support Seeking": 2}, {"Support Seeking": 1}, {"Support Seeking": 0}]
+
+ const answerKey = [
+  [
+    {"Analytical Skills": 5},
+    {"Communication Skills": 4, "Teamwork": 3},
+    {"Decision Making": 5, "Analytical Skills": -2},
+    {"Teamwork": 5, "Decision Making": -1},
+    {"Creative Problem Solving": 5, "Analytical Skills": -1}
+  ],
+  [
+    {"Organizational Skills": 5, "Leadership": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Leadership": 5, "Teamwork": -1},
+    {"Communication Skills": 5},
+    {"Creative Problem Solving": 5, "Organizational Skills": -1}
+  ],
+  [
+    {"Analytical Skills": 4, "Creative Problem Solving": -1},
+    {"Decision Making": 4, "Analytical Skills": -1},
+    {"Communication Skills": 3, "Analytical Skills": 2},
+    {"Teamwork": 4, "Decision Making": -1},
+    {"Creative Problem Solving": 5, "Organizational Skills": -2}
+  ],
+  [
+    {"Analytical Skills": 5, "Creative Problem Solving": -1},
+    {"Communication Skills": 5, "Analytical Skills": -1},
+    {"Creative Problem Solving": 5, "Analytical Skills": -2},
+    {"Teamwork": 4, "Decision Making": 2},
+    {"Analytical Skills": 4, "Communication Skills": 3}
+  ],
+  [
+    {"Decision Making": 4, "Organizational Skills": 3},
+    {"Teamwork": 5, "Leadership": 2},
+    {"Creative Problem Solving": 5, "Analytical Skills": -1},
+    {"Teamwork": 5, "Decision Making": -1},
+    {"Analytical Skills": 5, "Creative Problem Solving": 2}
+  ],
+  [
+    {"Organizational Skills": 5, "Decision Making": 2},
+    {"Teamwork": 4, "Creative Problem Solving": 2},
+    {"Creative Problem Solving": 5, "Organizational Skills": -1},
+    {"Communication Skills": 4, "Leadership": 2},
+    {"Analytical Skills": 5, "Creative Problem Solving": -1}
+  ],
+  [
+    {"Organizational Skills": 4, "Creative Problem Solving": -2},
+    {"Teamwork": 4, "Decision Making": -1},
+    {"Decision Making": 3, "Organizational Skills": -1},
+    {"Creative Problem Solving": 4, "Analytical Skills": -1},
+    {"Organizational Skills": 4, "Leadership": 2}
+  ],
+  [
+    {"Analytical Skills": 5, "Creative Problem Solving": 2},
+    {"Teamwork": 5, "Communication Skills": 2},
+    {"Creative Problem Solving": 5, "Analytical Skills": -1},
+    {"Teamwork": 4, "Decision Making": 2},
+    {"Creative Problem Solving": 4, "Analytical Skills": 2}
+  ],
+  [
+    {"Analytical Skills": 5, "Creative Problem Solving": -1},
+    {"Decision Making": 4, "Analytical Skills": -2},
+    {"Communication Skills": 4, "Teamwork": 2},
+    {"Decision Making": 3, "Leadership": 2},
+    {"Decision Making": 4, "Analytical Skills": 2}
+  ],
+  [
+    {"Organizational Skills": 5, "Leadership": 2},
+    {"Communication Skills": 4, "Leadership": 3},
+    {"Creative Problem Solving": 5, "Analytical Skills": 2},
+    {"Decision Making": 4, "Organizational Skills": -1},
+    {"Analytical Skills": 5, "Creative Problem Solving": 1}
+  ],
+  [
+    {"Communication Skills": 5, "Analytical Skills": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Leadership": 4, "Communication Skills": 3},
+    {"Communication Skills": 4, "Teamwork": 3},
+    {"Decision Making": -2, "Communication Skills": -2}
+  ],
+  [
+    {"Leadership": 5, "Decision Making": 2},
+    {"Teamwork": 4, "Leadership": 2},
+    {"Creative Problem Solving": 5, "Analytical Skills": -1},
+    {"Decision Making": 4, "Organizational Skills": 2},
+    {"Analytical Skills": 3, "Creative Problem Solving": 2}
+  ],
+  [
+    {"Analytical Skills": 4, "Decision Making": 2},
+    {"Teamwork": 3, "Communication Skills": 2},
+    {"Creative Problem Solving": 4, "Decision Making": 2},
+    {"Decision Making": 4, "Analytical Skills": 2},
+    {"Decision Making": -1, "Leadership": -2}
+  ],
+  [
+    {"Organizational Skills": 4, "Leadership": 2},
+    {"Teamwork": 4, "Communication Skills": 2},
+    {"Creative Problem Solving": 4, "Decision Making": 2},
+    {"Decision Making": 4, "Organizational Skills": -1},
+    {"Organizational Skills": 3, "Creative Problem Solving": -2}
+  ],
+  [
+    {"Organizational Skills": 4, "Decision Making": 2},
+    {"Teamwork": 4, "Communication Skills": 2},
+    {"Creative Problem Solving": 5, "Analytical Skills": 1},
+    {"Decision Making": 4, "Organizational Skills": -1},
+    {"Analytical Skills": 5, "Creative Problem Solving": 2}
+  ],
+  [
+    {"Organizational Skills": 5, "Leadership": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Creative Problem Solving": 5, "Organizational Skills": -1},
+    {"Decision Making": 4, "Analytical Skills": -1},
+    {"Analytical Skills": 5, "Decision Making": 2}
+  ],
+  [
+    {"Analytical Skills": 5, "Creative Problem Solving": -1},
+    {"Communication Skills": 5, "Analytical Skills": -1},
+    {"Creative Problem Solving": 5, "Analytical Skills": -1},
+    {"Organizational Skills": 4, "Decision Making": 2},
+    {"Teamwork": 5, "Communication Skills": 2}
+  ],
+  [
+    {"Analytical Skills": 3, "Creative Problem Solving": -1},
+    {"Creative Problem Solving": 4, "Decision Making": 2},
+    {"Communication Skills": 3, "Analytical Skills": 2},
+    {"Teamwork": 3, "Communication Skills": 2},
+    {"Creative Problem Solving": 3, "Analytical Skills": 2}
+  ],
+  [
+    {"Analytical Skills": 4, "Communication Skills": 2},
+    {"Communication Skills": 3, "Teamwork": 2},
+    {"Communication Skills": 4, "Decision Making": 2},
+    {"Decision Making": -1, "Communication Skills": -2},
+    {"Teamwork": 4, "Communication Skills": 3}
+  ],
+  [
+    {"Organizational Skills": 4, "Leadership": 2},
+    {"Teamwork": 4, "Decision Making": 2},
+    {"Decision Making": 3, "Analytical Skills": 2},
+    {"Decision Making": 4, "Organizational Skills": 2},
+    {"Organizational Skills": 4, "Decision Making": 2}
+  ],
+  [
+    {"Analytical Skills": 5, "Decision Making": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Creative Problem Solving": 5, "Analytical Skills": 1},
+    {"Decision Making": 3, "Teamwork": 2},
+    {"Leadership": 5, "Organizational Skills": 2}
+  ],
+  [
+    {"Communication Skills": 4, "Leadership": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Communication Skills": 3, "Teamwork": 2},
+    {"Communication Skills": -1, "Teamwork": -2},
+    {"Decision Making": 4, "Communication Skills": 2}
+  ],
+  [
+    {"Analytical Skills": 4, "Creative Problem Solving": 2},
+    {"Creative Problem Solving": 4, "Decision Making": 2},
+    {"Leadership": 4, "Decision Making": 3},
+    {"Organizational Skills": 4, "Creative Problem Solving": -2},
+    {"Leadership": 5, "Decision Making": 2}
+  ],
+  [
+    {"Analytical Skills": 4, "Decision Making": 2},
+    {"Teamwork": 3, "Communication Skills": 3},
+    {"Decision Making": 4, "Leadership": 2},
+    {"Decision Making": -1, "Leadership": -2},
+    {"Creative Problem Solving": 4, "Decision Making": 2}
+  ],
+  [
+    {"Analytical Skills": 3, "Leadership": 2},
+    {"Communication Skills": 4, "Teamwork": 2},
+    {"Creative Problem Solving": 4, "Decision Making": 2},
+    {"Decision Making": -1, "Leadership": -2},
+    {"Decision Making": 4, "Creative Problem Solving": 2}
+  ],
+  [
+    {"Organizational Skills": 4, "Decision Making": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Creative Problem Solving": 4, "Analytical Skills": 2},
+    {"Decision Making": 3, "Creative Problem Solving": -1},
+    {"Decision Making": 4, "Creative Problem Solving": 2}
+  ],
+  [
+    {"Analytical Skills": 5, "Creative Problem Solving": 2},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Creative Problem Solving": 5, "Analytical Skills": 1},
+    {"Organizational Skills": 3, "Creative Problem Solving": -2},
+    {"Leadership": 4, "Teamwork": 3}
+  ],
+  [
+    {"Leadership": 4, "Decision Making": 2},
+    {"Teamwork": 4, "Creative Problem Solving": 2},
+    {"Analytical Skills": 4, "Creative Problem Solving": 3},
+    {"Decision Making": 4, "Organizational Skills": 2},
+    {"Analytical Skills": 4, "Creative Problem Solving": 2}
+  ],
+  [
+    {"Organizational Skills": 4, "Decision Making": 2},
+    {"Creative Problem Solving": 3, "Decision Making": 2},
+    {"Analytical Skills": 3, "Leadership": 2},
+    {"Decision Making": 3, "Leadership": -2},
+    {"Decision Making": 4, "Organizational Skills": 3}
+  ],
+  [
+    {"Organizational Skills": 4, "Decision Making": 3},
+    {"Teamwork": 4, "Communication Skills": 3},
+    {"Creative Problem Solving": 4, "Analytical Skills": 2},
+    {"Decision Making": -2, "Leadership": -2},
+    {"Organizational Skills": 4, "Leadership": 2}
+  ]
 ];
 
   // Store questions and options

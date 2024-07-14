@@ -1,8 +1,11 @@
 import Om from "../../assets/om.png";
 import Manav from "../../assets/manav.png";
 import Bhavith from "../../assets/bhavith.png";
+import Poorvi from "../../assets/poorvi.jpeg";
+import Saanvi from "../../assets/saanvi.jpeg"
+
 export default () => {
-  const testimonials = [
+ const testimonials = [
     {
       avatar: Om,
       name: "Om K Poojari",
@@ -24,10 +27,25 @@ export default () => {
       quote:
         "Branch Selector provided invaluable clarity, leading me to my ideal course.",
     },
+    {
+      avatar: Poorvi,
+      name: "Poorvi Shetty",
+      title: "Aeronautical Engineer",
+      quote:
+        "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
+    },
+    {
+      avatar: Saanvi,
+      name: "Saanvi Chetan",
+      title: "BBA student",
+      quote:
+        "With Branch Selector's guidance, I discovered a course that truly aligns with my interests.",
+    },
   ];
 
+
   return (
-    <section className="relative py-14 ">
+    <section className="relative py-14">
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="max-w-xl sm:text-center md:mx-auto">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
@@ -39,13 +57,13 @@ export default () => {
           </p>
         </div>
         <div className="mt-12">
-          <ul className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((item) => (
               <li
                 key={item.name}
-                className="bg-white rounded-xl border shadow-md"
+                className="bg-white rounded-xl border shadow-md flex flex-col"
               >
-                <div className="p-4">
+                <div className="p-4 flex-grow">
                   <svg
                     className="w-9 h-9 text-gray-300"
                     viewBox="0 0 35 35"
@@ -58,9 +76,9 @@ export default () => {
                     />
                   </svg>
                 </div>
-                <figure>
-                  <blockquote>
-                    <p className="text-g text-lg font-semibold px-4 py-1 ">
+                <figure className="flex flex-col justify-between h-full">
+                  <blockquote className="flex-grow">
+                    <p className="text-g text-lg font-semibold px-4 py-1">
                       {item.quote}
                     </p>
                   </blockquote>
@@ -74,7 +92,7 @@ export default () => {
                       <span className="block text-gray-800 font-semibold">
                         {item.name}
                       </span>
-                      <span className="block  text-indigo-600 text-sm mt-0.5">
+                      <span className="block text-indigo-600 text-sm mt-0.5">
                         {item.title}
                       </span>
                     </div>
