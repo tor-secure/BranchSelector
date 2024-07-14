@@ -87,6 +87,13 @@ const testMetaData = {
     name:"EQ Test",
     displayType:"mcq",
     evaluationType:"aggregation"
+  },
+
+  career:{
+    queryCode:"career",
+    name:"Career Aptitude Test",
+    displayType:"mcq",
+    evaluationType:"aggregation"
   }
 };
 

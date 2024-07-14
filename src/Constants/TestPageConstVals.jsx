@@ -15,6 +15,9 @@ const testContent = {
   vark: "The VARK model, developed by Neil Fleming in 1987, stands for Visual, Aural/Auditory, Read/Write, and Kinesthetic learning styles.",
   english:
     "The English test evaluates language proficiency, encompassing reading, writing, listening, and speaking skills for effective communication.",
+  eq: "The EQ test measures emotional intelligence, including self-awareness, self-regulation, motivation, empathy, and relationship management.",
+  career: "The Career Aptitude test assesses your skills to thrive in your career.",
+  study: "The Study Habits test analyzes your study habits to identify strengths and areas for improvement."  
 };
 
 export default testContent;

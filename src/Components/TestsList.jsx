@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Graduation from "../assets/TestList/graduation.svg";
-import { MdEngineering, MdOutlineEmojiEmotions } from "react-icons/md";
+import { MdEngineering, MdOutlineEmojiEmotions, MdWork } from "react-icons/md";
 import { PiBarbellFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
 import { IoEar } from "react-icons/io5";
 import { BiSolidBrain } from "react-icons/bi";
-import { FaTheaterMasks } from "react-icons/fa";
+import { FaBookOpen, FaBookReader, FaTheaterMasks } from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
 import { TbAbc } from "react-icons/tb";
 import { GiBookmarklet, GiPaintBrush } from "react-icons/gi";
@@ -92,9 +92,16 @@ const testsExtraData = [
     {
     queryCode: "study",
     name: "Study Habits Test",
-    icon: <GiBookmarklet className="size-10 text-gray-700" />,
+    icon: <FaBookReader className="size-10 text-gray-700" />,
     discription:
       "Analyze your study habits to identify strengths and areas for improvement",
+  },
+  {
+    queryCode: "career",
+    name: "Career Aptitude Test",
+    icon: <MdWork className="size-10 text-gray-700" />, 
+    discription:
+      "Discover your aptitude for different career paths based your career based skills."
   }
 ];
 
