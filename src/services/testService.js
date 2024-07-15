@@ -231,7 +231,7 @@ async function getTestQuestions(testName) {
     const contentCollection = collection(testQuestionsDocRef, "questions");
 
     const querySnapshot = await getDocs(contentCollection);
-    const questions = querySnapshot.docs.map((doc) => {
+    let questions = querySnapshot.docs.map((doc) => {
       const data = doc.data();
       return {
         id: doc.id,
@@ -242,6 +242,10 @@ async function getTestQuestions(testName) {
         })),
       };
     });
+
+    if (questions.length > 30) {
+      questions = questions.sort(() => 0.5 - Math.random()).slice(0, 30);
+    }
 
     return questions;
   } catch (error) {
