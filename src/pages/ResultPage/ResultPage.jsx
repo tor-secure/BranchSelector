@@ -63,7 +63,14 @@ const ResultsPage = () => {
            <div className="flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-5">
 
               <ResultTextComponent testName = {testName} result={result}/>
-              <ResultGraphComponent testname={testmeta.name}  result={result}/>
+              <ResultGraphComponent
+                testname={testmeta.name}
+                result={
+                  testName === 'english'
+                    ? (({ 'Correct Answers': correctAnswers, 'Wrong Answers': wrongAnswers }) => ({ 'Correct Answers': correctAnswers, 'Wrong Answers': wrongAnswers }))(result)
+                    : result
+                }
+              />
             </div>
           </div>
 

@@ -33,7 +33,7 @@ const ResultTextComponent = ({testName, result}) => {
           testMetadata['evaluationType'] == 'single-option'?
           (
           <div className="text-[40px]">
-          {Object.values(result)[0]}
+          {testName == 'english'?result.grade:Object.values(result)[0]}
           </div>
           ):
           (

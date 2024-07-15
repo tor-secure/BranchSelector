@@ -255,6 +255,16 @@ async function getTestQuestions(testName) {
 }
 
 async function evaluteTest(testName, selectedOptions) {
+  function calculateGrade(correctAnswers) {
+  const percentage = (correctAnswers / 30) * 100;
+  
+  if (percentage >= 90) return 'A';
+  if (percentage >= 80) return 'B';
+  if (percentage >= 70) return 'C';
+  if (percentage >= 60) return 'D';
+  if (percentage >= 50) return 'E';
+  return 'F';
+  }
   const evaluationType = getTestMetaData(testName).evaluationType;
   try {
     const testQuestionsCollection = collection(db, "test-content");
@@ -303,7 +313,12 @@ async function evaluteTest(testName, selectedOptions) {
         if (optionId === answerKey[questionId]) correctAnswers += 1;
       }
 
-      return {'Correct Answers':correctAnswers,'Wrong Answers':Object.values(selectedOptions).length - correctAnswers};
+      let res = {'Correct Answers':correctAnswers,'Wrong Answers':Object.values(selectedOptions).length - correctAnswers};
+      if (testName === 'english') {
+        const grade = calculateGrade(correctAnswers);
+        res.grade = grade;
+      }
+      return res
     }
 
     if (evaluationType == "weighted-aggregation") {

@@ -186,7 +186,7 @@ const resultTextData = {
     text:"Based on your answers, your most dominant personality trait is "
   },
   english:{
-    text:"Based on the questions you answered, your english score is"
+    text:"Based on the questions you answered, your english grade is"
   },
 
   eq:{
