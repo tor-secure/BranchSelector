@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { LoadingPage } from "./pages/LoadingPage.jsx";
 import RefundPolicyPage from "./pages/RefundPage.jsx";
 import AboutUs from "./Components/AboutUs/AboutUs.jsx";
+import PricingPage from "./pages/PricingPage/PricingPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
@@ -128,6 +129,11 @@ const router = createBrowserRouter([
         ),
         errorElement: <ErrorPage />,
       },
+        {
+    path: "pricing",
+    element: <PricingPage />,
+    errorElement: <ErrorPage />,
+  },
       {
         path: "about",
         element: (
@@ -166,6 +172,8 @@ const router = createBrowserRouter([
     element: <ServicesTest />,
     errorElement: <ErrorPage />,
   },
+
+
 
   {
     path: "testInstruction",

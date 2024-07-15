@@ -1,11 +1,11 @@
 import { collection, doc, getDocs, getFirestore } from "./firebase";
 import React from "react";
-import { MdEngineering, MdOutlineEmojiEmotions } from "react-icons/md";
+import { MdEngineering, MdOutlineEmojiEmotions, MdWork } from "react-icons/md";
 import { PiBarbellFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
 import { IoEar } from "react-icons/io5";
 import { BiSolidBrain } from "react-icons/bi";
-import { FaTheaterMasks } from "react-icons/fa";
+import { FaBookReader, FaTheaterMasks } from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
 import { TbAbc } from "react-icons/tb";
 import { GiBookmarklet, GiPaintBrush } from "react-icons/gi";
@@ -180,7 +180,15 @@ const testLogoData = {
 
   study:{
     logo: (size) =>
-      React.createElement(GiBookmarklet, {
+      React.createElement(FaBookReader, {
+        className: `text-gray-700`,
+        size: size,
+      }),
+  },
+
+  career:{
+    logo: (size) =>
+      React.createElement(MdWork, {
         className: `text-gray-700`,
         size: size,
       }),
