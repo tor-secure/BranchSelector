@@ -5,27 +5,13 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { CounselingCard, LargeCard, SmallCard } from "./PricingPage/PricingPage";
 
-    const plans = {
-  credits: [
-    { credits: 1, price: 199, originalPrice: 199, plandID:'C1' },
-    { credits: 3, price: 499, originalPrice: 599, planID:'C3'},
-    { credits: 5, price: 799, originalPrice: 999, planID:'C5' },
-    { credits: 9, price: 1499, originalPrice: 1799, planID:'C9' },
-    { credits: 12, price: 1999, originalPrice: 2399, planID:'C12' },
-  ],
-  counselingSession: [
-    { title: "Online/Offline Career Counseling Appointment", price: 1999, originalPrice: 1999, planID: 'CO1' },
-  ],
-  bundle:[
-    { title: "3 Credits + online/offline career counseling", price: 2499, originalPrice: 2796, planID: 'CB3' },
-    { title: "5 Credits + online/offline career counseling", price: 2999, originalPrice: 3194, planID: 'CB5' },
-  ]
 
-};
+
 
 function BookingPage() {
+
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -82,8 +68,8 @@ function BookingPage() {
 
   return (
     <main className="py-0  my-8 bg-white">
-      <div className="  text-gray-600 md:p-8">
-        <div className="max-w-lg mx-auto justify-between lg:flex lg:max-w-none ">
+      <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:p-8">
+        <div className="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none lg:mr-20">
           <div className="flex flex-col p-4 md:p-1">
             <div className="max-w-lg space-y-3">
               <p className="text-gray-800 text-2xl font-bold sm:text-3xl">
@@ -120,25 +106,81 @@ function BookingPage() {
             </div>
           </div>
 
-      <div   className="ml-0 lg:ml-36  sm:p-8 font-poppins">
-            <div className="w-full">
-              <LargeCard title="Counselling Session">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-                  {plans.counselingSession.map((session, index) => (
-                    <CounselingCard key={index} {...session} />
-                  ))}
-                </div>
-              </LargeCard>
-              <LargeCard title="Credits + Counselling Session Bundle">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-              {plans.bundle.map((session, index) => (
-                    <CounselingCard key={index} {...session} />
-              ))}
+          <div className="bg-white flex-1 sm:max-w-lg lg:max-w-md shadow-lg border rounded-md duration-300 hover:shadow-sm px-6 lg:pt-2">
+            <form onSubmit={handleSubmit} className="space-y-3 py-6 md:py-2 ">
+              <p className="font-bold text-lg">Book Appointment</p>
+              <div>
+                <label className="font-medium text-sm text-gray-500">
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
+                />
               </div>
-              </LargeCard>
-            </div>
+              <div>
+                <label className="font-medium text-sm text-gray-500">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
+                />
+              </div>
+              <div>
+                <label className="font-medium text-sm text-gray-500">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
+                />
+              </div>
+              <div>
+                <label className="font-medium text-sm text-gray-500">
+                  Select Date
+                </label>
+                <input
+                  type="datetime-local"
+                  name="selectedDate"
+                  value={formData.selectedDate}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full mt-1 px-3 py-1.5 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
+                />
+              </div>
+              <div className="flex items-start justify-center sm:justify-start mx-4 md:mx-0">
+                <ReCAPTCHA
+                  sitekey="6Le3tq0pAAAAAIVfl381LNT7XKGE3uWsjll_g2gY"
+                  onChange={handleCaptchaChange}
+                  className="scale-75 fel  md:scale-110  lg:scale-90 "
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-4 py-2  text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+              >
+                Book Appointment
+              </button>
+              <p className="mt-3 text-xs font-medium text-center">
+                We will reach out to you to confirm the appointment date
+              </p>
+            </form>
           </div>
-          <div className="md:hidden mt-5 ml-5">
+          <div className="md:hidden mt-5">
             <p className="font-bold text-sm">Counselling Partner,</p>
             <div className="flex">
               <img src={SurePass} alt="sure pass logo" className="w-40" />
