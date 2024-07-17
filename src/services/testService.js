@@ -314,6 +314,7 @@ async function evaluteTest(testName, selectedOptions) {
       }
 
       let res = {'Correct Answers':correctAnswers,'Wrong Answers':Object.values(selectedOptions).length - correctAnswers};
+      
       if (testName === 'english') {
         const grade = calculateGrade(correctAnswers);
         res.grade = grade;

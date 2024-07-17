@@ -28,7 +28,7 @@ const handleClick = () =>{
 const SmallCard = ({ credits, price, originalPrice }) => {
 const discount = originalPrice-price
   return (
-    <div onClick={handleClick} className="bg-white cursor-pointer rounded-lg shadow-md p-4 w-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg group">
+    <div      onClick={handleClick} className="bg-white cursor-pointer rounded-lg shadow-md p-4 w-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg group">
       <div className="flex flex-row justify-between items-center">
         <p className="text-sm font-bold text-gray-800  duration-300">{credits} {credits === 1 ? 'Credit' : 'Credits'}</p>
         {discount > 0 && (
@@ -68,7 +68,10 @@ const CounselingCard = ({ title, price, originalPrice }) => {
 
 const PricingPage = () => {
   return (
-    <div className="flex flex-col lg:flex-row p-4 sm:p-8 font-poppins">
+    <div  style={{
+        background:
+          "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
+      }}  className="flex flex-col lg:flex-row p-4 sm:p-8 font-poppins">
       <div className="w-full lg:w-1/3 lg:pr-8 mb-6 lg:mb-0">
         <h2 className="text-xl sm:text-2xl font-bold mb-2">
           Buy credits to continue your journey into self discovery!
@@ -106,4 +109,4 @@ const PricingPage = () => {
   );
 };
 
-export default PricingPage;
+export  {PricingPage,CounselingCard,LargeCard,SmallCard}

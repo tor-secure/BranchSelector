@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { LoadingPage } from "./pages/LoadingPage.jsx";
 import RefundPolicyPage from "./pages/RefundPage.jsx";
 import AboutUs from "./Components/AboutUs/AboutUs.jsx";
-import PricingPage from "./pages/PricingPage/PricingPage.jsx";
+import {PricingPage} from "./pages/PricingPage/PricingPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
