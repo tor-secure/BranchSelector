@@ -2,10 +2,12 @@ import Navbar from "../Components/Navbar/Navbar";
 import SurePass from "../assets/SurePassLogo.jpeg";
 import Img from "../assets/bookAppointment.svg";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { CounselingCard, LargeCard, SmallCard } from "./PricingPage/PricingPage";
+import {BundlePlanCard, CounsellingPlanCard} from "./PricingPage/PricingPage";
+import { LoadingPage } from "./LoadingPage";
+import { getPricingPlans } from "./PricingPage/PricingPlans";
 
     const plans = {
   credits: [
@@ -80,6 +82,28 @@ function BookingPage() {
     }));
   };
 
+  const [plans, setPlans] = useState(null);
+  const [currency, setCurrency] = useState('₹');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPricingPlans = async () => {
+      const data = await getPricingPlans();
+      if (data) {
+
+        setPlans(data.plan);
+        setCurrency(data.currency);
+      }
+      setLoading(false);
+    };
+
+    fetchPricingPlans();
+  }, []);
+  if (loading) {
+    return <LoadingPage/>;
+  }
+
+
   return (
     <main className="py-0  my-8 bg-white">
       <div className="  text-gray-600 md:p-8">
@@ -122,20 +146,8 @@ function BookingPage() {
 
       <div   className="ml-0 lg:ml-36  sm:p-8 font-poppins">
             <div className="w-full">
-              <LargeCard title="Counselling Session">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-                  {plans.counselingSession.map((session, index) => (
-                    <CounselingCard key={index} {...session} />
-                  ))}
-                </div>
-              </LargeCard>
-              <LargeCard title="Credits + Counselling Session Bundle">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-              {plans.bundle.map((session, index) => (
-                    <CounselingCard key={index} {...session} />
-              ))}
-              </div>
-              </LargeCard>
+            <CounsellingPlanCard plans={plans} currency={currency}/>
+            <BundlePlanCard plans = {plans} currency={currency}/>
             </div>
           </div>
           <div className="md:hidden mt-5 ml-5">

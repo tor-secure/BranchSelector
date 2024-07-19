@@ -37,12 +37,14 @@ function App() {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [pathname]);
 
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <main>
       <header>
-        {isLoading ? (
-          <LoadingPage />
-        ) : isAuthenticated ? (
+        {isAuthenticated ? (
           <AuthenticatedNavBar user={isAuthenticated} />
         ) : (
           <Navbar />
