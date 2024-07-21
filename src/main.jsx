@@ -26,6 +26,7 @@ import { LoadingPage } from "./pages/LoadingPage.jsx";
 import RefundPolicyPage from "./pages/RefundPage.jsx";
 import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 import {PricingPage} from "./pages/PricingPage/PricingPage.jsx";
+import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
@@ -125,6 +126,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ResultsPage />
+          </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+      },      {
+        path: "checkout",
+        element: (
+          <ProtectedRoute>
+            <CheckoutPage />
           </ProtectedRoute>
         ),
         errorElement: <ErrorPage />,
