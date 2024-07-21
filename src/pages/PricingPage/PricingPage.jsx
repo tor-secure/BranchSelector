@@ -3,26 +3,36 @@ import { toast } from "react-toastify";
 import addCreditImg from "../../assets/AddCreditsSVG.svg";
 import { LoadingPage } from '../LoadingPage';
 import { getPricingPlans, plansIndia, plansUS } from './PricingPlans';
+import { useNavigate } from 'react-router-dom';
+import { CheckoutPage } from '../CheckoutPage/CheckoutPage';
 
 const handleClick = () => {
   toast.error("Payments not yet active")
 };
 
-const SmallCard = ({ credits, price, originalPrice, currency }) => {
-  const discount = originalPrice - price;
+
+const LargeContainerCard = ({ title, children }) => (
+  <div className="bg-white rounded-lg shadow-md p-6 w-full mb-4 transition-all duration-300 ease-in-out hover:shadow-lg">
+    <h3 className="text-lg font-semibold mb-4">{title}</h3>
+    {children}
+  </div>
+);
+
+const SmallCard = ({ plan,currency,currencyCode,clickHandler }) => {
+  const discount = plan.originalPrice - plan.price;
   return (
-    <div onClick={handleClick} className="bg-white cursor-pointer rounded-lg shadow-md p-4 w-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg group">
+    <div onClick={()=>clickHandler(plan,currencyCode)} className="bg-white cursor-pointer rounded-lg shadow-md p-4 w-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg group">
       <div className="flex flex-row justify-between items-center">
-        <p className="text-sm font-bold text-gray-800 duration-300">{credits} {credits === 1 ? 'Credit' : 'Credits'}</p>
+        <p className="text-sm font-bold text-gray-800 duration-300">{plan.credits} {plan.credits === 1 ? 'Credit' : 'Credits'}</p>
         {discount > 0 && (
-          <span className="text-xs text-green-500 font-bold duration-300">-{currency}{originalPrice - price}</span>
+          <span className="text-xs text-green-500 font-bold duration-300">-{currency}{plan.originalPrice - plan.price}</span>
         )}
       </div>
       <div className="flex items-baseline mt-1">
-        <span className="text-2xl font-bold text-blue-600 duration-300">{currency}{price}</span>
-        {originalPrice > price && (
+        <span className="text-2xl font-bold text-blue-600 duration-300">{currency}{plan.price}</span>
+        {plan.originalPrice > plan.price && (
           <span className="ml-2 text-sm text-gray-500 line-through transition-opacity duration-300 opacity-70 group-hover:opacity-100">
-            {currency}{originalPrice}
+            {plan.currency}{plan.originalPrice}
           </span>
         )}
       </div>
@@ -30,67 +40,70 @@ const SmallCard = ({ credits, price, originalPrice, currency }) => {
   );
 };
 
-const LargeCard = ({ title, children }) => (
-  <div className="bg-white rounded-lg shadow-md p-6 w-full mb-4 transition-all duration-300 ease-in-out hover:shadow-lg">
-    <h3 className="text-lg font-semibold mb-4">{title}</h3>
-    {children}
-  </div>
-);
 
-const LongCard = ({ title, price, originalPrice, currency }) => {
-  const discount = originalPrice - price;
+
+const LongCard = ({ plan,currency,currencyCode,clickHandler }) => {
+  const discount = plan.originalPrice - plan.price;
   return (
-    <div onClick={handleClick} className="bg-white cursor-pointer rounded-lg shadow-md p-4 w-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg group">
-      <p className="text-sm font-bold text-gray-800 duration-300">{title}</p>
+    <div onClick={()=>clickHandler(plan,currencyCode)} className="bg-white cursor-pointer rounded-lg shadow-md p-4 w-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg group">
+      <p className="text-sm font-bold text-gray-800 duration-300">{plan.title}</p>
       <div className="flex items-baseline mt-1 justify-between">
-        <span className="text-2xl font-bold text-blue-600 duration-300">{currency}{price}</span>
+        <span className="text-2xl font-bold text-blue-600 duration-300">{currency}{plan.price}</span>
       </div>
     </div>
   );
 };
 
-const CreditPlanCard = ({plans,currency}) =>{
+const CreditPlanCard = ({plans,currency,currencyCode,clickHandler}) =>{
   return(
-        <LargeCard title="Credit Bundle">
+        <LargeContainerCard title="Credit Bundle">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {plans.credits.map((plan, index) => (
-              <SmallCard key={index} {...plan} currency={currency} />
+              <SmallCard key={index} plan={plan} currency={currency} currencyCode={currencyCode} clickHandler={clickHandler}/>
             ))}
           </div>
-        </LargeCard>
+        </LargeContainerCard>
   )
 }
 
-const CounsellingPlanCard = ({plans,currency}) =>{
+const CounsellingPlanCard = ({plans,currency,currencyCode,clickHandler}) =>{
   return (
-        <LargeCard title="Counseling Session">
+        <LargeContainerCard title="Counseling Session">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {plans.counselingSession.map((session, index) => (
-              <LongCard key={index} {...session} currency={currency} />
+            {plans.counselingSession.map((plan, index) => (
+              <LongCard key={index} plan={plan} currency={currency} currencyCode={currencyCode} clickHandler={clickHandler}/>
             ))}
           </div>
-        </LargeCard>
+        </LargeContainerCard>
   )
 }
 
-const BundlePlanCard = ({plans,currency}) =>
+const BundlePlanCard = ({plans,currency,currencyCode,clickHandler}) =>
 {
 return(
-        <LargeCard title="Credits + Counseling Session Bundle">
+        <LargeContainerCard title="Credits + Counseling Session Bundle">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {plans.bundle.map((session, index) => (
-              <LongCard key={index} {...session} currency={currency} />
+            {plans.bundle.map((plan, index) => (
+              <LongCard key={index} plan={plan} currency={currency} currencyCode={currencyCode} clickHandler={clickHandler}/>
             ))}
           </div>
-        </LargeCard>
+        </LargeContainerCard>
 )
 
 }
 
 const PricingPage = () => {
+  const navigate = useNavigate();
   const [plans, setPlans] = useState(null);
   const [currency, setCurrency] = useState('₹');
+  const [currencyCode, setCurrencyCode] = useState('INR')
   const [loading, setLoading] = useState(true);
+
+  const handleCheckout = (plan,currencyCode) =>{
+  navigate('/checkout',{state:{plan:plan,currencyCode:currencyCode}})
+  console.log("want to execute",plan,"with code",currencyCode)
+  }
+
 
   useEffect(() => {
     const fetchPricingPlans = async () => {
@@ -99,6 +112,7 @@ const PricingPage = () => {
 
         setPlans(data.plan);
         setCurrency(data.currency);
+        setCurrencyCode(data.currencyCode)
       }
       setLoading(false);
     };
@@ -123,9 +137,9 @@ const PricingPage = () => {
         <br />
       </div>
       <div className="w-full lg:w-2/3">
-      <CreditPlanCard plans={plans} currency = {currency}/>
-      <CounsellingPlanCard plans = {plans} currency = {currency}/>
-      <BundlePlanCard plans = {plans} currency={currency}/>
+      <CreditPlanCard plans={plans} currency = {currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
+      <CounsellingPlanCard plans = {plans} currency = {currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
+      <BundlePlanCard plans = {plans} currency={currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
 
 
       </div>
@@ -133,4 +147,4 @@ const PricingPage = () => {
   );
 };
 
-export { PricingPage, LongCard, LargeCard, SmallCard, CreditPlanCard, BundlePlanCard, CounsellingPlanCard };
+export { PricingPage, LongCard, LargeContainerCard, SmallCard, CreditPlanCard, BundlePlanCard, CounsellingPlanCard };
