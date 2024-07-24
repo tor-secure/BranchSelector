@@ -1,11 +1,20 @@
+import { toast } from "react-toastify";
+import { getCurrentUserInfo } from "../../services/userService";
+
 const verifyPayment = async (
-    userId,
-    userName,
-    userEmail,
-    creditsPurchased,
-    transactionId,
-    couponUsed
+  userDetails,
+  planDetails,
+  appointmentDetails,
+  paymentDetails,
+
   ) => {
+
+    console.log(JSON.stringify({
+            'userDetails':userDetails,
+            'planDetails':planDetails,
+            'appointmentDetails':appointmentDetails,
+            'paymentDetails':paymentDetails
+          }))
     const toastId = toast.loading("Verifying payment...", {
       autoClose: false,
       draggable: true,
@@ -18,12 +27,10 @@ const verifyPayment = async (
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            userId,
-            userName,
-            creditsPurchased,
-            transactionId,
-            couponUsed,
-            userEmail,
+            'userDetails':userDetails,
+            'planDetails':planDetails,
+            'appointmentDetails':appointmentDetails,
+            'paymentDetails':paymentDetails
           }),
         }
       );
@@ -32,7 +39,7 @@ const verifyPayment = async (
 
       if (data.status === "success") {
         toast.update(toastId, {
-          render: `Payment verified successfully! ${creditsPurchased} credits have been added to your account!`,
+          render: `Payment verified successfully! ${planDetails.credits} credits have been added to your account!`,
           type: "success",
           isLoading: false,
           autoClose: 3000,
@@ -59,8 +66,7 @@ const verifyPayment = async (
     }
   };
 
-  const handlePayment = async (event) => {
-    event.preventDefault();
+  const handlePayment = async (plan,appointmentDetails,paymentDetails) => {
 
     const toastId = toast.loading("Contacting Payment Gateway...", {
       autoClose: false,
@@ -76,8 +82,8 @@ const verifyPayment = async (
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            couponCode: voucherCode,
-            creditsOrdered: credit,
+            paymentDetails: paymentDetails,
+            plan:plan
           }),
         }
       );
@@ -95,19 +101,18 @@ const verifyPayment = async (
 
         const options = {
           key_id: "rzp_test_yAtiwPxT3TKKr2", // Enter the Key ID generated from the Dashboard
-          amount: data.orderAmount * 100, // Amount in paise
-          currency: "INR",
-          name: "SurePass",
-          description: "Buy Credits",
+          amount: paymentDetails.amount * 100, // Amount in lowest denomination
+          currency: paymentDetails.currency,
+          name: "SurePass Academy",
+          description: plan.title,
           order_id: data.razorpayOrder.id, // Razorpay Order ID
           handler: function (response) {
+            
+            let tempUserDetails = {"uid":userDetails.uid,"name":userDetails.displayName,"email":userDetails.email}
+            paymentDetails.razorpay_payment_id = response.razorpay_payment_id
+
             verifyPayment(
-              userDetails.uid,
-              userDetails.displayName,
-              userDetails.email,
-              credit,
-              response.razorpay_payment_id,
-              voucherCode
+              tempUserDetails, plan, appointmentDetails,paymentDetails
             );
           },
           prefill: {

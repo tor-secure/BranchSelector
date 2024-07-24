@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import CreditsRemainingIcon from "./../../assets/CreditsRemainingIcon.svg";
 import { useLocation } from "react-router-dom";
 import { getPricingPlans } from "../PricingPage/PricingPlans";
+import { handlePayment } from "./PaymentService";
 
 const CheckoutPage = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const CheckoutPage = () => {
   const [voucherCode, setVoucherCode] = useState("");
   const [credit, setCredits] = useState(plan.credit ? plan.credit : 0);
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
-  const [formData, setFormData] = useState({
+  const [appointmentFormData, setAppointmentFormData] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
@@ -36,15 +37,17 @@ const CheckoutPage = () => {
     event.preventDefault();
     toast.error("Payment option is not yet active!");
   };
-
-  const handleCreditsChange = (newCredits) => {
-    setCredits(newCredits);
-    calculateAmountToPay(newCredits, discountApplied);
-  };
-
-  const calculateAmountToPay = () => {
-    setTotalAmountToPay(((100 - discountApplied) / 100) * plan.price);
-  };
+  
+  const handleSubmit = async (event) =>{
+    event.preventDefault()
+    const paymentDetails = {
+      couponCode:voucherCode,
+      amount:totalAmountToPay,
+      currency:currencyCode
+    }
+    await handlePayment(plan,appointmentFormData,paymentDetails)
+    console.log('created order')
+  }
 
   const handleApplyVoucher = async (event) => {
     event.preventDefault();
@@ -62,21 +65,9 @@ const CheckoutPage = () => {
     }
   };
 
-  const handleIncreaseCredits = () => {
-    const newCredits = credit + 1;
-    handleCreditsChange(newCredits);
-  };
-
-  const handleDecreaseCredits = () => {
-    if (credit > 1) {
-      const newCredits = credit - 1;
-      handleCreditsChange(newCredits);
-    }
-  };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
+    setAppointmentFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -87,10 +78,10 @@ const CheckoutPage = () => {
     <div className="bg-white p-5 my-8 mt-0 md:w-max max-w-md mx-auto border rounded-lg shadow-md font-poppins">
       <p className="text-2xl font-bold text-center mb-10 text-blue-500">Checkout</p>
 
-      <form>
+      <form onSubmit={tempPayHandle}>
         <div className="mb-4">
           <label className="font-bold text-sm text-gray-700">Selected Plan</label>
-          <p className="text-black shadow-sm border p-4 rounded-md text-2xl font-bold">
+          <p className="text-black shadow-sm border p-4 rounded-md text-xl font-bold">
             {plan.title}
           </p>
         </div>
@@ -101,7 +92,7 @@ const CheckoutPage = () => {
               <input
                 type="text"
                 name="fullName"
-                value={formData.fullName}
+                value={appointmentFormData.fullName}
                 onChange={handleInputChange}
                 required
                 className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
@@ -112,7 +103,7 @@ const CheckoutPage = () => {
               <input
                 type="email"
                 name="email"
-                value={formData.email}
+                value={appointmentFormData.email}
                 onChange={handleInputChange}
                 required
                 className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
@@ -122,8 +113,9 @@ const CheckoutPage = () => {
               <label className="font-bold text-sm text-gray-700">Phone Number</label>
               <input
                 type="tel"
+                pattern="[1-9]{1}[0-9]{9}"
                 name="phoneNumber"
-                value={formData.phoneNumber}
+                value={appointmentFormData.phoneNumber}
                 onChange={handleInputChange}
                 required
                 className="w-full mt-1 px-3 py-1 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
@@ -134,7 +126,7 @@ const CheckoutPage = () => {
               <input
                 type="datetime-local"
                 name="selectedDate"
-                value={formData.selectedDate}
+                value={appointmentFormData.selectedDate}
                 onChange={handleInputChange}
                 required
                 className="w-full mt-1 px-3 py-1.5 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
@@ -148,7 +140,7 @@ const CheckoutPage = () => {
                     type="radio"
                     name="appointmentType"
                     value="online"
-                    checked={formData.appointmentType === "online"}
+                    checked={appointmentFormData.appointmentType === "online"}
                     onChange={handleInputChange}
                     className="form-radio"
                   />
@@ -159,14 +151,25 @@ const CheckoutPage = () => {
                     type="radio"
                     name="appointmentType"
                     value="offline"
-                    checked={formData.appointmentType === "offline"}
+                    checked={appointmentFormData.appointmentType === "offline"}
                     onChange={handleInputChange}
                     className="form-radio"
                   />
                   <span className="ml-2">Offline</span>
                 </label>
               </div>
+
             </div>
+            {appointmentFormData.appointmentType === 'offline'?(
+              <>
+               <label className="font-bold text-sm text-gray-700 mt-10">Counselling Location</label>
+               <p className="text-black shadow-sm border p-4 rounded-md text-md font-bold mt-1">
+                SurePass Academy, 9, II, Manasa Tower, PVS Junction, Mangaluru - India
+          </p>
+          </>
+               )
+              
+              :<></>}
           </>
         )}
         <div className="mb-4 mt-4">
@@ -193,7 +196,7 @@ const CheckoutPage = () => {
           {discountApplied > 0 && (
             <p className="text-green-600 text-sm mt-2 font-bold">
               Code "{voucherCode}" applied for {discountApplied}% discount. <br />
-              You save ₹{plan.price - totalAmountToPay}.
+              You save {currencyCode==='INR'?'₹':'$'}{plan.price - totalAmountToPay}.
             </p>
           )}
         </div>
@@ -209,7 +212,6 @@ const CheckoutPage = () => {
 
         <button
           type="submit"
-          onClick={tempPayHandle}
           className="w-full px-4 py-2 text-white bg-[#367AF3] hover:bg-blue-400 active:bg-[#367AF3] rounded-md duration-150"
         >
           Pay Now

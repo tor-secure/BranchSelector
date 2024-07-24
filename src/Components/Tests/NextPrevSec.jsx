@@ -6,6 +6,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { newTestTaken } from "../../services/userService";
+import { toast } from "react-toastify";
+import OverlayLoader from "../OverlayLoader";
 
 export const NextPrevSec = ({
   heading,
@@ -23,6 +25,7 @@ export const NextPrevSec = ({
 }) => {
   const navigate = useNavigate();
   const [currSec, setCurrSec] = useState(0);
+  const [isLoading,setLoading] = useState(false);
 
   useEffect(() => {
     setSecData(range1);
@@ -31,6 +34,8 @@ export const NextPrevSec = ({
   useEffect(() => {
     setCurrSec(Math.ceil(questionsRange[0] / questionsPerPage));
   }, [questionsRange]);
+
+  
 
   let itemRefs = useRef([]);
 
@@ -95,9 +100,17 @@ export const NextPrevSec = ({
   };
 
   const hadleSubmit = async () => {
-    console.log("Submitted", result);
+    setLoading(true)
+ const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     const finRes = await evaluteTest(testQueryName, result);
     await newTestTaken(testQueryName, finRes);
+    toast.update(toastId, {
+        render: "Test evaluation complete!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        draggable: true
+      });
     navigate("/result", {
       state: { result: finRes, testName: testQueryName },
     });
@@ -114,8 +127,11 @@ export const NextPrevSec = ({
 
   return (
     <>
+
       {secData && (
+            
         <div className="h-[7em]  z-20 w-full">
+          <OverlayLoader isLoading={isLoading} loadingText={'Evaluating Test....'}/>
           <div className="h-[50%]  flex items-center justify-center">
             {/* <h3 className="font-semibold cursor-pointer hover:text-[#686868]">
             Prev
