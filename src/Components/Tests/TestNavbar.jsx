@@ -7,6 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { newTestTaken } from "../../services/userService";
 import { toast } from "react-toastify";
+import OverlayLoader from "../OverlayLoader";
 
 export const TestNavbar = ({
   heading,
@@ -25,6 +26,7 @@ export const TestNavbar = ({
   const navigate = useNavigate();
 
   const [currSec, setCurrSec] = useState(0);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setSecData(range1);
@@ -105,6 +107,7 @@ export const TestNavbar = ({
   };
 
   const hadleSubmit = async () => {
+    setLoading(true)
     const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     const finRes = await evaluteTest(testQueryName, result);
     await newTestTaken(testQueryName, finRes);
@@ -133,6 +136,7 @@ export const TestNavbar = ({
     <>
       {secData && (
         <header className="h-[7em]  fixed top-0 z-20 w-screen ">
+          <OverlayLoader isLoading={isLoading} loadingText={'Evaluating Test....'}/>
           <nav className="h-[50%] bg-white flex justify-between items-center mx-2 sm:mx-8">
             <div className="h-full flex items-center ml-1 w-[12em]">
               <img

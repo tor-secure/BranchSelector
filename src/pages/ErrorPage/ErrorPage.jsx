@@ -1,5 +1,6 @@
 import React from "react";
 import ErrorTree from "../../assets/tree.svg";
+import { FaArrowLeft, FaBackspace } from "react-icons/fa";
 
 const ErrorPage = () => {
   return (
@@ -11,6 +12,11 @@ const ErrorPage = () => {
       </p>
       <h2 className="text-2xl font-semibold mt-2">404</h2>
       <span className="text-gray-500 mb-8">Page not found</span>
+
+      <div className="mb-10 flex " href='/'>
+      <FaArrowLeft color="367af3" className="mr-2 mt-1"/>
+      <a href='/' className="text-lg font-bold text-[#367af3]">Go to home page</a>
+      </div>
     </section>
   );
 };
