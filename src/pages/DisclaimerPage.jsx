@@ -73,7 +73,7 @@ const DisclaimerPage = () =>{
   
   <p className="mt-2">If you have any questions about this Disclaimer, You can contact us:</p>
   <ul className="list-disc list-inside mt-2">
-    <li>By email: educatorananth@gmail.com</li>
+    <li>By email: <a href="mailto:educatorananth@gmail.com" className="text-blue-600 underline">educatorananth@gmail.com</a></li>
     <li>By visiting this page on our website: <a href="https://www.branchselector.com/contactus" className="text-blue-500">https://www.branchselector.com/contactus</a></li>
     <li>By mail: Surepass, #9, Second Floor, Next to Stock Holding, Manasa Towers, MG Road, Mangalore - 575003, Karnataka, India</li>
   </ul>
