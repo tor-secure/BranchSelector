@@ -30,6 +30,7 @@ import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
+const AppDisclaimerPage = React.lazy(() => import("./pages/DisclaimerPage.jsx"));
 const LazyBlogPage = React.lazy(() => import("./Components/Blog/Blog.jsx"));
 const LazyEbook = React.lazy(() => import("./pages/Ebook.jsx"));
 const LazyBookingPage = React.lazy(() => import("./pages/BookingPage.jsx"));
@@ -60,6 +61,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingPage />}>
             <LazyTermsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "disclaimer",
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <AppDisclaimerPage />
           </Suspense>
         ),
       },
