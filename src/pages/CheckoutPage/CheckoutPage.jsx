@@ -2,6 +2,7 @@ import { VoucherSection } from "../../Components/Dashboard/VoucherSection";
 import { useState } from "react";
 import img from "../../assets/buycreditillustration.svg";
 import creditImg from "../../assets/CreditsRemainingIcon.svg";
+import OverlayLoader from "../../Components/OverlayLoader";
 import {
   getCurrentUserInfo,
   validateDiscountVoucher,
@@ -19,6 +20,7 @@ const CheckoutPage = () => {
   const [totalAmountToPay, setTotalAmountToPay] = useState(plan.price);
   const [discountApplied, setDiscountApplied] = useState(0);
   const [voucherCode, setVoucherCode] = useState("");
+  const [isLoading, setLoading] = useState(false)
   const [credit, setCredits] = useState(plan.credit ? plan.credit : 0);
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
   const [appointmentFormData, setAppointmentFormData] = useState({
@@ -45,8 +47,9 @@ const CheckoutPage = () => {
       amount:totalAmountToPay,
       currency:currencyCode
     }
-    await handlePayment(plan,appointmentFormData,paymentDetails)
-    console.log('created order')
+    setLoading(true)
+    await handlePayment(plan,appointmentFormData,paymentDetails,setLoading)
+    
   }
 
   const handleApplyVoucher = async (event) => {
@@ -76,6 +79,7 @@ const CheckoutPage = () => {
   return (
     
     <div className="bg-white p-5 my-8 mt-0 md:w-max max-w-md mx-auto border rounded-lg shadow-md font-poppins">
+      <OverlayLoader isLoading={isLoading} loadingText={"Processing Transaction. Do not refresh or navigate to other page. Please wait..."}/>
       <p className="text-2xl font-bold text-center mb-10 text-blue-500">Checkout</p>
 
       <form onSubmit={tempPayHandle}>

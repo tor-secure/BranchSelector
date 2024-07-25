@@ -6,6 +6,7 @@ const verifyPayment = async (
   planDetails,
   appointmentDetails,
   paymentDetails,
+  loaderHandler
 
   ) => {
 
@@ -36,8 +37,9 @@ const verifyPayment = async (
       );
 
       const data = await response.json();
-
+      loaderHandler(false)
       if (data.status === "success") {
+  
         toast.update(toastId, {
           render: `Payment verified successfully! ${planDetails.credits} credits have been added to your account!`,
           type: "success",
@@ -66,7 +68,7 @@ const verifyPayment = async (
     }
   };
 
-  const handlePayment = async (plan,appointmentDetails,paymentDetails) => {
+  const handlePayment = async (plan,appointmentDetails,paymentDetails,loaderHandler) => {
 
     const toastId = toast.loading("Contacting Payment Gateway...", {
       autoClose: false,
@@ -112,7 +114,7 @@ const verifyPayment = async (
             paymentDetails.razorpay_payment_id = response.razorpay_payment_id
 
             verifyPayment(
-              tempUserDetails, plan, appointmentDetails,paymentDetails
+              tempUserDetails, plan, appointmentDetails,paymentDetails,loaderHandler
             );
           },
           prefill: {
