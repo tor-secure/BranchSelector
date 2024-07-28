@@ -1,4 +1,5 @@
 import {
+  FacebookAuthProvider,
   browserLocalPersistence,
   browserSessionPersistence,
   onAuthStateChanged,
@@ -98,6 +99,35 @@ const signInWithGoogle = async ({ rememberMe }) => {
   }
 };
 
+const signInWithFacebook = async ({ rememberMe }) => {
+  const provider = new FacebookAuthProvider();
+    try {
+        const result = await signInWithPopup(auth, provider)
+        const user = result.user;
+        const newUser = {
+            authProvider: 'facebook',
+            uid: user.uid,
+            email: user.email,
+            metadata: JSON.stringify(user.metadata),
+            displayName: user.displayName,
+            phoneNumber: user.phoneNumber,
+            photoUrl: user.photoURL,
+            accountType: 'free',
+            testsTaken: 0,
+            credit: 5
+        };
+        const usersCollection = collection(firestore, "users");
+        const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));
+        if (querySnapshot.empty) {
+            await addDoc(usersCollection, newUser);
+        }
+    return { success: true, user }; // Indicate successful login
+  } catch (error) {
+    console.error("Sign-in failed:", error);
+    return { success: false, error }; // Indicate failed login with error details
+  }
+};
+
 // Function to check if the user is signed in
 const isSignedIn = () => {
 };
@@ -170,10 +200,15 @@ const logout = () => {
   signOut(auth);
 };
 
-
-const syncUserData = async () => {
-
-};
+const resetPassword = async (email) => {
+  try {
+    const result = await sendPasswordResetEmail(auth, email);
+    console.log(result)
+    return {status: "success"};
+  } catch (error) {
+    return {status: 'error', message: error.message};
+  }
+}
 
 function getCurrentUser() {
   return new Promise((resolve, reject) => {
@@ -197,6 +232,7 @@ export {
   firestore,
   registerWithEmailAndPassword,
   signInWithGoogle,
+  signInWithFacebook,
   loginWithEmailAndPassword,
   loginWithEmailLink,
   logout,
@@ -205,5 +241,5 @@ export {
   setPersistence,
   getCurrentUser,
   addAuthChangeListener,
-  syncUserData,
+  resetPassword
 };
