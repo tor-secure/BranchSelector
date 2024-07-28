@@ -28,11 +28,11 @@ import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 import {PricingPage} from "./pages/PricingPage/PricingPage.jsx";
 import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage.jsx";
+import { DeleteAccountPage } from "./pages/DeleteAccountPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyDisclaimerPage = React.lazy(()=>import("./pages/DisclaimerPage.jsx"))
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
-const AppDisclaimerPage = React.lazy(() => import("./pages/DisclaimerPage.jsx"));
 const LazyBlogPage = React.lazy(() => import("./Components/Blog/Blog.jsx"));
 const LazyEbook = React.lazy(() => import("./pages/Ebook.jsx"));
 const LazyBookingPage = React.lazy(() => import("./pages/BookingPage.jsx"));
@@ -71,14 +71,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingPage />}>
             <LazyTermsPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "disclaimer",
-        element: (
-          <Suspense fallback={<LoadingPage />}>
-            <AppDisclaimerPage />
           </Suspense>
         ),
       },
@@ -130,6 +122,14 @@ const router = createBrowserRouter([
           <Suspense fallback={<LoadingPage />}>
             <RefundPolicyPage />
           </Suspense>
+        ), //<ContactUs />,
+      },
+      {
+        path: "deleteAccount",
+        element: (
+          <ProtectedRoute>
+            <DeleteAccountPage />
+          </ProtectedRoute>
         ), //<ContactUs />,
       },
       {
