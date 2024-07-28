@@ -1,8 +1,12 @@
 import {
+  EmailAuthProvider,
   FacebookAuthProvider,
   browserLocalPersistence,
   browserSessionPersistence,
+  deleteUser,
   onAuthStateChanged,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
   setPersistence,
 } from "firebase/auth";
 import {
@@ -21,7 +25,9 @@ import {
   where,
   addDoc,
   getDocs,
+  deleteDoc,
 } from "./firebase.js";
+import { getCurrentUserInfo } from "./userService.js";
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
@@ -210,6 +216,41 @@ const resetPassword = async (email) => {
   }
 }
 
+const deleteAccount = async (password=null) => {
+  try {
+    
+    const user = await getCurrentUserInfo();
+    const uid = user.uid;
+
+    if(user.authProvider === 'google')
+    await reauthenticateWithPopup(auth.currentUser,googleAuthProvider)
+
+    else if(user.authProvider === 'local')
+    {
+      const credential = EmailAuthProvider.credential(user.email,password)
+      await reauthenticateWithCredential(auth.currentUser,credential)
+    }
+
+    // Delete the user document from Firestore
+    const usersCollection = collection(firestore, 'users');
+    const q = query(usersCollection, where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      await deleteDoc(userDoc.ref);
+    }
+
+    // Delete the user from Firebase Auth
+    await deleteUser(auth.currentUser);
+
+    return { status: 'success', message: 'User account deleted successfully' };
+  } catch (error) {
+    return { status: 'error', message: error.message };
+  }
+};
+
+
 function getCurrentUser() {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged(
@@ -241,5 +282,6 @@ export {
   setPersistence,
   getCurrentUser,
   addAuthChangeListener,
-  resetPassword
+  resetPassword,
+  deleteAccount
 };

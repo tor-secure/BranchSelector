@@ -28,6 +28,7 @@ import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 import {PricingPage} from "./pages/PricingPage/PricingPage.jsx";
 import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage.jsx";
+import { DeleteAccountPage } from "./pages/DeleteAccountPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyDisclaimerPage = React.lazy(()=>import("./pages/DisclaimerPage.jsx"))
@@ -121,6 +122,14 @@ const router = createBrowserRouter([
           <Suspense fallback={<LoadingPage />}>
             <RefundPolicyPage />
           </Suspense>
+        ), //<ContactUs />,
+      },
+      {
+        path: "deleteAccount",
+        element: (
+          <ProtectedRoute>
+            <DeleteAccountPage />
+          </ProtectedRoute>
         ), //<ContactUs />,
       },
       {
