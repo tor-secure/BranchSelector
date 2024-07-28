@@ -16,6 +16,9 @@ import { updateDoc } from "firebase/firestore";
 
 import {redeemCoupon, validateCouponCode} from "../../services/userService"
 
+const db = getFirestore()
+const firestore = getFirestore()
+
 const ServicesTest = () => {
   async function getD() {
     const du = {"VARQ1":"VARO2","VARQ10":"VARO2","VARQ11":"VARO3","VARQ12":"VARO2","VARQ13":"VARO2","VARQ14":"VARO1","VARQ15":"VARO4","VARQ16":"VARO4","VARQ17":"VARO1","VARQ18":"VARO2","VARQ19":"VARO2","VARQ2":"VARO3","VARQ20":"VARO3","VARQ21":"VARO1","VARQ22":"VARO1","VARQ23":"VARO4","VARQ24":"VARO3","VARQ25":"VARO2","VARQ3":"VARO3","VARQ4":"VARO2","VARQ5":"VARO1","VARQ6":"VARO4","VARQ7":"VARO2","VARQ8":"VARO3","VARQ9":"VARO2"}
@@ -32,9 +35,7 @@ const ServicesTest = () => {
     <>
       <button
         onClick={async () => {
-          pushPlansToFirebase(plansIndia, 'INR');
-pushPlansToFirebase(plansUS, 'USD')
-          console.log(null)
+          await reformatDates()
         }}
         style={style}
       >
@@ -407,3 +408,82 @@ async function pushPlansToFirebase(plans, currency) {
     console.error("Error adding document: ", e);
   }
 }
+
+
+const formatDate = (date) => {
+  const options = { 
+    day: '2-digit', 
+    month: '2-digit', 
+    year: '2-digit', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    hour12: true 
+  };
+  return new Intl.DateTimeFormat('en-GB', options).format(date);
+};
+
+const parseDate = (dateString) => {
+  const regex = /^\d{2}\/\d{2}\/\d{4}, \d{2}:\d{2}:\d{2}$/;
+  const alreadyFormattedRegex = /^\d{2}\/\d{2}\/\d{2}, \d{2}:\d{2} (AM|PM)$/i;
+
+  if (alreadyFormattedRegex.test(dateString)) {
+    console.log(`Already in correct format: ${dateString}`);
+    return { formattedDate: dateString, alreadyCorrect: true };
+  }
+
+  if (regex.test(dateString)) {
+    const [datePart, timePart] = dateString.split(', ');
+    const [day, month, year] = datePart.split('/');
+    const [hours, minutes, seconds] = timePart.split(':');
+    const date = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`);
+    return { formattedDate: formatDate(date), alreadyCorrect: false };
+  }
+
+  throw new Error(`Invalid date format: ${dateString}`);
+};
+
+const reformatDates = async () => {
+  let errorCount = 0;
+  let fixedCount = 0;
+  let correctFormatCount = 0;
+
+  try {
+    const usersCollection = await collection(firestore, "users");
+    const querySnapshot = await getDocs(usersCollection);
+
+    for (const doc of querySnapshot.docs) {
+      const uid = doc.data().uid;
+      const testsTakenRef = collection(doc.ref, "tests-taken");
+      const testsSnapshot = await getDocs(testsTakenRef);
+
+      for (const testDoc of testsSnapshot.docs) {
+        const testData = testDoc.data();
+        if (testData.time) {
+          try {
+            const { formattedDate, alreadyCorrect } = parseDate(testData.time);
+            if (!alreadyCorrect) {
+              await updateDoc(testDoc.ref, { time: formattedDate });
+              fixedCount++;
+              console.log(`Updated document ${testDoc.id} with formatted date ${formattedDate}`);
+            } else {
+              correctFormatCount++;
+            }
+          } catch (error) {
+            errorCount++;
+            console.error(`Error updating document ${testDoc.id} for user ${uid} with existing time ${testData.time}: `, error);
+          }
+        }
+      }
+    }
+
+    console.log("All dates reformatted successfully!");
+  } catch (error) {
+    console.error("Error reformating dates: ", error);
+  }
+
+  console.log(`Total errors: ${errorCount}`);
+  console.log(`Total fixed: ${fixedCount}`);
+  console.log(`Total already correct: ${correctFormatCount}`);
+};
+
+

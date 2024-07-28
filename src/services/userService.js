@@ -14,7 +14,7 @@ import {
 
 const firestore = getFirestore(app);
 
-import { getCurrentUser, isSignedIn, syncUserData } from "./authService.js";
+import { getCurrentUser, isSignedIn } from "./authService.js";
 import { toast } from "react-toastify";
 import { sendTestResultsMail } from "./testService.js";
 
@@ -39,41 +39,57 @@ const getAllDocumentsFromCollection = async (collectionRef) => {
 
 // Records a new test taken along with its details
 const newTestTaken = async (testName, result) => {
+  const formatDate = (date) => {
+    const options = { 
+      day: '2-digit', 
+      month: '2-digit', 
+      year: '2-digit', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: true 
+    };
+    return new Intl.DateTimeFormat('en-GB', options).format(date);
+  };
+
   const testDetails = {
     "test-name": testName,
     result: JSON.stringify(result),
-    time: new Date().toLocaleString(),
+    time: formatDate(new Date()),
   };
+
   try {
     if (!(await canTakeTest())) {
       return;
     }
+
     let userId = await getCurrentUser();
-    userId = userId.uid
+    userId = userId.uid;
     console.log("from new test", userId);
 
     const usersCollection = await collection(firestore, "users");
     const querySnapshot = await getDocs(
       query(usersCollection, where("uid", "==", userId))
     );
-    if (querySnapshot.size != 1) {
+    if (querySnapshot.size !== 1) {
       console.log("No or multiple user documents found!");
       return;
     }
+
     const doc = querySnapshot.docs[0];
     var credit = doc.data().credit;
     credit -= 1;
-    console.log("credit updated to ",credit)
+    console.log("credit updated to ", credit);
     await updateDoc(doc.ref, { credit });
+
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
     console.log("Data written to Firestore successfully!");
+
   } catch (error) {
     console.error("Error writing document: ", error);
   }
 
-  await sendTestResultsMail(testName,result)
-
+  await sendTestResultsMail(testName, result);
 };
 
 // Checks if the user is allowed to take a test based on their account type and the number of tests taken

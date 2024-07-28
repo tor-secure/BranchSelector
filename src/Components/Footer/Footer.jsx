@@ -29,6 +29,10 @@ export default () => {
       label: "About",
       items: [
         {
+          href: "disclaimer",
+          name: "Disclaimer ",
+        },
+        {
           href: "terms",
           name: "Terms of Service",
         },

@@ -186,6 +186,7 @@ const ContactUs = () => {
               <div>
                 <label className="font-medium">Phone number</label>
                 <input
+                  title="Enter a valid 10 digit phone number"
                   type="tel"
                   name="phoneNumber"
                   value={formData.phoneNumber}

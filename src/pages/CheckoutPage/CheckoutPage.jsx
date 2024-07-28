@@ -168,7 +168,9 @@ const CheckoutPage = () => {
               <>
                <label className="font-bold text-sm text-gray-700 mt-10">Counselling Location</label>
                <p className="text-black shadow-sm border p-4 rounded-md text-md font-bold mt-1">
-                SurePass Academy, 9, II, Manasa Tower, PVS Junction, Mangaluru - India
+                SurePass,<br/> #9, Second floor
+                Next to Stock Holding
+                Manasa Towers, MG Road, <br/>Mangalore - 575003,<br/> Karnataka, India
           </p>
           </>
                )

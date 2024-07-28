@@ -1,6 +1,7 @@
 import { GoogleLogo } from "./GoogleLogo";
 import {
   loginWithEmailAndPassword,
+  signInWithFacebook,
   signInWithGoogle,
 } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { IoClose } from "react-icons/io5";
+import { FacebookLogo } from "./FacebookLogo";
 
 
 const Login = () => {
@@ -27,9 +29,9 @@ const Login = () => {
 
     } 
     
-const handleGoBack = () => {
-        navigate('/');
-}
+  const handleGoBack = () => {
+          navigate('/');
+  }
 
 const onSubmitHandler = async (e) => {
   e.preventDefault(); // Prevent the default form submission
@@ -78,12 +80,26 @@ const onSubmitHandler = async (e) => {
 
   }
 
+  const onContinueWithFacebookHandler = async () =>{
+    const authResult = await signInWithFacebook({rememberMe:false})
+    if(authResult.success)
+    {
+    toast.success("Logged in successfully!", toastOptions);
+    navigate(fromLocation?fromLocation.pathname:'/');
+    }
+    else{
+      toast.error("Something went wrong! Try again!",toastOptions)
+    }
+
+
+  }
+
   const onClickHandler = () => {
     navigate("/signup");
   };
 
   const forgotPasswordHandler = () => {
-    navigate("/resetPassword");
+    navigate("/forgotPassword");
   };
 
   return (
@@ -114,15 +130,35 @@ const onSubmitHandler = async (e) => {
             </p>
           </div>
         </div>
+
+
         <div className="flex items-center justify-center">
-          <button
-            className="flex items-center justify-center py-2.5 px-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
-            onClick={onContinueWithGoogleHandler}
-          >
-            <GoogleLogo />
-            Continue with Google
-          </button>
+          <div className="w-full max-w-xs">
+            <button
+              className="w-full flex items-center justify-center py-2.5 px-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
+              onClick={onContinueWithGoogleHandler}
+            >
+              <GoogleLogo />
+              Continue with Google
+            </button>
+          </div>
         </div>
+
+        {
+          /*
+        <div className="flex items-center justify-center">
+          <div className="w-full max-w-xs">
+            <button
+              className="w-full flex items-center justify-center py-2.5 px-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
+              onClick={onContinueWithFacebookHandler}
+            >
+              <FacebookLogo />
+              Continue with Facebook
+            </button>
+          </div>
+        </div>*/
+        }
+
         <div className="relative">
           <span className="block w-full h-px bg-gray-300"></span>
           <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">

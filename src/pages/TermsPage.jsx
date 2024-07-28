@@ -66,7 +66,10 @@ const TermsPage = () => {
   <ul className="list-disc list-inside mt-2">
     <li>By email: info@branchselector.com</li>
     <li>By visiting this page on our website: <a href="https://www.branchselector.com/contactus" className="text-blue-500">https://www.branchselector.com/contactus</a></li>
-    <li>By mail: 9, II, Second Floor, Manasa Towers, Karnataka, India</li>
+    <li>By mail: SurePass,
+        #9, Second floor Next to Stock Holding Manasa Towers, MG Road,
+        Mangalore - 575003,
+        Karnataka, India</li>
   </ul>
 
 
