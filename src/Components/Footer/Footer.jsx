@@ -44,6 +44,10 @@ export default () => {
           href: "refund",
           name: "Refund Policy"
         },
+        {
+          href: "disclaimer",
+          name: "Disclaimer"
+        },
       ],
     },
   ];

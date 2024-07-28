@@ -22,8 +22,8 @@ const contactMethods = [
         />
       </svg>
     ),
-    contact: "info@branchselector.com",
-    href: "mailto:info@branchselector.com",
+    contact: "educatorananth@gmail.com",
+    href: "mailto:educatorananth@gmail.com",
   },
   {
     icon: (
@@ -67,8 +67,8 @@ const contactMethods = [
         />
       </svg>
     ),
-    contact: "9, II, Manasa Tower, PVS Junction,Mangaluru, Karnataka 575003",
-    href: "https://maps.app.goo.gl/BH5khiT5wcJuGc1q6",
+    contact: "Surepass, #9, Second Floor, Next to Stock Holding, Manasa Towers, MG Road, Mangalore - 575003, Karnataka, India",
+    href: "https://maps.app.goo.gl/nm6oJrVmMhzKm2xm9",
   },
 ];
 

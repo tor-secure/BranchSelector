@@ -64,12 +64,14 @@ const TermsPage = () => {
 
       <h2 className="text-2xl font-bold mt-8">11. Contact Us</h2>
   <ul className="list-disc list-inside mt-2">
-    <li>By email: info@branchselector.com</li>
+    <li>By email: <a href="mailto:educatorananth@gmail.com" className="text-blue-600 underline">educatorananth@gmail.com</a></li>
     <li>By visiting this page on our website: <a href="https://www.branchselector.com/contactus" className="text-blue-500">https://www.branchselector.com/contactus</a></li>
+
     <li>By mail: SurePass,
         #9, Second floor Next to Stock Holding Manasa Towers, MG Road,
         Mangalore - 575003,
         Karnataka, India</li>
+
   </ul>
 
 

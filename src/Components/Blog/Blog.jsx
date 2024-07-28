@@ -26,7 +26,7 @@ const Blog = () => {
       let q = query(
         collection(firestoredb, "blog-posts"),
         orderBy("date", "desc"),
-        limit(10)
+        limit(9)
       );
 
       if (lastDoc) {
@@ -44,7 +44,7 @@ const Blog = () => {
         title: doc.data().title,
       }));
       setPosts((prevPosts) => [...prevPosts, ...newPosts]);
-      if (snapshot.docs.length < 10) {
+      if (snapshot.docs.length < 9) {
         setHasMore(false); // Disable "Load More" button if there are no more posts to load
       }
       setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
