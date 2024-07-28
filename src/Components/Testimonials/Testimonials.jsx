@@ -14,6 +14,13 @@ export default () => {
         "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
     {
+      avatar: Poorvi,
+      name: "Poorvi Shetty",
+      title: "Aeronautical Engineer",
+      quote:
+        "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
+    },
+    {
       avatar: Manav,
       name: "Manav Makhasana",
       title: "Software Engineer",
@@ -26,13 +33,6 @@ export default () => {
       title: "UI/UX designer",
       quote:
         "Branch Selector provided invaluable clarity, leading me to my ideal course.",
-    },
-    {
-      avatar: Poorvi,
-      name: "Poorvi Shetty",
-      title: "Aeronautical Engineer",
-      quote:
-        "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
     },
     {
       avatar: Saanvi,
@@ -57,11 +57,11 @@ export default () => {
           </p>
         </div>
         <div className="mt-12">
-          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
             {testimonials.map((item) => (
               <li
                 key={item.name}
-                className="bg-white rounded-xl border shadow-md flex flex-col"
+                className="bg-white rounded-xl border shadow-md flex flex-col self-center"
               >
                 <div className="p-4 flex-grow">
                   <svg

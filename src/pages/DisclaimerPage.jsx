@@ -5,10 +5,7 @@ const DisclaimerPage = () =>{
       <p className="text-sm text-gray-500">Last updated: July 25, 2024</p>
       <p className="mt-4">This Disclaimer describes Our terms and conditions on the purpose and usage of <a href="https://www.branchselector.com"><strong>Branch Selector</strong></a> The information provided on this site is for general informational purposes only and should not be construed as professional advice. Branch Selector strives to ensure the accuracy and reliability of the information presented, but we make no guarantees of completeness or timeliness.</p>
       <p className="mt-4">We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
-      
-      <h2 className="text-2xl font-bold mt-8">Interpretation and Definitions</h2>
-      {/* To be removed */}
-      
+            
       <h3 className="text-xl font-bold mt-4">Informational Purpose Only</h3>
       <p className="mt-2">The psychometric tests and assessments provided on <a href="https://www.branchselector.com" className="text-blue-600 underline">https://www.branchselector.com</a> are intended solely for informational and educational purposes. They are designed to assist individuals in understanding their interests, strengths, and potential career paths but should not be considered definitive or absolute measures of one's abilities or future success.
       </p>
