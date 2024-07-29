@@ -54,7 +54,7 @@ const CheckoutPage = () => {
       currency:currencyCode
     }
     setLoading(true)
-    await handlePayment(plan,appointmentFormData,paymentDetails,setLoading)
+    await handlePayment(plan,appointmentFormData,paymentDetails,setLoading,navigate)
     
   }
 
