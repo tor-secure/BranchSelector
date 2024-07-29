@@ -54,7 +54,7 @@ const CheckoutPage = () => {
       currency:currencyCode
     }
     setLoading(true)
-    await handlePayment(plan,appointmentFormData,paymentDetails,setLoading)
+    await handlePayment(plan,appointmentFormData,paymentDetails,setLoading,navigate)
     
   }
 
@@ -102,6 +102,8 @@ const CheckoutPage = () => {
               <input
                 type="text"
                 name="fullName"
+                minLength={2}
+                title="Please enter a name with at least 2 characters"
                 value={appointmentFormData.fullName}
                 onChange={handleInputChange}
                 required
@@ -125,6 +127,7 @@ const CheckoutPage = () => {
                 type="tel"
                 pattern="[1-9]{1}[0-9]{9}"
                 name="phoneNumber"
+                title="Enter a valid 10 digit phone number"
                 value={appointmentFormData.phoneNumber}
                 onChange={handleInputChange}
                 required

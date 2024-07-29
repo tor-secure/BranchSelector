@@ -1,14 +1,17 @@
 import { toast } from "react-toastify";
 import { getCurrentUserInfo } from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const verifyPayment = async (
   userDetails,
   planDetails,
   appointmentDetails,
   paymentDetails,
-  loaderHandler
-
+  loaderHandler,
+  navigate
   ) => {
+
+  
 
     console.log(JSON.stringify({
             'userDetails':userDetails,
@@ -39,8 +42,11 @@ const verifyPayment = async (
       const data = await response.json();
       loaderHandler(false)
       if (data.status === "success") {
+
+        navigate('/paymentConfirmation',{state:{planDetail:planDetails,appointmentDetail:appointmentDetails, paymentDetail:paymentDetails}})
   
         toast.update(toastId, {
+          
           render: `Payment verified successfully! ${planDetails.credits} credits have been added to your account!`,
           type: "success",
           isLoading: false,
@@ -68,7 +74,7 @@ const verifyPayment = async (
     }
   };
 
-  const handlePayment = async (plan,appointmentDetails,paymentDetails,loaderHandler) => {
+  const handlePayment = async (plan,appointmentDetails,paymentDetails,loaderHandler,navigate) => {
 
     const toastId = toast.loading("Contacting Payment Gateway...", {
       autoClose: false,
@@ -108,13 +114,15 @@ const verifyPayment = async (
           name: "SurePass Academy",
           description: plan.title,
           order_id: data.razorpayOrder.id, // Razorpay Order ID
-          handler: function (response) {
+          handler: async function (response) {
             
             let tempUserDetails = {"uid":userDetails.uid,"name":userDetails.displayName,"email":userDetails.email}
             paymentDetails.razorpay_payment_id = response.razorpay_payment_id
+            paymentDetails.razorpay_order_id = response.razorpay_order_id
+            paymentDetails.razorpay_signature = response.razorpay_signature
 
-            verifyPayment(
-              tempUserDetails, plan, appointmentDetails,paymentDetails,loaderHandler
+            await verifyPayment(
+              tempUserDetails, plan, appointmentDetails,paymentDetails,loaderHandler,navigate
             );
           },
           prefill: {
