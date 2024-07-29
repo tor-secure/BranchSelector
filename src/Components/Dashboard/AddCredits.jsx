@@ -13,11 +13,6 @@ const AddCredits = () => {
             Add credits to your account and continue your journey of discovery
             with BranchSelector!
             <br />
-            <br />
-            For just{" "}
-            <span className="font-bold text-[#5a93f5]">₹200 per credit</span>,
-            unlock personalized tests that reveal your true potential. Each
-            credit brings you one step closer to your ideal career.
           </div>
           <img
             className="h-60 mt-10 ml-[50%] hidden md:block"
