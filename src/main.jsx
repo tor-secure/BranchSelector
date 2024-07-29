@@ -29,6 +29,7 @@ import {PricingPage} from "./pages/PricingPage/PricingPage.jsx";
 import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage.jsx";
 import { DeleteAccountPage } from "./pages/DeleteAccountPage.jsx";
+import { PaymentConfirmationPage } from "./pages/PaymentConfirmationPage.jsx";
 
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyDisclaimerPage = React.lazy(()=>import("./pages/DisclaimerPage.jsx"))
@@ -63,6 +64,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingPage />}>
             <LazyDisclaimerPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "paymentConfirmation",
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <PaymentConfirmationPage />
           </Suspense>
         ),
       },

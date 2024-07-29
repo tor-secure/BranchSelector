@@ -9,14 +9,14 @@ import {
 } from "../../services/userService";
 import { toast } from "react-toastify";
 import CreditsRemainingIcon from "./../../assets/CreditsRemainingIcon.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getPricingPlans } from "../PricingPage/PricingPlans";
 import { handlePayment } from "./PaymentService";
 
 const CheckoutPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { plan, currencyCode } = location.state || {};
-
   const [totalAmountToPay, setTotalAmountToPay] = useState(plan.price);
   const [discountApplied, setDiscountApplied] = useState(0);
   const [voucherCode, setVoucherCode] = useState("");
@@ -36,7 +36,13 @@ const CheckoutPage = () => {
   };
 
   const tempPayHandle = (event) => {
+    const paymentDetails = {
+      couponCode:voucherCode,
+      amount:totalAmountToPay,
+      currency:currencyCode
+    }
     event.preventDefault();
+    //navigate('/paymentConfirmation',{state:{planDetail:plan,appointmentDetail:appointmentFormData, paymentDetail:paymentDetails}})
     toast.error("Payment option is not yet active!");
   };
   
