@@ -39,7 +39,13 @@ const addAuthChangeListener = (onChange) => {
 
 // Function to register a new user with email and password
 const registerWithEmailAndPassword = async (name, phoneNumber, email, password) => {
+
+  const logResult = await logger("SIGNUP")
+  if(!logResult)
+  return { status: 'error', message: 'An unexpected error occurred. Please try again later.' };
+
   try {
+
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const user = result.user;
 
@@ -58,7 +64,6 @@ const registerWithEmailAndPassword = async (name, phoneNumber, email, password) 
 
     const usersCollection = collection(firestore, 'users');
     await addDoc(usersCollection, newUser);
-
     return { status: 'success', message: 'Sign up successful!' };
   } catch (error) {
     // Handle different error cases and return the appropriate status and message
@@ -78,7 +83,13 @@ const registerWithEmailAndPassword = async (name, phoneNumber, email, password) 
 
 // Function to sign in with Google using Google OAuth provider
 const signInWithGoogle = async ({ rememberMe }) => {
-    try {
+
+  const logResult = await logger("LOGIN")
+  if(!logResult)
+  return { success: false, message: 'An unexpected error occurred. Please try again later.' };
+
+
+  try {
         const result = await signInWithPopup(auth, googleAuthProvider)
         const user = result.user;
         const newUser = {
@@ -106,6 +117,11 @@ const signInWithGoogle = async ({ rememberMe }) => {
 };
 
 const signInWithFacebook = async ({ rememberMe }) => {
+
+  const logResult = await logger("LOGIN")
+  if(!logResult)
+  return { success: false, message: 'An unexpected error occurred. Please try again later.' };
+
   const provider = new FacebookAuthProvider();
     try {
         const result = await signInWithPopup(auth, provider)
@@ -140,6 +156,11 @@ const isSignedIn = () => {
 
 // Function to login with email and password
 const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
+
+  const logResult = await logger("LOGIN")
+  if(!logResult)
+  return { success: false, message: 'An unexpected error occurred. Please try again later.' };
+
   try {
     // Set the appropriate persistence based on the 'rememberMe' flag
     await getAuth().setPersistence(
@@ -202,8 +223,11 @@ const SendPasswordResetEmail = async (email) => {
 };
 
 // Function to logout the current user
-const logout = () => {
+const logout = async () => {
   signOut(auth);
+  const logResult = await logger("LOGOUT")
+  if(!logResult)
+  return { success: false, message: 'An unexpected error occurred. Please try again later.' };
 };
 
 const resetPassword = async (email) => {
@@ -268,6 +292,28 @@ function getCurrentUser() {
   });
 }
 
+const logger = async (event) => {
+  try {
+    const response = await fetch('https://ip-world.vercel.app/');
+    const logData = await response.json();
+
+    // Prepare the data
+    const logEntry = {
+      EVENT: event,
+      TIMESTAMP: logData.USER_INFORMATION.TIMESTAMP,
+      ASN_INFORMATION: logData.ASN_INFORMATION,
+      GEO_INFORMATION: logData.GEO_INFORMATION,
+      USER_INFORMATION: logData.USER_INFORMATION
+    };
+
+    // Push to Firebase
+    await addDoc(collection(firestore, "logs"), logEntry);
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 export {
   auth,
   firestore,
@@ -283,5 +329,6 @@ export {
   getCurrentUser,
   addAuthChangeListener,
   resetPassword,
-  deleteAccount
+  deleteAccount,
+  logger
 };

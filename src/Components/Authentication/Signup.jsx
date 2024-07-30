@@ -32,14 +32,13 @@ const onContinueWithGoogleHandler = async () =>{
     const authResult = await signInWithGoogle({rememberMe:false})
     if(authResult.success)
     {
-
     toast.success("Logged in successfully!", toastOptions);
-    setIsLoading(false)
     navigate('/');
     }
     else{
       toast.error("Something went wrong! Try again!",toastOptions)
     }
+    setIsLoading(false)
 
 
   }

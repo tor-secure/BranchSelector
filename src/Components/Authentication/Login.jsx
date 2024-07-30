@@ -11,6 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { IoClose } from "react-icons/io5";
 import { FacebookLogo } from "./FacebookLogo";
+import { useState } from "react";
+import OverlayLoader from "../OverlayLoader";
 
 
 const Login = () => {
@@ -20,6 +22,7 @@ const Login = () => {
   const fromLocation = state.from;
 
   const navigate = useNavigate();
+  const [isLoading,setIsLoading] = useState(false)
 
     const toastOptions = {
 
@@ -35,6 +38,7 @@ const Login = () => {
 
 const onSubmitHandler = async (e) => {
   e.preventDefault(); // Prevent the default form submission
+  setIsLoading(true)
 
   const email = e.target.elements.email.value;
   const password = e.target.elements.password.value;
@@ -50,6 +54,7 @@ const onSubmitHandler = async (e) => {
     if (status === 'success') {
       // Login successful, navigate to the desired location
       toast.success("Logged in successfully")
+      setIsLoading(false)
       navigate(fromLocation ? fromLocation.pathname : '/');
     } else {
       // Login failed, display the error message using a toast
@@ -60,23 +65,23 @@ const onSubmitHandler = async (e) => {
     console.error('An unexpected error occurred:', error);
     toast.error('An unexpected error occurred. Please try again later.');
   }
+
+  setIsLoading(false)
 };
 
   const onContinueWithGoogleHandler = async () =>{
+
+    setIsLoading(true)
     const authResult = await signInWithGoogle({rememberMe:false})
     if(authResult.success)
     {
-
-
-
     toast.success("Logged in successfully!", toastOptions);
-
     navigate(fromLocation?fromLocation.pathname:'/');
     }
     else{
       toast.error("Something went wrong! Try again!",toastOptions)
     }
-
+    setIsLoading(false)
 
   }
 
@@ -106,7 +111,7 @@ const onSubmitHandler = async (e) => {
     
     <div className="flex-1 flex lg:items-center justify-center h-screen">
 
- 
+      <OverlayLoader isLoading={isLoading} loadingText={"Logging in..."}/>
       <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
 
         <div className="mt-5 space-y-2">
