@@ -1,6 +1,6 @@
 
 
-import { auth, getCurrentUser, logout } from "../../services/authService";
+import { auth, getCurrentUser, logger, logout } from "../../services/authService";
 import {
   collection,
   doc,
@@ -35,7 +35,7 @@ const ServicesTest = () => {
     <>
       <button
         onClick={async () => {
-          await reformatDates()
+          await logger("LOGIN")
         }}
         style={style}
       >
