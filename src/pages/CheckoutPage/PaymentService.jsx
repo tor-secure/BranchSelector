@@ -43,7 +43,7 @@ const verifyPayment = async (
       loaderHandler(false)
       if (data.status === "success") {
 
-        navigate('/paymentConfirmation',{state:{planDetail:planDetails,appointmentDetail:appointmentDetails, paymentDetail:paymentDetails}})
+        navigate('/paymentConfirmation',{state:{planDetail:planDetails,appointmentDetail:appointmentDetails, paymentDetail:paymentDetails, receiptId:data.receipt_id}})
   
         toast.update(toastId, {
           
