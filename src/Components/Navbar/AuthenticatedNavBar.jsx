@@ -15,9 +15,9 @@ const ProfileDropDown = ({ profile, className, setMenuState }) => {
     { id: 2, title: "Log out", path: "/" },
   ];
 
-  const logoutListener = () => {
+  const logoutListener = async () => {
+    await logout();
     toast.success("Signed out suceessfully!");
-    logout();
   };
 
   useEffect(() => {
