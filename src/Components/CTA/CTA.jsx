@@ -9,7 +9,7 @@ const CTA = () => {
             Know yourself in depth!
           </h2>
           <p className="text-blue-100 my-3">
-            Sign up now to unlock 3 tests for free!
+            Sign up now!
           </p>
         </div>
         <div className="mt-4">
