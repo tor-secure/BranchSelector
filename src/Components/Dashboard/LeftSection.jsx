@@ -125,11 +125,23 @@ export const LeftSection = ({ setSelectedPage }) => {
           
         <div
           className="border-red-600 justify-self-center p-3 flex font-sans font-bold mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md"
-          onClick={() => {
+          onClick={async () => {
             navigate("/");
-            toast.success("Logged out sucessfully!");
-            logout();
-          }}
+            const toastId = toast.loading("Signing out...", {
+              autoClose: false,
+              draggable: true,
+            });
+
+            await logout();
+
+          toast.update(toastId, {
+          render: `Logged out successfully!`,
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          draggable: true,
+        });
+        }}
         >
           <MdExitToApp size={25} />
           <p className="ml-2">Log Out</p>
