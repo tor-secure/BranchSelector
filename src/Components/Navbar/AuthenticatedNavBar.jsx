@@ -16,8 +16,20 @@ const ProfileDropDown = ({ profile, className, setMenuState }) => {
   ];
 
   const logoutListener = async () => {
+    const toastId = toast.loading("Signing out...", {
+      autoClose: false,
+      draggable: true,
+    });
+
     await logout();
-    toast.success("Signed out suceessfully!");
+
+    toast.update(toastId, {
+    render: `Logged out successfully!`,
+    type: "success",
+    isLoading: false,
+    autoClose: 3000,
+    draggable: true,
+    });
   };
 
   useEffect(() => {
