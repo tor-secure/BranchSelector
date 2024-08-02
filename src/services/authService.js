@@ -54,7 +54,7 @@ const registerWithEmailAndPassword = async (name, phoneNumber, email, password) 
       photoUrl: user.photoURL ? user.photoURL : '',
       accountType: 'free',
       testsTaken: 0,
-      credit: 5,
+      credit: 0,
     };
 
     const usersCollection = collection(firestore, 'users');
@@ -92,7 +92,7 @@ const signInWithGoogle = async ({ rememberMe }) => {
             photoUrl: user.photoURL,
             accountType: 'free',
             testsTaken: 0,
-            credit: 5
+            credit: 0
         };
         const usersCollection = collection(firestore, "users");
         const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));
@@ -131,7 +131,7 @@ const signInWithFacebook = async ({ rememberMe }) => {
             photoUrl: user.photoURL,
             accountType: 'free',
             testsTaken: 0,
-            credit: 5
+            credit: 0
         };
         const usersCollection = collection(firestore, "users");
         const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));
