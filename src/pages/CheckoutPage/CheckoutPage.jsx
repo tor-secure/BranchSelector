@@ -88,7 +88,7 @@ const CheckoutPage = () => {
       <OverlayLoader isLoading={isLoading} loadingText={"Processing Transaction. Do not refresh or navigate to other page. Please wait..."}/>
       <p className="text-2xl font-bold text-center mb-10 text-blue-500">Checkout</p>
 
-      <form onSubmit={tempPayHandle}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="font-bold text-sm text-gray-700">Selected Plan</label>
           <p className="text-black shadow-sm border p-4 rounded-md text-xl font-bold">
@@ -141,6 +141,7 @@ const CheckoutPage = () => {
                 name="selectedDate"
                 value={appointmentFormData.selectedDate}
                 onChange={handleInputChange}
+                 min={new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 16)}
                 required
                 className="w-full mt-1 px-3 py-1.5 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
               />

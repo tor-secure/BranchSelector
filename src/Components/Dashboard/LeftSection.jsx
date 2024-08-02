@@ -12,7 +12,7 @@ import { getCurrentUserInfo } from "../../services/userService";
 
 export const LeftSection = ({ setSelectedPage }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false]);
-  const [userData, serUserData] = useState({});
+  const [userData, setUserData] = useState({});
   const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
 
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const LeftSection = ({ setSelectedPage }) => {
     async function fetchTestHistory() {
       const testUserData = await getCurrentUserInfo();
       console.log("UserData:", testUserData);
-      serUserData(testUserData);
+      setUserData(testUserData);
     }
 
     fetchTestHistory();
@@ -40,7 +40,7 @@ export const LeftSection = ({ setSelectedPage }) => {
     <aside className="w-full lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 md:pb-3 pb-0 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff]">
       <div className="w-full flex row:flex-row lg:flex-col justify-center items-center mt-10 lg:mt-0">
         <img
-          src={userData.photoURL?userData.photoURL: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"}
+          src={userData.authProvider == 'google' ? userData.photoUrl : "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"}
           className="rounded-full size-[25%] max-w-[200px] lg:size-28 bg-white"
           alt="User Profile"
         ></img>
