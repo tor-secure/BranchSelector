@@ -136,10 +136,14 @@ const verifyPayment = async (
           theme: {
             color: "#F37254",
           },
+          modal:{
+            "ondismiss":()=>{loaderHandler(false)}
+          }
         };
 
         const rzp1 = new Razorpay(options);
         rzp1.on("payment.failed", function (response) {
+          loaderHandler(false)
           toast.error(`Payment Failed: ${response.error.description}`, {
             autoClose: 3000,
             draggable: true,
@@ -156,6 +160,7 @@ const verifyPayment = async (
         });
       }
     } catch (error) {
+      loaderHandler(false)
       toast.update(toastId, {
         render: "Error processing payment.",
         type: "error",
