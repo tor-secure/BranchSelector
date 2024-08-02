@@ -108,7 +108,7 @@ const verifyPayment = async (
         });
 
         const options = {
-          key_id: "rzp_test_yAtiwPxT3TKKr2", // Enter the Key ID generated from the Dashboard
+          key_id: "rzp_live_EDnbw5QpCBwgp0", // Enter the Key ID generated from the Dashboard
           amount: paymentDetails.amount * 100, // Amount in lowest denomination
           currency: paymentDetails.currency,
           name: "SurePass Academy",
