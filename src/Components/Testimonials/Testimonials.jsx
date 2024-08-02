@@ -3,6 +3,7 @@ import Manav from "../../assets/manav.png";
 import Bhavith from "../../assets/bhavith.png";
 import Poorvi from "../../assets/poorvi.jpeg";
 import Saanvi from "../../assets/saanvi.jpeg"
+import Anish from "../../assets/Anish.jpeg"
 
 export default () => {
  const testimonials = [
@@ -14,12 +15,19 @@ export default () => {
         "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
     {
+      avatar: Saanvi,
+      name: "Saanvi Chetan",
+      title: "BBA student",
+      quote:
+        "With Branch Selector's guidance, I discovered a course that truly aligns with my interests.",
+    },
+    {
       avatar: Manav,
       name: "Manav Makhasana",
       title: "Software Engineer",
       quote:
         "Thanks to Branch Selector, I'm now pursuing a field I'm truly passionate about.",
-    },
+    },    
     {
       avatar: Bhavith,
       name: "Bhavith B Shetty",
@@ -34,13 +42,16 @@ export default () => {
       quote:
         "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
     },
+
     {
-      avatar: Saanvi,
-      name: "Saanvi Chetan",
-      title: "BBA student",
+      avatar: Anish,
+      name: "Anish U",
+      title: "Software Developer Intern",
       quote:
-        "With Branch Selector's guidance, I discovered a course that truly aligns with my interests.",
+        "Branch Selector's insight was crucial in finding a course that perfectly matches my passion and career goals.",
     },
+
+
   ];
 
 
