@@ -2,6 +2,7 @@ import React from "react";
 import ErrorTree from "../../assets/tree.svg";
 import { FaArrowLeft, FaBackspace } from "react-icons/fa";
 
+//Standard page for all errors
 const ErrorPage = () => {
   return (
     <section className="flex flex-col justify-center items-center font-poppins my-4   mx-4 text-center">

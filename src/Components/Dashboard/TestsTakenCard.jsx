@@ -1,5 +1,7 @@
+import { testMetaData } from "../../services/testService";
 import TestsTakenIcon from "./../../assets/TestsTakenIcon.svg";
 
+//Card in user dashboard 
 export const TestsTakenCard = ({testsTaken}) => {
   return (
     <div className="bg-white rounded-xl lg:rounded-r-none w-28 h-28 sm:w-36 sm:h-32 my-5 py-1 shadow-[#9cbcf8] shadow-md ml-10 lg:ml-0">
@@ -10,7 +12,7 @@ export const TestsTakenCard = ({testsTaken}) => {
       <div className="flex justify-center p-4 pt-2 h-[3.5em]">
         <img src={TestsTakenIcon} className="size-fit"></img>
       </div>
-      <p className="text-end text-sm sm:text-2xl mr-3 font-semibold">{testsTaken}/9</p>
+      <p className="text-end text-sm sm:text-2xl mr-3 font-semibold">{testsTaken}/{Object.keys(testMetaData).length}</p>
     </div>
   );
 };

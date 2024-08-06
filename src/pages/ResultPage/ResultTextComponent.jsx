@@ -1,15 +1,7 @@
 import { resultTextData } from "../../services/ResultContent";
 import { getTestMetaData } from "../../services/testService";
 
-const EngineeringResultListComponent = ({result}) =>{
-Object.keys(result).map((index,value)=>{
-
-
-
-})
-}
-
-
+//The text that displayed below result pages.
 const ResultTextComponent = ({testName, result}) => {
 
   const testMetadata = getTestMetaData(testName);

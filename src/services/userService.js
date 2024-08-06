@@ -14,7 +14,7 @@ import {
 
 const firestore = getFirestore(app);
 
-import { getCurrentUser, isSignedIn } from "./authService.js";
+import { getCurrentUser } from "./authService.js";
 import { toast } from "react-toastify";
 import { sendTestResultsMail } from "./testService.js";
 
@@ -64,7 +64,6 @@ const newTestTaken = async (testName, result) => {
 
     let userId = await getCurrentUser();
     userId = userId.uid;
-    console.log("from new test", userId);
 
     const usersCollection = await collection(firestore, "users");
     const querySnapshot = await getDocs(
@@ -78,12 +77,10 @@ const newTestTaken = async (testName, result) => {
     const doc = querySnapshot.docs[0];
     var credit = doc.data().credit;
     credit -= 1;
-    console.log("credit updated to ", credit);
     await updateDoc(doc.ref, { credit });
-
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
-    console.log("Data written to Firestore successfully!");
+ 
 
   } catch (error) {
     console.error("Error writing document: ", error);
@@ -92,7 +89,7 @@ const newTestTaken = async (testName, result) => {
   await sendTestResultsMail(testName, result);
 };
 
-// Checks if the user is allowed to take a test based on their account type and the number of tests taken
+// Checks if the user is allowed to take a test based on the credits in their account
 const canTakeTest = async () => {
   const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
@@ -108,10 +105,8 @@ const canTakeTest = async () => {
   let credits = doc.data().credit;
 
   if (credits <= 0) {
-    console.log("No more free tests");
     return false;
   } else {
-    console.log("Can take test");
     return true;
   }
 };
@@ -120,7 +115,6 @@ const canTakeTest = async () => {
 const getTestHistory = async () => {
   try {
     const temp = await getCurrentUser();
-    //console.log("Userr", temp);
     const userId = temp.uid;
     const usersCollection = collection(firestore, "users");
     const querySnapshot = await getDocs(
@@ -142,23 +136,18 @@ const getTestHistory = async () => {
   }
 };
 
+//IMPORTANT: Defination of voucher and coupon are flipped in usage. Might correct it sometime later.
 
-// Upgrades the user's account
-const upgradeAccount = async () => {
-  // Implementation goes here
-};
-
+// Validate if a discount coupon exists, is under usage limit and is within the expriation dates.
 const validateDiscountVoucher = async (voucherCode) => {
   const toastId = toast.loading("Validating voucher...", { autoClose: false, draggable: true });
   
   try {
-    // Reference to the vouchers collection
     const vouchersCollection = collection(firestore, 'vouchers');
     const voucherQuery = query(vouchersCollection, where('code', '==', voucherCode));
     const voucherSnapshot = await getDocs(voucherQuery);
 
     if (voucherSnapshot.size !== 1) {
-      console.log("Voucher code does not exist.");
       toast.update(toastId, {
         render: "Voucher code does not exist.",
         type: "error",
@@ -180,7 +169,6 @@ const validateDiscountVoucher = async (voucherCode) => {
 
     if (currentDate >= startingDate && currentDate <= endingDate) {
       if (redeemed >= limit) {
-        console.log("Voucher code has reached its limit.");
         toast.update(toastId, {
           render: "Voucher code has reached its limit.",
           type: "error",
@@ -191,7 +179,6 @@ const validateDiscountVoucher = async (voucherCode) => {
         return null;
       }
 
-      console.log(`Voucher validated. Discount: ${discountPercentage}%`);
       toast.update(toastId, {
         render: `Voucher validated!`,
         type: "success",
@@ -202,7 +189,7 @@ const validateDiscountVoucher = async (voucherCode) => {
 
       return discountPercentage;
     } else {
-      console.log("Voucher code is expired.");
+
       toast.update(toastId, {
         render: "Voucher code is expired.",
         type: "error",
@@ -227,7 +214,7 @@ const validateDiscountVoucher = async (voucherCode) => {
 
 
 
-// Validates a coupon code and returns the credits to be added
+// Validates a voucher and returns the credits to be added
 const validateCouponCode = async (couponCode) => {
   const usersCollection = await collection(firestore, "coupon");
   const querySnapshot = await getDocs(
@@ -259,7 +246,7 @@ const validateCouponCode = async (couponCode) => {
   }
 };
 
-
+// Redeem the entered voucher, update the users count of credits.
 const redeemCoupon = async (couponCode) => {
   const toastId = toast.loading("Validating coupon....", { autoClose: false, draggable: true });
   try {
@@ -280,8 +267,6 @@ const redeemCoupon = async (couponCode) => {
 
     const { status, creditsToBeAdded } = validationResult;
 
-
-
     // Get the current user
     const currentUser = await getCurrentUser();
     const userUid = currentUser.uid;
@@ -293,7 +278,6 @@ const redeemCoupon = async (couponCode) => {
     const userSnapshot = await getDocs(userQuery);
 
     if (userSnapshot.empty) {
-      console.log("User does not exist.");
       toast.update(toastId, {
         render: "User does not exist.",
         type: "error",
@@ -304,7 +288,6 @@ const redeemCoupon = async (couponCode) => {
       return;
     }
 
-    // Assuming uid is unique and there is only one document in the snapshot
     const userDoc = userSnapshot.docs[0];
     const userRef = userDoc.ref;
     const userData = userDoc.data();
@@ -314,7 +297,7 @@ const redeemCoupon = async (couponCode) => {
     // Check if the coupon has already been redeemed
     const redeemedCoupons = userData.redeemedCoupons || [];
     if (redeemedCoupons.includes(couponCode)) {
-      console.log("You have already redeemed the coupon.");
+
       toast.update(toastId, {
         render: "You have already redeemed the coupon.",
         type: "error",
@@ -325,14 +308,12 @@ const redeemCoupon = async (couponCode) => {
       return;
     }
 
-
     // Update the user's credits
     await updateDoc(userRef, {
       credit: newCredits,
       redeemedCoupons: [...redeemedCoupons, couponCode]
     });
 
-    console.log(`Credits updated successfully. New credits: ${newCredits}`);
 
 
     // Update the redeemed count for the coupon
@@ -345,7 +326,6 @@ const redeemCoupon = async (couponCode) => {
       const couponData = couponDoc.data();
       const newRedeemedCount = (couponData.redeemed || 0) + 1;
       await updateDoc(couponRef, { redeemed: newRedeemedCount });
-      console.log(`Coupon redeemed count updated to: ${newRedeemedCount}`);
       toast.update(toastId, {
         render: "Coupon redeemed successfully!",
         type: "success",
@@ -378,7 +358,7 @@ const redeemCoupon = async (couponCode) => {
 };
 
 
-// Updates the number of downloads for a specific asset
+// Updates the number of downloads for a specific asset. NOT USED.
 const updateDownloads = async (assetDownloaded) => {
   try {
     const collectionRef = await collection(firestore, "books-downloads");
@@ -394,9 +374,9 @@ const updateDownloads = async (assetDownloaded) => {
   }
 };
 
-// Retrieves the current user's information
+
+// Retrieves the current user's information from the database
 const getCurrentUserInfo = async () => {
-  
   const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
   const querySnapshot = await getDocs(
@@ -411,6 +391,7 @@ const getCurrentUserInfo = async () => {
 
 };
 
+// Retrives the credits remaining in the user's account
 const getRemainingCredits = async () =>{
   const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
@@ -430,7 +411,6 @@ export {
   newTestTaken,
   getTestHistory,
   validateCouponCode,
-  updateDownloads,
   getRemainingCredits,
   getCurrentUserInfo,
   redeemCoupon,

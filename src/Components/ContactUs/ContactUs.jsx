@@ -1,3 +1,5 @@
+//Contact Us Page
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -77,12 +79,14 @@ const ContactUs = () => {
   const handleCaptchaChange = () => {
     setCaptchaChecked(true);
   };
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
     message: ""
   });
+
   const navigate = useNavigate()
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -206,18 +210,17 @@ const ContactUs = () => {
                   className="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 ></textarea>
               </div>
-                          <div className="flex items-start justify-center sm:justify-start mx-4 md:mx-0">
+              <div className="flex items-start justify-center sm:justify-start mx-4 md:mx-0">
                 <ReCAPTCHA
                   sitekey="6Le3tq0pAAAAAIVfl381LNT7XKGE3uWsjll_g2gY"
                   onChange={handleCaptchaChange}
                   className="scale-75 fel  md:scale-110  lg:scale-90 "
                 />
-            </div>
+              </div>
               <button type="submit" className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
                 Submit
               </button>
             </form>
-
           </div>
         </div>
       </div>

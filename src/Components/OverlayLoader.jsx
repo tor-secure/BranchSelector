@@ -1,3 +1,4 @@
+//Simple overlay loader. Use it when you dont want users to click anything else during loading.
 const OverlayLoader = ({ isLoading,loadingText }) => {
   if (!isLoading) return null;
 

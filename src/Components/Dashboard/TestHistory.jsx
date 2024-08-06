@@ -36,7 +36,6 @@ export const TestHistory = ({ testHistory }) => {
                 <div className="w-[20em] h-full p-2 flex">
                   <button
                     onClick={() => {
-                      // console.log(testMetaData[test.queryCode]);
                       navigate("/testInstruction", {
                         state: {
                           testMetaData: testMetaData[test["test-name"]],

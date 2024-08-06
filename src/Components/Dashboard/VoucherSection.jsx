@@ -10,10 +10,6 @@ export const VoucherSection = () => {
   const [couponCode, setCouponCode] = useState("");
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
   const [creditsToBeRedeemed, setCredits] = useState(0);
-  const calculateAmountToPay = (event) => {
-    const credits = parseInt(event.target.value);
-    setTotalAmountToPay(credits * 200);
-  };
 
   const handleValidate = async (event) => {
     event.preventDefault();
@@ -37,6 +33,7 @@ export const VoucherSection = () => {
     setCredits(0);
     setCouponCode("");
   };
+  
   return (
     <div className="bg-white md:w-max min-w-20 px-5 ">
       <form className="space-y-3 py-6 md:py-2 ">

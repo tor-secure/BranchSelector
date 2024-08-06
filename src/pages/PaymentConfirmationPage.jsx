@@ -2,12 +2,11 @@ import { useLocation } from "react-router-dom"
 import suceessSvg from "../assets/success.svg"
 import { FaArrowLeft } from "react-icons/fa"
 
+//Display payment confirmation after successfull payment
 const PaymentConfirmationPage = () => {
 
     const location = useLocation()
     const {planDetail, appointmentDetail, paymentDetail,receiptId} = location.state
-
-    console.log(planDetail,appointmentDetail,paymentDetail)
 
     return(
         <div className="flex flex-col h-full max-w-3xl min-h-lvh lg:mx-auto md:mx-auto sm:m-2 p-8 font-poppins text-center border-2 rounded-lg">

@@ -6,12 +6,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
-
-
+//Simple form for booking appointments
 function BookingPage() {
-
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -42,8 +38,7 @@ function BookingPage() {
       });
 
       if (response.ok) {
-        // Handle successful submission
-        console.log("Form submitted successfully!");
+
         toast.success(
           "Your request has been recived. We will reach out to you shortly"
         );

@@ -31,7 +31,7 @@ export default () => {
     {
       avatar: Bhavith,
       name: "Bhavith B Shetty",
-      title: "UI/UX designer",
+      title: "Frontend Developer",
       quote:
         "Branch Selector provided invaluable clarity, leading me to my ideal course.",
     },

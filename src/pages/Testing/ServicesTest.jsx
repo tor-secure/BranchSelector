@@ -1,4 +1,4 @@
-
+/* Testing ground for new functions etc. Have to delete someday when everything is complete */
 
 import { auth, getCurrentUser, logger, logout } from "../../services/authService";
 import {

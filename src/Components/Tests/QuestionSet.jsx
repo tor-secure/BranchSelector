@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
+//The questions section along with the options. Used for regular MCQ kind questions.
 export const QuestionSet = ({ qNo, questionsData, result, setResult }) => {
   
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
-
-  //   console.log(qNo, questionsData);
 
   const handleOptionClick = (index, option) => {
     const tempResult = { ...result };

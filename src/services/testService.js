@@ -11,6 +11,7 @@ import { TbAbc } from "react-icons/tb";
 import { GiBookmarklet, GiPaintBrush } from "react-icons/gi";
 import { getCurrentUserInfo } from "./userService";
 
+//List of all tests. Big metadata. Update this list after uploading new test data onto firebase.
 const testMetaData = {
   engineering: {
     queryCode: "engineering",
@@ -94,7 +95,31 @@ const testMetaData = {
     name:"Career Aptitude Test",
     displayType:"mcq",
     evaluationType:"aggregation"
-  }
+  },
+
+  /*
+  time:{
+    queryCode:"time",
+    name:"Time Management Test",
+    displayType:"mcq",
+    evaluationType:"score-range"
+  },
+
+  motivation:{
+    queryCode:"motivation",
+    name:"Motivation Assesment Test",
+    displayType:"mcq",
+    evaluationType:"score-range"
+  },
+
+  creativity:{
+    queryCode:"creativity",
+    name:"Creativity Test",
+    displayType:"mcq",
+    evaluationType:"score-range"
+  },
+  */
+
 };
 
 const testLogoData = {
@@ -195,6 +220,8 @@ const testLogoData = {
   }
 };
 
+//Functions relating to tests are defined here. 
+
 const db = getFirestore();
 
 const getTestLogo = (testName, size) => {
@@ -209,6 +236,7 @@ const getDefaultProfilePic = () => {
   return defaultUserPic;
 };
 
+// Function to get list of tests user has not yet taken.
 const getRemainingTests = (excludedTests) => {
   const filteredTests = Object.keys(testMetaData)
     .filter(
@@ -224,6 +252,7 @@ const getRemainingTests = (excludedTests) => {
   return filteredTests;
 };
 
+//Function to get test questions and optionsfrom firebase.
 async function getTestQuestions(testName) {
   try {
     const testQuestionsCollection = collection(db, "test-content");
@@ -254,10 +283,11 @@ async function getTestQuestions(testName) {
   }
 }
 
+//Function to evaluate tests. Would be great if it can be shifted to server side someday.
 async function evaluteTest(testName, selectedOptions) {
+
   function calculateGrade(correctAnswers) {
   const percentage = (correctAnswers / 30) * 100;
-  
   if (percentage >= 90) return 'A';
   if (percentage >= 80) return 'B';
   if (percentage >= 70) return 'C';
@@ -265,6 +295,9 @@ async function evaluteTest(testName, selectedOptions) {
   if (percentage >= 50) return 'E';
   return 'F';
   }
+
+  //Function contains several special cases for evaluation of certain tests. 
+
   const evaluationType = getTestMetaData(testName).evaluationType;
   try {
     const testQuestionsCollection = collection(db, "test-content");
@@ -274,7 +307,10 @@ async function evaluteTest(testName, selectedOptions) {
     // Fetch the entire answer key
     const answerKeySnapshot = await getDocs(answerKeyCollection);
 
+
     if (evaluationType == "aggregation") {
+      // Most of tests fall under this category. Options to each question contains several different attributes they are related to.
+      // To find answer, just agregate all of these attributes and their scores.
       const answerKey = {};
       var results = {};
       answerKeySnapshot.forEach((doc) => {
@@ -296,10 +332,10 @@ async function evaluteTest(testName, selectedOptions) {
       }
       var resultsArray = Object.entries(results);
       resultsArray.sort((a, b) => b[1] - a[1]);
-      console.log(resultsArray)
       results = Object.fromEntries(resultsArray);
 
       if(testName === "brain"){
+        // If its a brain test, change the key names to be accurately displayed in the results section.
         const tempRes = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
         return tempRes
       }
@@ -307,6 +343,7 @@ async function evaluteTest(testName, selectedOptions) {
       return results;
 
     } else if (evaluationType == "single-option") {
+      //Used for tests where there is only one correct option.
       let correctAnswers = 0;
       const answerKey = answerKeySnapshot.docs[0].data();
       for (let [questionId, optionId] of Object.entries(selectedOptions)) {
@@ -316,6 +353,7 @@ async function evaluteTest(testName, selectedOptions) {
       let res = {'Correct Answers':correctAnswers,'Wrong Answers':Object.values(selectedOptions).length - correctAnswers};
       
       if (testName === 'english') {
+        //If its and english test, calculate a grade based on the correct option.
         const grade = calculateGrade(correctAnswers);
         res.grade = grade;
       }
@@ -323,6 +361,7 @@ async function evaluteTest(testName, selectedOptions) {
     }
 
     if (evaluationType == "weighted-aggregation") {
+      //Similar to aggregation, but here there is an external weight to all atributes that the user is selecting.
       const answerKey = {};
       var results = {};
       answerKeySnapshot.forEach((doc) => {
@@ -349,6 +388,7 @@ async function evaluteTest(testName, selectedOptions) {
       resultsArray.sort((a, b) => b[1] - a[1]);
 
       if (testName === 'engineering') {
+        //For engineering test, return just the top 5 most scored options.
          resultsArray = resultsArray.slice(0, 5);
       }
       results = Object.fromEntries(resultsArray);
@@ -360,7 +400,10 @@ async function evaluteTest(testName, selectedOptions) {
   }
 }
 
+//Function that initates the mail to be sent to users after a test is taken.
 const sendTestResultsMail = async (testName,result) => {
+  // Once results is calculated, send results along with user details to a cloudflare worker. 
+  // The worker will then handle sending a mail.
   const testData = await getTestMetaData(testName);
   const userData = await getCurrentUserInfo();
 
@@ -372,8 +415,6 @@ const sendTestResultsMail = async (testName,result) => {
     "testType":testData.evaluationType == 'single-option'?'single-option':"aggregation"
   }
 
-  console.log("Mail server update body", JSON.stringify(requestBody))
-
   try {
       const response = await fetch("https://result-mail-sender.branchselector.workers.dev/", {
         method: "POST",
@@ -384,7 +425,6 @@ const sendTestResultsMail = async (testName,result) => {
          mode: 'no-cors'
       });
       if (response.ok) {
-        console.log("Mail server contacted succefuly");
       } else {
         console.error("Failed to submit form");
       }

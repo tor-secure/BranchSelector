@@ -63,7 +63,6 @@ export const RecommendedTests = ({ recommendedTests }) => {
                     <div>{getTestLogo(test.queryCode, 40)}</div>
                     <button
                       onClick={() => {
-                        // console.log(testMetaData[test.queryCode]);
                         navigate("/testInstruction", {
                           state: { testMetaData: test },
                         });

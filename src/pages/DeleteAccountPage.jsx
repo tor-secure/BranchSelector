@@ -5,6 +5,8 @@ import { LoadingPage } from "./LoadingPage";
 import { deleteAccount } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
+/*Delete Account Page. Not yet user accessable. Required for Facebook Auth Standards*/
+
 const DeleteAccountPage = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [userDetails, setUserDetails] = useState(null);

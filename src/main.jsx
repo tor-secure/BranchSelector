@@ -2,50 +2,51 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+
 import LandingPage from "./pages/LandingPage.jsx";
 import { Authentication } from "./pages/Authentication.jsx";
 import ResultsPage from "./pages/ResultPage/ResultPage.jsx";
 import { TestArea } from "./Components/Tests/TestArea.jsx";
 import { ServicesTest } from "./pages/Testing/ServicesTest.jsx";
 import { TestsList } from "./Components/TestsList.jsx";
-
-//import BookingPage from "./pages/BookingPage.jsx";
-
-//import EBook from "./pages/Ebook.jsx";
 import { TestInstruction } from "./Components/Tests/TestInstruction.jsx";
 import ProtectedRoute from "./Components/Authentication/ProtectedRoute.jsx";
-//import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 import { DashboardPage } from "./Components/Dashboard/DashboardPage.jsx";
-
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-//import TermsPage from "./pages/TermsPage.jsx";
 import { LoadingPage } from "./pages/LoadingPage.jsx";
 import RefundPolicyPage from "./pages/RefundPage.jsx";
-import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 import {PricingPage} from "./pages/PricingPage/PricingPage.jsx";
 import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage.jsx";
 import { DeleteAccountPage } from "./pages/DeleteAccountPage.jsx";
 import { PaymentConfirmationPage } from "./pages/PaymentConfirmationPage.jsx";
 
+
+//Lazy loading static pages
 const LazyPrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
 const LazyDisclaimerPage = React.lazy(()=>import("./pages/DisclaimerPage.jsx"))
 const LazyTermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
 const LazyBlogPage = React.lazy(() => import("./Components/Blog/Blog.jsx"));
 const LazyEbook = React.lazy(() => import("./pages/Ebook.jsx"));
 const LazyBookingPage = React.lazy(() => import("./pages/BookingPage.jsx"));
-const LazyContactUs = React.lazy(() =>
-  import("./Components/ContactUs/ContactUs.jsx")
-);
-//const LazyTestListPage = React.lazy(() => import("./Components/TestsList.jsx"));
+const LazyContactUs = React.lazy(() =>import("./Components/ContactUs/ContactUs.jsx"));
 
+//All routes in the project are defined here
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    // All the routes that under this childern list will be rendered with the App template.
+    // Basically with the navbar and footer.
+
+
+    // Wrap the required element inside a ProtectedRoute element to ensure users wont be able to access
+    // the routes without being authenticated.
+
     children: [
       {
         path: "",
@@ -94,9 +95,6 @@ const router = createBrowserRouter([
       {
         path: "testList",
         element: (
-          //<Suspense fallback={<LoadingPage />}>
-          //<LazyTestListPage />
-          //</Suspense>
           <TestsList />
         ),
       },
@@ -110,7 +108,7 @@ const router = createBrowserRouter([
       },
       {
         path: "ebook",
-        //<EBook />
+        
         element: (
           <Suspense fallback={<LoadingPage />}>
             <LazyEbook />
@@ -123,7 +121,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<LoadingPage />}>
             <LazyContactUs />
           </Suspense>
-        ), //<ContactUs />,
+        ), 
       },
       {
         path: "refund",
@@ -131,7 +129,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<LoadingPage />}>
             <RefundPolicyPage />
           </Suspense>
-        ), //<ContactUs />,
+        ), 
       },
       {
         path: "deleteAccount",
@@ -139,7 +137,7 @@ const router = createBrowserRouter([
           <ProtectedRoute>
             <DeleteAccountPage />
           </ProtectedRoute>
-        ), //<ContactUs />,
+        ), 
       },
       {
         path: "dashboard",
@@ -157,7 +155,8 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         errorElement: <ErrorPage />,
-      },      {
+      },      
+      {
         path: "checkout",
         element: (
           <ProtectedRoute>
@@ -166,24 +165,18 @@ const router = createBrowserRouter([
         ),
         errorElement: <ErrorPage />,
       },
-        {
-    path: "pricing",
-    element: <PricingPage />,
-    errorElement: <ErrorPage />,
-  },
       {
-        path: "about",
-        element: (
-          <ProtectedRoute>
-            <AboutUs />
-          </ProtectedRoute>
-        ),
+        path: "pricing",
+        element: <PricingPage />,
         errorElement: <ErrorPage />,
       },
-    ],
+      ],
     errorElement: <ErrorPage />,
   },
 
+  // Routes below this line dont use the default template and will be rendered
+  // without a navbar and a footer
+  
   {
     path: "login",
     element: <Authentication authType="login" />,
@@ -214,9 +207,6 @@ const router = createBrowserRouter([
     element: <ServicesTest />,
     errorElement: <ErrorPage />,
   },
-
-
-
   {
     path: "testInstruction",
     element: (
@@ -230,7 +220,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ToastContainer />
+    <ToastContainer /> {/*Required to display toasts throughout the website*/}
     <RouterProvider router={router} />
   </React.StrictMode>
 );
