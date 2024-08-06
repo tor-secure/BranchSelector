@@ -12,6 +12,7 @@ import {
 
 import blogIcon from "../../assets/Icons/BlogIcon.svg";
 
+//Blog page. Fetch blogs from firebase. Display all.
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { LeftSection } from "./LeftSection";
-import { RightSection } from "./RightSection";
-import { Settings } from "./Settings";
-import { BuyCredits } from "./BuyCredits";
-import { RedeemCoupon } from "./RedeemCoupon";
+import { MainDashboardContent } from "./MainDashboardContent";
 import AddCredits from "./AddCredits";
 
 
@@ -11,11 +8,11 @@ export const DashboardPage = () => {
   const [selectedPage, setSelectedPage] = useState("Your Data");
   return (
     <div class="bg-white block lg:flex items-start w-full">
+      {/* Left section to select the required section */}
       <LeftSection setSelectedPage={setSelectedPage} />
-      {selectedPage == "Your Data" && <RightSection />}
-      {selectedPage == "Buy Credits" && <BuyCredits />}
-      {selectedPage == "Settings" && <Settings />}
-      {selectedPage == "Redeem Coupon" && <RedeemCoupon />}
+
+      {/* Render right side content based selection on left side */}
+      {selectedPage == "Your Data" && <MainDashboardContent />}
       {selectedPage === "Add Credits" && <AddCredits/> }
     </div>
   );

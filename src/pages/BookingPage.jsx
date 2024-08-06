@@ -1,9 +1,6 @@
-import Navbar from "../Components/Navbar/Navbar";
 import SurePass from "../assets/SurePassLogo.jpeg";
 import Img from "../assets/bookAppointment.svg";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import {BundlePlanCard, CounsellingPlanCard} from "./PricingPage/PricingPage";
 import { LoadingPage } from "./LoadingPage";

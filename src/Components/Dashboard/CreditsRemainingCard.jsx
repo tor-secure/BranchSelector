@@ -1,5 +1,6 @@
 import CreditsRemainingIcon from "./../../assets/CreditsRemainingIcon.svg";
 
+//Card in user dashboard
 export const CreditsRemainingCard = ({remainingCredits}) => {
   return (
     <div className="bg-white rounded-xl lg:rounded-r-none w-28 h-28 sm:w-36 sm:h-32 my-5 py-1 shadow-[#9cbcf8] shadow-md">

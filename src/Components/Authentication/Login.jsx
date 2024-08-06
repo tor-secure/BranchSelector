@@ -1,24 +1,32 @@
-import { GoogleLogo } from "./GoogleLogo";
 import {
   loginWithEmailAndPassword,
   signInWithFacebook,
   signInWithGoogle,
 } from "../../services/authService";
+
 import { useNavigate } from "react-router-dom";
-import branchselector_logo from "../../assets/branchselector_logo.png";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+
+import branchselector_logo from "../../assets/branchselector_logo.png";
+
+import OverlayLoader from "../OverlayLoader";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { IoClose } from "react-icons/io5";
+import { GoogleLogo } from "./GoogleLogo";
 import { FacebookLogo } from "./FacebookLogo";
-import { useState } from "react";
-import OverlayLoader from "../OverlayLoader";
+
 
 
 const Login = () => {
   const location = useLocation();
   const state = location.state || {};
 
+  // Using this to get the location from where the user was redirected to the login page.
+  // If the user tries to access protected route without being authenticated, they are redirected 
+  // to the login page.
+  // On sucessfull login, we redirect back to where they left off for a seamless experience.
   const fromLocation = state.from;
 
   const navigate = useNavigate();
@@ -45,7 +53,7 @@ const onSubmitHandler = async (e) => {
   const rememberMe = e.target.elements.rememberMe.checked;
 
   try {
-    const { status, message, currentUser } = await loginWithEmailAndPassword(
+    const { status, message } = await loginWithEmailAndPassword(
       email,
       password,
       { rememberMe: rememberMe }
@@ -71,6 +79,8 @@ const onSubmitHandler = async (e) => {
 
   const onContinueWithGoogleHandler = async () =>{
 
+    //Attempt to sign in with google. Redirect to destination if successful, else toast error.
+
     setIsLoading(true)
     const authResult = await signInWithGoogle({rememberMe:false})
     if(authResult.success)
@@ -85,6 +95,7 @@ const onSubmitHandler = async (e) => {
 
   }
 
+  //Yet to be implemented
   const onContinueWithFacebookHandler = async () =>{
     const authResult = await signInWithFacebook({rememberMe:false})
     if(authResult.success)
@@ -111,6 +122,7 @@ const onSubmitHandler = async (e) => {
     
     <div className="flex-1 flex lg:items-center justify-center h-screen">
 
+      {/* Overlay loader. Prevents multiple clicks. */}
       <OverlayLoader isLoading={isLoading} loadingText={"Logging in..."}/>
       <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
 
@@ -150,7 +162,8 @@ const onSubmitHandler = async (e) => {
         </div>
 
         {
-          /*
+        //Facebook Login Button. Yet to be activated.
+        /*
         <div className="flex items-center justify-center">
           <div className="w-full max-w-xs">
             <button
@@ -161,7 +174,8 @@ const onSubmitHandler = async (e) => {
               Continue with Facebook
             </button>
           </div>
-        </div>*/
+        </div>
+        */
         }
 
         <div className="relative">

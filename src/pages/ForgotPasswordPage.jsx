@@ -3,6 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { resetPassword } from "../services/authService";
 import { toast } from "react-toastify";
 
+//Forgot password page. Managed by firebase auth password reset.
 const ForgotPasswordPage = () => {
     
     const handleSubmit = async (event) =>{

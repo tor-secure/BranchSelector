@@ -10,6 +10,8 @@ const handleClick = () => {
   toast.error("Payments not yet active")
 };
 
+// Simple pricing page. Components are reused in the book appointment page as well.
+// Plans are recived from the PricingPlans functions along with relavent currency wrt users location.
 
 const LargeContainerCard = ({ title, children }) => (
   <div className="bg-white rounded-lg shadow-md p-6 w-full mb-4 transition-all duration-300 ease-in-out hover:shadow-lg">
@@ -39,8 +41,6 @@ const SmallCard = ({ plan,currency,currencyCode,clickHandler }) => {
     </div>
   );
 };
-
-
 
 const LongCard = ({ plan,currency,currencyCode,clickHandler }) => {
   const discount = plan.originalPrice - plan.price;
@@ -93,58 +93,58 @@ return(
 }
 
 const PricingPage = () => {
-  const navigate = useNavigate();
-  const [plans, setPlans] = useState(null);
-  const [currency, setCurrency] = useState('₹');
-  const [currencyCode, setCurrencyCode] = useState('INR')
-  const [loading, setLoading] = useState(true);
+  
+    const navigate = useNavigate();
+    const [plans, setPlans] = useState(null);
+    const [currency, setCurrency] = useState('₹');
+    const [currencyCode, setCurrencyCode] = useState('INR')
+    const [loading, setLoading] = useState(true);
 
-  const handleCheckout = (plan,currencyCode) =>{
-  navigate('/checkout',{state:{plan:plan,currencyCode:currencyCode}})
-  console.log("want to execute",plan,"with code",currencyCode)
-  }
+    const handleCheckout = (plan,currencyCode) =>{
+    navigate('/checkout',{state:{plan:plan,currencyCode:currencyCode}})
+    }
 
 
-  useEffect(() => {
-    const fetchPricingPlans = async () => {
-      const data = await getPricingPlans();
-      if (data) {
+    useEffect(() => {
+      const fetchPricingPlans = async () => {
+        const data = await getPricingPlans();
+        if (data) {
 
-        setPlans(data.plan);
-        setCurrency(data.currency);
-        setCurrencyCode(data.currencyCode)
-      }
-      setLoading(false);
-    };
+          setPlans(data.plan);
+          setCurrency(data.currency);
+          setCurrencyCode(data.currencyCode)
+        }
+        setLoading(false);
+      };
 
-    fetchPricingPlans();
-  }, []);
-  if (loading) {
-    return <LoadingPage/>;
-  }
+      fetchPricingPlans();
+    }, []);
+    if (loading) {
+      return <LoadingPage/>;
+    }
 
-  return (
-    <div style={{
-      background: "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
-    }} className="flex flex-col lg:flex-row p-4 sm:p-8 font-poppins">
-      <div className="w-full lg:w-1/3 lg:pr-8 mb-6 lg:mb-0">
-        <h2 className="text-xl sm:text-2xl font-bold mb-2">
-          Buy credits to continue your journey into self discovery!
-        </h2>
-        <p className="text-sm text-gray-600">
-          1 credit allows you to take a test one time
-        </p>
-        <br />
+    return (
+      <div style={{
+        background: "linear-gradient(143.6deg, rgba(28, 124, 252, 0) 20.79%, rgba(28, 124, 252, 0.26) 40.92%, rgba(204, 171, 238, 0) 70.35%)",
+      }} className="flex flex-col lg:flex-row p-4 sm:p-8 font-poppins">
+        <div className="w-full lg:w-1/3 lg:pr-8 mb-6 lg:mb-0">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">
+            Buy credits to continue your journey into self discovery!
+          </h2>
+          <p className="text-sm text-gray-600">
+            1 credit allows you to take a test one time
+          </p>
+          <br />
+        </div>
+        <div className="w-full lg:w-2/3">
+        <CreditPlanCard plans={plans} currency = {currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
+        <CounsellingPlanCard plans = {plans} currency = {currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
+        <BundlePlanCard plans = {plans} currency={currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
+
+
+        </div>
       </div>
-      <div className="w-full lg:w-2/3">
-      <CreditPlanCard plans={plans} currency = {currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
-      <CounsellingPlanCard plans = {plans} currency = {currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
-      <BundlePlanCard plans = {plans} currency={currency} currencyCode={currencyCode} clickHandler={handleCheckout}/>
-
-
-      </div>
-    </div>
-  );
+    );
 };
 
 export { PricingPage, LongCard, LargeContainerCard, SmallCard, CreditPlanCard, BundlePlanCard, CounsellingPlanCard };

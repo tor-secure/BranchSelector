@@ -1,6 +1,7 @@
 import ExampleImg from "./../../assets/ExampleTestImg.png";
 import Navigation from "./../../assets/Navigation.png";
 
+//Test instructions for regular MCQ questions.
 export const TestInstructionSection = ({ evaluationType }) => {
   return (
     <div className=" p-3 flex justify-center w-full md:w-[50%]">

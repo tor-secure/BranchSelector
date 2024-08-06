@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+//The questions section. Used for Scrollbar kind questions.
 export const QuestionSetScroll = ({
   qNo,
   questionsData,
   result,
   setResult,
 }) => {
-  // useEffect(() => {
-  //   const tempResult = { ...result };
-  //   tempResult[questionsData.id] = 3;
-  //   setResult(tempResult);
-  //   console.log(result);
-  // }, [result]);
 
   const [sliderValue, setSliderValue] = useState(3);
 

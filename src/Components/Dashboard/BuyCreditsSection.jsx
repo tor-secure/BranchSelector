@@ -1,6 +1,6 @@
 import { FaArrowRight } from "react-icons/fa"
 
-
+//Section in user dashboard
 export const BuyCreditsSection = () => {
   return (
     <div className="bg-white p-5 my-8 mt-0 md:w-max max-w-md mx-auto">

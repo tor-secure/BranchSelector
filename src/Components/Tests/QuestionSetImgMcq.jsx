@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+//The questions section along with the options. Used for Image MCQ kind questions.
 export const QuestionSetImgMcq = ({
   qNo,
   questionsData,

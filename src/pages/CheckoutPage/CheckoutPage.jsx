@@ -1,27 +1,24 @@
-import { VoucherSection } from "../../Components/Dashboard/VoucherSection";
 import { useState } from "react";
-import img from "../../assets/buycreditillustration.svg";
-import creditImg from "../../assets/CreditsRemainingIcon.svg";
 import OverlayLoader from "../../Components/OverlayLoader";
 import {
-  getCurrentUserInfo,
   validateDiscountVoucher,
 } from "../../services/userService";
 import { toast } from "react-toastify";
-import CreditsRemainingIcon from "./../../assets/CreditsRemainingIcon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getPricingPlans } from "../PricingPage/PricingPlans";
 import { handlePayment } from "./PaymentService";
 
 const CheckoutPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { plan, currencyCode } = location.state || {};
+
+  // Fetch plan seleted from the pricing page
+  const { plan, currencyCode } = location.state || {}; 
+
+  // Setup inital states
   const [totalAmountToPay, setTotalAmountToPay] = useState(plan.price);
   const [discountApplied, setDiscountApplied] = useState(0);
   const [voucherCode, setVoucherCode] = useState("");
   const [isLoading, setLoading] = useState(false)
-  const [credit, setCredits] = useState(plan.credit ? plan.credit : 0);
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
   const [appointmentFormData, setAppointmentFormData] = useState({
     fullName: "",
@@ -31,21 +28,18 @@ const CheckoutPage = () => {
     appointmentType: "online",
   });
 
+  //Voucher Code change handler
   const handleVoucherCodeChange = (event) => {
     setVoucherCode(event.target.value);
   };
 
-  const tempPayHandle = (event) => {
-    const paymentDetails = {
-      couponCode:voucherCode,
-      amount:totalAmountToPay,
-      currency:currencyCode
-    }
+  //Temporary submit handler. Doesnt initiate payment. 
+  const tempHandleSubmit = (event) => {
     event.preventDefault();
-    //navigate('/paymentConfirmation',{state:{planDetail:plan,appointmentDetail:appointmentFormData, paymentDetail:paymentDetails}})
     toast.error("Payment option is not yet active!");
   };
   
+
   const handleSubmit = async (event) =>{
     event.preventDefault()
     const paymentDetails = {
@@ -53,19 +47,23 @@ const CheckoutPage = () => {
       amount:totalAmountToPay,
       currency:currencyCode
     }
-    setLoading(true)
+    setLoading(true) //Enable overlay loader
     await handlePayment(plan,appointmentFormData,paymentDetails,setLoading,navigate)
-    
   }
+
 
   const handleApplyVoucher = async (event) => {
     event.preventDefault();
+    // If voucher already applied, apply button will become remove button. So remove coupon code.
     if (isVoucherApplied) {
       setDiscountApplied(0);
       setVoucherCode("");
       setIsVoucherApplied(false);
       setTotalAmountToPay(plan.price);
-    } else {
+    } 
+    // Else fetch discount details from firebase and apply them.
+    else 
+    {
       const discount = await validateDiscountVoucher(voucherCode);
       const newDiscount = discount ? discount : 0;
       setDiscountApplied(newDiscount);
@@ -83,8 +81,8 @@ const CheckoutPage = () => {
   };
 
   return (
-    
     <div className="bg-white p-5 my-8 mt-0 md:w-max max-w-md mx-auto border rounded-lg shadow-md font-poppins">
+      {/* Overlay loader to prevent users from clicking on button mutliple times */}
       <OverlayLoader isLoading={isLoading} loadingText={"Processing Transaction. Do not refresh or navigate to other page. Please wait..."}/>
       <p className="text-2xl font-bold text-center mb-10 text-blue-500">Checkout</p>
 
@@ -141,7 +139,10 @@ const CheckoutPage = () => {
                 name="selectedDate"
                 value={appointmentFormData.selectedDate}
                 onChange={handleInputChange}
-                 min={new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 16)}
+                 min={
+                  /* Set the minimum selectable day to tommrow */
+                  new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 16) 
+                  }
                 required
                 className="w-full mt-1 px-3 py-1.5 text-gray-500 bg-transparent outline-none border bg-white shadow-sm rounded-lg"
               />
@@ -174,18 +175,19 @@ const CheckoutPage = () => {
               </div>
 
             </div>
-            {appointmentFormData.appointmentType === 'offline'?(
+            {
+            //Show Appointment location if "Offline" Counselling is chosen
+            appointmentFormData.appointmentType === 'offline' && (
               <>
                <label className="font-bold text-sm text-gray-700 mt-10">Counselling Location</label>
                <p className="text-black shadow-sm border p-4 rounded-md text-md font-bold mt-1">
                 SurePass,<br/> #9, Second floor
                 Next to Stock Holding
                 Manasa Towers, MG Road, <br/>Mangalore - 575003,<br/> Karnataka, India
-          </p>
-          </>
+                </p>
+              </>
                )
-              
-              :<></>}
+              }
           </>
         )}
         <div className="mb-4 mt-4">
@@ -209,12 +211,15 @@ const CheckoutPage = () => {
               {isVoucherApplied ? "Remove" : "Apply"}
             </button>
           </div>
-          {discountApplied > 0 && (
-            <p className="text-green-600 text-sm mt-2 font-bold">
-              Code "{voucherCode}" applied for {discountApplied}% discount. <br />
-              You save {currencyCode==='INR'?'₹':'$'}{plan.price - totalAmountToPay}.
-            </p>
-          )}
+          {
+            //Show coupon applied text if coupoun applied
+            discountApplied > 0 && (
+              <p className="text-green-600 text-sm mt-2 font-bold">
+                Code "{voucherCode}" applied for {discountApplied}% discount. <br />
+                You save {currencyCode === 'INR'? '₹' : '$' }{plan.price - totalAmountToPay}.
+              </p>
+            )
+          }
         </div>
 
         <div className="mb-4">
@@ -223,8 +228,6 @@ const CheckoutPage = () => {
             {currencyCode==='INR'?'₹':'$'}{totalAmountToPay}
           </p>
         </div>
-
-        
 
         <button
           type="submit"

@@ -1,6 +1,8 @@
 import AddCreditSliderTabs from "./AddCreditsSliderTabs";
 import addCreditImg from "../../assets/AddCreditsSVG.svg";
 
+//Add credits section inside user dashboard.
+
 const AddCredits = () => {
   return (
     <section className="">
@@ -21,6 +23,7 @@ const AddCredits = () => {
           />
         </div>
         <div>
+          {/* Slider tabs to switch between buy credits and use voucher code */}
           <AddCreditSliderTabs />
         </div>
       </div>

@@ -66,6 +66,10 @@ const onSubmitHandler = async (e) => {
       password
     );
 
+    // Try to sign up with email and password
+    // If account is created, redirect user to login again.
+    // Else display error.
+
     if (status === 'success') {
       toast.success(message);
       navigate('/login');

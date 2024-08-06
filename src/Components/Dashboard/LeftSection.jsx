@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { RiCoinsFill } from "react-icons/ri";
-import { IoIosSettings } from "react-icons/io";
 import { MdExitToApp } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import { getCurrentUser, logout } from "../../services/authService";
+import {logout } from "../../services/authService";
 import "./BreathingAnimation.css";
-import { BiSolidCoupon } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUserInfo } from "../../services/userService";
 
 export const LeftSection = ({ setSelectedPage }) => {
-  const [checkBottons, setCheckBottons] = useState([true, false, false]);
+  const [checkBottons, setCheckBottons] = useState([true, false]); //Used to track which section is currently selected
   const [userData, setUserData] = useState({});
-  const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    //Fetch all user details from firebase. This includes user's test history
     async function fetchTestHistory() {
       const testUserData = await getCurrentUserInfo();
       console.log("UserData:", testUserData);
@@ -28,14 +26,14 @@ export const LeftSection = ({ setSelectedPage }) => {
   }, []);
 
   const handleClick = (pos, selectedOpt) => {
-    // console.log("In");
+    // When one item is selected, set only its index to true. Rest set as false.
     setSelectedPage(selectedOpt);
     const temp = [...checkBottons];
     temp.fill(false);
     temp[pos] = true;
     setCheckBottons(temp);
   };
-  //mt-[${1000000}em]
+
   return (
     <aside className="w-full lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 md:pb-3 pb-0 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff]">
       <div className="w-full flex row:flex-row lg:flex-col justify-center items-center mt-10 lg:mt-0">
@@ -68,30 +66,6 @@ export const LeftSection = ({ setSelectedPage }) => {
           <p className="ml-2">Your Data</p>
         </li>
 
-        {/*<li
-          onClick={() => handleClick(2, "Redeem Coupon")}
-          className={`p-3 rounded-md mx-1  lg:w-48 ${
-            checkBottons[2]
-              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
-              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
-          }`}
-        >
-          <BiSolidCoupon size={25} />
-          <p className="ml-2">Redeem Coupon</p>
-        </li>*/}
-
-        {/*<li
-
-          onClick={() => handleClick(1, "Buy Credits")}
-          className={`p-3 rounded-md mx-1  lg:w-48 ${
-            checkBottons[1]
-              ? "flex my-7 text-start bg-primary text-white shadow-[#9cbcf8] shadow-md cursor-pointer hover:bg-[#5a93f5]"
-              : "flex my-7 text-start cursor-pointer hover:text-[#808080] bg-white"
-          }`}
-        >
-          <RiCoinsFill size={25} />
-          <p className="ml-2">Buy Credits</p>
-        </li>*/}
         
         {
           <li
@@ -107,7 +81,10 @@ export const LeftSection = ({ setSelectedPage }) => {
           </li>
         }
 
-        {/*
+        {
+        // UNFINISHED. COULD BE IMPLEMENTED SOMEDAY.
+
+        /*
         <li
           onClick={() => handleClick(2, "Settings")}
           className={`p-3 rounded-md mx-1 w-32 lg:w-48 ${
@@ -118,34 +95,39 @@ export const LeftSection = ({ setSelectedPage }) => {
         >
           <IoIosSettings size={25} />
           <p className="ml-2">Settings</p>
-        </li>*/}
+        </li>*/
+        
+        }
         
 
       </ul>
-          
+        
+        {/* The logout button */}
         <div
           className="border-red-600 justify-self-center p-3 flex font-sans font-bold mx-1 w-32 lg:w-48 text-start text-red-600 cursor-pointer hover:text-red-400 bg-white rounded-md"
-          onClick={async () => {
-            navigate("/");
-            const toastId = toast.loading("Signing out...", {
-              autoClose: false,
+          onClick = {
+            async () => {
+              navigate("/");
+              const toastId = toast.loading("Signing out...", {
+                autoClose: false,
+                draggable: true,
+              });
+
+              await logout();
+
+              toast.update(toastId, {
+              render: `Logged out successfully!`,
+              type: "success",
+              isLoading: false,
+              autoClose: 3000,
               draggable: true,
-            });
-
-            await logout();
-
-          toast.update(toastId, {
-          render: `Logged out successfully!`,
-          type: "success",
-          isLoading: false,
-          autoClose: 3000,
-          draggable: true,
-        });
-        }}
+              });
+            }
+          }
         >
           <MdExitToApp size={25} />
           <p className="ml-2">Log Out</p>
-          {/* setAlignment defined in BreathingAnimation.css*/}
+          
         </div>
         </div>
     </aside>
