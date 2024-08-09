@@ -31,6 +31,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const [isLoading,setIsLoading] = useState(false)
+  const [isRemeberMeChecked,setRememberMeChecked] = useState(true)
 
     const toastOptions = {
 
@@ -50,13 +51,12 @@ const onSubmitHandler = async (e) => {
 
   const email = e.target.elements.email.value;
   const password = e.target.elements.password.value;
-  const rememberMe = e.target.elements.rememberMe.checked;
-
+  
   try {
     const { status, message } = await loginWithEmailAndPassword(
       email,
       password,
-      { rememberMe: rememberMe }
+      { rememberMe: isRemeberMeChecked }
     );
 
     if (status === 'success') {
@@ -219,6 +219,8 @@ const onSubmitHandler = async (e) => {
             <input
               name="rememberMe"
               type="checkbox"
+              checked = {isRemeberMeChecked}
+              onChange={()=>setRememberMeChecked(!isRemeberMeChecked)}
               className=" h-4 w-4 mr-2 mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />
             <label className="font-medium">Remember me</label>

@@ -18,7 +18,6 @@ export const LeftSection = ({ setSelectedPage }) => {
     //Fetch all user details from firebase. This includes user's test history
     async function fetchTestHistory() {
       const testUserData = await getCurrentUserInfo();
-      console.log("UserData:", testUserData);
       setUserData(testUserData);
     }
 
