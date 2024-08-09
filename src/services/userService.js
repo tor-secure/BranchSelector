@@ -38,7 +38,7 @@ const getAllDocumentsFromCollection = async (collectionRef) => {
 };
 
 // Records a new test taken along with its details
-const newTestTaken = async (testName, result) => {
+const newTestTaken = async (testName, result, optionsSelected) => {
   const formatDate = (date) => {
     const options = { 
       day: '2-digit', 
@@ -54,6 +54,7 @@ const newTestTaken = async (testName, result) => {
   const testDetails = {
     "test-name": testName,
     result: JSON.stringify(result),
+    optionsSelected:JSON.stringify(optionsSelected),
     time: formatDate(new Date()),
   };
 

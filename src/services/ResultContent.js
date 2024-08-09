@@ -140,24 +140,46 @@ english: {
     "How often you seek academic support from study groups, teachers, mentors, family, friends, tutoring services, or academic support centers. Actively seeking help and collaborating with others can provide different perspectives, clarify doubts, and offer emotional and academic support, contributing to a more effective and enjoyable learning experience."
 },
 
-career: {
-  "Analytical Skills": "Your ability to examine information, identify patterns, and solve complex problems is heavily weighted in many questions, indicating its importance in various career paths. Strong analytical skills can lead to success in fields such as data analysis, scientific research, and strategic planning. Examples of careers that heavily rely on analytical skills include data analyst, financial analyst, research scientist, systems engineer, business intelligence analyst, actuary, epidemiologist, and forensic scientist.",
+  career: {
+    "Analytical Skills": "Your ability to examine information, identify patterns, and solve complex problems is heavily weighted in many questions, indicating its importance in various career paths. Strong analytical skills can lead to success in fields such as data analysis, scientific research, and strategic planning. Examples of careers that heavily rely on analytical skills include data analyst, financial analyst, research scientist, systems engineer, business intelligence analyst, actuary, epidemiologist, and forensic scientist.",
 
-  "Communication Skills": "Your capacity to express ideas clearly, listen effectively, and interact with others is frequently valued across different scenarios, often paired with teamwork. Effective communication is crucial in roles involving client interaction, team collaboration, and leadership. Careers that particularly value communication skills include public relations specialist, marketing manager, human resources manager, journalist, corporate trainer, content writer, public speaking coach, and customer success manager.",
+    "Communication Skills": "Your capacity to express ideas clearly, listen effectively, and interact with others is frequently valued across different scenarios, often paired with teamwork. Effective communication is crucial in roles involving client interaction, team collaboration, and leadership. Careers that particularly value communication skills include public relations specialist, marketing manager, human resources manager, journalist, corporate trainer, content writer, public speaking coach, and customer success manager.",
 
-  "Teamwork": "Your ability to collaborate, contribute to group efforts, and work harmoniously with others is often positively weighted, indicating its importance in modern workplaces. Strong teamwork skills are valuable in project-based work, cross-functional teams, and collaborative environments. Careers that heavily emphasize teamwork include project manager, social worker, event planner, nurse, teacher, community organizer, athletic coach, and operations manager.",
+    "Teamwork": "Your ability to collaborate, contribute to group efforts, and work harmoniously with others is often positively weighted, indicating its importance in modern workplaces. Strong teamwork skills are valuable in project-based work, cross-functional teams, and collaborative environments. Careers that heavily emphasize teamwork include project manager, social worker, event planner, nurse, teacher, community organizer, athletic coach, and operations manager.",
 
-  "Decision Making": "Your capacity to evaluate options, make choices, and take action has varying weights across different scenarios, sometimes with negative impacts when avoiding decisions. Good decision-making skills are crucial for leadership roles, project management, and entrepreneurship. Careers that require strong decision-making skills include business executive, entrepreneur, judge, emergency room doctor, air traffic controller, military officer, investment banker, and political campaign manager.",
+    "Decision Making": "Your capacity to evaluate options, make choices, and take action has varying weights across different scenarios, sometimes with negative impacts when avoiding decisions. Good decision-making skills are crucial for leadership roles, project management, and entrepreneurship. Careers that require strong decision-making skills include business executive, entrepreneur, judge, emergency room doctor, air traffic controller, military officer, investment banker, and political campaign manager.",
 
-  "Creative Problem Solving": "Your ability to think innovatively and develop unique solutions to challenges is often highly weighted, particularly in scenarios requiring new approaches. Creative problem-solving is valuable in fields such as design, product development, and strategic planning. Careers that rely heavily on creative problem-solving include graphic designer, software developer, architect, advertising creative director, product manager, user experience (UX) designer, industrial designer, and marketing strategist.",
+    "Creative Problem Solving": "Your ability to think innovatively and develop unique solutions to challenges is often highly weighted, particularly in scenarios requiring new approaches. Creative problem-solving is valuable in fields such as design, product development, and strategic planning. Careers that rely heavily on creative problem-solving include graphic designer, software developer, architect, advertising creative director, product manager, user experience (UX) designer, industrial designer, and marketing strategist.",
 
-  "Organizational Skills": "Your ability to plan, prioritize, and manage tasks efficiently is positively weighted in many scenarios, particularly those involving project planning or time management. Strong organizational skills are important in project management, administrative roles, and leadership positions. Careers that require excellent organizational skills include project coordinator, executive assistant, event manager, logistics coordinator, office manager, librarian, wedding planner, and construction manager.",
+    "Organizational Skills": "Your ability to plan, prioritize, and manage tasks efficiently is positively weighted in many scenarios, particularly those involving project planning or time management. Strong organizational skills are important in project management, administrative roles, and leadership positions. Careers that require excellent organizational skills include project coordinator, executive assistant, event manager, logistics coordinator, office manager, librarian, wedding planner, and construction manager.",
 
-  "Leadership": "Your capacity to guide, influence, and motivate others is often positively weighted, particularly in scenarios involving team management or strategic decision-making. Leadership skills are crucial for management positions, entrepreneurship, and roles involving team coordination. Careers that require strong leadership skills include CEO, school principal, political leader, nonprofit executive director, restaurant manager, sports team coach, military officer, and startup founder.",
+    "Leadership": "Your capacity to guide, influence, and motivate others is often positively weighted, particularly in scenarios involving team management or strategic decision-making. Leadership skills are crucial for management positions, entrepreneurship, and roles involving team coordination. Careers that require strong leadership skills include CEO, school principal, political leader, nonprofit executive director, restaurant manager, sports team coach, military officer, and startup founder.",
 
-  "Adaptability": "Your ability to adjust to new conditions and handle change effectively, while not explicitly named in our previous data, is implied in scenarios valuing flexibility and handling unexpected challenges. Adaptability is increasingly important in rapidly changing industries and roles requiring quick responses to new situations. Careers that particularly value adaptability include management consultant, entrepreneur, emergency response coordinator, international aid worker, digital marketing specialist, supply chain manager, travel agent, and freelance professional."
-}
-};
+    "Adaptability": "Your ability to adjust to new conditions and handle change effectively, while not explicitly named in our previous data, is implied in scenarios valuing flexibility and handling unexpected challenges. Adaptability is increasingly important in rapidly changing industries and roles requiring quick responses to new situations. Careers that particularly value adaptability include management consultant, entrepreneur, emergency response coordinator, international aid worker, digital marketing specialist, supply chain manager, travel agent, and freelance professional."
+  },
+
+  time:{
+    "Excellent time management skills":"You have a well-organized approach and effectively balance your tasks and time.",
+    "Good time management skills": "You manage your time well but could benefit from slight improvements in planning and handling interruptions.",
+    "Fair time management skills.": "You have some good habits but need to work on consistency and handling distractions better.",
+    "Poor time management skills.": "You should consider restructuring your approach to time management and adopting new strategies to improve your productivity."
+  },
+
+  motivation:{
+    "Highly motivated": "You are driven and use various strategies to maintain and boost your motivation.",
+    "Motivated": "You have a good level of motivation but can benefit from improving certain aspects.",
+    "Moderately motivated": "You experience fluctuations in your motivation and could work on consistency.",
+    "Low motivation": "You need to find new ways to inspire and motivate yourself to reach your goals."
+  },
+
+
+  creativity:{
+    "Highly creative":"You excel at thinking outside the box and are constantly generating new ideas.",
+    "Very creative": "You have a strong creative drive and frequently come up with innovative solutions.",
+    "Moderately creative": "You have good creative potential but could benefit from further developing your skills and confidence.",
+    "Low creativity": "You may need to explore new ways to stimulate your creativity and embrace innovative thinking."
+  }
+  };
 
 
 const resultTextData = {
@@ -199,6 +221,15 @@ const resultTextData = {
 
   career:{
     text:"Based on the questions you have answered, your best skill for your career is"
+  },
+  time:{
+    text:"Based on the questions you have answered, your time management score is"
+  },
+  motivation:{
+    text:"Based on the questions you have answered, your motivation score is"
+  },
+  creativity:{
+    text:"Based on the questions you have answered, your creativity score is"
   }
 
 }

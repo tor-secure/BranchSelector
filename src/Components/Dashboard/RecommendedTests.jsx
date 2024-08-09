@@ -52,27 +52,32 @@ export const RecommendedTests = ({ recommendedTests }) => {
                 ref={scrollContainerRef}
                 className="grid grid-flow-col overflow-x-scroll  py-5 -ml-7 myScrollbar w-full"
               >
-                {recommendedTests.map((test, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col justify-between items-center bg-white shadow-blue-200 p-1 shadow-lg w-32 h-32  sm:w-52 sm:h-44 mx-7 rounded-lg"
-                  >
-                    <h4 className="mt-2 font-bold text-primary text-sm sm:text-lg">
-                      {test.name.split(" ")[0]}
-                    </h4>
-                    <div>{getTestLogo(test.queryCode, 40)}</div>
-                    <button
-                      onClick={() => {
-                        navigate("/testInstruction", {
-                          state: { testMetaData: test },
-                        });
-                      }}
-                      className="mb-2 bg-primary text-white font-semibold p-1 px-5 rounded text-[9px] sm:text-sm"
+                {recommendedTests.map((test, index) => 
+                {
+                  const TestIcon = test.icon
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col justify-between items-center bg-white shadow-blue-200 p-1 shadow-lg w-32 h-32  sm:w-52 sm:h-44 mx-7 rounded-lg"
                     >
-                      Take test
-                    </button>
-                  </div>
-                ))}
+                      <h4 className="mt-2 font-bold text-primary text-sm sm:text-lg">
+                        {test.name.split(" ")[0]}
+                      </h4>
+                      <TestIcon className="text-gray-700 size-10" />
+                      <button
+                        onClick={() => {
+                          const { icon, ...testState } = test;
+                          navigate("/testInstruction", {
+                            state: { testMetaData: testState },
+                          });
+                        }}
+                        className="mb-2 bg-primary text-white font-semibold p-1 px-5 rounded text-[9px] sm:text-sm"
+                      >
+                        Take test
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>

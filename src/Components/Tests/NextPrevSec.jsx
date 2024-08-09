@@ -87,7 +87,7 @@ export const NextPrevSec = ({
     const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     // Call fuction to evaluate the test. When completed, update the results in firebase.
     const finRes = await evaluteTest(testQueryName, result);
-    await newTestTaken(testQueryName, finRes);
+    await newTestTaken(testQueryName, finRes,result);
     toast.update(toastId, {
         render: "Test evaluation complete!",
         type: "success",

@@ -115,7 +115,7 @@ export const TestNavbar = ({
     setLoading(true)
     const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     const finRes = await evaluteTest(testQueryName, result);
-    await newTestTaken(testQueryName, finRes);
+    await newTestTaken(testQueryName, finRes, result);
     toast.update(toastId, {
         render: "Test evaluation complete!",
         type: "success",

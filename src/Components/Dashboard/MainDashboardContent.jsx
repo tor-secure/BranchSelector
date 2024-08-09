@@ -25,7 +25,6 @@ export const MainDashboardContent = () => {
       const testHistoryTemp = await getTestHistory();
       const userDataTemp = await getRemainingCredits();
 
-      console.log("from credit card ", userDataTemp);
       const remainigTemp = getRemainingTests(testHistoryTemp);
 
       setRemainingCredits(userDataTemp);

@@ -10,117 +10,10 @@ import { PiCertificateFill } from "react-icons/pi";
 import { TbAbc } from "react-icons/tb";
 import { GiBookmarklet, GiPaintBrush } from "react-icons/gi";
 import { getCurrentUserInfo } from "./userService";
+import { testMetaData } from "./testData";
 
 //List of all tests. Big metadata. Update this list after uploading new test data onto firebase.
-const testMetaData = {
-  engineering: {
-    queryCode: "engineering",
-    name: "Engineering Test",
-    displayType: "slider",
-    evaluationType: "weighted-aggregation",
-  },
 
-  brain: {
-    queryCode: "brain",
-    name: "Brain Test",
-    displayType: "mcq",
-    evaluationType: "aggregation",
-  },
-
-  interest: {
-    queryCode: "interest",
-    name: "Interest Test",
-    displayType: "mcq",
-    evaluationType: "aggregation",
-  },
-
-  iq: {
-    queryCode: "iq",
-    name: "IQ Test",
-    displayType: "img-mcq",
-    evaluationType: "single-option",
-  },
-
-  personality: {
-    queryCode: "personality",
-    name: "Personality Test",
-    displayType: "mcq",
-    evaluationType: "aggregation",
-  },
-
-  stream: {
-    queryCode: "stream",
-    name: "Stream Test",
-    displayType: "mcq",
-    evaluationType: "aggregation",
-  },
-
-  strength: {
-    queryCode: "strength",
-    name: "Strength Test",
-    displayType: "mcq",
-    evaluationType: "aggregation",
-  },
-
-  vark: {
-    queryCode: "vark",
-    name: "VARK Test",
-    displayType: "mcq",
-    evaluationType: "aggregation",
-  },
-
-  english: {
-    queryCode: "english",
-    name: "English Test",
-    displayType: "mcq",
-    evaluationType: "single-option",
-  },
-
-  study:{
-    queryCode:"study",
-    name:"Study Habits Test",
-    displayType:"mcq",
-    evaluationType:"aggregation"
-  },
-
-  eq:{
-    queryCode:"eq",
-    name:"EQ Test",
-    displayType:"mcq",
-    evaluationType:"aggregation"
-  },
-
-  career:{
-    queryCode:"career",
-    name:"Career Aptitude Test",
-    displayType:"mcq",
-    evaluationType:"aggregation"
-  },
-
-  /*
-  time:{
-    queryCode:"time",
-    name:"Time Management Test",
-    displayType:"mcq",
-    evaluationType:"score-range"
-  },
-
-  motivation:{
-    queryCode:"motivation",
-    name:"Motivation Assesment Test",
-    displayType:"mcq",
-    evaluationType:"score-range"
-  },
-
-  creativity:{
-    queryCode:"creativity",
-    name:"Creativity Test",
-    displayType:"mcq",
-    evaluationType:"score-range"
-  },
-  */
-
-};
 
 const testLogoData = {
   engineering: {
@@ -225,7 +118,7 @@ const testLogoData = {
 const db = getFirestore();
 
 const getTestLogo = (testName, size) => {
-  return testLogoData[testName].logo(size);
+  return testMetaData[testName].logo;
 };
 
 const getTestMetaData = (testName) => {
@@ -296,7 +189,7 @@ async function evaluteTest(testName, selectedOptions) {
   return 'F';
   }
 
-  //Function contains several special cases for evaluation of certain tests. 
+  //NOTE: Function contains several special cases for evaluation of certain tests. 
 
   const evaluationType = getTestMetaData(testName).evaluationType;
   try {
@@ -393,6 +286,57 @@ async function evaluteTest(testName, selectedOptions) {
       }
       results = Object.fromEntries(resultsArray);
       return results;
+    }
+
+    if (evaluationType === 'ranged-score'){
+      // Tests where the final result is based on the range within which the score lies.
+
+      //Similar to aggregation, sum all the scores.
+      const answerKey = {};
+      var results = {};
+      answerKeySnapshot.forEach((doc) => {
+        answerKey[doc.id] = doc.data();
+      });
+      for (let [questionId, optionId] of Object.entries(selectedOptions)) {
+        const weights = answerKey[questionId];
+        if (weights) {
+          const optionWeight = weights[optionId];
+          if (optionWeight) {
+            Object.keys(optionWeight).forEach((weight) => {
+              if (results[weight]) results[weight] += optionWeight[weight];
+              else results[weight] = optionWeight[weight];
+            });
+          }
+        } else {
+          console.warn(`Answer key not found for question ${questionId}`);
+        }
+      }
+
+      const number = results['Score']
+
+      const ranges = answerKey['ranges']
+      
+      //Finding the max and min of the ranges. Required for showing in the graph.
+      let minRange = Number.MAX_SAFE_INTEGER;
+      let maxRange = Number.MIN_SAFE_INTEGER;
+      let rangedLevel;
+
+
+      for (const [range, value] of Object.entries(ranges)) {
+        const [min, max] = range.split('-').map(Number);
+        minRange = Math.min(minRange, min);
+        maxRange = Math.max(maxRange, max);
+
+        // If number is within range, set the level to it
+        if (number >= min && number <= max) {
+          rangedLevel = value;
+        }
+      }
+
+
+      return { level: rangedLevel, maxRange: maxRange, minRange: minRange, score: number };
+
+
     }
   } catch (error) {
     console.error("Error calculating total score:", error);
