@@ -1,5 +1,6 @@
 import { BsGlobe2 } from "react-icons/bs";
 import branchselector_logo from "../../assets/branchselector_logo.png";
+import NortonLogo from "../../assets/NortonLogo.svg"
 import { Link } from "react-router-dom";
 
 export default () => {
@@ -59,9 +60,10 @@ export default () => {
                 alt="branchselector logo"
                 className="w-24"
               />
-              <p className="leading-relaxed mt-2 text-[15px]">
+              <p className="leading-relaxed mt-2 text-[15px] font-poppins">
                 Join BranchSelector to take your future in your hands!
               </p>
+              {/*<img src={NortonLogo}/>*/}
             </div>
           </div>
           <div className="flex-1 mt-10 space-y-6 justify-end  sm:flex md:space-y-0 md:mt-0">
