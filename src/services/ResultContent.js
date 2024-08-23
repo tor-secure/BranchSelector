@@ -178,7 +178,15 @@ english: {
     "Very creative": "You have a strong creative drive and frequently come up with innovative solutions.",
     "Moderately creative": "You have good creative potential but could benefit from further developing your skills and confidence.",
     "Low creativity": "You may need to explore new ways to stimulate your creativity and embrace innovative thinking."
-  }
+  },
+
+  medical:{
+  "Not suitable": "You may find the medical or paramedical field challenging. It might be beneficial to explore other career options that better suit your strengths and interests.",
+  "Potentially suitable": "You have the potential for a career in the medical or paramedical field. While some areas may need further development, you have a good foundation to build on.",
+  "Well-suited": "You possess many qualities well-suited for the medical or paramedical field. This could be a fulfilling career path for you, though some minor improvements might be necessary.",
+  "Highly suitable": "You are highly suited for a career in the medical or paramedical field. Your skills, interests, and qualities strongly align with the demands of these professions, making you an excellent candidate."
+}
+
   };
 
 
@@ -230,6 +238,10 @@ const resultTextData = {
   },
   creativity:{
     text:"Based on the questions you have answered, your creativity score is"
+  },
+  medical:
+  {
+    text:"Based on the questions you have answered, we have identified your suitability for the medical field as"
   }
 
 }

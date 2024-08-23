@@ -108,324 +108,477 @@ const migrateUsers = async () => {
 async function putDataToFireStoreRegular() {
   const db = getFirestore();
 
-  const testName = "creativity";
-  const testCode = "CRE"; // Replace with your test name
-const questionData = [
+  const testName = "medical";
+  const testCode = "MED"; // Replace with your test name
+  const questionData = [
   {
-    question: "How often do you come up with new ideas?",
+    question: "Do you enjoy learning about different cultures and customs, particularly in relation to healthcare?",
     options: [
-      "Occasionally.",
-      "Very frequently.",
-      "Rarely.",
-      "Often."
+      "I’m interested but not deeply.",
+      "I’m very interested in cultural aspects of healthcare.",
+      "I find it somewhat interesting.",
+      "I’m not really interested."
     ]
   },
   {
-    question: "How do you handle challenges or problems?",
+    question: "How well do you manage time and prioritize tasks?",
     options: [
-      "I enjoy finding unique and creative solutions.",
-      "I seek traditional solutions.",
-      "I get overwhelmed and avoid them.",
-      "I brainstorm multiple solutions."
+      "I’m excellent at time management and prioritization.",
+      "I find it hard to prioritize tasks.",
+      "I struggle to manage time effectively.",
+      "I’m good but sometimes get overwhelmed."
     ]
   },
   {
-    question: "How do you express your creativity?",
+    question: "Are you disciplined and capable of maintaining focus during long periods of study or work?",
     options: [
-      "I explore various artistic outlets like drawing, writing, or music.",
-      "I don't often express it.",
-      "I occasionally work on creative projects.",
-      "I try to incorporate creativity into everyday tasks."
+      "I’m highly disciplined and focused.",
+      "I’m disciplined but can get distracted.",
+      "I find it hard to maintain focus for long periods.",
+      "I struggle with discipline and focus."
     ]
   },
   {
-    question: "How do you feel about taking risks in your work or projects?",
+    question: "How comfortable are you with taking responsibility for others' well-being?",
     options: [
-      "I prefer to stick with what I know.",
-      "I am cautious but willing to take calculated risks.",
-      "I avoid risks altogether.",
-      "I thrive on taking risks and exploring new possibilities."
+      "Uncomfortable, it’s too much pressure.",
+      "Very comfortable, I’m confident in such roles.",
+      "Comfortable, but I recognize the weight of the responsibility.",
+      "I’m cautious and sometimes unsure."
     ]
   },
   {
-    question: "How do you approach learning new skills?",
+    question: "Do you have a strong ability to memorize and recall information?",
     options: [
-      "I am excited to try new things and experiment.",
-      "I prefer to stick to familiar skills.",
-      "I am willing to learn but take my time.",
-      "I learn new skills occasionally."
+      "My memory is good, but I need to review regularly.",
+      "Yes, I have an excellent memory.",
+      "I find it hard to memorize large amounts of information.",
+      "I struggle with memory retention."
     ]
   },
   {
-    question: "How do you generate new ideas?",
+    question: "Are you empathetic and able to understand others’ feelings?",
     options: [
-      "I get inspired by different sources and combine ideas.",
-      "I rely on tried-and-true methods.",
-      "I come up with ideas randomly.",
-      "I brainstorm and use creative thinking techniques."
+      "Yes, I’m very empathetic and caring.",
+      "I’m empathetic but sometimes struggle to relate.",
+      "I find it hard to empathize with others.",
+      "I’m not very empathetic."
     ]
   },
   {
-    question: "How do you respond to feedback on your creative work?",
+    question: "How do you handle seeing blood or injuries?",
     options: [
-      "I use feedback to improve and refine my ideas.",
-      "I feel discouraged by feedback.",
-      "I occasionally consider feedback.",
-      "I take feedback constructively but maintain my creative vision."
+      "I’m comfortable and calm.",
+      "I get very uncomfortable.",
+      "I avoid such situations.",
+      "I’m a bit squeamish but manage."
     ]
   },
   {
-    question: "How do you find inspiration for your creative projects?",
+    question: "Are you committed to following a strict code of conduct in your professional life?",
     options: [
-      "I struggle to find inspiration.",
-      "I occasionally find inspiration in my surroundings.",
-      "I actively seek out new experiences and ideas.",
-      "I get inspired by the work of others."
+      "Yes, I’m very committed.",
+      "I prefer more flexibility.",
+      "I try to follow but struggle with strict rules.",
+      "I’m committed but find it challenging at times."
     ]
   },
   {
-    question: "How do you approach problem-solving?",
+    question: "Are you able to make quick decisions in critical situations?",
     options: [
-      "I think outside the box and explore unconventional solutions.",
-      "I follow standard procedures.",
-      "I analyze the problem and try to find a unique approach.",
-      "I solve problems as they arise without much planning."
+      "I usually need more time to decide.",
+      "Yes, I’m decisive and confident under pressure.",
+      "I find it difficult to make quick decisions.",
+      "I can, but I need a moment to think."
     ]
   },
   {
-    question: "How do you handle criticism of your creative ideas?",
+    question: "How do you feel about working long hours, possibly overnight?",
     options: [
-      "I take it as an opportunity to improve.",
-      "I get discouraged and lose motivation.",
-      "I consider it but often stick to my original ideas.",
-      "I feel hurt but try to learn from it."
+      "I’m fine with it occasionally.",
+      "I’m okay with it; I’m committed to the job.",
+      "I prefer a regular 9-5 schedule.",
+      "I’m not comfortable with long or irregular hours."
     ]
   },
   {
-    question: "How do you balance creativity with practicality?",
+    question: "Do you enjoy problem-solving and diagnosing issues?",
     options: [
-      "I find it hard to be both creative and practical.",
-      "I focus mainly on creativity and less on practicality.",
-      "I strike a balance between creativity and practical considerations.",
-      "I lean more towards practicality but incorporate creativity when possible."
+      "Yes, I love solving complex problems.",
+      "I prefer straightforward tasks.",
+      "I enjoy it, but it can be challenging.",
+      "Not really."
     ]
   },
   {
-    question: "How do you feel about collaborating on creative projects?",
+    question: "Are you physically fit and able to handle physically demanding tasks?",
     options: [
-      "I enjoy collaborating and believe it enhances creativity.",
-      "I prefer working alone.",
-      "I collaborate occasionally but prefer my own ideas.",
-      "I am open to collaboration and find it useful."
+      "I’m reasonably fit but could improve.",
+      "Yes, I’m in great physical shape.",
+      "I find physically demanding tasks challenging.",
+      "I’m not physically fit."
     ]
   },
   {
-    question: "How do you keep your creative skills sharp?",
+    question: "How important is helping others to you?",
     options: [
-      "I rarely practice or enhance my creative skills.",
-      "I occasionally work on creative projects.",
-      "I actively seek opportunities to use and improve my creativity.",
-      "I practice creative activities regularly."
+      "Not very important.",
+      "Important, I like to help when I can.",
+      "Extremely important, it’s my top priority.",
+      "Moderately important, I help if needed."
     ]
   },
   {
-    question: "How do you handle creative blocks?",
+    question: "How well do you follow procedures and protocols?",
     options: [
-      "I take breaks and return with a fresh perspective.",
-      "I give up when I hit a block.",
-      "I push through the block until I find a solution.",
-      "I struggle to overcome creative blocks."
+      "I try but find it hard to stick to strict procedures.",
+      "I follow them but may sometimes overlook details.",
+      "I strictly follow all procedures and protocols.",
+      "I prefer to improvise rather than follow protocols."
     ]
   },
   {
-    question: "How do you incorporate creativity into your daily life?",
+    question: "How do you feel about continuing education and lifelong learning?",
     options: [
-      "I find ways to be creative in everyday tasks.",
-      "I don't actively seek to be creative daily.",
-      "I incorporate creativity occasionally.",
-      "I make a conscious effort to be creative every day."
+      "I prefer to learn only when necessary.",
+      "I’m open to it but not overly excited.",
+      "I’m very enthusiastic about it.",
+      "I’m not interested in continuous learning."
     ]
   },
   {
-    question: "How do you deal with uncertainty in creative projects?",
+    question: "How well do you handle feedback and criticism?",
     options: [
-      "I embrace uncertainty and see it as part of the process.",
-      "I feel uncomfortable with uncertainty and avoid it.",
-      "I manage uncertainty but prefer clear directions.",
-      "I struggle with uncertainty but try to adapt."
+      "I find it hard to take criticism.",
+      "I accept it but sometimes feel defensive.",
+      "I struggle with feedback and tend to avoid it.",
+      "I take it well and use it to improve."
     ]
   },
   {
-    question: "How do you stay motivated on long creative projects?",
+    question: "Are you comfortable working in high-pressure situations?",
     options: [
-      "I lose interest quickly.",
-      "I break the project into smaller, manageable tasks.",
-      "I stay motivated but need occasional breaks.",
-      "I struggle to stay motivated throughout."
+      "Yes, I thrive in high-pressure environments.",
+      "I find it difficult but try my best.",
+      "I manage well but need time to adjust.",
+      "No, I prefer calmer environments."
     ]
   },
   {
-    question: "How do you approach new and unfamiliar creative fields?",
+    question: "Are you good at managing stress?",
     options: [
-      "I avoid them and stick to what I know.",
-      "I am curious and excited to explore them.",
-      "I am hesitant but willing to try.",
-      "I feel intimidated and unsure."
+      "Yes, I handle stress very well.",
+      "I find stress overwhelming.",
+      "I struggle with stress but try to cope.",
+      "I manage stress adequately."
     ]
   },
   {
-    question: "How do you stay updated with creative trends?",
+    question: "How patient are you when dealing with difficult or uncooperative people?",
     options: [
-      "I actively research and follow trends.",
-      "I occasionally check out new trends.",
-      "I am not interested in following trends.",
-      "I find it hard to keep up with trends."
+      "I’m patient but can get frustrated over time.",
+      "Very patient, I handle such situations calmly.",
+      "I struggle with difficult people.",
+      "I find it very challenging to stay patient."
     ]
   },
   {
-    question: "How do you approach feedback from peers on creative work?",
+    question: "Do you have a strong interest in biology and human anatomy?",
     options: [
-      "I ignore feedback and do things my way.",
-      "I take feedback constructively and make changes if necessary.",
-      "I consider feedback but am hesitant to change.",
-      "I welcome feedback and use it to enhance my work."
+      "I find it interesting but challenging.",
+      "I prefer other sciences like physics or chemistry.",
+      "Not really.",
+      "Yes, I love learning about the human body."
+    ]
+  },
+  {
+    question: "How do you feel about working with advanced technology and medical equipment?",
+    options: [
+      "I’m not comfortable with advanced technology.",
+      "I find it challenging but manageable.",
+      "I’m very interested and comfortable with technology.",
+      "I’m comfortable but not overly enthusiastic."
+    ]
+  },
+  {
+    question: "Do you have good hand-eye coordination and manual dexterity?",
+    options: [
+      "Yes, I’m very coordinated and skilled with my hands.",
+      "I’m not very coordinated.",
+      "I sometimes struggle with coordination.",
+      "I’m fairly coordinated."
+    ]
+  },
+  {
+    question: "How comfortable are you with handling sensitive or confidential information?",
+    options: [
+      "Yes, I understand the importance of confidentiality.",
+      "I’m uncomfortable with such responsibilities.",
+      "I’m comfortable but sometimes find it stressful.",
+      "I prefer not to handle sensitive information."
+    ]
+  },
+  {
+    question: "Do you have the resilience to handle setbacks and challenges in your work?",
+    options: [
+      "I find setbacks hard to deal with.",
+      "I’m resilient but sometimes take time to recover.",
+      "I struggle significantly with setbacks.",
+      "Yes, I’m very resilient and bounce back quickly."
+    ]
+  },
+  {
+    question: "Are you prepared to handle emotional challenges, such as dealing with loss or grief?",
+    options: [
+      "I find it very overwhelming.",
+      "I can handle it but find it difficult.",
+      "I find it very challenging.",
+      "Yes, I’m emotionally resilient."
+    ]
+  },
+  {
+    question: "How well do you work in a team setting?",
+    options: [
+      "I work well with others.",
+      "I work excellently in teams and often take the lead.",
+      "I prefer working alone but can manage in teams.",
+      "I find teamwork challenging."
+    ]
+  },
+  {
+    question: "Do you have a strong ethical foundation and a sense of integrity?",
+    options: [
+      "Yes, I always act with integrity and ethics.",
+      "I find ethical dilemmas very challenging.",
+      "I have strong ethics but sometimes struggle with difficult decisions.",
+      "I try to be ethical but find it hard in complex situations."
+    ]
+  },
+  {
+    question: "How interested are you in research and staying updated with medical advancements?",
+    options: [
+      "Not really interested in research.",
+      "I’m interested but don’t always keep up.",
+      "I’m somewhat interested, but it’s not a priority.",
+      "Yes, I’m passionate about medical research."
+    ]
+  },
+  {
+    question: "How would you rate your communication skills, especially in explaining complex concepts?",
+    options: [
+      "Average, I sometimes struggle to explain complex ideas.",
+      "Poor, I find it hard to communicate complex information.",
+      "Excellent, I’m very clear and patient.",
+      "Good, I manage to explain things well."
+    ]
+  },
+  {
+    question: "Are you detail-oriented and meticulous in your work?",
+    options: [
+      "I sometimes overlook details.",
+      "Yes, I pay great attention to detail.",
+      "I’m more of a big-picture thinker.",
+      "I’m usually detail-oriented."
     ]
   }
 ];
 
+
 const answerKey = [
   [
-    { "Score": 1 },
     { "Score": 3 },
-    { "Score": 0 },
-    { "Score": 2 }
-  ],
-  [
-    { "Score": 3 },
-    { "Score": 1 },
-    { "Score": 0 },
-    { "Score": 2 }
-  ],
-  [
-    { "Score": 3 },
-    { "Score": 0 },
+    { "Score": 4 },
     { "Score": 1 },
     { "Score": 2 }
   ],
   [
+    { "Score": 4 },
     { "Score": 1 },
-    { "Score": 2 },
-    { "Score": 0 },
-    { "Score": 3 }
-  ],
-  [
-    { "Score": 3 },
-    { "Score": 0 },
-    { "Score": 2 },
-    { "Score": 1 }
-  ],
-  [
-    { "Score": 3 },
-    { "Score": 0 },
-    { "Score": 1 },
-    { "Score": 2 }
-  ],
-  [
-    { "Score": 0 },
-    { "Score": 1 },
-    { "Score": 3 },
-    { "Score": 2 }
-  ],
-  [
-    { "Score": 3 },
-    { "Score": 0 },
-    { "Score": 2 },
-    { "Score": 1 }
-  ],
-  [
-    { "Score": 0 },
-    { "Score": 1 },
-    { "Score": 3 },
-    { "Score": 2 }
-  ],
-  [
-    { "Score": 1 },
-    { "Score": 0 },
     { "Score": 2 },
     { "Score": 3 }
   ],
   [
-    { "Score": 0 },
+    { "Score": 4 },
+    { "Score": 3 },
+    { "Score": 2 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 1 },
+    { "Score": 4 },
+    { "Score": 3 },
+    { "Score": 2 }
+  ],
+  [
+    { "Score": 3 },
+    { "Score": 4 },
+    { "Score": 2 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 3 },
+    { "Score": 2 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 1 },
+    { "Score": 2 },
+    { "Score": 3 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 2 },
+    { "Score": 1 },
+    { "Score": 3 }
+  ],
+  [
+    { "Score": 1 },
+    { "Score": 4 },
+    { "Score": 2 },
+    { "Score": 3 }
+  ],
+  [
+    { "Score": 3 },
+    { "Score": 4 },
+    { "Score": 1 },
+    { "Score": 2 }
+  ],
+  [
+    { "Score": 4 },
     { "Score": 1 },
     { "Score": 3 },
     { "Score": 2 }
   ],
   [
     { "Score": 3 },
-    { "Score": 0 },
+    { "Score": 4 },
+    { "Score": 2 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 1 },
+    { "Score": 3 },
+    { "Score": 4 },
+    { "Score": 2 }
+  ],
+  [
+    { "Score": 2 },
+    { "Score": 1 },
+    { "Score": 4 },
+    { "Score": 3 }
+  ],
+  [
+    { "Score": 1 },
+    { "Score": 2 },
+    { "Score": 3 },
+    { "Score": 4 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 2 },
+    { "Score": 3 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 1 },
+    { "Score": 2 },
+    { "Score": 3 }
+  ],
+  [
+    { "Score": 3 },
+    { "Score": 4 },
     { "Score": 1 },
     { "Score": 2 }
   ],
   [
+    { "Score": 2 },
+    { "Score": 4 },
+    { "Score": 1 },
+    { "Score": 3 }
+  ],
+  [
+    { "Score": 1 },
+    { "Score": 2 },
     { "Score": 3 },
-    { "Score": 0 },
+    { "Score": 4 }
+  ],
+  [
+    { "Score": 3 },
+    { "Score": 1 },
+    { "Score": 4 },
+    { "Score": 2 }
+  ],
+  [
+    { "Score": 2 },
+    { "Score": 4 },
+    { "Score": 3 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 3 },
+    { "Score": 2 },
+    { "Score": 1 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 3 },
+    { "Score": 1 },
+    { "Score": 2 }
+  ],
+  [
+    { "Score": 2 },
+    { "Score": 3 },
+    { "Score": 1 },
+    { "Score": 4 }
+  ],
+  [
+    { "Score": 3 },
+    { "Score": 1 },
+    { "Score": 2 },
+    { "Score": 4 }
+  ],
+  [
+    { "Score": 1 },
+    { "Score": 2 },
+    { "Score": 3 },
+    { "Score": 4 }
+  ],
+  [
+    { "Score": 4 },
+    { "Score": 3 },
     { "Score": 2 },
     { "Score": 1 }
   ],
   [
     { "Score": 2 },
-    { "Score": 0 },
+    { "Score": 4 },
     { "Score": 1 },
     { "Score": 3 }
   ],
   [
     { "Score": 3 },
-    { "Score": 0 },
-    { "Score": 2 },
-    { "Score": 1 }
-  ],
-  [
-    { "Score": 0 },
-    { "Score": 3 },
-    { "Score": 2 },
-    { "Score": 1 }
-  ],
-  [
-    { "Score": 0 },
-    { "Score": 3 },
-    { "Score": 2 },
-    { "Score": 1 }
-  ],
-  [
-    { "Score": 3 },
     { "Score": 1 },
-    { "Score": 2 },
-    { "Score": 0 }
-  ],
-  [
-    { "Score": 3 },
-    { "Score": 2 },
-    { "Score": 0 },
-    { "Score": 1 }
-  ],
-  [
-    { "Score": 0 },
-    { "Score": 3 },
-    { "Score": 1 },
+    { "Score": 4 },
     { "Score": 2 }
   ]
 ];
 
+
 const ranges = {
-  "48-60": "Highly creative",
-  "36-47": "Very creative",
-  "24-35": "Moderately creative",
-  "0-23": "Low creativity"
+  "0-50": "Not suitable",
+  "51-80": "Potentially suitable",
+  "81-100": "Well-suited",
+  "101-999": "Highly suitable"
 };
 
 
+
   // Store questions and options
-const testQuestionsCollection = collection(db, "test-content");
+  const testQuestionsCollection = collection(db, "test-content");
   const testQuestionsDocRef = doc(testQuestionsCollection, testName);
   const contentCollection = collection(testQuestionsDocRef, "questions");
 

@@ -63,7 +63,12 @@ export default () => {
               <p className="leading-relaxed mt-2 text-[15px] font-poppins">
                 Join BranchSelector to take your future in your hands!
               </p>
-              {/*<img src={NortonLogo}/>*/}
+
+              <div className="my-5 p-2 bg-gray-200 rounded-sm inline-flex items-center max-w-full">
+                <p className="text-black font-bold font-poppins mr-1 text-xs">Site Secured by</p>
+                <img className="w-14" src={NortonLogo} alt="Norton Secured Logo" />
+              </div>
+
             </div>
           </div>
           <div className="flex-1 mt-10 space-y-6 justify-end  sm:flex md:space-y-0 md:mt-0">
