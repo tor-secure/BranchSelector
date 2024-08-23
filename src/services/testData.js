@@ -159,15 +159,16 @@ const testMetaData = {
       "Measure your creative thinking skills and explore your potential for innovative ideas",
   }, 
 
+  /*
   medical: {
     queryCode: "medical",
-    name: "Medical Test",
+    name: "Medical Aptitude Test",
     displayType: "mcq",
     evaluationType: "ranged-score",
     icon: FaStethoscope,
     description:
       "Evaluate your interests and preferences on various medical fields and specialties",
-  },
+  },*/
 };
 
 
