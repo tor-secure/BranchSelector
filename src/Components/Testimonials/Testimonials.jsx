@@ -50,13 +50,10 @@ export default () => {
       quote:
         "Branch Selector's insight was crucial in finding a course that perfectly matches my passion and career goals.",
     },
-
-
   ];
 
-
   return (
-    <section className="relative py-14">
+    <section className="relative py-14 pb-3">
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="max-w-xl sm:text-center md:mx-auto">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
