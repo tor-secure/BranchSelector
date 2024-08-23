@@ -4,6 +4,7 @@ import Features from "../Components/Features/Features";
 import Sponsors from "../Components/Sponsors/Sponsors";
 import CTA from "../Components/CTA/CTA";
 import Message from "../Components/Message/Message";
+import CasseroleSpinner from "../Components/CasseroleSpinner";
 
 
 const LandingPage = () => {
@@ -14,7 +15,9 @@ const LandingPage = () => {
       <Message />
       <Features />
       <Testimonials />
+      <CasseroleSpinner/>
       <CTA />
+
     </>
   );
 };
