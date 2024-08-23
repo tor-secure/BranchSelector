@@ -12,7 +12,7 @@ const TestsList = () => {
       <div className="flex flex-col md:flex-row bg-dimBlue   items-center justify-center md:gap-2 lg:gap-44 ">
         <div className="items-center flex justify-center align-middle">
           <h1 className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-96 mt-5 md:mt-0 text-gray-700 ">
-            Unlock Your Potential with our wide range of tests.
+          Unlock Your Potential with our wide range of AI powered tests.
           </h1>
         </div>
 

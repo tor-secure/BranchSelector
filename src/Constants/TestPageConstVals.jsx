@@ -23,7 +23,9 @@ const testContent = {
   motivation:
     "The Motivation Assessment test explores what drives you to set and achieve goals, providing insights into your intrinsic and extrinsic motivators.",
   time:
-    "The Time Management test assesses your ability to prioritize tasks, manage time efficiently, and maintain productivity under various conditions." 
+    "The Time Management test assesses your ability to prioritize tasks, manage time efficiently, and maintain productivity under various conditions." ,
+  medical:
+    "A medical interest test is typically designed to assess an individual's interest in various aspects of the medical field."
 };
 
 export default testContent;

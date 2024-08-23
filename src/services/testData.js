@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiSolidBrain } from "react-icons/bi";
-import { FaBookReader, FaLightbulb, FaRocket, FaTheaterMasks } from "react-icons/fa";
+import { FaBookReader, FaLightbulb, FaRocket, FaStethoscope, FaTheaterMasks } from "react-icons/fa";
 import { GiPaintBrush } from "react-icons/gi";
 import { IoEar, IoRocket } from "react-icons/io5";
 import { MdEngineering, MdOutlineEmojiEmotions, MdOutlineTimer, MdWork } from "react-icons/md";
@@ -158,6 +158,16 @@ const testMetaData = {
     description:
       "Measure your creative thinking skills and explore your potential for innovative ideas",
   }, 
+
+  medical: {
+    queryCode: "medical",
+    name: "Medical Test",
+    displayType: "mcq",
+    evaluationType: "ranged-score",
+    icon: FaStethoscope,
+    description:
+      "Evaluate your interests and preferences on various medical fields and specialties",
+  },
 };
 
 
