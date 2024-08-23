@@ -138,7 +138,6 @@ const testMetaData = {
     description:
       "Evaluate your time management skills to improve productivity and efficiency",
   },
-
   motivation: {
     queryCode: "motivation",
     name: "Motivation Assessment Test",
@@ -148,7 +147,6 @@ const testMetaData = {
     description:
       "Assess your motivation levels to understand what drives you to achieve your goals",
   },
-
   creativity: {
     queryCode: "creativity",
     name: "Creativity Test",
@@ -158,8 +156,6 @@ const testMetaData = {
     description:
       "Measure your creative thinking skills and explore your potential for innovative ideas",
   }, 
-
-  /*
   medical: {
     queryCode: "medical",
     name: "Medical Aptitude Test",
@@ -168,7 +164,7 @@ const testMetaData = {
     icon: FaStethoscope,
     description:
       "Evaluate your interests and preferences on various medical fields and specialties",
-  },*/
+  }
 };
 
 

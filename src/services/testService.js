@@ -165,6 +165,8 @@ async function getTestQuestions(testName) {
       };
     });
 
+    console.log(questions)
+
     if (questions.length > 30) {
       questions = questions.sort(() => 0.5 - Math.random()).slice(0, 30);
     }
