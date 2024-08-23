@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OverlayLoader from "../../Components/OverlayLoader";
 import {
   validateDiscountVoucher,
@@ -13,6 +13,14 @@ const CheckoutPage = () => {
 
   // Fetch plan seleted from the pricing page
   const { plan, currencyCode } = location.state || {}; 
+
+  
+  useEffect(() => {
+    if (!plan) {
+      navigate('/pricing');
+    }
+  }, [plan, navigate]); // Dependencies to prevent infinite loop
+
 
   // Setup inital states
   const [totalAmountToPay, setTotalAmountToPay] = useState(plan.price);

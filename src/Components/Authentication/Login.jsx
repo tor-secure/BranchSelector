@@ -63,7 +63,7 @@ const onSubmitHandler = async (e) => {
       // Login successful, navigate to the desired location
       toast.success("Logged in successfully")
       setIsLoading(false)
-      navigate(fromLocation ? fromLocation.pathname : '/');
+      navigate(fromLocation ? fromLocation.pathname : '/',{state:state.state});
     } else {
       // Login failed, display the error message using a toast
       toast.error(message);
