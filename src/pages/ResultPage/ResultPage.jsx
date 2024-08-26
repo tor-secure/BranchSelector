@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Chart as ChartJS } from "chart.js/auto"; //Do not remove this import.
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getTestMetaData } from "../../services/testService";
 import { resultcontentdata } from "../../services/ResultContent";
 import ResultGraphComponent from "./ResultGraphComponent";
@@ -11,11 +11,14 @@ import ResultSidebar from "./ResultSidebar";
 
 const ResultsPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { result, testName } = location.state || {};
   const testmeta = getTestMetaData(testName);
 
 
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
+
+
 
   useEffect(() => {
     const handleResize = () => {
