@@ -24,6 +24,7 @@ import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage.jsx";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage.jsx";
 import { DeleteAccountPage } from "./pages/DeleteAccountPage.jsx";
 import { PaymentConfirmationPage } from "./pages/PaymentConfirmationPage.jsx";
+import { TestReport } from "./pages/ResultPage/ResultReport.jsx";
 
 
 //Lazy loading static pages
@@ -205,6 +206,11 @@ const router = createBrowserRouter([
   {
     path: "services-test",
     element: <ServicesTest />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "result-report",
+    element: <TestReport />,
     errorElement: <ErrorPage />,
   },
   {
