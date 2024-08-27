@@ -65,11 +65,11 @@ export default () => {
           </p>
         </div>
         <div className="mt-12">
-          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
             {testimonials.map((item) => (
               <li
                 key={item.name}
-                className="bg-white rounded-xl border shadow-md flex flex-col"
+                className="bg-white rounded-xl border shadow-md flex flex-col self-center"
               >
                 <div className="p-4 flex-grow">
                   <svg
