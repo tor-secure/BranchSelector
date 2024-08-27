@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { RiCoinsFill } from "react-icons/ri";
-import { IoIosSettings } from "react-icons/io";
-import { MdExitToApp } from "react-icons/md";
 
-import { FaHome, FaHouseDamage, FaListUl, FaUser } from "react-icons/fa";
-import { getCurrentUser } from "../../services/authService";
+import { FaHome, FaListUl, FaUser } from "react-icons/fa";
 import "../../Components/Dashboard/BreathingAnimation.css";
 import { useNavigate } from "react-router-dom";
+import { getCurrentUserInfo } from "../../services/userService";
 
 export const ResultSidebar = ({ setSelectedPage }) => {
   const [checkBottons, setCheckBottons] = useState([true, false, false, false]);
   const [userData, serUserData] = useState({});
-  const [isFixed, setIsFixed] = useState(true); // State to track if the div should be fixed
+
 const navigate = useNavigate();
   useEffect(() => {
     async function fetchTestHistory() {
-      const testUserData = await getCurrentUser();
-      console.log("UserData:", testUserData);
+      const testUserData = await getCurrentUserInfo();
       serUserData(testUserData);
     }
 
@@ -24,7 +20,6 @@ const navigate = useNavigate();
   }, []);
 
   const handleClick = (pos, selectedOpt) => {
-    // console.log("In");
     if (selectedOpt == 'home')
     navigate('/')
     else if(selectedOpt == 'dashboard')
@@ -32,16 +27,15 @@ const navigate = useNavigate();
     else if(selectedOpt == 'list')
     navigate('/testlist')
   };
-  //mt-[${1000000}em]
   return (
     <div className="w-full hidden lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff] " >
       <div className="w-full flex flex-col justify-center items-center mt-10 lg:mt-0">
         <img
-          src={userData.photoURL}
+          src={userData.authProvider == 'google' ? userData.photoUrl : "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"}
           className="rounded-full size-40 lg:size-28"
           alt="User Profile"
         ></img>
-        <h3 className="font-bold text-xl">{userData.displayName}</h3>
+        <h3 className="font-bold text-xl mt-7">{userData.displayName}</h3>
         <p>{userData.email}</p>
       </div>
       <ul className="font-bold text-sm lg:text-base text-[#595959] mt-12 w-full flex lg:block justify-between flex-wrap">

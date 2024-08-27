@@ -7,8 +7,13 @@ import { useNavigate } from "react-router-dom";
 import branchselector_logo from "../../assets/branchselector_logo.png";
 import { toast } from "react-toastify";
 import { IoClose } from "react-icons/io5";
+import OverlayLoader from "../OverlayLoader";
+import { useState } from "react";
 
 const Signup = () => {
+
+  const [isLoading,setIsLoading] = useState(false)
+
   const navigate = useNavigate();
 
   const onClickHandler = () => {
@@ -23,17 +28,17 @@ const onContinueWithGoogleHandler = async () =>{
       delay:false
 
     } 
+    setIsLoading(true)
     const authResult = await signInWithGoogle({rememberMe:false})
     if(authResult.success)
     {
-
     toast.success("Logged in successfully!", toastOptions);
-
     navigate('/');
     }
     else{
       toast.error("Something went wrong! Try again!",toastOptions)
     }
+    setIsLoading(false)
 
 
   }
@@ -45,6 +50,8 @@ const handleGoBack = () => {
 
 const onSubmitHandler = async (e) => {
   e.preventDefault();
+
+  setIsLoading(true)
 
   const email = e.target.elements.email.value;
   const password = e.target.elements.password.value;
@@ -59,6 +66,10 @@ const onSubmitHandler = async (e) => {
       password
     );
 
+    // Try to sign up with email and password
+    // If account is created, redirect user to login again.
+    // Else display error.
+
     if (status === 'success') {
       toast.success(message);
       navigate('/login');
@@ -69,10 +80,13 @@ const onSubmitHandler = async (e) => {
     console.error('An unexpected error occurred:', error);
     toast.error('An unexpected error occurred. Please try again later.');
   }
+
+  setIsLoading(false)
 };
 
   return (
     <div className="flex-1 flex lg:items-center justify-center h-screen">
+      <OverlayLoader isLoading={isLoading} loadingText={"Creating Account..."}/>
       <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
         <div class="absolute top-0 left-0 items-center justify-center w-16 h-16 bg-gray-300 rounded-full ml-5 mt-5 lg:flex hidden" onClick={handleGoBack}>
         <IoClose class="text-black text-2xl" />
@@ -122,6 +136,8 @@ const onSubmitHandler = async (e) => {
             <input
               name="name"
               type="text"
+              minLength={2}
+              title="Please enter a name with atleast 2 characters."
               required
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />
@@ -140,6 +156,8 @@ const onSubmitHandler = async (e) => {
             <input
               name="phone"
               type="tel"
+              title="Enter a valid 10 digit phone number"
+              pattern="[1-9]{1}[0-9]{9}"
               required
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />

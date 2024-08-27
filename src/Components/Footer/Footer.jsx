@@ -1,5 +1,6 @@
 import { BsGlobe2 } from "react-icons/bs";
 import branchselector_logo from "../../assets/branchselector_logo.png";
+import NortonLogo from "../../assets/NortonLogo.svg"
 import { Link } from "react-router-dom";
 
 export default () => {
@@ -29,6 +30,10 @@ export default () => {
       label: "About",
       items: [
         {
+          href: "disclaimer",
+          name: "Disclaimer ",
+        },
+        {
           href: "terms",
           name: "Terms of Service",
         },
@@ -39,10 +44,6 @@ export default () => {
         {
           href: "refund",
           name: "Refund Policy"
-        },
-        {
-          href: "disclaimer",
-          name: "Disclaimer"
         },
       ],
     },
@@ -59,9 +60,15 @@ export default () => {
                 alt="branchselector logo"
                 className="w-24"
               />
-              <p className="leading-relaxed mt-2 text-[15px]">
+              <p className="leading-relaxed mt-2 text-[15px] font-poppins">
                 Join BranchSelector to take your future in your hands!
               </p>
+
+              <div className="my-5 p-2 bg-gray-200 rounded-sm inline-flex items-center max-w-full">
+                <p className="text-black font-bold font-poppins mr-1 text-xs">Site Secured by</p>
+                <img className="w-14" src={NortonLogo} alt="Norton Secured Logo" />
+              </div>
+
             </div>
           </div>
           <div className="flex-1 mt-10 space-y-6 justify-end  sm:flex md:space-y-0 md:mt-0">

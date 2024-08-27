@@ -34,18 +34,21 @@ const plansUS = {
 
 
 const getPricingPlans = async () => {
+
+  //Fetch country code, returns plans based on country
+
   try {
-    const response = await fetch('https://ipapi.co/json/');
+    const response = await fetch('https://ipapi.co/json/'); // Using third party API
     const data = await response.json();
 
     let plan = {};
 
     if (data.country === 'IN') {
-      plan.plan = plansIndia; // Ensure plansIndia is defined and contains the plans for India
+      plan.plan = plansIndia; 
       plan.currency = '₹';
       plan.currencyCode = 'INR'
     } else {
-      plan.plan = plansUS; // Ensure plansUS is defined and contains the plans for the US
+      plan.plan = plansUS; 
       plan.currency = '$';
       plan.currencyCode = 'USD'
     }

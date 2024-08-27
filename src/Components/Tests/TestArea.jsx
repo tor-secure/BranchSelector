@@ -6,7 +6,6 @@ import { TestNavbar } from "./TestNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { QuestionSetScroll } from "./QuestionSetScroll";
 import { QuestionSetImgMcq } from "./QuestionSetImgMcq";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import { NextPrevSec } from "./NextPrevSec";
 
 export const TestArea = () => {
@@ -15,6 +14,7 @@ export const TestArea = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    //If users land on this page without selecting any test on the previous page, go back to home
     if (Object.keys(testMetaData).length === 0) {
       navigate("/");
     }
@@ -22,48 +22,44 @@ export const TestArea = () => {
 
   const heading = testMetaData.name;
   const [result, setResult] = useState({});
-  // const questionsPerPage = 5;
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [questionsRange, setQuestionsRange] = useState([0, questionsPerPage]);
 
+  //Set initial question range
   useEffect(() => {
     setQuestionsRange([0, questionsPerPage]);
   }, [questionsPerPage]);
 
+  //Fetch the questions for the test
   useEffect(() => {
     const fetchData = async () => {
-      //console.log(await getTestQuestions("brain"));
       setQuestionsData(await getTestQuestions(testMetaData.queryCode));
     };
 
     fetchData();
 
-    // Empty dependency array ensures this effect runs only once after the initial render
   }, []);
 
-  // var result = {}
+  
   const [questionsData, setQuestionsData] = useState([]);
 
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
 
   useEffect(() => {
-    console.log("testMetaData.displayType:", testMetaData.displayType);
     if (testMetaData.displayType === "slider") {
       const tempResult = { ...result };
       questionsData.map((data) => {
         tempResult[data.id] = 3;
-        console.log("tempResult:", tempResult);
       });
       setResult(tempResult);
     }
     if (testMetaData.displayType === "img-mcq") setQuestionsPerPage(1);
   }, [testMetaData.displayType, questionsData]);
 
+  //To keep track of which section the user is currently in
   const range1 = Array.from({
     length: Math.ceil(questionsData.length / questionsPerPage),
   }).fill(false);
+  
   range1[0] = true;
 
   const [secData, setSecData] = useState(range1);
@@ -140,8 +136,6 @@ export const TestArea = () => {
           range1={range1}
         />
       }
-      {/* <Navbar /> */}
-
       <div className=" bg-[#ffffff] h-screen mt-[4em]">
         <div className="flex overflow-hidden mb-2 ">
           <div className="lg:block hidden w-[24em] h-screen fixed bg-[#ffffff] border-r border-r-[#D6D6D6] border-r-solid">

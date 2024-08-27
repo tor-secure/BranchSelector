@@ -6,7 +6,6 @@ import { RecommendedTests } from "./RecommendedTests";
 import { useEffect, useState } from "react";
 import {
   getRemainingTests,
-  getTestLogo,
   testMetaData,
 } from "../../services/testService";
 import {
@@ -14,10 +13,9 @@ import {
   getTestHistory,
 } from "../../services/userService";
 import { TestHistory } from "./TestHistory";
-import { LoadingPage } from "../../pages/LoadingPage";
-import { getCurrentUser } from "../../services/authService";
 
-export const RightSection = () => {
+
+export const MainDashboardContent = () => {
   const [testHistory, setTestHistory] = useState(null);
   const [recommendedTests, setRecommendedTests] = useState(null);
   const [remainingCredits, setRemainingCredits] = useState(null);
@@ -27,7 +25,6 @@ export const RightSection = () => {
       const testHistoryTemp = await getTestHistory();
       const userDataTemp = await getRemainingCredits();
 
-      console.log("from credit card ", userDataTemp);
       const remainigTemp = getRemainingTests(testHistoryTemp);
 
       setRemainingCredits(userDataTemp);

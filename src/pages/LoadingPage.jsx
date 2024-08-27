@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import Lottie from "lottie-web";
 import loading from "../assets/animation/loading.json";
 
+//Default loading animation
 const LoadingPage = () => {
   const containerRef = useRef(null);
 

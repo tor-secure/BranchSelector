@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BuyCreditsSection } from "./BuyCreditsSection";
 import { VoucherSection } from "./VoucherSection";
 
+// Slider tab seen on the add credits section. It renders the child based on what is selected.
+
 const AddCreditSliderTabs = () => {
   const [activeTab, setActiveTab] = useState("buyCredits");
 

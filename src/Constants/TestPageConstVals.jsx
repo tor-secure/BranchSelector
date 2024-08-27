@@ -17,7 +17,15 @@ const testContent = {
     "The English test evaluates language proficiency, encompassing reading, writing, listening, and speaking skills for effective communication.",
   eq: "The EQ test measures emotional intelligence, including self-awareness, self-regulation, motivation, empathy, and relationship management.",
   career: "The Career Aptitude test assesses your skills to thrive in your career.",
-  study: "The Study Habits test analyzes your study habits to identify strengths and areas for improvement."  
+  study: "The Study Habits test analyzes your study habits to identify strengths and areas for improvement.",
+  creativity:
+    "The Creativity test evaluates your ability to think outside the box, generate innovative ideas, and approach problems with originality.",
+  motivation:
+    "The Motivation Assessment test explores what drives you to set and achieve goals, providing insights into your intrinsic and extrinsic motivators.",
+  time:
+    "The Time Management test assesses your ability to prioritize tasks, manage time efficiently, and maintain productivity under various conditions." ,
+  medical:
+    "A medical interest test is typically designed to assess an individual's interest in various aspects of the medical field."
 };
 
 export default testContent;

@@ -2,12 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import Logo_Temp from "../../assets/Logo-Temp.png";
 import { evaluteTest } from "../../services/testService";
 import { MdExitToApp } from "react-icons/md";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { newTestTaken } from "../../services/userService";
 import { toast } from "react-toastify";
 import OverlayLoader from "../OverlayLoader";
+
+
+/*
+
+This is the component that appears at the top of the screen when taking a test.
+
+REMEMBER: If any changes are made to the functionality of next/previous/submit handlers, make sure to make the
+          same changes in the NextPrevSec.jsx component. 
+
+          Else the next and previous buttons on the top and bottom will have different behaviours resulting 
+          in unexpected errors.
+          
+          
+*/
 
 export const TestNavbar = ({
   heading,
@@ -55,13 +67,6 @@ export const TestNavbar = ({
     } else {
       alert("Answer all the previous sections");
     }
-    // console.log(questionsRange);
-
-    // itemRefs.current[sec]?.scrollIntoView({
-    //   behavior: "smooth", // Optional: defines the transition animation
-    //   block: "nearest", // Optional: defines vertical alignment
-    //   inline: "start", // Optional: defines horizontal alignment
-    // });
   };
 
   const goToPrev = () => {
@@ -110,7 +115,7 @@ export const TestNavbar = ({
     setLoading(true)
     const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     const finRes = await evaluteTest(testQueryName, result);
-    await newTestTaken(testQueryName, finRes);
+    await newTestTaken(testQueryName, finRes, result);
     toast.update(toastId, {
         render: "Test evaluation complete!",
         type: "success",
@@ -162,13 +167,6 @@ export const TestNavbar = ({
           </nav>
 
           <div className="h-[50%] bg-[#F3F3F3] border-y border-y-[#D6D6D6] border-y-solid flex items-center justify-center">
-            {/* <h3 className="font-semibold cursor-pointer hover:text-[#686868]">
-          Prev
-        </h3>
-        <h3 className="font-semibold cursor-pointer hover:text-[#686868]">
-          Next
-        </h3> */}
-
             {!isInstruction && (
               <div className="flex items-center justify-center w-full">
                 {questionsRange[0] == 0 ? (
@@ -176,7 +174,6 @@ export const TestNavbar = ({
                     className="font-bold cursor-pointer text-[#727272] ml-5"
                     onClick={() => goToPrev()}
                   >
-                    {/* <IoIosArrowBack size={22} /> */}
                     Prev
                   </button>
                 ) : (
@@ -184,7 +181,6 @@ export const TestNavbar = ({
                     className="font-bold cursor-pointer  hover:text-[#686868] ml-5"
                     onClick={() => goToPrev()}
                   >
-                    {/* <IoIosArrowBack size={22} /> */}
                     Prev
                   </button>
                 )}
@@ -227,7 +223,6 @@ export const TestNavbar = ({
                       checkIfAllAnswered() ? goToNext() : console.log();
                     }}
                   >
-                    {/* <IoIosArrowForward size={22} /> */}
                     Next
                   </button>
                 )}

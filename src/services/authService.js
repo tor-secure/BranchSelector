@@ -1,7 +1,12 @@
 import {
+  EmailAuthProvider,
+  FacebookAuthProvider,
   browserLocalPersistence,
   browserSessionPersistence,
+  deleteUser,
   onAuthStateChanged,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
   setPersistence,
 } from "firebase/auth";
 import {
@@ -20,19 +25,29 @@ import {
   where,
   addDoc,
   getDocs,
+  deleteDoc,
 } from "./firebase.js";
+import { getCurrentUserInfo } from "./userService.js";
+
+//All functions relating to authentication are defined here.
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const googleAuthProvider = new GoogleAuthProvider();
 
+//Function to add a listener to auth changes. Used in Protected Routes.
 const addAuthChangeListener = (onChange) => {
   return onAuthStateChanged(auth, onChange);
 };
 
 // Function to register a new user with email and password
 const registerWithEmailAndPassword = async (name, phoneNumber, email, password) => {
+
+  //Create a new user using firebase email-password auth. 
+  //Once new account is created, create a corresponding document in the user collection
+  
   try {
+
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const user = result.user;
 
@@ -45,13 +60,12 @@ const registerWithEmailAndPassword = async (name, phoneNumber, email, password) 
       phoneNumber: user.phoneNumber ? user.phoneNumber : phoneNumber,
       photoUrl: user.photoURL ? user.photoURL : '',
       accountType: 'free',
-      testsTaken: 0,
-      credit: 5,
+      credit: 0,
     };
 
     const usersCollection = collection(firestore, 'users');
     await addDoc(usersCollection, newUser);
-
+    await logger("SIGNUP")
     return { status: 'success', message: 'Sign up successful!' };
   } catch (error) {
     // Handle different error cases and return the appropriate status and message
@@ -71,7 +85,8 @@ const registerWithEmailAndPassword = async (name, phoneNumber, email, password) 
 
 // Function to sign in with Google using Google OAuth provider
 const signInWithGoogle = async ({ rememberMe }) => {
-    try {
+  //Signin with google. If new user, create corresponding user document in firebase
+  try {
         const result = await signInWithPopup(auth, googleAuthProvider)
         const user = result.user;
         const newUser = {
@@ -83,8 +98,47 @@ const signInWithGoogle = async ({ rememberMe }) => {
             phoneNumber: user.phoneNumber,
             photoUrl: user.photoURL,
             accountType: 'free',
+            credit: 0
+        };
+        const usersCollection = collection(firestore, "users");
+        const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));
+        if (querySnapshot.empty) {
+            await addDoc(usersCollection, newUser);
+            await logger("SIGNUP")
+        }
+
+        else
+        await logger("LOGIN")
+  
+        return { success: true, user }; // Indicate successful login
+  } catch (error) {
+    console.error("Sign-in failed:", error);
+    return { success: false, error }; // Indicate failed login with error details
+  }
+};
+
+//Signin with facebook. Not yet active.
+const signInWithFacebook = async ({ rememberMe }) => {
+
+  const logResult = await logger("LOGIN")
+  if(!logResult)
+  return { success: false, message: 'An unexpected error occurred. Please try again later.' };
+
+  const provider = new FacebookAuthProvider();
+    try {
+        const result = await signInWithPopup(auth, provider)
+        const user = result.user;
+        const newUser = {
+            authProvider: 'facebook',
+            uid: user.uid,
+            email: user.email,
+            metadata: JSON.stringify(user.metadata),
+            displayName: user.displayName,
+            phoneNumber: user.phoneNumber,
+            photoUrl: user.photoURL,
+            accountType: 'free',
             testsTaken: 0,
-            credit: 5
+            credit: 0
         };
         const usersCollection = collection(firestore, "users");
         const querySnapshot = await getDocs(query(usersCollection, where("uid", "==", user.uid)));
@@ -96,10 +150,6 @@ const signInWithGoogle = async ({ rememberMe }) => {
     console.error("Sign-in failed:", error);
     return { success: false, error }; // Indicate failed login with error details
   }
-};
-
-// Function to check if the user is signed in
-const isSignedIn = () => {
 };
 
 // Function to login with email and password
@@ -119,7 +169,7 @@ const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
 
     // Retrieve the current user
     const currentUser = userCredential.user;
-
+    await logger("LOGIN")
     // Update the authentication state
     return { status: "success", currentUser };
     } 
@@ -142,6 +192,7 @@ const loginWithEmailAndPassword = async (email, password, { rememberMe }) => {
       }
   }
 };
+
 // Function to login with email link
 const loginWithEmailLink = async (email) => {
   try {
@@ -166,16 +217,65 @@ const SendPasswordResetEmail = async (email) => {
 };
 
 // Function to logout the current user
-const logout = () => {
+const logout = async () => {
+  const logResult = await logger("LOGOUT")
+  if(!logResult)
+  return { success: false, message: 'An unexpected error occurred. Please try again later.' };
   signOut(auth);
 };
 
+// Function to reset the password
+const resetPassword = async (email) => {
+  try {
+    const result = await sendPasswordResetEmail(auth, email);
+    return {status: "success"};
+  } catch (error) {
+    return {status: 'error', message: error.message};
+  }
+}
 
-const syncUserData = async () => {
+// Function to delete user account.
+const deleteAccount = async (password=null) => {
+  try {
+    /*
+    Deleting account requires recent authentication. So force reauthentication.
+    */
+    const user = await getCurrentUserInfo();
+    const uid = user.uid;
 
+    if(user.authProvider === 'google')
+    await reauthenticateWithPopup(auth.currentUser,googleAuthProvider)
+
+    else if(user.authProvider === 'local')
+    {
+      const credential = EmailAuthProvider.credential(user.email,password)
+      await reauthenticateWithCredential(auth.currentUser,credential)
+    }
+
+    // Delete the user document from Firestore
+    const usersCollection = collection(firestore, 'users');
+    const q = query(usersCollection, where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      await deleteDoc(userDoc.ref);
+    }
+
+    // Delete the user from Firebase Auth
+    await deleteUser(auth.currentUser);
+
+    return { status: 'success', message: 'User account deleted successfully' };
+  } catch (error) {
+    return { status: 'error', message: error.message };
+  }
 };
 
+// Function to get current user in a systematic promise format. 
 function getCurrentUser() {
+  // Got this code from an old Firebase Repo, Issues section
+  // No idea how it works but it works. 
+  // Built in method of auth.currentUser is not reliable.
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged(
       (user) => {
@@ -192,18 +292,45 @@ function getCurrentUser() {
   });
 }
 
+// Function to create logs on the database relating to events such login and signup
+const logger = async (event) => {
+  try {
+    const response = await fetch('https://ip-world.vercel.app/');
+    const logData = await response.json();
+
+    const userData = await getCurrentUserInfo()
+
+    // Prepare the data
+    const logEntry = {
+      EVENT: event,
+      TIMESTAMP: logData.USER_INFORMATION.TIMESTAMP,
+      ASN_INFORMATION: logData.ASN_INFORMATION,
+      GEO_INFORMATION: logData.GEO_INFORMATION,
+      USER_INFORMATION: {...logData.USER_INFORMATION,"USER_ID":userData.uid,"PROFILE_NAME":userData.displayName}
+    };
+
+    // Push to Firebase
+    await addDoc(collection(firestore, "logs"), logEntry);
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 export {
   auth,
   firestore,
   registerWithEmailAndPassword,
   signInWithGoogle,
+  signInWithFacebook,
   loginWithEmailAndPassword,
   loginWithEmailLink,
   logout,
   SendPasswordResetEmail,
-  isSignedIn,
   setPersistence,
   getCurrentUser,
   addAuthChangeListener,
-  syncUserData,
+  resetPassword,
+  deleteAccount,
+  logger
 };

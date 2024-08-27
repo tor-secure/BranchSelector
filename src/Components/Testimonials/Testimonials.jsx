@@ -3,6 +3,7 @@ import Manav from "../../assets/manav.png";
 import Bhavith from "../../assets/bhavith.png";
 import Poorvi from "../../assets/poorvi.jpeg";
 import Saanvi from "../../assets/saanvi.jpeg"
+import Anish from "../../assets/Anish.jpeg"
 
 export default () => {
  const testimonials = [
@@ -14,11 +15,11 @@ export default () => {
         "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
     {
-      avatar: Poorvi,
-      name: "Poorvi Shetty",
-      title: "Aeronautical Engineer",
+      avatar: Saanvi,
+      name: "Saanvi Chetan",
+      title: "BBA student",
       quote:
-        "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
+        "With Branch Selector's guidance, I discovered a course that truly aligns with my interests.",
     },
     {
       avatar: Manav,
@@ -26,26 +27,33 @@ export default () => {
       title: "Software Engineer",
       quote:
         "Thanks to Branch Selector, I'm now pursuing a field I'm truly passionate about.",
-    },
+    },    
     {
       avatar: Bhavith,
       name: "Bhavith B Shetty",
-      title: "UI/UX designer",
+      title: "Frontend Developer",
       quote:
         "Branch Selector provided invaluable clarity, leading me to my ideal course.",
     },
     {
-      avatar: Saanvi,
-      name: "Saanvi Chetan",
-      title: "BBA student",
+      avatar: Poorvi,
+      name: "Poorvi Shetty",
+      title: "Aeronautical Engineer",
       quote:
-        "With Branch Selector's guidance, I discovered a course that truly aligns with my interests.",
+        "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
+    },
+
+    {
+      avatar: Anish,
+      name: "Anish U",
+      title: "Software Developer Intern",
+      quote:
+        "Branch Selector's insight was crucial in finding a course that perfectly matches my passion and career goals.",
     },
   ];
 
-
   return (
-    <section className="relative py-14">
+    <section className="relative py-14 pb-3">
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="max-w-xl sm:text-center md:mx-auto">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">

@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
-import SideDashBoard from "../../Components/SideDashBoard/SideDashBoard";
-import { Chart as ChartJS } from "chart.js/auto";
-import { Bar, Doughnut } from "react-chartjs-2";
-import { faL } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
-import ProfilePic from "../../assets/profile.webp";
+
+import { Chart as ChartJS } from "chart.js/auto"; //Do not remove this import.
+
+import { useLocation, useNavigate } from "react-router-dom";
 import { getTestMetaData } from "../../services/testService";
 import { resultcontentdata } from "../../services/ResultContent";
-import LeftSection from "../../Components/Dashboard/LeftSection";
 import ResultGraphComponent from "./ResultGraphComponent";
 import ResultTextComponent from "./ResultTextComponent";
 import ResultSidebar from "./ResultSidebar";
 
 const ResultsPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { result, testName } = location.state || {};
-  console.log(result, testName);
   const testmeta = getTestMetaData(testName);
 
 
   const [isScreenLarge, setScreenLarge] = useState(window.innerWidth > 768);
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,17 +27,6 @@ const ResultsPage = () => {
     window.addEventListener("resize", handleResize);
   }, []);
 
-  // const resultarray = Object.entries(result);
-
-  // const slicedEngineeringData = resultarray.slice(0, 15);
-
-  // const FirstLabel = slicedEngineeringData.map(([key]) => {
-  //   return key.replace("Engineering", "E");
-  // });
-
-  // const AdjustedLabel = FirstLabel.map((label) => label.split(" "));
-
-  // console.log(AdjustedLabel);
 
   return (
     <>
@@ -51,10 +38,10 @@ const ResultsPage = () => {
       }}
     >
       
-      {/* <div className="bg-[#c2c2c2] h-4 "></div> */}
+
       <div className="lg:flex font-poppins   relative ">
         <ResultSidebar/>
-        {/* bg-[#CBE1F6] */}
+
         <div className="relative z-2  w-[100]  py-12  lg:px-16 px-5 overflow-y-hidden border-t-2 ">
           <div>
             <h2 className=" text-3xl md:text-3xl pb-4 md:pb-7 font-semibold  ">
@@ -64,7 +51,7 @@ const ResultsPage = () => {
 
               <ResultTextComponent testName = {testName} result={result}/>
               <ResultGraphComponent
-                testname={testmeta.name}
+                testname={testName}
                 result={
                   testName === 'english'
                     ? (({ 'Correct Answers': correctAnswers, 'Wrong Answers': wrongAnswers }) => ({ 'Correct Answers': correctAnswers, 'Wrong Answers': wrongAnswers }))(result)

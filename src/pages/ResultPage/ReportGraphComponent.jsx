@@ -3,13 +3,13 @@ import { Bar } from "react-chartjs-2";
 import { getTestMetaData } from "../../services/testService";
 
 //Bar graph for all results
-const ResultGraphComponent = ({ testname, result }) => {
+const ReportGraphComponent = ({ testname, result }) => {
 
   const testMetaData = getTestMetaData(testname)
 
   return (
     <div
-      className="bg-white shadow-md h-[70vh] lg:w-[60%]  rounded-[8px] sm:rounded-[15px] flex items-center justify-center p-2 sm:p-5"
+      className="bg-white h-[350px] mt-6 lg:w-[100%]  rounded-[8px] sm:rounded-[15px] flex items-center justify-center p-2 sm:p-5"
     >
       <div className="w-full h-full">
         <Bar
@@ -20,7 +20,7 @@ const ResultGraphComponent = ({ testname, result }) => {
                 :Object.keys(result),
             datasets: [
               {
-                label: testname,
+                label: testname.toUpperCase(),
                 data: testMetaData.evaluationType === 'ranged-score'?{
                   "Highest Score":result.maxRange,
                   "Your Score":result.score,
@@ -43,6 +43,6 @@ const ResultGraphComponent = ({ testname, result }) => {
   );
 };
 
-export default ResultGraphComponent;
+export default ReportGraphComponent;
 
 

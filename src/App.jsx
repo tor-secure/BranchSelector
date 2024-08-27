@@ -16,6 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { pathname } = useLocation();
 
+  //Top level app is always listening for auth changes. Renders navbar based on current auth state.
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
       setIsAuthenticated(user);
