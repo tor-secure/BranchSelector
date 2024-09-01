@@ -16,10 +16,10 @@ const Message = () => {
               Crafting Futures: Your Path Starts Here
             </h3>
             <p className="mt-3 text-gray-600 md:text-lg text-ellipsis">
-              With personalized
-              recommendations, we'll guide you towards academic paths that align
-              with your goals and aspirations. Explore, learn, and embark on a
-              transformative educational experience. Your future starts here.
+              <br/>
+                BranchSelector.com, a pioneering website launched in 2012, initially focused on guiding students to choose the most suitable branch from over 60 options in engineering. Over the years, it has evolved into a comprehensive platform designed to help students understand their strengths, weaknesses, and aptitudes. Now in 2024, the site offers a wide array of tests, from the Engineering Branch Selector and IQ Test to more specialized assessments like the Medical Aptitude Test and VARK Test, catering to a diverse set of needs. This holistic approach ensures that students can make well-informed decisions about their academic and career paths, rather than relying solely on traditional advice or external pressures.
+                <br/> <br/>
+                The importance of this platform lies in its ability to address the common mistakes made by students and parents when selecting academic or career paths. Often, choices are made based on societal trends, parental expectations, or superficial interests, without a deep understanding of the student’s inherent abilities or passions. This can lead to dissatisfaction, underperformance, and even a complete change of direction later in life. BranchSelector.com helps mitigate these risks by providing a scientific basis for decision-making, encouraging students to explore their true potential, and ultimately guiding them toward a fulfilling career.
             </p>
           </div>
         </div>
