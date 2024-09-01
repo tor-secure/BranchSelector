@@ -91,7 +91,7 @@ export default () => {
         </div>
         <div className="mt-8 py-6 border-t items-center justify-between sm:flex">
           <div className="mt-4 sm:mt-0">
-            &copy; 2012 - 2024 BranchSelector. All rights reserved.<br/> BranchSelector is operated by <a href = 'https:\\www.thesurepass.com'>Sure Pass Academy</a>
+            &copy; 2011 - 2024 BranchSelector. All rights reserved.<br/> BranchSelector is operated by <a href = 'https:\\www.thesurepass.com'>Sure Pass Academy</a>
           </div>
           <div className="mt-6 sm:mt-0">
             <ul className="flex items-center space-x-4">

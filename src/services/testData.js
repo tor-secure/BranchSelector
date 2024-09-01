@@ -8,6 +8,9 @@ import { PiBarbellFill, PiCertificateFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
 import { TbAbc } from "react-icons/tb";
 
+//Test metadata determines how the test will appear to the user and how it will be evaluated. 
+//Refer technical docs for more details.
+
 const testMetaData = {
   engineering: {
     queryCode: "engineering",

@@ -5,6 +5,7 @@ const plansIndia = {
     {title:"5 Credits", credits: 5, price: 799, originalPrice: 999, planID:'C5' },
     {title:"9 Credits", credits: 9, price: 1499, originalPrice: 1799, planID:'C9' },
     {title:"12 Credits", credits: 12, price: 1999, originalPrice: 2399, planID:'C12' },
+    {title:"16 Credits", credits: 16, price: 2499, originalPrice: 3199, planID:'C16' },
   ],
   counselingSession: [
     { title: "Online/Offline Career Counseling Appointment", appointment:true, price: 1999, originalPrice: 1999, planID: 'CO1' },
@@ -22,6 +23,7 @@ const plansUS = {
     {title:"5 Credits", credits: 5, price: 40, originalPrice: 50, planID:'C5' },
     {title:"9 Credits", credits: 9, price: 80, originalPrice: 90, planID:'C9' },
     {title:"12 Credits", credits: 12, price: 100, originalPrice: 120, planID:'C12' },
+    {title:"16 Credits", credits: 16, price: 125, originalPrice: 160, planID:'C16' },
   ],
   counselingSession: [
     { title: "Online/Offline Career Counseling Appointment",appointment:true, price: 60, originalPrice: 60, planID: 'CO1' },
