@@ -252,6 +252,12 @@ async function evaluteTest(testName, selectedOptions) {
         const grade = calculateGrade(correctAnswers);
         res.grade = grade;
       }
+
+      if (testName ==='iq'){
+        //If its an IQ test, calculate IQ. 
+        const iq = correctAnswers*4 + ((Object.values(selectedOptions).length - correctAnswers)*-1)
+        res.iq = iq
+      }
       return res
     }
 

@@ -38,7 +38,7 @@ const ResultTextComponent = ({testName, result}) => {
           (
             <div className="text-[40px]">
             {
-            testName === 'english'?result.grade: testObject.values(result)[0]
+            testName === 'english'?result.grade: (testName ==='iq'?result.iq:testObject.values(result)[0])
             }
             </div>
           ):
