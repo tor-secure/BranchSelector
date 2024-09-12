@@ -20,9 +20,16 @@ export const VoucherSection = () => {
     } else {
       const validationResult = await validateCouponCode(couponCode);
       if (validationResult.status !== "fail")
+      {
         setCredits(validationResult.creditsToBeAdded);
-      setIsVoucherApplied(true);
-      toast.success("Voucher is valid!");
+        setIsVoucherApplied(true);
+        toast.success("Voucher is valid!");
+      }
+      else{
+        setCredits(0);
+        setIsVoucherApplied(false);
+        toast.error("Voucher is invalid!");
+      }
     }
   };
 
@@ -83,10 +90,14 @@ export const VoucherSection = () => {
         <button
           onClick={handleSubmit}
           type="submit"
-          className="w-full px-4 py-2 mt-11 text-white font-medium bg-[#367AF3] hover:bg-blue-400 active:bg-[#367AF3] rounded-md duration-150"
+          className={`w-full px-4 py-2 mt-11 font-medium rounded-md duration-150 
+            ${isVoucherApplied ? 'bg-[#367AF3] text-white hover:bg-blue-400 active:bg-[#367AF3]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+          disabled={!isVoucherApplied}
         >
-          Redeem Coupon
+          Redeem
         </button>
+
+
       </form>
     </div>
   );

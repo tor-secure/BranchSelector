@@ -10,7 +10,7 @@ export default () => {
     {
       avatar: Om,
       name: "Om K Poojari",
-      title: "Trainee Software Engineer",
+      title: "Software Engineer",
       quote:
         "Branch Selector helped guide my academic journey, revealing my true passion.",
     },
