@@ -53,7 +53,7 @@ const ResultsPage = () => {
               <ResultGraphComponent
                 testname={testName}
                 result={
-                  testName === 'english'
+                  testName === 'english' || testName === 'iq'
                     ? (({ 'Correct Answers': correctAnswers, 'Wrong Answers': wrongAnswers }) => ({ 'Correct Answers': correctAnswers, 'Wrong Answers': wrongAnswers }))(result)
                     : result
                 }

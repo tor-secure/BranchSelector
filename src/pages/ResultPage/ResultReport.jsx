@@ -218,7 +218,7 @@ const TestReport = () => {
             (
               testMetaData['evaluationType'] == 'single-option'?
               (
-                testName === 'english'?result.grade: testObject.values(result)[0]
+                testName === 'english'?result.grade: (testName ==='iq'?result.iq:testObject.values(result)[0])
               ):
               (        
               testMetaData.evaluationType === 'ranged-score'?result.level:Object.keys(result)[0]
