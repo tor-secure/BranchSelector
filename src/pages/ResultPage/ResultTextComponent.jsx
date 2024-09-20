@@ -4,14 +4,14 @@ import { getTestMetaData } from "../../services/testService";
 import { FaAngleDoubleDown } from "react-icons/fa";
 
 //The text that displayed below result pages.
-const ResultTextComponent = ({testName, result}) => {
+const ResultTextComponent = ({testName, result, dateTaken}) => {
 
   const testMetadata = getTestMetaData(testName);
 
   const navigate = useNavigate()
 
   const downloadReportHandler = () =>{
-    navigate('/result-report',{state:{testName:testName,result:result}})
+    navigate('/result-report',{state:{testName:testName,result:result, dateTaken:dateTaken}})
   }
 
   return (    
@@ -52,7 +52,7 @@ const ResultTextComponent = ({testName, result}) => {
         }
       </div>
       <div onClick={downloadReportHandler} className="bg-blue-500 text-white font-poppins py-3 font-bold rounded-md lg:mt-0 mt-20 w-full flex items-center justify-center">
-        <FaAngleDoubleDown size={20} className="mr-2"/>
+<FaAngleDoubleDown size={20} className="mr-2"/>
         <span>Download Report</span>
         
       </div>
