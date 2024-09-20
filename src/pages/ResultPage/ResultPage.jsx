@@ -12,7 +12,7 @@ import ResultSidebar from "./ResultSidebar";
 const ResultsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { result, testName } = location.state || {};
+  const { result, testName, dateTaken } = location.state || {};
   const testmeta = getTestMetaData(testName);
 
 
@@ -49,7 +49,7 @@ const ResultsPage = () => {
             </h2>
            <div className="flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-5">
 
-              <ResultTextComponent testName = {testName} result={result}/>
+<ResultTextComponent testName = {testName} result={result} dateTaken={dateTaken}/>
               <ResultGraphComponent
                 testname={testName}
                 result={

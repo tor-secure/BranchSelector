@@ -42,6 +42,7 @@ const TestReport = () => {
 
   const testName = state.testName
   const result = state.result
+  const dateTaken = state.dateTaken
   const testMetaData = getTestMetaData(testName)
   const testContent = testStaticContent[testName]
 
@@ -134,7 +135,7 @@ const TestReport = () => {
       pdf.addImage(page.imgData, 'JPEG', 0, 0, page.pdfWidth, page.pdfHeight, '', 'FAST');
     }
 
-    pdf.save('Test-Report.pdf');
+    pdf.save(testMetaData.name.toUpperCase() + '-Report.pdf');
 
   };
 
@@ -156,7 +157,7 @@ const TestReport = () => {
           <span className="text-xl font-bold text-blue-500 -mt-5">BranchSelector</span>
         </div>
 
-        <h1 className="text-4xl font-bold mb-36 mt-64">TEST REPORT</h1>
+<h1 className="text-4xl font-bold mb-36 mt-64">{String(testMetaData.name).toUpperCase()} REPORT</h1>
 
         <div className="space-y-6">
           <div>
@@ -168,8 +169,8 @@ const TestReport = () => {
             <p className="text-md">{userDetails.email}</p>
           </div>
           <div>
-            <p className="text-blue-500 font-bold text-xs">Test Taken</p>
-            <p className=" text-md">{testMetaData.name}</p>
+        <p className="text-blue-500 font-bold text-xs">Date Taken</p>
+<p className=" text-md">{dateTaken}</p>
           </div>
         </div>
       </div>
