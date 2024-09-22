@@ -11,7 +11,7 @@ const ResultTextComponent = ({testName, result, dateTaken}) => {
   const navigate = useNavigate()
 
   const downloadReportHandler = () =>{
-    navigate('/result-report',{state:{testName:testName,result:result, dateTaken:dateTaken}})
+navigate('/result-report',{state:{testName:testName,result:result, dateTaken:dateTaken}})
   }
 
   return (    
