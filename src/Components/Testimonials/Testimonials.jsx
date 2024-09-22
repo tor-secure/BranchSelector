@@ -42,13 +42,12 @@ export default () => {
       quote:
         "Branch Selector was instrumental in helping me find the right career path and achieve my goals.",
     },
-
     {
       avatar: Anish,
       name: "Anish U",
       title: "Software Developer Intern",
       quote:
-        "Branch Selector's insight was crucial in finding a course that perfectly matches my passion and career goals.",
+    "Branch Selector's insight was crucial in finding a course that perfectly matches my passion",
     },
   ];
 
@@ -65,11 +64,11 @@ export default () => {
           </p>
         </div>
         <div className="mt-12">
-          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+          <ul className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((item) => (
               <li
                 key={item.name}
-                className="bg-white rounded-xl border shadow-md flex flex-col self-center"
+className="bg-white rounded-xl border shadow-md flex flex-col self-center h-[300px]"
               >
                 <div className="p-4 flex-grow">
                   <svg
@@ -86,11 +85,11 @@ export default () => {
                 </div>
                 <figure className="flex flex-col justify-between h-full">
                   <blockquote className="flex-grow">
-                    <p className="text-g text-lg font-semibold px-4 py-1">
+<p className="text-g text-lg font-semibold px-4 py-1 h-[100px] overflow-y-auto">
                       {item.quote}
                     </p>
                   </blockquote>
-                  <div className="flex items-center gap-x-4 p-4 mt-6 bg-indigo-50">
+                  <div className="flex items-center gap-x-4 p-4 mt-auto bg-indigo-50">
                     <img
                       src={item.avatar}
                       alt="person"
