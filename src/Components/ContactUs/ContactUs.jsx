@@ -130,9 +130,9 @@ const ContactUs = () => {
     <section className="pb-10">
       <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8 ">
         <div className="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none">
-          <div className="max-w-lg space-y-3 py-10">
+          <div className="max-w-lg py-10">
             <h3 className="text-indigo-600 font-semibold">Contact</h3>
-            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl mt-2 mb-3">
               Let us know how we can help
             </p>
             <p>
@@ -162,6 +162,12 @@ const ContactUs = () => {
                 ))}
               </ul>
             </div>
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3737.549460552318!2d74.83667637827618!3d12.876674755019192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba35b2bfc57f253%3A0xa31ea1109925b56a!2sSURE%20PASS!5e0!3m2!1sen!2sin"
+  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mt-10 h-80 w-full">
+</iframe>
+
+
           </div>
           <div className="flex-1 mt-12 sm:max-w-lg lg:max-w-md">
             <form onSubmit={handleSubmit} className="space-y-5">

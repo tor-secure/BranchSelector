@@ -37,6 +37,17 @@ export const NextPrevSec = ({
     setSecData(range1);
   }, [noOfSections]);
 
+  const formatDate = (date) => {
+    const options = { 
+      day: '2-digit', 
+      month: '2-digit', 
+      year: '2-digit', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: true 
+    };
+    return new Intl.DateTimeFormat('en-GB', options).format(date);
+  };
 
   const goToPrev = () => {
     if (questionsRange[0] >= questionsPerPage) {
@@ -96,7 +107,7 @@ export const NextPrevSec = ({
         draggable: true
       });
     navigate("/result", {
-      state: { result: finRes, testName: testQueryName },
+      state: { result: finRes, testName: testQueryName, dateTaken: formatDate(new Date()) },
     });
   };
 
