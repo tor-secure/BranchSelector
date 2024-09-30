@@ -94,7 +94,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "testList",
+        path: "tests",
         element: (
           <TestsList />
         ),
