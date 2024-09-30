@@ -115,7 +115,7 @@ const AuthenticatedNavBar = (props) => {
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: "Tests", path: "testList" },
+    { title: "Tests", path: "tests" },
     { title: "Ebook", path: "/ebook" },
     { title: "Blog", path: "/blog" },
     { title: "Pricing", path:"pricing"},

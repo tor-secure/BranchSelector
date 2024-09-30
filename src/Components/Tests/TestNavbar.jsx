@@ -133,7 +133,7 @@ export const TestNavbar = ({
       "Are you sure? Your progress will be lost!"
     );
     if (confirmNavigation) {
-      navigate("/testList");
+      navigate("/tests");
     }
   };
 
