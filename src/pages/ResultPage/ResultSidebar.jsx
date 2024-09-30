@@ -25,7 +25,7 @@ const navigate = useNavigate();
     else if(selectedOpt == 'dashboard')
     navigate('/dashboard')
     else if(selectedOpt == 'list')
-    navigate('/testlist')
+    navigate('/tests')
   };
   return (
     <div className="w-full hidden lg:flex lg:h-screen lg:w-[18em] bg-white shadow-2xl p-7 lg:flex-col items-center lg:sticky lg:top-10 bg-gradient-to-b from-[#CBE1F6] to-[#e9f3fc] lg:bg-white lg:from-[#ffffff] " >

@@ -50,6 +50,18 @@ export const TestNavbar = ({
 
   let itemRefs = useRef([]);
 
+  const formatDate = (date) => {
+    const options = { 
+      day: '2-digit', 
+      month: '2-digit', 
+      year: '2-digit', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: true 
+    };
+    return new Intl.DateTimeFormat('en-GB', options).format(date);
+  };
+
   useEffect(() => {
     itemRefs.current[currSec]?.scrollIntoView({
       behavior: "smooth",
@@ -111,7 +123,7 @@ export const TestNavbar = ({
     return answeredAllQuestions;
   };
 
-  const hadleSubmit = async () => {
+  const handleSubmit = async () => {
     setLoading(true)
     const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     const finRes = await evaluteTest(testQueryName, result);
@@ -124,7 +136,7 @@ export const TestNavbar = ({
         draggable: true
       });
     navigate("/result", {
-      state: { result: finRes, testName: testQueryName },
+      state: { result: finRes, testName: testQueryName, dateTaken: formatDate(new Date()) },
     });
   };
 
@@ -212,7 +224,7 @@ export const TestNavbar = ({
                 {questionsRange[1] >= questionsData.length ? (
                   <button
                     className="font-bold cursor-pointer text-[#367AF3] hover:text-[#7aa7f4] mr-5 text-"
-                    onClick={() => hadleSubmit()}
+                    onClick={() => handleSubmit()}
                   >
                     Submit
                   </button>

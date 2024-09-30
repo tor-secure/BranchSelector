@@ -47,7 +47,7 @@ export default () => {
       name: "Anish U",
       title: "Software Developer Intern",
       quote:
-    "Branch Selector's insight was crucial in finding a course that perfectly matches my passion",
+    "Branch Selector's insight was crucial in finding a course that perfectly matches my passion.",
     },
   ];
 
