@@ -265,6 +265,7 @@ async function evaluteTest(testName, selectedOptions) {
       //Similar to aggregation, but here there is an external weight to all atributes that the user is selecting.
       const answerKey = {};
       var results = {};
+      var highlyInterested = new Set()
       answerKeySnapshot.forEach((doc) => {
         answerKey[doc.id] = doc.data();
       });
@@ -277,20 +278,47 @@ async function evaluteTest(testName, selectedOptions) {
           if (optionWeight) {
             Object.keys(optionWeight).forEach((weight) => {
               if (results[weight])
-                results[weight] += selectedWeight * optionWeight[weight];
-              else results[weight] = selectedWeight * optionWeight[weight];
+                results[weight] += optionWeight[weight] * selectedWeight;
+              else results[weight] = optionWeight[weight] * selectedWeight;
             });
           }
         } else {
           console.warn(`Answer key not found for question ${questionId}`);
         }
+
+        if(selectedWeight === 5 || selectedWeight === '5'){
+          highlyInterested.add([Object.keys(answerKey[questionId]).find(key => answerKey[questionId][key] === 5),999])
+        }
       }
+
       var resultsArray = Object.entries(results);
       resultsArray.sort((a, b) => b[1] - a[1]);
 
       if (testName === 'engineering') {
-        //For engineering test, return just the top 5 most scored options.
-         resultsArray = resultsArray.slice(0, 5);
+        // For engineering test, there is some special logic as requested by the client.
+        // Questions that they answer 5 to, are regarded as highly preferred.Pick 2 from this list and pop them as the top 2 results.
+        // Rest of the logic is same.
+
+        //Preparing results array
+        let tempResults = Array.from(highlyInterested).slice(0,2)
+        tempResults.push(...resultsArray)
+        resultsArray = tempResults.slice(0, 5);
+
+        // Find the maximum value excluding 999. We use this to replace the int value of the preference score from 999.
+        // Because it will look better on a graph and in the mail.
+        let maxValue = Math.max(...resultsArray.map(item => item[1]).filter(value => value !== 999));
+
+        // Calculate 20% more than the max value and round it to an integer.
+        // 20% seemed like a reasonable amount to increase it by.
+        let newValue = Math.floor(maxValue * 1.2);
+
+        // Replace 999 with the new integer value
+        resultsArray.forEach(item => {
+          if (item[1] === 999) {
+            item[1] = newValue;
+          }
+        });
+
       }
       results = Object.fromEntries(resultsArray);
       return results;
