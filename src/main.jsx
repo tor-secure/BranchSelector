@@ -207,7 +207,7 @@ const router = createBrowserRouter([
     path: "services-test",
     element: <ServicesTest />,
     errorElement: <ErrorPage />,
-  }*/,
+  },*/
   {
     path: "result-report",
     element: <TestReport />,

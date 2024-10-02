@@ -35,7 +35,7 @@ const ServicesTest = () => {
     <>
       <button
         onClick={async () => {
-          await putDataToFireStoreRegular();
+          console.log(await evaluteTest("engineering",{"EGGQ1":"3","EGGQ21":3,"EGGQ13":"5","EGGQ2":3,"EGGQ19":"5","EGGQ31":3,"EGGQ10":3,"EGGQ5":3,"EGGQ25":3,"EGGQ34":3,"EGGQ7":3,"EGGQ8":3,"EGGQ9":3,"EGGQ20":3,"EGGQ30":3,"EGGQ3":3,"EGGQ23":"5","EGGQ32":3,"EGGQ11":3,"EGGQ29":3,"EGGQ33":3,"EGGQ17":3,"EGGQ18":3,"EGGQ27":3,"EGGQ12":3,"EGGQ15":3,"EGGQ4":3,"EGGQ26":3,"EGGQ35":3,"EGGQ22":3}))
         }}
         style={style}
       >

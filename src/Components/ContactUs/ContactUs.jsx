@@ -132,7 +132,7 @@ const ContactUs = () => {
         <div className="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none">
           <div className="max-w-lg py-10">
             <h3 className="text-indigo-600 font-semibold">Contact</h3>
-            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl mt-2 mb-3">
+            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl mt-2 mb-3  ">
               Let us know how we can help
             </p>
             <p>
