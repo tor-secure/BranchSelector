@@ -92,7 +92,6 @@ const newTestTaken = async (testName, result, optionsSelected) => {
 
 // Checks if the user is allowed to take a test based on the credits in their account
 const canTakeTest = async () => {
-  return false;
   const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
   const querySnapshot = await getDocs(
