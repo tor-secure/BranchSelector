@@ -14,9 +14,11 @@ export const TestInstruction = () => {
 
   const [isChecked, setIsChecked] = useState(false);
 
+  //If user has exhausted credits, code was showing error toast twice. Using this fixes it.
+  const [hasShownToast, setHasShownToast] = useState(false);
+
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
-    console.log(event.target.checked);
   };
 
   const navigate = useNavigate();
@@ -33,15 +35,27 @@ export const TestInstruction = () => {
   const heading = testMetaData.name;
 
   useEffect(() => {
-    const canTakeTestCheck = async () => {
-      const result = await canTakeTest();
-      if (!result) {
-        toast.error("You cannot take anymore tests! Buy more credits!");
-        navigate("/pricing");
-      }
-    };
-    canTakeTestCheck();
-  }, []);
+      let isMounted = true;
+
+      const canTakeTestCheck = async () => {
+        try {
+          const result = await canTakeTest();
+          if (isMounted && !result && !hasShownToast) {
+            toast.error("You cannot take anymore tests! Buy more credits!");
+            setHasShownToast(true);
+            navigate("/dashboard", { state: { selectedPage: 'Add Credits' } });
+          }
+        } catch (error) {
+          console.error("Error checking if user can take test:", error);
+        }
+      };
+
+      canTakeTestCheck();
+
+      return () => {
+        isMounted = false;
+      };
+    }, [navigate, hasShownToast]);
 
   const checkTest = (testType) => {
     // Early return pattern - if the condition is met, the component renders early.
