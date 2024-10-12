@@ -40,13 +40,13 @@ const getAllDocumentsFromCollection = async (collectionRef) => {
 // Records a new test taken along with its details
 const newTestTaken = async (testName, result, optionsSelected) => {
   const formatDate = (date) => {
-    const options = { 
-      day: '2-digit', 
-      month: '2-digit', 
-      year: '2-digit', 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      hour12: true 
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
     };
     return new Intl.DateTimeFormat('en-GB', options).format(date);
   };
@@ -54,7 +54,7 @@ const newTestTaken = async (testName, result, optionsSelected) => {
   const testDetails = {
     "test-name": testName,
     result: JSON.stringify(result),
-    optionsSelected:JSON.stringify(optionsSelected),
+    optionsSelected: JSON.stringify(optionsSelected),
     time: formatDate(new Date()),
   };
 
@@ -81,7 +81,7 @@ const newTestTaken = async (testName, result, optionsSelected) => {
     await updateDoc(doc.ref, { credit });
     const testsCollectionRef = collection(doc.ref, "tests-taken");
     await addDoc(testsCollectionRef, testDetails);
- 
+
 
   } catch (error) {
     console.error("Error writing document: ", error);
@@ -142,7 +142,7 @@ const getTestHistory = async () => {
 // Validate if a discount coupon exists, is under usage limit and is within the expriation dates.
 const validateDiscountVoucher = async (voucherCode) => {
   const toastId = toast.loading("Validating voucher...", { autoClose: false, draggable: true });
-  
+
   try {
     const vouchersCollection = collection(firestore, 'vouchers');
     const voucherQuery = query(vouchersCollection, where('code', '==', voucherCode));
@@ -223,7 +223,7 @@ const validateCouponCode = async (couponCode) => {
   );
   if (querySnapshot.size != 1) {
     console.log("Code Does not exist");
-    return {status:"fail",message:"Coupon does not exist"};
+    return { status: "fail", message: "Coupon does not exist" };
   }
 
   const codeDoc = querySnapshot.docs[0];
@@ -238,12 +238,12 @@ const validateCouponCode = async (couponCode) => {
     console.log("Coupon code is valid.");
 
     if (redeemed >= limit) {
-      return {status:"fail",message:"Coupon Code has reached its limit!"}
+      return { status: "fail", message: "Coupon Code has reached its limit!" }
     }
-    return {status:"success", creditsToBeAdded: creditsToBeAdded };
+    return { status: "success", creditsToBeAdded: creditsToBeAdded };
   } else {
     console.log("Coupon code is expired.");
-    return {status:"fail",message:"Coupon Code has expired"}
+    return { status: "fail", message: "Coupon Code has expired" }
   }
 };
 
@@ -253,7 +253,7 @@ const redeemCoupon = async (couponCode) => {
   try {
     // Validate the coupon
     const validationResult = await validateCouponCode(couponCode);
-    
+
     if (validationResult.status === "fail") {
       console.log("Invalid coupon code. No credits added.");
       toast.update(toastId, {
@@ -393,7 +393,7 @@ const getCurrentUserInfo = async () => {
 };
 
 // Retrives the credits remaining in the user's account
-const getRemainingCredits = async () =>{
+const getRemainingCredits = async () => {
   const userId = await getCurrentUser()
   const usersCollection = await collection(firestore, "users");
   const querySnapshot = await getDocs(
