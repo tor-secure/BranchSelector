@@ -1,12 +1,15 @@
 import React from 'react';
 import { BiSolidBrain } from "react-icons/bi";
 import { FaBookReader, FaLightbulb, FaRocket, FaStethoscope, FaTheaterMasks } from "react-icons/fa";
-import { GiPaintBrush } from "react-icons/gi";
+import { GiPaintBrush, GiStumpRegrowth } from "react-icons/gi";
 import { IoEar, IoRocket } from "react-icons/io5";
 import { MdEngineering, MdOutlineEmojiEmotions, MdOutlineTimer, MdWork } from "react-icons/md";
 import { PiBarbellFill, PiCertificateFill } from "react-icons/pi";
 import { RiLightbulbFlashFill } from "react-icons/ri";
 import { TbAbc } from "react-icons/tb";
+import { TfiThought } from "react-icons/tfi";
+import { IoIosPeople } from "react-icons/io";
+import { FaPeopleRoof } from "react-icons/fa6";
 
 //Test metadata determines how the test will appear to the user and how it will be evaluated. 
 //Refer technical docs for more details.
@@ -167,6 +170,42 @@ const testMetaData = {
     icon: FaStethoscope,
     description:
       "Evaluate your interests and preferences on various medical fields and specialties",
+  },
+  decision: {
+    queryCode: "decision",
+    name: "COMING SOON",
+    displayType: "mcq",
+    evaluationType: "aggregation",
+    icon: TfiThought,
+    description:
+      "Identify your Dominant Decision-Making Style and how you approach decisions",
+  },
+  future: {
+    queryCode: "future",
+    name: "COMING SOON",
+    displayType: "mcq",
+    evaluationType: "aggregation",
+    icon: GiStumpRegrowth,
+    description:
+      "Identify your approach to embracing and leveraging future technologies",
+  },
+  entrepreneur: {
+    queryCode: "entrepreneur",
+    name: "COMING SOON",
+    displayType: "mcq",
+    evaluationType: "aggregation",
+    icon: IoIosPeople,
+    description:
+      "Assess your entrepreneurial mindset by evaluating your preferences and behaviors",
+  },
+  social: {
+    queryCode: "social",
+    name: "COMING SOON",
+    displayType: "mcq",
+    evaluationType: "aggregation",
+    icon: FaPeopleRoof,
+    description:
+      "Evaluate your ability to interact effectively with others and understanding social cues",
   }
 };
 
@@ -432,6 +471,42 @@ const testStaticContent = {
     "Potentially suitable": "You have the potential for a career in the medical or paramedical field. While some areas may need further development, you have a good foundation to build on.",
     "Well-suited": "You possess many qualities well-suited for the medical or paramedical field. This could be a fulfilling career path for you, though some minor improvements might be necessary.",
     "Highly suitable": "You are highly suited for a career in the medical or paramedical field. Your skills, interests, and qualities strongly align with the demands of these professions, making you an excellent candidate."
+  }
+  },
+
+  decision: {
+    description:"The Decision Making Style test evaluates your approach to making choices, considering factors like risk tolerance, information processing, and decision-making strategies.",
+    motive:"Understanding your decision-making style can help you make better choices, improve your problem-solving skills, and enhance your leadership abilities.",
+    resultIntroText:"Based on the questions you have answered, your dominant decision-making style is",
+    resultExplaination:{
+    
+  }
+  },
+
+  future: {
+    description:"The Future Technology test assesses your readiness and openness to adopting new technologies and innovations.",
+    motive:"Understanding your approach to future technologies can help you prepare for upcoming trends, stay competitive in your field, and leverage emerging tools and platforms.",
+    resultIntroText:"Based on the questions you have answered, your future technology score is",
+    resultExplaination:{
+    
+  }
+  },
+
+  entrepreneur: {
+    description:"The Entrepreneurial Aptitude test evaluates your mindset, skills, and preferences related to entrepreneurship and business ownership.",
+    motive:"Understanding your entrepreneurial aptitude can guide you in pursuing entrepreneurial ventures, developing business ideas, and honing the skills needed for success in the business world.",
+    resultIntroText:"Based on the questions you have answered, your entrepreneurial aptitude score is",
+    resultExplaination:{
+    
+  }
+  },
+
+  social: {
+    description:"The Social Skills test assesses your ability to interact effectively with others, understand social cues, and build positive relationships.",
+    motive:"Improving your social skills can enhance your personal and professional relationships, leading to better communication, collaboration, and overall well-being.",
+    resultIntroText:"Based on the questions you have answered, your social skills score is",
+    resultExplaination:{
+    
   }
   }
 }
