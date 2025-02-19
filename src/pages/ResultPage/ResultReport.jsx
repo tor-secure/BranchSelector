@@ -33,10 +33,10 @@ const TestReport = () => {
     motivation:7,
     creativity:7,
     medical:7,
-    decision:7,
-    future:7,
-    entrepreneur:7,
-    social:7
+    decision:2,
+    future:2,
+    entrepreneur:2,
+    social:2
   }
 
   const location = useLocation()
