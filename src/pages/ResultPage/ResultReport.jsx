@@ -12,9 +12,31 @@ import { testStaticContent } from '../../services/testData';
 import OverlayLoader  from '../../Components/OverlayLoader';
 import { toast } from 'react-toastify';
 
+import { getTestStartTime } from "../../Components/Tests/TestInstruction.jsx";
+import { getTestEndTime } from "../../Components/Tests/NextPrevSec.jsx";
+
 const TestReport = () => {
 
   //Page where the test result converted into a PDF. IDK how exactly it works. ChatGPT Magic.
+
+  const getTestTime = () => {
+    let testStartTime = getTestStartTime();
+    let testEndTime = getTestEndTime();
+    const toSeconds = (time) => {
+      const [hours, minutes, seconds] = time.split(":").map(Number);
+      return hours * 3600 + minutes * 60 + seconds;
+    };
+
+    let startSeconds = toSeconds(testStartTime);
+    let endSeconds = toSeconds(testEndTime);
+    let diffSeconds = endSeconds - startSeconds;
+
+    // Convert back to MM:SS
+    let minutes = Math.floor(diffSeconds / 60);
+    let seconds = diffSeconds % 60;
+
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
 
   const pointsPerPage = {
     engineering:7,
@@ -173,8 +195,12 @@ const TestReport = () => {
             <p className="text-md">{userDetails.email}</p>
           </div>
           <div>
-        <p className="text-blue-500 font-bold text-xs">Date Taken</p>
-<p className=" text-md">{dateTaken}</p>
+            <p className="text-blue-500 font-bold text-xs">Date Taken</p>
+            <p className=" text-md">{dateTaken}</p>
+          </div>
+          <div>
+            <p className="text-blue-500 font-bold text-xs">Time Taken</p>
+            <p className=" text-md">{getTestTime()}</p>
           </div>
         </div>
       </div>

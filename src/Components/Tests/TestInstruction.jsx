@@ -8,6 +8,9 @@ import { TestInstructionSectionSlider } from "./TestInstructionSectionSlider";
 import { canTakeTest } from "../../services/userService";
 import { toast } from "react-toastify";
 
+let testStartTime = null;
+export const getTestStartTime = () => testStartTime;
+
 export const TestInstruction = () => {
   const location = useLocation();
   const { testMetaData } = location.state ?? {};
@@ -127,6 +130,7 @@ export const TestInstruction = () => {
           className=" bg-[#367AF3] text-white font-semibold w-28 h-10 rounded-md hover:bg-[#689af0]"
           onClick={() => {
             if (isChecked) {
+              testStartTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
               navigate("/testPage", {
                 state: { testMetaData: testMetaData },
               });

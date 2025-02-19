@@ -17,6 +17,9 @@ REMEMBER: If any changes are made to the functionality of next/previous/submit h
 
 */
 
+let testEndTime = null;
+export const getTestEndTime = () => testEndTime;
+
 export const NextPrevSec = ({
   questionsRange,
   setQuestionsRange,
@@ -95,6 +98,7 @@ export const NextPrevSec = ({
 
   const handleSubmit = async () => {
     setLoading(true)
+    testEndTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
     const toastId = toast.loading("Evaluating Test....", { autoClose: false, draggable: true });
     // Call fuction to evaluate the test. When completed, update the results in firebase.
     const finRes = await evaluteTest(testQueryName, result);
