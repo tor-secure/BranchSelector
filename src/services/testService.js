@@ -231,8 +231,24 @@ async function evaluteTest(testName, selectedOptions) {
 
       if(testName === "brain"){
         // If its a brain test, change the key names to be accurately displayed in the results section.
-        const tempRes = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
-        return tempRes
+        
+        const leftScore = results.left || 0;
+        const rightScore = results.right || 0;
+        
+        // Create an object that shows both scores but orders them based on dominance
+        const tempRes = {};
+        if (leftScore >= rightScore) {
+          tempRes['Left Hemisphere'] = leftScore;
+          tempRes['Right Hemisphere'] = rightScore;
+        } else {
+          tempRes['Right Hemisphere'] = rightScore;
+          tempRes['Left Hemisphere'] = leftScore;
+        }
+        
+        return tempRes;
+
+        // const tempRes = {'Left Hemisphere':results.left, 'Right Hemisphere':results.right}
+        // return tempRes
       }
 
       return results;
