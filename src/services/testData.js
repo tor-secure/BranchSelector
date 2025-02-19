@@ -173,7 +173,7 @@ const testMetaData = {
   },
   decision: {
     queryCode: "decision",
-    name: "COMING SOON",
+    name: "Decision Style Test",
     displayType: "mcq",
     evaluationType: "aggregation",
     icon: TfiThought,
@@ -182,7 +182,7 @@ const testMetaData = {
   },
   future: {
     queryCode: "future",
-    name: "COMING SOON",
+    name: "Future Technology Test",
     displayType: "mcq",
     evaluationType: "aggregation",
     icon: GiStumpRegrowth,
@@ -191,7 +191,7 @@ const testMetaData = {
   },
   entrepreneur: {
     queryCode: "entrepreneur",
-    name: "COMING SOON",
+    name: "Entrepreneurial Aptitude Test",
     displayType: "mcq",
     evaluationType: "aggregation",
     icon: IoIosPeople,
@@ -200,7 +200,7 @@ const testMetaData = {
   },
   social: {
     queryCode: "social",
-    name: "COMING SOON",
+    name: "Social Skills Test",
     displayType: "mcq",
     evaluationType: "aggregation",
     icon: FaPeopleRoof,
