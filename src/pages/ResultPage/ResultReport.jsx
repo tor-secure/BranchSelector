@@ -32,7 +32,11 @@ const TestReport = () => {
     time:7,
     motivation:7,
     creativity:7,
-    medical:7
+    medical:7,
+    decision:7,
+    future:7,
+    entrepreneur:7,
+    social:7
   }
 
   const location = useLocation()
