@@ -25,7 +25,15 @@ const testContent = {
   time:
     "The Time Management test assesses your ability to prioritize tasks, manage time efficiently, and maintain productivity under various conditions." ,
   medical:
-    "A medical interest test is typically designed to assess an individual's interest in various aspects of the medical field."
+    "A medical interest test is typically designed to assess an individual's interest in various aspects of the medical field.",
+  decision:
+    "The Decision-Making test evaluates your ability to make sound decisions under pressure, considering risks, benefits, and consequences.",
+  future:
+    "The Future Planning test examines your goals, aspirations, and strategies for personal and professional growth.",
+  entrepreneur:
+    "The Entrepreneurial test assesses your aptitude for entrepreneurship, focusing on traits like innovation, risk-taking, and business acumen.",
+  social:
+    "The Social Skills test evaluates your ability to communicate, collaborate, and build relationships effectively in personal and professional settings."
 };
 
 export default testContent;
