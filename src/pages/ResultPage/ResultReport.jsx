@@ -185,7 +185,7 @@ const TestReport = () => {
 
 <h1 className="text-4xl font-bold mb-36 mt-64">{String(testMetaData.name).toUpperCase()} REPORT</h1>
 
-        <div className="space-y-6">
+        <div className="space-y-1">
           <div>
             <p className="text-blue-500 font-bold text-xs">Username</p>
             <p className=" text-md">{userDetails.displayName}</p>
