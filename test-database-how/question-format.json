@@ -1,0 +1,47 @@
+{
+    "CODQ1": {
+        "options": {
+            "CODO1": "Option Description 1",
+            "CODO2": "Option Description 2",
+            "CODO3": "Option Description 3",
+            "CODO4": "Option Description 4"
+        },
+        "question": "Question Description 1"
+    },
+    "CODQ2": {
+        "options": {
+            "CODO1": "Option Description 1",
+            "CODO2": "Option Description 2",
+            "CODO3": "Option Description 3",
+            "CODO4": "Option Description 4"
+        },
+        "question": "Question Description 2"
+    },
+    "CODQ3": {
+        "options": {
+            "CODO1": "Option Description 1",
+            "CODO2": "Option Description 2",
+            "CODO3": "Option Description 3",
+            "CODO4": "Option Description 4"
+        },
+        "question": "Question Description 3"
+    },
+    "CODQ4": {
+        "options": {
+            "CODO1": "Option Description 1",
+            "CODO2": "Option Description 2",
+            "CODO3": "Option Description 3",
+            "CODO4": "Option Description 4"
+        },
+        "question": "Question Description 4"
+    },
+    "CODQ5": {
+        "options": {
+            "CODO1": "Option Description 1",
+            "CODO2": "Option Description 2",
+            "CODO3": "Option Description 3",
+            "CODO4": "Option Description 4"
+        },
+        "question": "Question Description 5"
+    }
+}

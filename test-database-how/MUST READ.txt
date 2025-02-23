@@ -1,0 +1,3 @@
+Please go to the Firebase Account of torsecure.dev@gmail.com 
+and get serviceAccountKey.json file, which has credentials,
+that can be used to automate the insertion of quiz contents.

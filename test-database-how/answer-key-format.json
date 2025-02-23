@@ -1,0 +1,32 @@
+{
+    "CODQ1": {
+        "CODO1": { "Option Type 1": 1 },
+        "CODO2": { "Option Type 2": 1 },
+        "CODO3": { "Option Type 3": 1 },
+        "CODO4": { "Option Type 4": 1 }
+    },
+    "CODQ2": {
+        "CODO1": { "Option Type 2": 1 },
+        "CODO2": { "Option Type 3": 1 },
+        "CODO3": { "Option Type 1": 1 },
+        "CODO4": { "Option Type 4": 1 }
+    },
+    "CODQ3": {
+        "CODO1": { "Option Type 3": 1 },
+        "CODO2": { "Option Type 1": 1 },
+        "CODO3": { "Option Type 2": 1 },
+        "CODO4": { "Option Type 4": 1 }
+    },
+    "CODQ4": {
+        "CODO1": { "Option Type 3": 1 },
+        "CODO2": { "Option Type 2": 1 },
+        "CODO3": { "Option Type 1": 1 },
+        "CODO4": { "Option Type 4": 1 }
+    },
+    "CODQ5": {
+        "CODO1": { "Option Type 1": 1 },
+        "CODO2": { "Option Type 3": 1 },
+        "CODO3": { "Option Type 2": 1 },
+        "CODO4": { "Option Type 4": 1 }
+    }
+}
