@@ -20,7 +20,7 @@
     "chart.js": "^4.4.2",
     "firebase": "^10.9.0",
     "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.1",
+    "jspdf": "^3.0.0",
     "lottie-react": "^2.4.0",
     "razorpay": "^2.9.4",
     "react": "^18.2.0",
