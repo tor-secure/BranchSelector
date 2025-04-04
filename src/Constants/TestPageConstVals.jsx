@@ -33,7 +33,9 @@ const testContent = {
   entrepreneur:
     "The Entrepreneurial test assesses your aptitude for entrepreneurship, focusing on traits like innovation, risk-taking, and business acumen.",
   social:
-    "The Social Skills test evaluates your ability to communicate, collaborate, and build relationships effectively in personal and professional settings."
+    "The Social Skills test evaluates your ability to communicate, collaborate, and build relationships effectively in personal and professional settings.",
+  board:
+    "The Board Selection Test helps students choose the most suitable education board after Class 10 by analyzing their learning style, career aspirations, study preferences, and future goals. Based on their responses, the test suggests whether CBSE, ICSE, State Board, IB, IGCSE, or NIOS would be the best fit for them."
 };
 
 export default testContent;
