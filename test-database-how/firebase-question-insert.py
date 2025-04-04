@@ -5,57 +5,192 @@ db = firestore.Client.from_service_account_json("serviceAccountKey.json")
 
 # Define Firestore structure
 main_collection = "test-content"
-main_document = "code"
-sub_collection = "questions"
-doc_prefix = "CODQ"
+main_document = "board"
+sub_collection = "answer-key"
+doc_prefix = "BODQ"
 doc_range = range(1, 31)  # CODQ1 to CODQ30
 
 # Mapping of CODQ to CODO values
 data_mapping = {
-    "CODQ1": {
-        "options": {
-            "CODO1": "Option Description 1",
-            "CODO2": "Option Description 2",
-            "CODO3": "Option Description 3",
-            "CODO4": "Option Description 4"
-        },
-        "question": "Question Description 1"
+    "BODQ1": {
+        "BODO1": { "CBSE": 1, "State Board": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "IB": 1, "IGCSE": 1 },
+        "BODO4": { "NIOS": 1 }
     },
-    "CODQ2": {
-        "options": {
-            "CODO1": "Option Description 1",
-            "CODO2": "Option Description 2",
-            "CODO3": "Option Description 3",
-            "CODO4": "Option Description 4"
-        },
-        "question": "Question Description 2"
+    "BODQ2": {
+        "BODO1": { "CBSE": 1, "ICSE": 1 },
+        "BODO2": { "IGCSE": 1, "IB": 1 },
+        "BODO3": { "NIOS": 1 },
+        "BODO4": { "State Board": 1 }
     },
-    "CODQ3": {
-        "options": {
-            "CODO1": "Option Description 1",
-            "CODO2": "Option Description 2",
-            "CODO3": "Option Description 3",
-            "CODO4": "Option Description 4"
-        },
-        "question": "Question Description 3"
+    "BODQ3": {
+        "BODO1": { "ICSE": 1, "IB": 1 },
+        "BODO2": { "CBSE": 1, "IGCSE": 1 },
+        "BODO3": { "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
     },
-    "CODQ4": {
-        "options": {
-            "CODO1": "Option Description 1",
-            "CODO2": "Option Description 2",
-            "CODO3": "Option Description 3",
-            "CODO4": "Option Description 4"
-        },
-        "question": "Question Description 4"
+    "BODQ4": {
+        "BODO1": { "CBSE": 1, "ICSE": 1 },
+        "BODO2": { "IB": 1, "IGCSE": 1 },
+        "BODO3": { "NIOS": 1 },
+        "BODO4": { "State Board": 1 }
     },
-    "CODQ5": {
-        "options": {
-            "CODO1": "Option Description 1",
-            "CODO2": "Option Description 2",
-            "CODO3": "Option Description 3",
-            "CODO4": "Option Description 4"
-        },
-        "question": "Question Description 5"
+    "BODQ5": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "CBSE": 1, "ICSE": 1 },
+        "BODO3": { "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ6": {
+        "BODO1": { "CBSE": 1, "State Board": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "IGCSE": 1, "IB": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ7": {
+        "BODO1": { "IB": 1 },
+        "BODO2": { "IGCSE": 1 },
+        "BODO3": { "CBSE": 1, "ICSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ8": {
+        "BODO1": { "IB": 1 },
+        "BODO2": { "IGCSE": 1 },
+        "BODO3": { "CBSE": 1, "ICSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ9": {
+        "BODO1": { "CBSE": 1, "State Board": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "IB": 1, "IGCSE": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ10": {
+        "BODO1": { "NIOS": 1 },
+        "BODO2": { "CBSE": 1, "ICSE": 1 },
+        "BODO3": { "IB": 1, "IGCSE": 1 },
+        "BODO4": { "State Board": 1 }
+    },
+    "BODQ11": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ12": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ13": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ14": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ15": {
+        "BODO1": { "IB": 1 },
+        "BODO2": { "IGCSE": 1 },
+        "BODO3": { "CBSE": 1, "ICSE": 1 },
+        "BODO4": { "NIOS": 1, "State Board": 1 }
+    },
+    "BODQ16": {
+        "BODO1": { "NIOS": 1 },
+        "BODO2": { "IB": 1, "IGCSE": 1 },
+        "BODO3": { "CBSE": 1, "ICSE": 1, "State Board": 1 },
+        "BODO4": { "State Board": 1 }
+    },
+    "BODQ17": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ18": {
+        "BODO1": { "NIOS": 1 },
+        "BODO2": { "IB": 1, "IGCSE": 1 },
+        "BODO3": { "CBSE": 1, "ICSE": 1, "State Board": 1 },
+        "BODO4": { "CBSE": 1, "ICSE": 1 }
+    },
+    "BODQ19": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1, "CBSE": 1 },
+        "BODO3": { "NIOS": 1 },
+        "BODO4": { "State Board": 1 }
+    },
+    "BODQ20": {
+        "BODO1": { "IB": 1, "IGCSE": 1, "NIOS": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "ICSE": 1, "CBSE": 1 }
+    },
+    "BODQ21": {
+        "BODO1": { "ICSE": 1 },
+        "BODO2": { "CBSE": 1, "IGCSE": 1 },
+        "BODO3": { "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ22": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ23": {
+        "BODO1": { "IB": 1, "ICSE": 1 },
+        "BODO2": { "CBSE": 1, "IGCSE": 1 },
+        "BODO3": { "NIOS": 1, "State Board": 1 },
+        "BODO4": { "ICSE": 1, "IGCSE": 1 }
+    },
+    "BODQ24": {
+        "BODO1": { "CBSE": 1, "ICSE": 1, "State Board": 1 },
+        "BODO2": { "IGCSE": 1 },
+        "BODO3": { "IB": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ25": {
+        "BODO1": { "CBSE": 1, "ICSE": 1, "IGCSE": 1 },
+        "BODO2": { "IB": 1 },
+        "BODO3": { "NIOS": 1, "State Board": 1 },
+        "BODO4": { "IB": 1, "IGCSE": 1, "NIOS": 1 }
+    },
+    "BODQ26": {
+        "BODO1": { "CBSE": 1, "ICSE": 1 },
+        "BODO2": { "IGCSE": 1 },
+        "BODO3": { "IB": 1, "NIOS": 1 },
+        "BODO4": { "NIOS": 1, "State Board": 1 }
+    },
+    "BODQ27": {
+        "BODO1": { "IB": 1, "IGCSE": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "CBSE": 1, "State Board": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ28": {
+        "BODO1": { "CBSE": 1, "ICSE": 1 },
+        "BODO2": { "IGCSE": 1 },
+        "BODO3": { "NIOS": 1, "IB": 1 },
+        "BODO4": { "IB": 1, "IGCSE": 1 }
+    },
+    "BODQ29": {
+        "BODO1": { "CBSE": 1, "State Board": 1 },
+        "BODO2": { "ICSE": 1 },
+        "BODO3": { "IGCSE": 1, "IB": 1 },
+        "BODO4": { "NIOS": 1 }
+    },
+    "BODQ30": {
+        "BODO1": { "NIOS": 1 },
+        "BODO2": { "IB": 1, "IGCSE": 1 },
+        "BODO3": { "CBSE": 1, "ICSE": 1, "State Board": 1 },
+        "BODO4": { "IGCSE": 1, "IB": 1 }
     }
 }
 

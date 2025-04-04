@@ -5,9 +5,9 @@ db = firestore.Client.from_service_account_json("serviceAccountKey.json")
 
 # Define Firestore structure
 main_collection = "test-content"
-main_document = "code"
+main_document = "board"
 sub_collections = ["questions", "answer-key"]
-doc_prefix = "CODQ"
+doc_prefix = "BODQ"
 doc_range = range(1, 31)  # CODQ1 to CODQ30
 
 def create_missing_documents():
