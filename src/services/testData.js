@@ -10,6 +10,7 @@ import { TbAbc } from "react-icons/tb";
 import { TfiThought } from "react-icons/tfi";
 import { IoIosPeople } from "react-icons/io";
 import { FaPeopleRoof } from "react-icons/fa6";
+import { LiaSchoolSolid } from "react-icons/lia";
 
 //Test metadata determines how the test will appear to the user and how it will be evaluated. 
 //Refer technical docs for more details.
@@ -212,7 +213,7 @@ const testMetaData = {
     name: "Board Selection Test",
     displayType: "mcq",
     evaluationType: "aggregation",
-    icon: FaPeopleRoof,
+    icon: LiaSchoolSolid,
     description:
       "Know the ideal education board after Class 10 based on your capabilities",
   }
