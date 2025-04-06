@@ -59,7 +59,7 @@ const TestReport = () => {
     future:2,
     entrepreneur:2,
     social:2,
-    board:2
+    board:1
   }
 
   const location = useLocation()
